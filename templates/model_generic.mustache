@@ -353,14 +353,6 @@ class {{classname}}({{#parent}}{{{.}}}{{/parent}}{{^parent}}BaseModel{{/parent}}
         return _obj
         {{/hasChildren}}
 
-    def to_tuple(self):
-        """Returns the tuple representation of the model using alias"""
-        _tuple = tuple(self)
-
-        _keys, values = zip(*_tuple)
-
-        return values
-
 {{#vendorExtensions.x-py-postponed-model-imports.size}}
 {{#vendorExtensions.x-py-postponed-model-imports}}
 {{{.}}}
