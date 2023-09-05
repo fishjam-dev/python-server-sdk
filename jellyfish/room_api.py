@@ -1,6 +1,6 @@
 import time
 import jellyfish_openapi_client as jellyfish_api
-from jellyfish_api.rest import ApiException
+from jellyfish_openapi_client.rest import ApiException
 
 from jellyfish_openapi_client import Room, RoomConfig
 
@@ -19,7 +19,7 @@ class RoomApi:
         """Creates a room"""
 
         room_config = RoomConfig(maxPeers=max_peers, videoCodec=video_codec)
-        room = self._room_api.create(room_config)
+        room = self._room_api.create_room(room_config)
 
         return (room.data.jellyfish_address, room.data.room)
 
