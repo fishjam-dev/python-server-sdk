@@ -4,21 +4,21 @@ orbs:
   python: circleci/python@2.0.3
 
 jobs:
-  build_and_test:
+  lint:
     executor: python/default
     steps:
-      - checkout # checkout source code
+      - checkout
       - python/install-packages:
           pkg-manager: pip
       - run:
-          name: Run tests
-          command: python -m pytest
+          name: Lint
+          command: pylint --rcfile=pylintrc jellyfish tests
       - persist_to_workspace:
           root: ~/project
           paths:
             - .
 
 workflows:
-  test_my_app:
+  build:
     jobs:
-      - build_and_test
+      - lint

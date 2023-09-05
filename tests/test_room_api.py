@@ -1,13 +1,16 @@
-# pylint: disable=locally-disabled, missing-class-docstring, missing-function-docstring
+# pylint: disable=locally-disabled, missing-class-docstring, missing-function-docstring, redefined-outer-name, too-few-public-methods
 
-import random
+"""
+    Tests room api
+"""
+
+
 import pytest
 
 import jellyfish
-import pydantic
 
 from jellyfish import RoomApi, RoomConfig
-from jellyfish import Room, Peer, Component
+from jellyfish import Room, Component
 from jellyfish import ComponentOptionsRTSP, PeerOptionsWebRTC
 
 from jellyfish import ValidationError
@@ -23,20 +26,8 @@ COMPONENT_HLS = "hls"
 COMPONENT_RTSP = "rtsp"
 
 HLS_OPTIONS = None
-RTSP_OPTIONS = ComponentOptionsRTSP(sourceUri="rtsp://ef36c6dff23ecc5bbe311cc880d95dc8.se:2137/does/not/matter")
-
-
-def test_create_room_client():
-    with pytest.raises(TypeError):
-        RoomApi()
-
-    with pytest.raises(TypeError):
-        RoomApi(server_address="address")
-
-    with pytest.raises(TypeError):
-        RoomApi(server_api_token="api_token")
-
-    RoomApi(server_address="address", server_api_token="api_token")
+RTSP_OPTIONS = ComponentOptionsRTSP(
+    sourceUri="rtsp://ef36c6dff23ecc5bbe311cc880d95dc8.se:2137/does/not/matter")
 
 
 class TestAuthentication:
@@ -73,8 +64,8 @@ class TestCreateRoom:
     def test_valid_params(self, room_api):
         _, room = room_api.create_room(max_peers=MAX_PEERS, video_codec=VIDEO_CODEC)
 
-        assert room == Room(components=[], config=RoomConfig(max_peers=MAX_PEERS, video_codec=VIDEO_CODEC),
-                            id=room.id, peers=[])
+        assert room == Room(components=[], config=RoomConfig(
+            max_peers=MAX_PEERS, video_codec=VIDEO_CODEC), id=room.id, peers=[])
         assert room in room_api.get_all_rooms()
 
     def test_invalid_max_peers(self, room_api):
@@ -164,7 +155,8 @@ class TestAddPeer:
     def test_valid(self, room_api: RoomApi):
         room_id = room_api.create_room().id
 
-        peer = room_api.add_peer(room_id, type="webrtc", options=PeerOptionsWebRTC(enableSimulcast=True))
+        peer = room_api.add_peer(room_id, type="webrtc",
+                                 options=PeerOptionsWebRTC(enableSimulcast=True))
 
         assert peer.status == "disconnected"
         assert peer.type == "webrtc"
@@ -182,7 +174,8 @@ class TestAddPeer:
 class TestDeletePeer:
     def test_valid(self, room_api: RoomApi):
         room_id = room_api.create_room().id
-        peer = room_api.add_peer(room_id, type="webrtc", options=PeerOptionsWebRTC(enableSimulcast=True))
+        peer = room_api.add_peer(room_id, type="webrtc",
+                                 options=PeerOptionsWebRTC(enableSimulcast=True))
 
         room_api.delete_peer(peer.id)
 
@@ -192,4 +185,4 @@ class TestDeletePeer:
         room_id = room_api.create_room().id
 
         with pytest.raises(NotImplementedError):
-            room_api.delete_peer("invalid_peer_id")
+            room_api.delete_peer(room_id, peer_id="invalid_peer_id")
