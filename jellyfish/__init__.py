@@ -4,10 +4,13 @@
 
 __version__ = "0.1.0"
 
-from pydantic.error_wrappers import ValidationError  # pylint: disable=no-name-in-module
+# pylint: disable=locally-disabled, no-name-in-module, import-error
+
+from pydantic.error_wrappers import ValidationError
+
+from openapi_client import Room, RoomConfig, Peer, Component
+from openapi_client import ComponentOptions, ComponentOptionsRTSP, PeerOptionsWebRTC
+
+from openapi_client.exceptions import UnauthorizedException, NotFoundException, BadRequestException
 
 from jellyfish.room_api import RoomApi
-
-from .openapi_client.jellyfish_openapi_client import Room, RoomConfig, Peer, Component
-from .openapi_client.jellyfish_openapi_client import ComponentOptionsRTSP
-from .openapi_client.jellyfish_openapi_client import PeerOptionsWebRTC
