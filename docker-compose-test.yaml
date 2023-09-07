@@ -26,9 +26,9 @@ services:
       - "5002:5002"
       - "49999:49999"
       - "50000-50050:50000-50050/udp"
-  
+
   test:
-    image: python:3.11.5-alpine3.18
+    image: python:3.7-alpine3.18
     command: sh -c "cd app/ && pip install -r requirements.txt && pytest"
     volumes:
       - .:/app

@@ -4,14 +4,14 @@
 
 import openapi_client as jellyfish_api
 
-from openapi_client import AddPeerRequest, AddComponentRequest, PeerOptions, ComponentOptions
-from openapi_client import Room, RoomConfig
+from openapi_client import (AddPeerRequest, AddComponentRequest, PeerOptions,
+                            ComponentOptions, Room, RoomConfig, Peer, Component)
 
 
 class RoomApi:
     """Allows for managing rooms"""
 
-    def __init__(self, server_address, server_api_token):
+    def __init__(self, server_address: str, server_api_token: str):
         self._configuration = jellyfish_api.Configuration(
             host=server_address,
             access_token=server_api_token
@@ -43,7 +43,7 @@ class RoomApi:
 
         return self._room_api.get_room(room_id).data
 
-    def add_peer(self, room_id: str, peer_type: str, options: PeerOptions):
+    def add_peer(self, room_id: str, peer_type: str, options) -> (str, Peer):
         """Creates peer in the room"""
 
         options = PeerOptions(options)
@@ -52,12 +52,12 @@ class RoomApi:
         resp = self._room_api.add_peer(room_id, request)
         return (resp.data.token, resp.data.peer)
 
-    def delete_peer(self, room_id, peer_id):
+    def delete_peer(self, room_id: str, peer_id: str) -> None:
         """Deletes peer"""
 
         return self._room_api.delete_peer(room_id, peer_id)
 
-    def add_component(self, room_id, component_type, options=None):
+    def add_component(self, room_id: str, component_type: str, options=None) -> Component:
         """Creates component in the room"""
 
         if options:
@@ -67,7 +67,7 @@ class RoomApi:
 
         return self._room_api.add_component(room_id, request).data
 
-    def delete_component(self, room_id, component_id):
+    def delete_component(self, room_id: str, component_id: str) -> None:
         """Deletes component"""
 
         return self._room_api.delete_component(room_id, component_id)
