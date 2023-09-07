@@ -33,7 +33,7 @@ class RoomApi:
 
         return self._room_api.delete_room(room_id)
 
-    def get_all_rooms(self) -> list[Room]:
+    def get_all_rooms(self) -> list:
         """Returns list of all rooms"""
 
         return self._room_api.get_all_rooms().data
