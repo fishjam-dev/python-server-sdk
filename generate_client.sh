@@ -2,9 +2,10 @@
 
 rm -rf openapi
 openapi-generator-cli generate \
-    -i https://raw.githubusercontent.com/jellyfish-dev/jellyfish/openapi-generator-compatibility/openapi.yaml \
+    -i https://raw.githubusercontent.com/jellyfish-dev/jellyfish/main/openapi.yaml \
     -g python \
     -o openapi \
+    -t templates \
     --package-name openapi_client \
     --global-property apis,models,modelTests=false,supportingFiles
     
