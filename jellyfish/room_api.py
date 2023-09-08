@@ -60,7 +60,7 @@ class RoomApi:
     def add_component(self, room_id: str, component_type: str, options=None) -> Component:
         """Creates component in the room"""
 
-        if options:
+        if options is not None:
             options = ComponentOptions(options)
 
         request = AddComponentRequest(type=component_type, options=options)
