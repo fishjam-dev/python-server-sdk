@@ -1,0 +1,18 @@
+[project]
+name = "jellyfish-server-sdk"
+version = "0.0.1"
+authors = [
+  { name="Membrane Team" },
+]
+description = "Python server SDK for Jellyfish media server"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Development Status :: 3 - Alpha"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/jellyfish-dev/python-server-sdk"
