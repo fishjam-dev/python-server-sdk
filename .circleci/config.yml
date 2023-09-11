@@ -1,0 +1,41 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@2.0.3
+
+executors:
+ machine_executor_amd64:
+   machine:
+     image: ubuntu-2204:2022.04.2
+   environment:
+     architecture: "amd64"
+     platform: "linux/amd64"
+
+
+jobs:
+  lint:
+    executor: python/default
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+      - run:
+          name: Lint
+          command: pylint --rcfile=pylintrc jellyfish tests
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
+  
+  test:
+    executor: machine_executor_amd64
+    steps:
+      - checkout
+      - run: docker compose -f docker-compose-test.yaml run test
+
+
+workflows:
+  build:
+    jobs:
+      - lint
+      - test
