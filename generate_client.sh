@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# mv jellyfish/openapi_client/__init__.py __init__.py.keep
-
-# rm -rf jellyfish/openapi_client
-
 TMP_DIR="openapi_client_generated"
 PACKAGE_NAME="openapi_client"
 

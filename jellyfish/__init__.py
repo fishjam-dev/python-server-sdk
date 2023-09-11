@@ -11,6 +11,7 @@ from pydantic.error_wrappers import ValidationError
 from jellyfish.openapi_client import Room, RoomConfig, Peer, Component
 from jellyfish.openapi_client import ComponentOptions, ComponentOptionsRTSP, PeerOptionsWebRTC
 
-from jellyfish.openapi_client.exceptions import UnauthorizedException, NotFoundException, BadRequestException
+from jellyfish.openapi_client.exceptions import (
+    UnauthorizedException, NotFoundException, BadRequestException)
 
 from jellyfish.room_api import RoomApi

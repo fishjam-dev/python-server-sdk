@@ -21,7 +21,7 @@ jobs:
           pkg-manager: pip
       - run:
           name: Lint
-          command: pylint --rcfile=pylintrc jellyfish tests
+          command: ./pylint_format.sh
       - persist_to_workspace:
           root: ~/project
           paths:
