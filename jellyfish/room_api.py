@@ -2,6 +2,8 @@
     RoomApi used to manage rooms
 """
 
+# import .openapi_client as jellyfish_api
+
 import openapi_client as jellyfish_api
 
 from openapi_client import (AddPeerRequest, AddComponentRequest, PeerOptions,

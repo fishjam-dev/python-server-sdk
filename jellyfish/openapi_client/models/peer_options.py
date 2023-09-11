@@ -18,7 +18,7 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
-from openapi_client.models.peer_options_web_rtc import PeerOptionsWebRTC
+from jellyfish.openapi_client.models.peer_options_web_rtc import PeerOptionsWebRTC
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 

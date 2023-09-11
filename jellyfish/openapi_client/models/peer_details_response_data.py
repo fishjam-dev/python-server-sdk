@@ -17,15 +17,16 @@ import json
 
 
 
-from pydantic import BaseModel, Field
-from openapi_client.models.peer_details_response_data import PeerDetailsResponseData
+from pydantic import BaseModel, Field, StrictStr
+from jellyfish.openapi_client.models.peer import Peer
 
-class PeerDetailsResponse(BaseModel):
+class PeerDetailsResponseData(BaseModel):
     """
-    Response containing peer details and their token
+    PeerDetailsResponseData
     """
-    data: PeerDetailsResponseData = Field(...)
-    __properties = ["data"]
+    peer: Peer = Field(...)
+    token: StrictStr = Field(..., description="Token for authorizing websocket connection")
+    __properties = ["peer", "token"]
 
     class Config:
         """Pydantic configuration"""
@@ -41,8 +42,8 @@ class PeerDetailsResponse(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> PeerDetailsResponse:
-        """Create an instance of PeerDetailsResponse from a JSON string"""
+    def from_json(cls, json_str: str) -> PeerDetailsResponseData:
+        """Create an instance of PeerDetailsResponseData from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -51,22 +52,23 @@ class PeerDetailsResponse(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of data
-        if self.data:
-            _dict['data'] = self.data.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of peer
+        if self.peer:
+            _dict['peer'] = self.peer.to_dict()
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> PeerDetailsResponse:
-        """Create an instance of PeerDetailsResponse from a dict"""
+    def from_dict(cls, obj: dict) -> PeerDetailsResponseData:
+        """Create an instance of PeerDetailsResponseData from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return PeerDetailsResponse.parse_obj(obj)
+            return PeerDetailsResponseData.parse_obj(obj)
 
-        _obj = PeerDetailsResponse.parse_obj({
-            "data": PeerDetailsResponseData.from_dict(obj.get("data")) if obj.get("data") is not None else None
+        _obj = PeerDetailsResponseData.parse_obj({
+            "peer": Peer.from_dict(obj.get("peer")) if obj.get("peer") is not None else None,
+            "token": obj.get("token")
         })
         return _obj
 

@@ -18,13 +18,13 @@ import json
 
 
 from pydantic import BaseModel, Field
-from openapi_client.models.component import Component
+from jellyfish.openapi_client.models.peer_details_response_data import PeerDetailsResponseData
 
-class ComponentDetailsResponse(BaseModel):
+class PeerDetailsResponse(BaseModel):
     """
-    Response containing component details
+    Response containing peer details and their token
     """
-    data: Component = Field(...)
+    data: PeerDetailsResponseData = Field(...)
     __properties = ["data"]
 
     class Config:
@@ -41,8 +41,8 @@ class ComponentDetailsResponse(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ComponentDetailsResponse:
-        """Create an instance of ComponentDetailsResponse from a JSON string"""
+    def from_json(cls, json_str: str) -> PeerDetailsResponse:
+        """Create an instance of PeerDetailsResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -57,16 +57,16 @@ class ComponentDetailsResponse(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ComponentDetailsResponse:
-        """Create an instance of ComponentDetailsResponse from a dict"""
+    def from_dict(cls, obj: dict) -> PeerDetailsResponse:
+        """Create an instance of PeerDetailsResponse from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ComponentDetailsResponse.parse_obj(obj)
+            return PeerDetailsResponse.parse_obj(obj)
 
-        _obj = ComponentDetailsResponse.parse_obj({
-            "data": Component.from_dict(obj.get("data")) if obj.get("data") is not None else None
+        _obj = PeerDetailsResponse.parse_obj({
+            "data": PeerDetailsResponseData.from_dict(obj.get("data")) if obj.get("data") is not None else None
         })
         return _obj
 

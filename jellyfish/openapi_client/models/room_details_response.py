@@ -17,17 +17,15 @@ import json
 
 
 
-from pydantic import BaseModel, Field, StrictStr
-from openapi_client.models.peer_status import PeerStatus
+from pydantic import BaseModel, Field
+from jellyfish.openapi_client.models.room import Room
 
-class Peer(BaseModel):
+class RoomDetailsResponse(BaseModel):
     """
-    Describes peer status
+    Response containing room details
     """
-    id: StrictStr = Field(..., description="Assigned peer id")
-    status: PeerStatus = Field(...)
-    type: StrictStr = Field(..., description="Peer type")
-    __properties = ["id", "status", "type"]
+    data: Room = Field(...)
+    __properties = ["data"]
 
     class Config:
         """Pydantic configuration"""
@@ -43,8 +41,8 @@ class Peer(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Peer:
-        """Create an instance of Peer from a JSON string"""
+    def from_json(cls, json_str: str) -> RoomDetailsResponse:
+        """Create an instance of RoomDetailsResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -53,21 +51,22 @@ class Peer(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of data
+        if self.data:
+            _dict['data'] = self.data.to_dict()
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Peer:
-        """Create an instance of Peer from a dict"""
+    def from_dict(cls, obj: dict) -> RoomDetailsResponse:
+        """Create an instance of RoomDetailsResponse from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return Peer.parse_obj(obj)
+            return RoomDetailsResponse.parse_obj(obj)
 
-        _obj = Peer.parse_obj({
-            "id": obj.get("id"),
-            "status": obj.get("status"),
-            "type": obj.get("type")
+        _obj = RoomDetailsResponse.parse_obj({
+            "data": Room.from_dict(obj.get("data")) if obj.get("data") is not None else None
         })
         return _obj
 

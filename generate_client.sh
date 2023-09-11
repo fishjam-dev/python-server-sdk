@@ -1,12 +1,10 @@
 #!/bin/bash
 
-rm -rf openapi
+rm -rf jellyfish/openapi_client
 openapi-generator-cli generate \
     -i https://raw.githubusercontent.com/jellyfish-dev/jellyfish/main/openapi.yaml \
     -g python \
-    -o openapi \
+    -o . \
     -t templates \
-    --package-name openapi_client \
-    --global-property apis,models,modelTests=false,supportingFiles
-    
-rm -rf openapi/{docs,test,.github,.openapi-generator,.gitignore,.gitlab-ci.yml,.travis.yml,.openapi-generator-ignore,git_push.sh,README.md,setup.cfg,test-requirements.txt,tox.ini}
+    --package-name jellyfish.openapi_client \
+    --global-property apis,models,modelTests=false,modelDocs=false,apiDocs=false
