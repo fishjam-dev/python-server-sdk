@@ -4,9 +4,9 @@
 
 # import .openapi_client as jellyfish_api
 
-import openapi_client as jellyfish_api
+from jellyfish import openapi_client as jellyfish_api
 
-from openapi_client import (AddPeerRequest, AddComponentRequest, PeerOptions,
+from jellyfish.openapi_client import (AddPeerRequest, AddComponentRequest, PeerOptions,
                             ComponentOptions, Room, RoomConfig, Peer, Component)
 
 
