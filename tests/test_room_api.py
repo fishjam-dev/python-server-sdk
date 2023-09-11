@@ -4,6 +4,8 @@
     Tests room api
 """
 
+import os
+
 import pytest
 
 from jellyfish import RoomApi, RoomConfig
@@ -15,7 +17,8 @@ from jellyfish import ValidationError
 from jellyfish import UnauthorizedException, NotFoundException, BadRequestException
 
 
-SERVER_ADDRESS = "http://localhost:5002"
+HOST = 'jellyfish' if os.getenv('DOCKER_TEST') == 'TRUE' else 'localhost'
+SERVER_ADDRESS = f'http://{HOST}:5002'
 SERVER_API_TOKEN = "development"
 
 MAX_PEERS = 10
