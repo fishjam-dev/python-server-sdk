@@ -1,6 +1,6 @@
 [project]
 name = "jellyfish-server-sdk"
-version = "0.0.1"
+version = "0.0.6"
 authors = [
   { name="Membrane Team" },
 ]
@@ -13,6 +13,19 @@ classifiers = [
     "Operating System :: OS Independent",
     "Development Status :: 3 - Alpha"
 ]
+dependencies = [
+  "aenum==3.1.15",
+  "pydantic==1.10.12",
+  "pytest==7.1.3",
+  "python_dateutil==2.8.2",
+  "setuptools==67.6.1",
+  "typing_extensions==4.7.1",
+  "urllib3==2.0.4",
+  "pylint==2.17.5"
+]
 
 [project.urls]
 "Homepage" = "https://github.com/jellyfish-dev/python-server-sdk"
+
+[tool.setuptools]
+packages = ["jellyfish", "jellyfish._openapi_client", "jellyfish._openapi_client.api", "jellyfish._openapi_client.models"]

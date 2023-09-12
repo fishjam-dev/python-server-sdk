@@ -17,16 +17,15 @@ import json
 
 
 
-from pydantic import BaseModel, Field, StrictStr
-from jellyfish.openapi_client.models.peer_options import PeerOptions
+from pydantic import BaseModel, Field
+from jellyfish._openapi_client.models.peer_details_response_data import PeerDetailsResponseData
 
-class AddPeerRequest(BaseModel):
+class PeerDetailsResponse(BaseModel):
     """
-    AddPeerRequest
+    Response containing peer details and their token
     """
-    options: PeerOptions = Field(...)
-    type: StrictStr = Field(..., description="Peer type")
-    __properties = ["options", "type"]
+    data: PeerDetailsResponseData = Field(...)
+    __properties = ["data"]
 
     class Config:
         """Pydantic configuration"""
@@ -42,8 +41,8 @@ class AddPeerRequest(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> AddPeerRequest:
-        """Create an instance of AddPeerRequest from a JSON string"""
+    def from_json(cls, json_str: str) -> PeerDetailsResponse:
+        """Create an instance of PeerDetailsResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -52,23 +51,22 @@ class AddPeerRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of options
-        if self.options:
-            _dict['options'] = self.options.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of data
+        if self.data:
+            _dict['data'] = self.data.to_dict()
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> AddPeerRequest:
-        """Create an instance of AddPeerRequest from a dict"""
+    def from_dict(cls, obj: dict) -> PeerDetailsResponse:
+        """Create an instance of PeerDetailsResponse from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return AddPeerRequest.parse_obj(obj)
+            return PeerDetailsResponse.parse_obj(obj)
 
-        _obj = AddPeerRequest.parse_obj({
-            "options": PeerOptions.from_dict(obj.get("options")) if obj.get("options") is not None else None,
-            "type": obj.get("type")
+        _obj = PeerDetailsResponse.parse_obj({
+            "data": PeerDetailsResponseData.from_dict(obj.get("data")) if obj.get("data") is not None else None
         })
         return _obj
 

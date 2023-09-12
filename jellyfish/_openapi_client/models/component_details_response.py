@@ -17,17 +17,15 @@ import json
 
 
 
-from pydantic import BaseModel, Field, StrictStr
-from jellyfish.openapi_client.models.peer_status import PeerStatus
+from pydantic import BaseModel, Field
+from jellyfish._openapi_client.models.component import Component
 
-class Peer(BaseModel):
+class ComponentDetailsResponse(BaseModel):
     """
-    Describes peer status
+    Response containing component details
     """
-    id: StrictStr = Field(..., description="Assigned peer id")
-    status: PeerStatus = Field(...)
-    type: StrictStr = Field(..., description="Peer type")
-    __properties = ["id", "status", "type"]
+    data: Component = Field(...)
+    __properties = ["data"]
 
     class Config:
         """Pydantic configuration"""
@@ -43,8 +41,8 @@ class Peer(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Peer:
-        """Create an instance of Peer from a JSON string"""
+    def from_json(cls, json_str: str) -> ComponentDetailsResponse:
+        """Create an instance of ComponentDetailsResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -53,21 +51,22 @@ class Peer(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of data
+        if self.data:
+            _dict['data'] = self.data.to_dict()
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Peer:
-        """Create an instance of Peer from a dict"""
+    def from_dict(cls, obj: dict) -> ComponentDetailsResponse:
+        """Create an instance of ComponentDetailsResponse from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return Peer.parse_obj(obj)
+            return ComponentDetailsResponse.parse_obj(obj)
 
-        _obj = Peer.parse_obj({
-            "id": obj.get("id"),
-            "status": obj.get("status"),
-            "type": obj.get("type")
+        _obj = ComponentDetailsResponse.parse_obj({
+            "data": Component.from_dict(obj.get("data")) if obj.get("data") is not None else None
         })
         return _obj
 

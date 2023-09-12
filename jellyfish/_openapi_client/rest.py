@@ -19,7 +19,7 @@ import ssl
 from urllib.parse import urlencode, quote_plus
 import urllib3
 
-from jellyfish.openapi_client.exceptions import ApiException, UnauthorizedException, ForbiddenException, NotFoundException, ServiceException, ApiValueError, BadRequestException
+from jellyfish._openapi_client.exceptions import ApiException, UnauthorizedException, ForbiddenException, NotFoundException, ServiceException, ApiValueError, BadRequestException
 
 
 logger = logging.getLogger(__name__)

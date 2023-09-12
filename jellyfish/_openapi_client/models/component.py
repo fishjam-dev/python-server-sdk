@@ -18,7 +18,7 @@ import json
 
 
 from pydantic import BaseModel, Field, StrictStr
-from jellyfish.openapi_client.models.component_metadata import ComponentMetadata
+from jellyfish._openapi_client.models.component_metadata import ComponentMetadata
 
 class Component(BaseModel):
     """

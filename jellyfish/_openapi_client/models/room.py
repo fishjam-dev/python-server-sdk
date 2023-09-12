@@ -18,9 +18,9 @@ import json
 
 from typing import List
 from pydantic import BaseModel, Field, StrictStr, conlist
-from jellyfish.openapi_client.models.component import Component
-from jellyfish.openapi_client.models.peer import Peer
-from jellyfish.openapi_client.models.room_config import RoomConfig
+from jellyfish._openapi_client.models.component import Component
+from jellyfish._openapi_client.models.peer import Peer
+from jellyfish._openapi_client.models.room_config import RoomConfig
 
 class Room(BaseModel):
     """

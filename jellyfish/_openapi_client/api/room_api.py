@@ -21,18 +21,18 @@ from pydantic import Field, StrictStr
 
 from typing import Optional
 
-from jellyfish.openapi_client.models.add_component_request import AddComponentRequest
-from jellyfish.openapi_client.models.add_peer_request import AddPeerRequest
-from jellyfish.openapi_client.models.component_details_response import ComponentDetailsResponse
-from jellyfish.openapi_client.models.peer_details_response import PeerDetailsResponse
-from jellyfish.openapi_client.models.room_config import RoomConfig
-from jellyfish.openapi_client.models.room_create_details_response import RoomCreateDetailsResponse
-from jellyfish.openapi_client.models.room_details_response import RoomDetailsResponse
-from jellyfish.openapi_client.models.rooms_listing_response import RoomsListingResponse
+from jellyfish._openapi_client.models.add_component_request import AddComponentRequest
+from jellyfish._openapi_client.models.add_peer_request import AddPeerRequest
+from jellyfish._openapi_client.models.component_details_response import ComponentDetailsResponse
+from jellyfish._openapi_client.models.peer_details_response import PeerDetailsResponse
+from jellyfish._openapi_client.models.room_config import RoomConfig
+from jellyfish._openapi_client.models.room_create_details_response import RoomCreateDetailsResponse
+from jellyfish._openapi_client.models.room_details_response import RoomDetailsResponse
+from jellyfish._openapi_client.models.rooms_listing_response import RoomsListingResponse
 
-from jellyfish.openapi_client.api_client import ApiClient
-from jellyfish.openapi_client.api_response import ApiResponse
-from jellyfish.openapi_client.exceptions import (  # noqa: F401
+from jellyfish._openapi_client.api_client import ApiClient
+from jellyfish._openapi_client.api_response import ApiResponse
+from jellyfish._openapi_client.exceptions import (  # noqa: F401
     ApiTypeError,
     ApiValueError
 )

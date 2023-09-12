@@ -17,7 +17,7 @@ import sys
 import urllib3
 
 import http.client as httplib
-from jellyfish.openapi_client.exceptions import ApiValueError
+from jellyfish._openapi_client.exceptions import ApiValueError
 
 JSON_SCHEMA_VALIDATION_KEYWORDS = {
     'multipleOf', 'maximum', 'exclusiveMaximum',
@@ -106,7 +106,7 @@ class Configuration(object):
         self.logger = {}
         """Logging Settings
         """
-        self.logger["package_logger"] = logging.getLogger("jellyfish.openapi_client")
+        self.logger["package_logger"] = logging.getLogger("jellyfish._openapi_client")
         self.logger["urllib3_logger"] = logging.getLogger("urllib3")
         self.logger_format = '%(asctime)s %(levelname)s %(message)s'
         """Log format

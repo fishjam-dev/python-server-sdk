@@ -21,11 +21,11 @@ from pydantic import Field, StrictStr, conint
 
 from typing import Optional
 
-from jellyfish.openapi_client.models.hls_skip import HlsSkip
+from jellyfish._openapi_client.models.hls_skip import HlsSkip
 
-from jellyfish.openapi_client.api_client import ApiClient
-from jellyfish.openapi_client.api_response import ApiResponse
-from jellyfish.openapi_client.exceptions import (  # noqa: F401
+from jellyfish._openapi_client.api_client import ApiClient
+from jellyfish._openapi_client.api_response import ApiResponse
+from jellyfish._openapi_client.exceptions import (  # noqa: F401
     ApiTypeError,
     ApiValueError
 )

@@ -16,16 +16,16 @@ import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, Field, StrictStr
-from jellyfish.openapi_client.models.component_options import ComponentOptions
 
-class AddComponentRequest(BaseModel):
+from pydantic import BaseModel, Field, StrictStr
+from jellyfish._openapi_client.models.peer_options import PeerOptions
+
+class AddPeerRequest(BaseModel):
     """
-    AddComponentRequest
+    AddPeerRequest
     """
-    options: Optional[ComponentOptions] = None
-    type: StrictStr = Field(..., description="Component type")
+    options: PeerOptions = Field(...)
+    type: StrictStr = Field(..., description="Peer type")
     __properties = ["options", "type"]
 
     class Config:
@@ -42,8 +42,8 @@ class AddComponentRequest(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> AddComponentRequest:
-        """Create an instance of AddComponentRequest from a JSON string"""
+    def from_json(cls, json_str: str) -> AddPeerRequest:
+        """Create an instance of AddPeerRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -55,24 +55,19 @@ class AddComponentRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of options
         if self.options:
             _dict['options'] = self.options.to_dict()
-        # set to None if options (nullable) is None
-        # and __fields_set__ contains the field
-        if self.options is None and "options" in self.__fields_set__:
-            _dict['options'] = None
-
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> AddComponentRequest:
-        """Create an instance of AddComponentRequest from a dict"""
+    def from_dict(cls, obj: dict) -> AddPeerRequest:
+        """Create an instance of AddPeerRequest from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return AddComponentRequest.parse_obj(obj)
+            return AddPeerRequest.parse_obj(obj)
 
-        _obj = AddComponentRequest.parse_obj({
-            "options": ComponentOptions.from_dict(obj.get("options")) if obj.get("options") is not None else None,
+        _obj = AddPeerRequest.parse_obj({
+            "options": PeerOptions.from_dict(obj.get("options")) if obj.get("options") is not None else None,
             "type": obj.get("type")
         })
         return _obj

@@ -18,7 +18,7 @@ import json
 
 
 from pydantic import BaseModel, Field
-from jellyfish.openapi_client.models.room_create_details_response_data import RoomCreateDetailsResponseData
+from jellyfish._openapi_client.models.room_create_details_response_data import RoomCreateDetailsResponseData
 
 class RoomCreateDetailsResponse(BaseModel):
     """
