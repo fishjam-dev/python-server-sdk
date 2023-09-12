@@ -39,7 +39,8 @@ services:
     networks:
       - network
     depends_on:
-      - jellyfish
+      jellyfish:
+        condition: service_healthy
 
 networks:
   network:
