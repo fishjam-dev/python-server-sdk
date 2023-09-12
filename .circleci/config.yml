@@ -21,7 +21,7 @@ jobs:
           pkg-manager: pip
       - run:
           name: Lint
-          command: ./pylint_format.sh
+          command: ./pylint.sh
       - persist_to_workspace:
           root: ~/project
           paths:
