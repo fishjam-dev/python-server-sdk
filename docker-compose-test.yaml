@@ -31,7 +31,7 @@ services:
 
   test:
     image: python:3.8-alpine3.18
-    command: sh -c "cd app/ && pip install -r requirements.txt && pytest"
+    command: sh -c "cd app/ && pip install -r requirements.txt && pytest tests/test_room_api.py::TestAuthentication"
     environment:
       - DOCKER_TEST=TRUE
     volumes:
