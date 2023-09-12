@@ -31,8 +31,7 @@ services:
 
   test:
     image: python:3.8-alpine3.18
-    command: ping jellyfish
-    # command: sh -c "cd app/ && pip install -r requirements.txt && pytest tests/test_room_api.py::TestAuthentication"
+    command: sh -c "cd app/ && pip install -r requirements.txt && pytest"
     environment:
       - DOCKER_TEST=TRUE
     volumes:
