@@ -18,7 +18,7 @@ import json
 
 
 from pydantic import BaseModel, Field, StrictStr
-from openapi_client.models.peer_options import PeerOptions
+from jellyfish._openapi_client.models.peer_options import PeerOptions
 
 class AddPeerRequest(BaseModel):
     """

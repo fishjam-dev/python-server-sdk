@@ -16,15 +16,15 @@ import re  # noqa: F401
 import json
 
 
-from typing import List
-from pydantic import BaseModel, Field, conlist
-from openapi_client.models.room import Room
 
-class RoomsListingResponse(BaseModel):
+from pydantic import BaseModel, Field
+from jellyfish._openapi_client.models.component import Component
+
+class ComponentDetailsResponse(BaseModel):
     """
-    Response containing list of all rooms
+    Response containing component details
     """
-    data: conlist(Room) = Field(...)
+    data: Component = Field(...)
     __properties = ["data"]
 
     class Config:
@@ -41,8 +41,8 @@ class RoomsListingResponse(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> RoomsListingResponse:
-        """Create an instance of RoomsListingResponse from a JSON string"""
+    def from_json(cls, json_str: str) -> ComponentDetailsResponse:
+        """Create an instance of ComponentDetailsResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -51,26 +51,22 @@ class RoomsListingResponse(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each item in data (list)
-        _items = []
+        # override the default output from pydantic by calling `to_dict()` of data
         if self.data:
-            for _item in self.data:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['data'] = _items
+            _dict['data'] = self.data.to_dict()
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> RoomsListingResponse:
-        """Create an instance of RoomsListingResponse from a dict"""
+    def from_dict(cls, obj: dict) -> ComponentDetailsResponse:
+        """Create an instance of ComponentDetailsResponse from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return RoomsListingResponse.parse_obj(obj)
+            return ComponentDetailsResponse.parse_obj(obj)
 
-        _obj = RoomsListingResponse.parse_obj({
-            "data": [Room.from_dict(_item) for _item in obj.get("data")] if obj.get("data") is not None else None
+        _obj = ComponentDetailsResponse.parse_obj({
+            "data": Component.from_dict(obj.get("data")) if obj.get("data") is not None else None
         })
         return _obj
 

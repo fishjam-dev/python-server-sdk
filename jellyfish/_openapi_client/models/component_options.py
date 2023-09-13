@@ -18,7 +18,7 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
-from openapi_client.models.component_options_rtsp import ComponentOptionsRTSP
+from jellyfish._openapi_client.models.component_options_rtsp import ComponentOptionsRTSP
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 

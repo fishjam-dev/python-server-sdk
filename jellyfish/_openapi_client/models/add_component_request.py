@@ -16,16 +16,17 @@ import re  # noqa: F401
 import json
 
 
+from typing import Optional
+from pydantic import BaseModel, Field, StrictStr
+from jellyfish._openapi_client.models.component_options import ComponentOptions
 
-from pydantic import BaseModel, Field
-from openapi_client.models.room import Room
-
-class RoomDetailsResponse(BaseModel):
+class AddComponentRequest(BaseModel):
     """
-    Response containing room details
+    AddComponentRequest
     """
-    data: Room = Field(...)
-    __properties = ["data"]
+    options: Optional[ComponentOptions] = None
+    type: StrictStr = Field(..., description="Component type")
+    __properties = ["options", "type"]
 
     class Config:
         """Pydantic configuration"""
@@ -41,8 +42,8 @@ class RoomDetailsResponse(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> RoomDetailsResponse:
-        """Create an instance of RoomDetailsResponse from a JSON string"""
+    def from_json(cls, json_str: str) -> AddComponentRequest:
+        """Create an instance of AddComponentRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -51,22 +52,28 @@ class RoomDetailsResponse(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of data
-        if self.data:
-            _dict['data'] = self.data.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of options
+        if self.options:
+            _dict['options'] = self.options.to_dict()
+        # set to None if options (nullable) is None
+        # and __fields_set__ contains the field
+        if self.options is None and "options" in self.__fields_set__:
+            _dict['options'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> RoomDetailsResponse:
-        """Create an instance of RoomDetailsResponse from a dict"""
+    def from_dict(cls, obj: dict) -> AddComponentRequest:
+        """Create an instance of AddComponentRequest from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return RoomDetailsResponse.parse_obj(obj)
+            return AddComponentRequest.parse_obj(obj)
 
-        _obj = RoomDetailsResponse.parse_obj({
-            "data": Room.from_dict(obj.get("data")) if obj.get("data") is not None else None
+        _obj = AddComponentRequest.parse_obj({
+            "options": ComponentOptions.from_dict(obj.get("options")) if obj.get("options") is not None else None,
+            "type": obj.get("type")
         })
         return _obj
 
