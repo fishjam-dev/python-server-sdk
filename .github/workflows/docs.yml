@@ -3,7 +3,7 @@ name: docs
 on:
   push:
     branches:
-      - improve-readme
+      - impove-readme
 
 # security: restrict permissions for CI jobs.
 permissions:
