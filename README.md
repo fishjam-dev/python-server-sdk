@@ -2,7 +2,7 @@
 
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/jellyfish-dev/python-server-sdk/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/jellyfish-dev/python-server-sdk/tree/main)
 
-Python server SDK for [Jellyfish](https://github.com/jellyfish-dev/jellyfish).
+Python server SDK for [Jellyfish](https://github.com/jellyfish-dev/jellyfish) media server.
 
 ## Installation
 
