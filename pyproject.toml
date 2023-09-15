@@ -4,7 +4,7 @@ version = "0.0.6"
 authors = [
   { name="Membrane Team" },
 ]
-description = "Python server SDK for Jellyfish media server"
+description = "Python server SDK for the Jellyfish media server"
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
