@@ -4,6 +4,8 @@
 
 Python server SDK for [Jellyfish](https://github.com/jellyfish-dev/jellyfish) media server.
 
+Read the docs [here](https://jellyfish-dev.github.io/python-server-sdk/jellyfish.html)
+
 ## Installation
 
 You can install the latest version of the package from github:
