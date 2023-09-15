@@ -3,7 +3,7 @@ name: docs
 on:
   push:
     branches:
-      - main
+      - impove-readme
 
 jobs:
   # Build the documentation and upload the static HTML files as an artifact.
@@ -15,7 +15,7 @@ jobs:
         with:
           python-version: '3.8'
       - run: pip install -r dev-requirements.txt
-      - run: pdoc -o doc jellyfish
+      - run: ./pdoc.sh
       - uses: actions/upload-pages-artifact@v2
         with:
           path: doc
