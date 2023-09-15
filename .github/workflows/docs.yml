@@ -3,7 +3,7 @@ name: docs
 on:
   push:
     branches:
-      - impove-readme
+      - main
 
 jobs:
   # Build the documentation and upload the static HTML files as an artifact.
