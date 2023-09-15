@@ -18,6 +18,7 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install python dependencies
           command: pip install -r dev-requirements.txt
       - run:
           name: Lint
