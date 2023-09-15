@@ -34,14 +34,23 @@ RTSP_OPTIONS = ComponentOptionsRTSP(
 
 
 class TestAuthentication:
-    def test_invalid_token(self, room_api):
+    def test_invalid_token(self):
         room_api = RoomApi(server_address=SERVER_ADDRESS, server_api_token="invalid")
 
         with pytest.raises(UnauthorizedException):
             room_api.create_room()
 
-    def test_valid_token(self, room_api):
+    def test_valid_token(self):
         room_api = RoomApi(server_address=SERVER_ADDRESS, server_api_token=SERVER_API_TOKEN)
+
+        _, room = room_api.create_room()
+
+        all_rooms = room_api.get_all_rooms()
+
+        assert room in all_rooms
+
+    def test_default_api_token(self):
+        room_api = RoomApi(server_address=SERVER_ADDRESS)
 
         _, room = room_api.create_room()
 

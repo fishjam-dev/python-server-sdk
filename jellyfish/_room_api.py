@@ -5,16 +5,16 @@
 from jellyfish import _openapi_client as jellyfish_api
 
 from jellyfish._openapi_client import (AddPeerRequest, AddComponentRequest, PeerOptions,
-                            ComponentOptions, Room, RoomConfig, Peer, Component)
+                                       ComponentOptions, Room, RoomConfig, Peer, Component)
 
 
 class RoomApi:
     """Allows for managing rooms"""
 
-    def __init__(self, server_address: str, server_api_token: str):
+    def __init__(self, server_address: str = None, server_api_token: str = None):
         self._configuration = jellyfish_api.Configuration(
-            host=server_address,
-            access_token=server_api_token
+            host=server_address or 'localhost:5002',
+            access_token=server_api_token or 'development'
         )
 
         self._api_client = jellyfish_api.ApiClient(self._configuration)
