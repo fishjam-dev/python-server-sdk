@@ -1,0 +1,35 @@
+name: docs
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  # Build the documentation and upload the static HTML files as an artifact.
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+      - run: pip install -r dev-requirements.txt
+      - run: ./pdoc.sh
+      - uses: actions/upload-pages-artifact@v2
+        with:
+          path: doc
+
+  # Deploy the artifact to GitHub pages.
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v2

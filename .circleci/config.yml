@@ -17,8 +17,9 @@ jobs:
     executor: python/default
     steps:
       - checkout
-      - python/install-packages:
-          pkg-manager: pip
+      - run:
+          name: Install python dependencies
+          command: pip install -r dev-requirements.txt
       - run:
           name: Lint
           command: ./pylint.sh
