@@ -16,17 +16,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, Field, StrictStr
-from jellyfish._openapi_client.models.component_options import ComponentOptions
 
-class AddComponentRequest(BaseModel):
+from pydantic import BaseModel, Field, StrictStr
+from jellyfish._openapi_client.models.component_metadata_hls import ComponentMetadataHLS
+
+class ComponentHLS(BaseModel):
     """
-    AddComponentRequest
+    Describes HLS component
     """
-    options: Optional[ComponentOptions] = None
+    id: StrictStr = Field(..., description="Assigned component ID")
+    metadata: ComponentMetadataHLS = Field(...)
     type: StrictStr = Field(..., description="Component type")
-    __properties = ["options", "type"]
+    __properties = ["id", "metadata", "type"]
 
     class Config:
         """Pydantic configuration"""
@@ -42,8 +43,8 @@ class AddComponentRequest(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> AddComponentRequest:
-        """Create an instance of AddComponentRequest from a JSON string"""
+    def from_json(cls, json_str: str) -> ComponentHLS:
+        """Create an instance of ComponentHLS from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -52,22 +53,23 @@ class AddComponentRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of options
-        if self.options:
-            _dict['options'] = self.options.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of metadata
+        if self.metadata:
+            _dict['metadata'] = self.metadata.to_dict()
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> AddComponentRequest:
-        """Create an instance of AddComponentRequest from a dict"""
+    def from_dict(cls, obj: dict) -> ComponentHLS:
+        """Create an instance of ComponentHLS from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return AddComponentRequest.parse_obj(obj)
+            return ComponentHLS.parse_obj(obj)
 
-        _obj = AddComponentRequest.parse_obj({
-            "options": ComponentOptions.from_dict(obj.get("options")) if obj.get("options") is not None else None,
+        _obj = ComponentHLS.parse_obj({
+            "id": obj.get("id"),
+            "metadata": ComponentMetadataHLS.from_dict(obj.get("metadata")) if obj.get("metadata") is not None else None,
             "type": obj.get("type")
         })
         return _obj

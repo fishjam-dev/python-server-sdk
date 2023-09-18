@@ -20,7 +20,7 @@ First create a `RoomApi` instance, providing the jellyfish server address and ap
 ```python
 from jellyfish import RoomApi
 
-room_api = RoomApi(server_address='localhost:5002', server_api_token='development')
+room_api = RoomApi(server_address='http://localhost:5002', server_api_token='development')
 ```
 
 You can use it to interact with Jellyfish managing rooms, peers and components

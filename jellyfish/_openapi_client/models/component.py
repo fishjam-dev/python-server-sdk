@@ -11,67 +11,157 @@
 
 
 from __future__ import annotations
+from inspect import getfullargspec
+import json
 import pprint
 import re  # noqa: F401
-import json
 
+from typing import Any, List, Optional
+from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
+from jellyfish._openapi_client.models.component_hls import ComponentHLS
+from jellyfish._openapi_client.models.component_rtsp import ComponentRTSP
+from typing import Union, Any, List, TYPE_CHECKING
+from pydantic import StrictStr, Field
 
-
-from pydantic import BaseModel, Field, StrictStr
-from jellyfish._openapi_client.models.component_metadata import ComponentMetadata
+COMPONENT_ONE_OF_SCHEMAS = ["ComponentHLS", "ComponentRTSP"]
 
 class Component(BaseModel):
     """
     Describes component
     """
-    id: StrictStr = Field(..., description="Assigned component id")
-    metadata: ComponentMetadata = Field(...)
-    type: StrictStr = Field(..., description="Component type")
-    __properties = ["id", "metadata", "type"]
+    # data type: ComponentHLS
+    oneof_schema_1_validator: Optional[ComponentHLS] = None
+    # data type: ComponentRTSP
+    oneof_schema_2_validator: Optional[ComponentRTSP] = None
+    if TYPE_CHECKING:
+        actual_instance: Union[ComponentHLS, ComponentRTSP]
+    else:
+        actual_instance: Any
+    one_of_schemas: List[str] = Field(COMPONENT_ONE_OF_SCHEMAS, const=True)
 
     class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
         validate_assignment = True
 
-    def to_str(self) -> str:
-        """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+    discriminator_value_class_map = {
+    }
 
-    def to_json(self) -> str:
-        """Returns the JSON representation of the model using alias"""
-        return json.dumps(self.to_dict())
+    def __init__(self, *args, **kwargs):
+        if args:
+            if len(args) > 1:
+                raise ValueError("If a position argument is used, only 1 is allowed to set `actual_instance`")
+            if kwargs:
+                raise ValueError("If a position argument is used, keyword arguments cannot be used.")
+            super().__init__(actual_instance=args[0])
+        else:
+            super().__init__(**kwargs)
 
-    @classmethod
-    def from_json(cls, json_str: str) -> Component:
-        """Create an instance of Component from a JSON string"""
-        return cls.from_dict(json.loads(json_str))
-
-    def to_dict(self):
-        """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of metadata
-        if self.metadata:
-            _dict['metadata'] = self.metadata.to_dict()
-        return _dict
+    @validator('actual_instance')
+    def actual_instance_must_validate_oneof(cls, v):
+        instance = Component.construct()
+        error_messages = []
+        match = 0
+        # validate data type: ComponentHLS
+        if not isinstance(v, ComponentHLS):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ComponentHLS`")
+        else:
+            match += 1
+        # validate data type: ComponentRTSP
+        if not isinstance(v, ComponentRTSP):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ComponentRTSP`")
+        else:
+            match += 1
+        if match > 1:
+            # more than 1 match
+            raise ValueError("Multiple matches found when setting `actual_instance` in Component with oneOf schemas: ComponentHLS, ComponentRTSP. Details: " + ", ".join(error_messages))
+        elif match == 0:
+            # no match
+            raise ValueError("No match found when setting `actual_instance` in Component with oneOf schemas: ComponentHLS, ComponentRTSP. Details: " + ", ".join(error_messages))
+        else:
+            return v
 
     @classmethod
     def from_dict(cls, obj: dict) -> Component:
-        """Create an instance of Component from a dict"""
-        if obj is None:
+        return cls.from_json(json.dumps(obj))
+
+    @classmethod
+    def from_json(cls, json_str: str) -> Component:
+        """Returns the object represented by the json string"""
+        instance = Component.construct()
+        error_messages = []
+        match = 0
+
+        # use oneOf discriminator to lookup the data type
+        _data_type = json.loads(json_str).get("type")
+        if not _data_type:
+            raise ValueError("Failed to lookup data type from the field `type` in the input.")
+
+        # check if data type is `ComponentHLS`
+        if _data_type == "ComponentHLS":
+            instance.actual_instance = ComponentHLS.from_json(json_str)
+            return instance
+
+        # check if data type is `ComponentRTSP`
+        if _data_type == "ComponentRTSP":
+            instance.actual_instance = ComponentRTSP.from_json(json_str)
+            return instance
+
+        # check if data type is `ComponentHLS`
+        if _data_type == "hls":
+            instance.actual_instance = ComponentHLS.from_json(json_str)
+            return instance
+
+        # check if data type is `ComponentRTSP`
+        if _data_type == "rtsp":
+            instance.actual_instance = ComponentRTSP.from_json(json_str)
+            return instance
+
+        # deserialize data into ComponentHLS
+        try:
+            instance.actual_instance = ComponentHLS.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into ComponentRTSP
+        try:
+            instance.actual_instance = ComponentRTSP.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+
+        if match > 1:
+            # more than 1 match
+            raise ValueError("Multiple matches found when deserializing the JSON string into Component with oneOf schemas: ComponentHLS, ComponentRTSP. Details: " + ", ".join(error_messages))
+        elif match == 0:
+            # no match
+            raise ValueError("No match found when deserializing the JSON string into Component with oneOf schemas: ComponentHLS, ComponentRTSP. Details: " + ", ".join(error_messages))
+        else:
+            return instance
+
+    def to_json(self) -> str:
+        """Returns the JSON representation of the actual instance"""
+        if self.actual_instance is None:
+            return "null"
+
+        to_json = getattr(self.actual_instance, "to_json", None)
+        if callable(to_json):
+            return self.actual_instance.to_json()
+        else:
+            return json.dumps(self.actual_instance)
+
+    def to_dict(self) -> dict:
+        """Returns the dict representation of the actual instance"""
+        if self.actual_instance is None:
             return None
 
-        if not isinstance(obj, dict):
-            return Component.parse_obj(obj)
+        to_dict = getattr(self.actual_instance, "to_dict", None)
+        if callable(to_dict):
+            return self.actual_instance.to_dict()
+        else:
+            # primitive type
+            return self.actual_instance
 
-        _obj = Component.parse_obj({
-            "id": obj.get("id"),
-            "metadata": ComponentMetadata.from_dict(obj.get("metadata")) if obj.get("metadata") is not None else None,
-            "type": obj.get("type")
-        })
-        return _obj
+    def to_str(self) -> str:
+        """Returns the string representation of the actual instance"""
+        return pprint.pformat(self.dict())
 
 
