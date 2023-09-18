@@ -28,7 +28,7 @@ class RoomApi:
         '''
         Creates a new room
 
-        Returns a tuple (`jellyfish_ip`, `Room`) - the ip of the Jellyfish
+        Returns a tuple (`jellyfish_address`, `Room`) - the address of the Jellyfish
         in which the room has been created and the created `Room`
         '''
         room_config = RoomConfig(maxPeers=max_peers, videoCodec=video_codec)
