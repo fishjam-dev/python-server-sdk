@@ -11,6 +11,7 @@ executors:
      architecture: "amd64"
      platform: "linux/amd64"
 
+
 jobs:
   lint:
     executor: python/default
