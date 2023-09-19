@@ -16,15 +16,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, StrictBool
+from typing import Any, Dict
+from pydantic import BaseModel, Field, StrictStr
 
-class ComponentMetadata(BaseModel):
+class ComponentRTSP(BaseModel):
     """
-    Component-specific metadata
+    Describes RTSP component
     """
-    playable: Optional[StrictBool] = None
-    __properties = ["playable"]
+    id: StrictStr = Field(..., description="Assigned component ID")
+    metadata: Dict[str, Any] = Field(..., description="Metadata specific to the RTSP component")
+    type: StrictStr = Field(..., description="Component type")
+    __properties = ["id", "metadata", "type"]
 
     class Config:
         """Pydantic configuration"""
@@ -40,8 +42,8 @@ class ComponentMetadata(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ComponentMetadata:
-        """Create an instance of ComponentMetadata from a JSON string"""
+    def from_json(cls, json_str: str) -> ComponentRTSP:
+        """Create an instance of ComponentRTSP from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -53,16 +55,18 @@ class ComponentMetadata(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ComponentMetadata:
-        """Create an instance of ComponentMetadata from a dict"""
+    def from_dict(cls, obj: dict) -> ComponentRTSP:
+        """Create an instance of ComponentRTSP from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ComponentMetadata.parse_obj(obj)
+            return ComponentRTSP.parse_obj(obj)
 
-        _obj = ComponentMetadata.parse_obj({
-            "playable": obj.get("playable")
+        _obj = ComponentRTSP.parse_obj({
+            "id": obj.get("id"),
+            "metadata": obj.get("metadata"),
+            "type": obj.get("type")
         })
         return _obj
 

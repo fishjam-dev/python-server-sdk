@@ -2,10 +2,13 @@
     RoomApi used to manage rooms
 """
 
+from typing import Union, Literal
+
 from jellyfish import _openapi_client as jellyfish_api
 
-from jellyfish._openapi_client import (AddPeerRequest, AddComponentRequest, PeerOptions,
-                                       ComponentOptions, Room, RoomConfig, Peer, Component)
+from jellyfish._openapi_client import (
+    AddPeerRequest, AddComponentRequest, PeerOptions, PeerOptionsWebRTC, Component,
+    ComponentOptions, ComponentOptionsHLS, ComponentOptionsRTSP, Room, RoomConfig, Peer)
 
 
 class RoomApi:
@@ -24,7 +27,9 @@ class RoomApi:
         self._api_client = jellyfish_api.ApiClient(self._configuration)
         self._room_api = jellyfish_api.RoomApi(self._api_client)
 
-    def create_room(self, max_peers: int = None, video_codec: str = None) -> (str, Room):
+    def create_room(
+            self, max_peers: int = None, video_codec: Literal['h264', 'vp8'] = None) -> (
+            str, Room):
         '''
         Creates a new room
 
@@ -51,16 +56,17 @@ class RoomApi:
 
         return self._room_api.get_room(room_id).data
 
-    def add_peer(self, room_id: str, peer_type: str, options) -> (str, Peer):
+    def add_peer(self, room_id: str, options: PeerOptionsWebRTC) -> (str, Peer):
         '''
         Creates peer in the room
 
-        Currently only `'webrtc'` peer is supported
+        Currently only `webrtc` peer is supported
 
         Returns a tuple (`peer_token`, `Peer`) - the token needed by Peer to authenticate
         to Jellyfish and the new `Peer`        
         '''
 
+        peer_type = 'webrtc'
         options = PeerOptions(options)
         request = AddPeerRequest(type=peer_type, options=options)
 
@@ -72,12 +78,18 @@ class RoomApi:
 
         return self._room_api.delete_peer(room_id, peer_id)
 
-    def add_component(self, room_id: str, component_type: str, options=None) -> Component:
+    def add_component(self, room_id: str, options: Union
+                      [ComponentOptionsHLS, ComponentOptionsRTSP]) -> Component:
         '''Creates component in the room'''
 
-        if options is not None:
-            options = ComponentOptions(options)
+        if isinstance(options, ComponentOptionsHLS):
+            component_type = 'hls'
+        elif isinstance(options, ComponentOptionsRTSP):
+            component_type = 'rtsp'
+        else:
+            raise ValueError('options must be either ComponentOptionsHLS or ComponentOptionsRTSP')
 
+        options = ComponentOptions(options)
         request = AddComponentRequest(type=component_type, options=options)
 
         return self._room_api.add_component(room_id, request).data

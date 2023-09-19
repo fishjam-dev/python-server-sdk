@@ -16,9 +16,12 @@ from jellyfish._openapi_client.models.add_component_request import AddComponentR
 from jellyfish._openapi_client.models.add_peer_request import AddPeerRequest
 from jellyfish._openapi_client.models.component import Component
 from jellyfish._openapi_client.models.component_details_response import ComponentDetailsResponse
-from jellyfish._openapi_client.models.component_metadata import ComponentMetadata
+from jellyfish._openapi_client.models.component_hls import ComponentHLS
+from jellyfish._openapi_client.models.component_metadata_hls import ComponentMetadataHLS
 from jellyfish._openapi_client.models.component_options import ComponentOptions
+from jellyfish._openapi_client.models.component_options_hls import ComponentOptionsHLS
 from jellyfish._openapi_client.models.component_options_rtsp import ComponentOptionsRTSP
+from jellyfish._openapi_client.models.component_rtsp import ComponentRTSP
 from jellyfish._openapi_client.models.error import Error
 from jellyfish._openapi_client.models.hls_skip import HlsSkip
 from jellyfish._openapi_client.models.peer import Peer
