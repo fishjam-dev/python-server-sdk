@@ -27,18 +27,20 @@ You can use it to interact with Jellyfish managing rooms, peers and components
 
 ```python
 # Create a room
-jellyfish_address, room = room_api.create_room()
-# 'localhost:5002', Room(components=[], id='f7cc2eac-f699-4609-ac8f-92f1ad6bea0c', peers=[])
+jellyfish_address, room = room_api.create_room(video_codec='h264')
+# 'localhost:5002', Room(components=[], config=RoomConfig(max_peers=None, video_codec='h264'), id='5a099a31-0eb2-4c28-84af-a1ec55c228af', peers=[]))
 
 # Add peer to the room
 from jellyfish import PeerOptionsWebRTC
 
-peer_token, peer_webrtc = room_api.add_peer(room.id, peer_type='webrtc', options=PeerOptionsWebRTC())
+peer_token, peer_webrtc = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
 # 'AgDYfrCSigFiAA', Peer(id='2869fb5', status=<PeerStatus.DISCONNECTED: 'disconnected'>, type='webrtc')
 
 # Add component to the room
-component_hls = room_api.add_component(room.id, component_type='hls')
-# Component(id='4c028a86', metadata=ComponentMetadata(playable=False), type='hls')
+from jellyfish import ComponentOptionsHLS
+
+component_hls = room_api.add_component(room.id, options=ComponentOptionsHLS())
+# Component(actual_instance=ComponentHLS(id='c0dfab50-cafd-438d-985e-7b8f97ae55e3', metadata=ComponentMetadataHLS(low_latency=False, playable=False), type='hls'))
 ```
 
 ## Copyright and License
