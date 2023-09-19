@@ -129,7 +129,6 @@ class TestAddComponent:
         room_api.add_component(room.id, options=HLS_OPTIONS)
 
         component = room_api.get_room(room.id).components[0].actual_instance
-        print(component)
 
         assert component.type == COMPONENT_HLS
 
