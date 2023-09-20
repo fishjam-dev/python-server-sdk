@@ -17,4 +17,4 @@ for file in $files; do
   printf "* $file\n"
 done
 
-protoc -I . --python_betterproto_out=jellyfish/protos $files
+protoc -I . --python_betterproto_out=jellyfish/_protos $files
