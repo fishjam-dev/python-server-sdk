@@ -20,7 +20,7 @@ class RoomApi:
         Create RoomApi instance, providing the jellyfish address and api token.
         '''
         self._configuration = jellyfish_api.Configuration(
-            host=server_address,
+            host=f'http://{server_address}',
             access_token=server_api_token
         )
 
