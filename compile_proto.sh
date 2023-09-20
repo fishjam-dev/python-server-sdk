@@ -11,14 +11,10 @@ printf "DONE\n\n"
 
 files=$(find protos/jellyfish -name "*.proto")
 
-printf "Compiling:\n"
-count=1
-total=${#files[@]}
+printf "Compiling files:\n"
+
 for file in $files; do
-  printf "Compile file %s %s ... " $count $file
-  protoc --python_out=./jellyfish/ $file
-  printf "DONE\n"
-  count=$(($count + 1))
+  printf "* $file\n"
 done
 
-autopep8 -ir jellyfish/protos
+protoc -I . --python_betterproto_out=jellyfish/protos $files
