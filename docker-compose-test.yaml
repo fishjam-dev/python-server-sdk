@@ -31,9 +31,9 @@ services:
 
   test:
     image: python:3.8-alpine3.18
-    command: sh -c "cd app/ && pip install -e . && pytest"
+    command: sh -c "cd app/ && pip install -r dev-requirements.txt && pytest -s"
     environment:
-      - DOCKER_TEST: "TRUE"
+      DOCKER_TEST: "TRUE"
     volumes:
       - .:/app
     networks:
