@@ -13,7 +13,7 @@ services:
       timeout: 2s
       start_period: 30s
     environment:
-      VIRTUAL_HOST: "jellyfish"
+      HOST: "jellyfish"
       USE_INTEGRATED_TURN: "true"
       INTEGRATED_TURN_IP: "${INTEGRATED_TURN_IP:-127.0.0.1}"
       INTEGRATED_TURN_LISTEN_IP: "0.0.0.0"
@@ -33,7 +33,7 @@ services:
     image: python:3.8-alpine3.18
     command: sh -c "cd app/ && pip install -e . && pytest"
     environment:
-      - DOCKER_TEST=TRUE
+      - DOCKER_TEST: "TRUE"
     volumes:
       - .:/app
     networks:
