@@ -1,8 +1,5 @@
-# pylint: disable=locally-disabled, missing-class-docstring, missing-function-docstring, redefined-outer-name, too-few-public-methods
+# pylint: disable=locally-disabled, missing-class-docstring, missing-function-docstring, redefined-outer-name, too-few-public-methods, missing-module-docstring
 
-"""
-    Tests room api
-"""
 
 import os
 
@@ -18,7 +15,7 @@ from jellyfish import UnauthorizedException, NotFoundException
 
 
 HOST = 'jellyfish' if os.getenv('DOCKER_TEST') == 'TRUE' else 'localhost'
-SERVER_ADDRESS = f'http://{HOST}:5002'
+SERVER_ADDRESS = f'{HOST}:5002'
 SERVER_API_TOKEN = 'development'
 
 MAX_PEERS = 10

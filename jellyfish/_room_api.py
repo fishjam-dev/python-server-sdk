@@ -1,6 +1,6 @@
-"""
-    RoomApi used to manage rooms
-"""
+'''
+RoomApi used to manage rooms
+'''
 
 from typing import Union, Literal
 

@@ -9,12 +9,12 @@ git submodule sync --recursive >> /dev/null
 git submodule update --recursive --remote --init >> /dev/null
 printf "DONE\n\n"
 
-files=$(find protos/jellyfish -name "server*.proto")
+server_file="./protos/jellyfish/server_notifications.proto"
+printf "Compiling: file $server_file"
+protoc -I . --python_betterproto_out=./jellyfish/_protos $server_file
+printf "\tDONE\n"
 
-printf "Compiling files:\n"
-
-for file in $files; do
-  printf "* $file\n"
-done
-
-protoc -I . --python_betterproto_out=jellyfish/_protos $files
+peer_file="./protos/jellyfish/peer_notifications.proto"
+printf "Compiling: file $peer_file"
+protoc -I . --python_betterproto_out=./tests/support/protos $peer_file
+printf "\tDONE\n"
