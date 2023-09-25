@@ -16,10 +16,7 @@ from jellyfish._openapi_client import (
     ComponentOptionsRTSP, ComponentOptionsHLS, PeerOptionsWebRTC)
 
 # Server Messages
-from jellyfish._protos.jellyfish import (
-    ServerMessageRoomCrashed, ServerMessageComponentCrashed, ServerMessageHlsPlayable,
-    ServerMessageMetricsReport, ServerMessagePeerCrashed, ServerMessagePeerConnected,
-    ServerMessagePeerDisconnected, ServerMessageRoomDeleted, ServerMessageRoomCreated)
+from jellyfish import events
 
 # Exceptions
 from jellyfish._openapi_client.exceptions import (
@@ -29,9 +26,7 @@ from jellyfish._openapi_client.exceptions import (
 __all__ = [
     'RoomApi', 'Notifier', 'Room', 'Peer', 'Component', 'ComponentHLS', 'ComponentRTSP',
     'ComponentOptionsHLS', 'RoomConfig', 'ComponentOptions', 'ComponentOptionsRTSP',
-    'PeerOptionsWebRTC', 'ServerMessageMetricsReport', 'ServerMessageRoomCreated',
-    'ServerMessageRoomDeleted', 'ServerMessageComponentCrashed', 'ServerMessageHlsPlayable',
-    'ServerMessagePeerConnected', 'ServerMessagePeerCrashed', 'ServerMessagePeerDisconnected',
-    'ServerMessageRoomCrashed', 'UnauthorizedException', 'NotFoundException', 'BadRequestException']
+    'PeerOptionsWebRTC', 'events', 'UnauthorizedException', 'NotFoundException',
+    'BadRequestException']
 
 __docformat__ = "restructuredtext"

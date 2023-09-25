@@ -13,7 +13,7 @@ import betterproto
 from websockets import client
 from websockets.exceptions import ConnectionClosedOK
 
-from jellyfish._protos.jellyfish import (
+from jellyfish.events import (
     ServerMessage, ServerMessageAuthRequest, ServerMessageAuthenticated,
     ServerMessageSubscribeRequest, ServerMessageEventType, ServerMessageSubscribeResponse,
     ServerMessageMetricsReport)
