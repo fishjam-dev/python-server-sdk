@@ -30,7 +30,7 @@ class TestConnectingToServer:
         # pylint: disable=protected-access
         assert notifier._websocket.open
 
-        cancel(notifier_task)
+        await cancel(notifier_task)
 
     @pytest.mark.asyncio
     async def test_invalid_credentials(self):
