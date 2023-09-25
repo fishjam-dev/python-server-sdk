@@ -2,16 +2,13 @@
 Notifier listening to WebSocket events
 '''
 
-import logging
 import asyncio
-
 from typing import Callable, Any
-
 
 import betterproto
 
 from websockets import client
-from websockets.exceptions import ConnectionClosedOK
+from websockets.exceptions import ConnectionClosed
 
 from jellyfish.events import (
     ServerMessage, ServerMessageAuthRequest, ServerMessageAuthenticated,
@@ -63,38 +60,24 @@ class Notifier:
         '''
         async with client.connect(f'ws://{self._server_address}/socket/server/websocket') \
                 as websocket:
-            self._websocket = websocket
-
-            msg = ServerMessage(auth_request=ServerMessageAuthRequest(token=self._server_api_token))
-            await websocket.send(bytes(msg))
-
             try:
-                message = await websocket.recv()
-            except ConnectionClosedOK as exception:
-                raise RuntimeError from exception
+                self._websocket = websocket
+                await self._authenticate()
 
-            message = ServerMessage().parse(message)
+                if self._notification_handler:
+                    await self._subscribe_event(
+                        event=ServerMessageEventType.EVENT_TYPE_SERVER_NOTIFICATION)
 
-            _type, message = betterproto.which_one_of(message, 'content')
-            assert isinstance(message, ServerMessageAuthenticated)
+                if self._metrics_handler:
+                    await self._subscribe_event(event=ServerMessageEventType.EVENT_TYPE_METRICS)
 
-            if self._notification_handler:
-                await self._subscribe_event(
-                    event=ServerMessageEventType.EVENT_TYPE_SERVER_NOTIFICATION)
+                self._ready = True
+                if self._ready_event:
+                    self._ready_event.set()
 
-            if self._metrics_handler:
-                await self._subscribe_event(event=ServerMessageEventType.EVENT_TYPE_METRICS)
-
-            self._ready = True
-
-            if self._ready_event:
-                self._ready_event.set()
-
-            receive_task = asyncio.create_task(self._receive_loop())
-
-            await receive_task
-
-        self._websocket = None
+                await self._receive_loop()
+            finally:
+                self._websocket = None
 
     async def wait_ready(self) -> True:
         '''
@@ -109,6 +92,22 @@ class Notifier:
             self._ready_event = asyncio.Event()
 
         await self._ready_event.wait()
+
+    async def _authenticate(self):
+        msg = ServerMessage(auth_request=ServerMessageAuthRequest(token=self._server_api_token))
+        await self._websocket.send(bytes(msg))
+
+        try:
+            message = await self._websocket.recv()
+        except ConnectionClosed as exception:
+            if 'invalid token' in str(exception):
+                raise RuntimeError('Invalid server_api_token') from exception
+            raise
+
+        message = ServerMessage().parse(message)
+
+        _type, message = betterproto.which_one_of(message, 'content')
+        assert isinstance(message, ServerMessageAuthenticated)
 
     async def _receive_loop(self):
         while True:
@@ -129,5 +128,3 @@ class Notifier:
         message = ServerMessage().parse(message)
         _which, message = betterproto.which_one_of(message, "content")
         assert isinstance(message, ServerMessageSubscribeResponse)
-
-        logging.info('Successfully subscribed to %s', event)

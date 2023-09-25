@@ -26,7 +26,6 @@ class PeerSocket:
             try:
                 message = await websocket.recv()
             except ConnectionClosedOK as exception:
-                print(exception)
                 raise RuntimeError from exception
 
             message = PeerMessage().parse(message)

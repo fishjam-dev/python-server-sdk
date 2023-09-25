@@ -2,7 +2,7 @@
 
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/jellyfish-dev/python-server-sdk/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/jellyfish-dev/python-server-sdk/tree/main)
 
-Python server SDK for the [Jellyfish](https://github.com/jellyfish-dev/jellyfish) media server.
+Python server SDK for the [Jellyfish Media Server](https://github.com/jellyfish-dev/jellyfish).
 
 Read the docs [here](https://jellyfish-dev.github.io/python-server-sdk/jellyfish.html)
 
@@ -88,6 +88,20 @@ asyncio.run(test_notifier())
 
 # Received a notification: ServerMessageRoomCreated(room_id='69a3fd1a-6a4d-47bc-ae54-0c72b0d05e29')
 # Received WebRTC metrics: ServerMessageMetricsReport(metrics='{}')
+```
+
+## Testing
+
+You can test the SDK against a local instance of Jellyfish by running
+```console
+pytest
+```
+
+Make sure to use the default configuration for Jellyfish
+
+Alternatively you can test using Docker
+```console
+docker-compose -f docker-compose-test.yaml run test
 ```
 
 ## Copyright and License
