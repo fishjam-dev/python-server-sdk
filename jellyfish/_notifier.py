@@ -24,7 +24,7 @@ class Notifier:
     Allows for receiving websocket notifications from Jellyfish.
     '''
 
-    def __init__(self, server_address: str, server_api_token: str):
+    def __init__(self, server_address: str = 'localhost:5002', server_api_token: str = 'development'):
         self._server_address = server_address
         self._server_api_token = server_api_token
         self._websocket = None

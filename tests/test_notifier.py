@@ -6,7 +6,7 @@ import asyncio
 import pytest
 
 from jellyfish import Notifier, RoomApi, PeerOptionsWebRTC
-from jellyfish._protos.jellyfish import (
+from jellyfish import (
     ServerMessageRoomCreated, ServerMessageRoomDeleted, ServerMessagePeerConnected,
     ServerMessagePeerDisconnected, ServerMessageMetricsReport)
 
@@ -30,8 +30,7 @@ class TestConnectingToServer:
         # pylint: disable=protected-access
         assert notifier._websocket.open
 
-        notifier_task.cancel()
-        await asyncio.sleep(0.1)
+        cancel(notifier_task)
 
     @pytest.mark.asyncio
     async def test_invalid_credentials(self):
