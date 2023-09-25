@@ -1,5 +1,5 @@
 '''
-Notifier
+Notifier listening to WebSocket events
 '''
 
 import logging
@@ -21,7 +21,7 @@ from jellyfish._protos.jellyfish import (
 
 class Notifier:
     '''
-    Allows for receiving websocket notifications from Jellyfish.
+    Allows for receiving WebSocket messages from Jellyfish.
     '''
 
     def __init__(self,
@@ -38,21 +38,28 @@ class Notifier:
 
     def on_server_notification(self, handler: Callable[[Any], None]):
         '''
-        Decorator used for defining handler for ServerNotifications.
+        Decorator used for defining handler for ServerNotifications
+        i.e. all messages other than `ServerMessageMetricsReport`.
         '''
         self._notification_handler = handler
         return handler
 
     def on_metrics(self, handler: Callable[[ServerMessageMetricsReport], None]):
         '''
-        Decorator used for defining handler for MetricsReport.
+        Decorator used for defining handler for `ServerMessageMetricsReport`.
         '''
         self._metrics_handler = handler
         return handler
 
     async def connect(self):
         '''
-        Connects Notifier to Jellyfish
+        A coroutine which connects Notifier to Jellyfish and listens for all incoming
+        messages from the Jellyfish.
+
+        It runs until the connection isn't closed.
+
+        The incoming messages are handled by the functions defined using the
+        `on_server_notification` and `on_metrics` decorators.
         '''
         async with client.connect(f'ws://{self._server_address}/socket/server/websocket') \
                 as websocket:
@@ -89,12 +96,14 @@ class Notifier:
 
         self._websocket = None
 
-    async def wait_ready(self):
+    async def wait_ready(self) -> True:
         '''
-        Waits ready
+        Waits until the notifier is connected and authenticated to Jellyfish.
+
+        If already connected, returns `True` immediately.
         '''
         if self._ready:
-            return
+            return True
 
         if self._ready_event is None:
             self._ready_event = asyncio.Event()
@@ -105,9 +114,7 @@ class Notifier:
         while True:
             message = await self._websocket.recv()
             message = ServerMessage().parse(message)
-            _which, message = betterproto.which_one_of(message, "content")
-
-            logging.info('Received message from server: %s', message)
+            _which, message = betterproto.which_one_of(message, 'content')
 
             if isinstance(message, ServerMessageMetricsReport):
                 self._metrics_handler(message)

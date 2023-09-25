@@ -30,7 +30,7 @@ from jellyfish import RoomApi
 room_api = RoomApi(server_address='localhost:5002', server_api_token='development')
 ```
 
-You can use it to interact with Jellyfish managing rooms, peers and components
+You can use it to interact with Jellyfish, managing rooms, peers and components
 
 ```python
 # Create a room
@@ -87,7 +87,7 @@ async def test_notifier():
 asyncio.run(test_notifier())
 
 # Received a notification: ServerMessageRoomCreated(room_id='69a3fd1a-6a4d-47bc-ae54-0c72b0d05e29')
-# Received metrics: {}
+# Received WebRTC metrics: ServerMessageMetricsReport(metrics='{}')
 ```
 
 ## Copyright and License

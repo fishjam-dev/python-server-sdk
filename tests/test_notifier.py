@@ -6,9 +6,9 @@ import asyncio
 import pytest
 
 from jellyfish import Notifier, RoomApi, PeerOptionsWebRTC
-from jellyfish import (
-    ServerMessageRoomCreated, ServerMessageRoomDeleted, ServerMessagePeerConnected,
-    ServerMessagePeerDisconnected, ServerMessageMetricsReport)
+from jellyfish import (ServerMessageRoomCreated, ServerMessageRoomDeleted,
+                       ServerMessagePeerConnected, ServerMessagePeerDisconnected,
+                       ServerMessageMetricsReport)
 
 from tests.support.peer_socket import PeerSocket
 from tests.support.asyncio_utils import assert_events, assert_metrics, cancel
