@@ -35,7 +35,7 @@ class TestConnectingToServer:
     @pytest.mark.asyncio
     async def test_invalid_credentials(self):
         notifier = Notifier(server_address=SERVER_ADDRESS,
-                            server_api_token='server_crappy_token')
+                            server_api_token='wrong_token')
 
         task = asyncio.create_task(notifier.connect())
 
