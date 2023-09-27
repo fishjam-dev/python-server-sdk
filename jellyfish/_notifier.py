@@ -57,9 +57,12 @@ class Notifier:
 
         The incoming messages are handled by the functions defined using the
         `on_server_notification` and `on_metrics` decorators.
+
+        The handlers have to be defined before calling `connect`,
+        otherwise the messages won't be received.
         '''
-        async with client.connect(f'ws://{self._server_address}/socket/server/websocket') \
-                as websocket:
+        address = f'ws://{self._server_address}/socket/server/websocket'
+        async with client.connect(address) as websocket:
             try:
                 self._websocket = websocket
                 await self._authenticate()
