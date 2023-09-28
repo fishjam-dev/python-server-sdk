@@ -29,4 +29,4 @@ dependencies = [
 "Homepage" = "https://github.com/jellyfish-dev/python-server-sdk"
 
 [tool.setuptools]
-packages = ["jellyfish", "jellyfish._openapi_client", "jellyfish._openapi_client.api", "jellyfish._openapi_client.models"]
+packages = ["jellyfish", "jellyfish.events", "jellyfish._openapi_client", "jellyfish._openapi_client.api", "jellyfish._openapi_client.models"]
