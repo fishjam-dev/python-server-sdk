@@ -30,7 +30,13 @@ services:
 
   test:
     image: python:3.8-alpine3.18
-    command: sh -c "cd app/ && pip install -r dev-requirements.txt && pytest -s"
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    command: sh -c "cd app/ && apk add curl gcc libc-dev libffi-dev && \
+      curl -sSL https://install.python-poetry.org | python3 - && \
+      export PATH=\"/root/.local/bin:$PATH\" \
+      poetry install && \
+      poetry run pytest -s"
     environment:
       DOCKER_TEST: "TRUE"
     volumes:
