@@ -1,3 +1,3 @@
 #!/bin/bash
 
-pylint --rcfile=pylintrc jellyfish tests
+poetry run pylint --rcfile=pylintrc jellyfish tests

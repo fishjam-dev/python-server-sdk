@@ -34,7 +34,7 @@ services:
       curl -sSL https://install.python-poetry.org | python3 - && \
       export PATH=\"/root/.local/bin:$PATH\" && \
       poetry config virtualenvs.in-project false && \
-      poetry install && \
+      poetry install --no-ansi && \
       poetry run pytest -s"
     environment:
       DOCKER_TEST: "TRUE"
