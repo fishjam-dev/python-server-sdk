@@ -34,7 +34,8 @@ services:
     tty: true        # docker run -t
     command: sh -c "cd app/ && apk add curl gcc libc-dev libffi-dev && \
       curl -sSL https://install.python-poetry.org | python3 - && \
-      export PATH=\"/root/.local/bin:$PATH\" \
+      export PATH=\"/root/.local/bin:$PATH\" && \
+      poetry config virtualenvs.in-project false && \
       poetry install && \
       poetry run pytest -s"
     environment:

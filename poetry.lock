@@ -48,20 +48,25 @@ wheel = ">=0.23.0,<1.0"
 
 [[package]]
 name = "betterproto"
-version = "1.2.5"
+version = "2.0.0b6"
 description = "A better Protobuf / gRPC generator & library"
 optional = false
-python-versions = ">=3.6"
-files = [
-    {file = "betterproto-1.2.5.tar.gz", hash = "sha256:74a3ab34646054f674d236d1229ba8182dc2eae86feb249b8590ef496ce9803d"},
-]
+python-versions = "^3.7"
+files = []
+develop = false
 
 [package.dependencies]
-grpclib = "*"
-stringcase = "*"
+grpclib = "^0.4.1"
+python-dateutil = "^2.8"
 
 [package.extras]
-compiler = ["black", "jinja2", "protobuf"]
+compiler = ["black (>=19.3b0)", "isort (>=5.11.5,<6.0.0)", "jinja2 (>=3.0.3)"]
+
+[package.source]
+type = "git"
+url = "https://github.com/danielgtaylor/python-betterproto.git"
+reference = "v.2.0.0b6"
+resolved_reference = "098989e9e93c97e16e10257b1b3575f987180f8c"
 
 [[package]]
 name = "colorama"
@@ -631,16 +636,6 @@ files = [
 ]
 
 [[package]]
-name = "stringcase"
-version = "1.2.0"
-description = "String case converter."
-optional = false
-python-versions = "*"
-files = [
-    {file = "stringcase-1.2.0.tar.gz", hash = "sha256:48a06980661908efe8d9d34eab2b6c13aefa2163b3ced26972902e3bdfd87008"},
-]
-
-[[package]]
 name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
@@ -869,4 +864,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "5f38f4d5de0f702165a01694d26712572cdf8bcff7d1dcd98a32e08dc3f2a3ee"
+content-hash = "a2fa69a05e80630694bd98da36dd57a5825ce6dc6979a61e404bc81be38130e9"
