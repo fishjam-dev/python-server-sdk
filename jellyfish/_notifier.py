@@ -22,9 +22,12 @@ class Notifier:
     '''
 
     def __init__(self,
-                 server_address: str = 'localhost:5002', server_api_token: str = 'development'):
+                 server_address: str = 'localhost:5002',
+                 server_api_token: str = 'development',
+                 secure: bool = False):
         self._server_address = server_address
         self._server_api_token = server_api_token
+        self._secure = secure
         self._websocket = None
         self._ready = False
 
@@ -61,7 +64,8 @@ class Notifier:
         The handlers have to be defined before calling `connect`,
         otherwise the messages won't be received.
         '''
-        address = f'ws://{self._server_address}/socket/server/websocket'
+        protocol = 'wss' if self._secure else 'ws'
+        address = f'{protocol}://{self._server_address}/socket/server/websocket'
         async with client.connect(address) as websocket:
             try:
                 self._websocket = websocket

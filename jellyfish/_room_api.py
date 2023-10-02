@@ -15,12 +15,16 @@ class RoomApi:
     '''Allows for managing rooms'''
 
     def __init__(self,
-                 server_address: str = 'localhost:5002', server_api_token: str = 'development'):
+                 server_address: str = 'localhost:5002',
+                 server_api_token: str = 'development',
+                 secure: bool = False):
         '''
         Create RoomApi instance, providing the jellyfish address and api token.
         '''
+
+        protocol = 'https' if secure else 'http'
         self._configuration = jellyfish_api.Configuration(
-            host=f'http://{server_address}',
+            host=f'{protocol}://{server_address}',
             access_token=server_api_token
         )
 
