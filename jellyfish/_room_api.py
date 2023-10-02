@@ -20,6 +20,7 @@ class RoomApi:
                  secure: bool = False):
         '''
         Create RoomApi instance, providing the jellyfish address and api token.
+        Set secure to `True` for `https` and `False` for `http` connection (default).
         '''
 
         protocol = 'https' if secure else 'http'

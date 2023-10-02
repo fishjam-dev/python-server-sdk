@@ -25,6 +25,10 @@ class Notifier:
                  server_address: str = 'localhost:5002',
                  server_api_token: str = 'development',
                  secure: bool = False):
+        '''
+        Create Notifier instance, providing the jellyfish address and api token.
+        Set secure to `True` for `wss` and `False` for `ws` connection (default).
+        '''
         self._server_address = server_address
         self._server_api_token = server_api_token
         self._secure = secure
