@@ -1,8 +1,5 @@
 version: 2.1
 
-orbs:
-  poetry: talkiq/poetry@4.0.1
-
 executors:
   machine_executor_amd64:
     machine:
@@ -23,7 +20,6 @@ jobs:
       - run:
           name: Lint
           command: ./pylint.sh
-      
       - persist_to_workspace:
           root: ~/project
           paths:
