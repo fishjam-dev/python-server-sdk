@@ -30,7 +30,7 @@ services:
 
   test:
     image: cimg/python:3.8
-    command: sh -c "cd /app && sudo apt update && sudo apt install curl gcc libc-dev libffi-dev && \
+    command: sh -c "cd /app && \
       poetry config virtualenvs.in-project false && \
       poetry install --no-ansi && \
       poetry run pytest -s"
