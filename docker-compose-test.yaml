@@ -29,10 +29,8 @@ services:
       - network
 
   test:
-    image: python:3.8-alpine3.18
-    command: sh -c "cd app/ && apk add curl gcc libc-dev libffi-dev && \
-      curl -sSL https://install.python-poetry.org | python3 - && \
-      export PATH=\"/root/.local/bin:$PATH\" && \
+    image: cimg/python:3.8
+    command: sh -c "cd /app && sudo apt update && sudo apt install curl gcc libc-dev libffi-dev && \
       poetry config virtualenvs.in-project false && \
       poetry install --no-ansi && \
       poetry run pytest -s"
