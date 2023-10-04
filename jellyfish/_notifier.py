@@ -22,8 +22,16 @@ class Notifier:
     '''
 
     def __init__(self,
-                 server_address: str = 'localhost:5002', server_api_token: str = 'development'):
-        self._server_address = server_address
+                 server_address: str = 'localhost:5002',
+                 server_api_token: str = 'development',
+                 secure: bool = False):
+        '''
+        Create Notifier instance, providing the jellyfish address and api token.
+        Set secure to `True` for `wss` and `False` for `ws` connection (default).
+        '''
+
+        protocol = 'wss' if secure else 'ws'
+        self._server_address = f'{protocol}://{server_address}/socket/server/websocket'
         self._server_api_token = server_api_token
         self._websocket = None
         self._ready = False
@@ -61,8 +69,7 @@ class Notifier:
         The handlers have to be defined before calling `connect`,
         otherwise the messages won't be received.
         '''
-        address = f'ws://{self._server_address}/socket/server/websocket'
-        async with client.connect(address) as websocket:
+        async with client.connect(self._server_address) as websocket:
             try:
                 self._websocket = websocket
                 await self._authenticate()
