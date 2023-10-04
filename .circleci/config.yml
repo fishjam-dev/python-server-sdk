@@ -1,25 +1,22 @@
 version: 2.1
 
-orbs:
-  python: circleci/python@2.1.1
-
 executors:
- machine_executor_amd64:
-   machine:
-     image: ubuntu-2204:2022.04.2
-   environment:
-     architecture: "amd64"
-     platform: "linux/amd64"
-
+  machine_executor_amd64:
+    machine:
+      image: ubuntu-2204:2022.04.2
+    environment:
+      architecture: "amd64"
+      platform: "linux/amd64"
 
 jobs:
   lint:
-    executor: python/default
+    docker:
+      - image: cimg/python:3.8
     steps:
       - checkout
       - run:
-          name: Install python dependencies
-          command: pip install -r dev-requirements.txt
+          name: Install project dependencies
+          command: poetry install --no-ansi
       - run:
           name: Lint
           command: ./pylint.sh
