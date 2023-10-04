@@ -63,11 +63,11 @@ Then define handlers for incoming messages
 ```python
 @notifier.on_server_notification
 def handle_notification(server_notification):
-    print(f'Received a notification: {notification}')
+    print(f'Received a notification: {server_notification}')
 
 @notifier.on_metrics
 def handle_metrics(metrics_report):
-    print(f'Received WebRTC metrics: {metrics_report.metrics}')
+    print(f'Received WebRTC metrics: {metrics_report}')
 ```
 
 After that you can start the notifier

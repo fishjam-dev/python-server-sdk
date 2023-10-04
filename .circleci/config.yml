@@ -1,27 +1,19 @@
 version: 2.1
 
 executors:
- machine_executor_amd64:
-   machine:
-     image: ubuntu-2204:2022.04.2
-   environment:
-     architecture: "amd64"
-     platform: "linux/amd64"
+  machine_executor_amd64:
+    machine:
+      image: ubuntu-2204:2022.04.2
+    environment:
+      architecture: "amd64"
+      platform: "linux/amd64"
 
 jobs:
   lint:
     docker:
-      - image: python:3.8.18-slim-bullseye
+      - image: cimg/python:3.8
     steps:
       - checkout
-      - run:
-          name: Install deps
-          command: apt update && apt upgrade && apt install -y curl gcc libc-dev libffi-dev
-      - run:
-          name: Install poetry
-          command: "curl -sSL https://install.python-poetry.org | python3 - && \ 
-              echo 'export PATH=/root/.local/bin:${PATH}' >> \"$BASH_ENV\" && \
-              source \"$BASH_ENV\""
       - run:
           name: Install project dependencies
           command: poetry install --no-ansi
