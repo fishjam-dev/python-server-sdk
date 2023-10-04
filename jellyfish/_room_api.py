@@ -35,6 +35,10 @@ class RoomApi:
 
         Returns a tuple (`jellyfish_address`, `Room`) - the address of the Jellyfish
         in which the room has been created and the created `Room`
+
+        The returned address may be different from the current `RoomApi` instance.
+        In such case, a new `RoomApi` instance has to be created using the returned address
+        in order to interact with the room.
         '''
         room_config = RoomConfig(maxPeers=max_peers, videoCodec=video_codec)
         resp = self._room_api.create_room(room_config)
