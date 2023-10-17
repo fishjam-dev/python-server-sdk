@@ -8,9 +8,8 @@ Read the docs [here](https://jellyfish-dev.github.io/python-server-sdk/jellyfish
 
 ## Installation
 
-You can install the latest version of the package from github:
 ```
-pip install git+https://github.com/jellyfish-dev/python-server-sdk@v0.1.0
+pip install python-server-sdk
 ```
 
 ## Usage

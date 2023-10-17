@@ -51,22 +51,18 @@ name = "betterproto"
 version = "2.0.0b6"
 description = "A better Protobuf / gRPC generator & library"
 optional = false
-python-versions = "^3.7"
-files = []
-develop = false
+python-versions = ">=3.7,<4.0"
+files = [
+    {file = "betterproto-2.0.0b6-py3-none-any.whl", hash = "sha256:a0839ec165d110a69d0d116f4d0e2bec8d186af4db826257931f0831dab73fcf"},
+    {file = "betterproto-2.0.0b6.tar.gz", hash = "sha256:720ae92697000f6fcf049c69267d957f0871654c8b0d7458906607685daee784"},
+]
 
 [package.dependencies]
-grpclib = "^0.4.1"
-python-dateutil = "^2.8"
+grpclib = ">=0.4.1,<0.5.0"
+python-dateutil = ">=2.8,<3.0"
 
 [package.extras]
 compiler = ["black (>=19.3b0)", "isort (>=5.11.5,<6.0.0)", "jinja2 (>=3.0.3)"]
-
-[package.source]
-type = "git"
-url = "https://github.com/danielgtaylor/python-betterproto.git"
-reference = "v.2.0.0b6"
-resolved_reference = "098989e9e93c97e16e10257b1b3575f987180f8c"
 
 [[package]]
 name = "colorama"
@@ -109,12 +105,12 @@ test = ["pytest (>=6)"]
 
 [[package]]
 name = "grpclib"
-version = "0.4.5"
+version = "0.4.6"
 description = "Pure-Python gRPC implementation for asyncio"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "grpclib-0.4.5.tar.gz", hash = "sha256:bf83ed55aca59497e168761d9555056efc54a8f865316c3b39becd007e9f9a73"},
+    {file = "grpclib-0.4.6.tar.gz", hash = "sha256:595d05236ca8b8f8e433f5bf6095e6354c1d8777d003ddaf5288efa9611e3fd6"},
 ]
 
 [package.dependencies]
@@ -122,7 +118,7 @@ h2 = ">=3.1.0,<5"
 multidict = "*"
 
 [package.extras]
-protobuf = ["protobuf (>=3.15.0)"]
+protobuf = ["protobuf (>=3.20.0)"]
 
 [[package]]
 name = "h2"
@@ -864,4 +860,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "95a622aeb47fcdb31de58455e05c20208396109a585f335ca99d8ae112438169"
+content-hash = "17535ed556dda51c20b5213388608d635ea12b12f63e159c35c1336b1552165d"
