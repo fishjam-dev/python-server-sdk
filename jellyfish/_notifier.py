@@ -138,3 +138,12 @@ class Notifier:
         message = ServerMessage().parse(message)
         _which, message = betterproto.which_one_of(message, "content")
         assert isinstance(message, ServerMessageSubscribeResponse)
+
+
+    @staticmethod
+    def handle_json(json):
+        msg = json["notification"]
+        message = ServerMessage().parse(msg)
+        _which, message = betterproto.which_one_of(message, 'content')
+        return message
+        
