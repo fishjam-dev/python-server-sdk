@@ -141,7 +141,7 @@ class Notifier:
 
 
     @staticmethod
-    def handle_json(json):
+    def handle_json(json: Dict) -> Any:
         '''
         Transform received json notification to adequate notification instance.
         '''

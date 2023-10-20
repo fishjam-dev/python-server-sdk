@@ -33,7 +33,9 @@ class RoomApi:
         self._room_api = jellyfish_api.RoomApi(self._api_client)
 
     def create_room(
-            self, max_peers: int = None, video_codec: Literal['h264', 'vp8'] = None, webhook_url: str = None) -> (
+            self, max_peers: int = None,
+            video_codec: Literal['h264', 'vp8'] = None,
+            webhook_url: str = None) -> (
             str, Room):
         '''
         Creates a new room
@@ -45,7 +47,11 @@ class RoomApi:
         In such case, a new `RoomApi` instance has to be created using the returned address
         in order to interact with the room.
         '''
-        room_config = RoomConfig(maxPeers=max_peers, videoCodec=video_codec, webhook_url=webhook_url)
+        room_config = RoomConfig(
+            maxPeers=max_peers,
+            videoCodec=video_codec,
+            webhook_url=webhook_url
+            )
         resp = self._room_api.create_room(room_config)
 
         return (resp.data.jellyfish_address, resp.data.room)
