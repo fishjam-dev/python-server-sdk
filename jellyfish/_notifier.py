@@ -142,6 +142,9 @@ class Notifier:
 
     @staticmethod
     def handle_json(json):
+        '''
+        Transform received json notification to adequate notification instance.
+        '''
         msg = json["notification"]
         msg = bytes(msg, "utf-8")
         message = ServerMessage().parse(msg)
