@@ -25,7 +25,8 @@ class RoomConfig(BaseModel):
     """
     max_peers: Optional[conint(strict=True, ge=1)] = Field(None, alias="maxPeers", description="Maximum amount of peers allowed into the room")
     video_codec: Optional[StrictStr] = Field(None, alias="videoCodec", description="Enforces video codec for each peer in the room")
-    __properties = ["maxPeers", "videoCodec"]
+    webhook_url: Optional[StrictStr] = Field(None, alias="webhookUrl", description="URL where Jellyfish notifications will be sent")
+    __properties = ["maxPeers", "videoCodec", "webhookUrl"]
 
     @validator('video_codec')
     def video_codec_validate_enum(cls, value):
@@ -71,6 +72,11 @@ class RoomConfig(BaseModel):
         if self.video_codec is None and "video_codec" in self.__fields_set__:
             _dict['videoCodec'] = None
 
+        # set to None if webhook_url (nullable) is None
+        # and __fields_set__ contains the field
+        if self.webhook_url is None and "webhook_url" in self.__fields_set__:
+            _dict['webhookUrl'] = None
+
         return _dict
 
     @classmethod
@@ -84,7 +90,8 @@ class RoomConfig(BaseModel):
 
         _obj = RoomConfig.parse_obj({
             "max_peers": obj.get("maxPeers"),
-            "video_codec": obj.get("videoCodec")
+            "video_codec": obj.get("videoCodec"),
+            "webhook_url": obj.get("webhookUrl")
         })
         return _obj
 

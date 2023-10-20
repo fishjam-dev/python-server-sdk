@@ -26,24 +26,28 @@ services:
       - "49999:49999"
       - "50000-50050:50000-50050/udp"
     networks:
-      - network
+      test_network:
+        ipv4_address: 172.28.1.3
 
   test:
+    container_name: test
     image: cimg/python:3.8
-    command: sh -c "cd /app && \
-      poetry config virtualenvs.in-project false && \
-      poetry install --no-ansi && \
-      poetry run pytest -s"
+    command: sh -c "cd /app && \ poetry config virtualenvs.in-project false && \ poetry install --no-ansi && \ poetry run pytest -s"
     environment:
       DOCKER_TEST: "TRUE"
+    ports:
+      - "5000:5000"
     volumes:
       - .:/app
     networks:
-      - network
+      test_network:
+        ipv4_address: 172.28.1.2
     depends_on:
       jellyfish:
         condition: service_healthy
 
 networks:
-  network:
-    driver: bridge
+  test_network:
+    ipam:
+      config:
+        - subnet: 172.28.1.0/24

@@ -16,16 +16,18 @@ import re  # noqa: F401
 import json
 
 
-
-from pydantic import BaseModel, Field, StrictBool
+from typing import Optional
+from pydantic import BaseModel, Field, StrictBool, StrictInt
 
 class ComponentMetadataHLS(BaseModel):
     """
     Metadata specific to the HLS component
     """
     low_latency: StrictBool = Field(..., alias="lowLatency", description="Whether the component uses LL-HLS")
+    persistent: StrictBool = Field(..., description="Whether the video is stored after end of stream")
     playable: StrictBool = Field(..., description="Whether the generated HLS playlist is playable")
-    __properties = ["lowLatency", "playable"]
+    target_window_duration: Optional[StrictInt] = Field(..., alias="targetWindowDuration", description="Duration of stream available for viewer")
+    __properties = ["lowLatency", "persistent", "playable", "targetWindowDuration"]
 
     class Config:
         """Pydantic configuration"""
@@ -51,6 +53,11 @@ class ComponentMetadataHLS(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if target_window_duration (nullable) is None
+        # and __fields_set__ contains the field
+        if self.target_window_duration is None and "target_window_duration" in self.__fields_set__:
+            _dict['targetWindowDuration'] = None
+
         return _dict
 
     @classmethod
@@ -64,7 +71,9 @@ class ComponentMetadataHLS(BaseModel):
 
         _obj = ComponentMetadataHLS.parse_obj({
             "low_latency": obj.get("lowLatency"),
-            "playable": obj.get("playable")
+            "persistent": obj.get("persistent"),
+            "playable": obj.get("playable"),
+            "target_window_duration": obj.get("targetWindowDuration")
         })
         return _obj
 

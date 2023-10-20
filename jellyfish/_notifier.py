@@ -143,6 +143,7 @@ class Notifier:
     @staticmethod
     def handle_json(json):
         msg = json["notification"]
+        msg = bytes(msg, "utf-8")
         message = ServerMessage().parse(msg)
         _which, message = betterproto.which_one_of(message, 'content')
         return message

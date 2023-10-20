@@ -17,14 +17,16 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, StrictBool
+from pydantic import BaseModel, Field, StrictBool, StrictInt
 
 class ComponentOptionsHLS(BaseModel):
     """
     Options specific to the HLS component
     """
     low_latency: Optional[StrictBool] = Field(False, alias="lowLatency", description="Whether the component should use LL-HLS")
-    __properties = ["lowLatency"]
+    persistent: Optional[StrictBool] = Field(False, description="Whether the video is stored after end of stream")
+    target_window_duration: Optional[StrictInt] = Field(None, alias="targetWindowDuration", description="Duration of stream available for viewer")
+    __properties = ["lowLatency", "persistent", "targetWindowDuration"]
 
     class Config:
         """Pydantic configuration"""
@@ -50,6 +52,11 @@ class ComponentOptionsHLS(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if target_window_duration (nullable) is None
+        # and __fields_set__ contains the field
+        if self.target_window_duration is None and "target_window_duration" in self.__fields_set__:
+            _dict['targetWindowDuration'] = None
+
         return _dict
 
     @classmethod
@@ -62,7 +69,9 @@ class ComponentOptionsHLS(BaseModel):
             return ComponentOptionsHLS.parse_obj(obj)
 
         _obj = ComponentOptionsHLS.parse_obj({
-            "low_latency": obj.get("lowLatency") if obj.get("lowLatency") is not None else False
+            "low_latency": obj.get("lowLatency") if obj.get("lowLatency") is not None else False,
+            "persistent": obj.get("persistent") if obj.get("persistent") is not None else False,
+            "target_window_duration": obj.get("targetWindowDuration")
         })
         return _obj
 

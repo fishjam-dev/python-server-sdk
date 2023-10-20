@@ -12,11 +12,25 @@ from jellyfish.events import (ServerMessageRoomCreated, ServerMessageRoomDeleted
 
 from tests.support.peer_socket import PeerSocket
 from tests.support.asyncio_utils import assert_events, assert_metrics, cancel
+from tests.support.webhook_notifier import run_server
+from multiprocessing import Process, Queue
+import time
 
 
 HOST = 'jellyfish' if os.getenv('DOCKER_TEST') == 'TRUE' else 'localhost'
 SERVER_ADDRESS = f'{HOST}:5002'
 SERVER_API_TOKEN = 'development'
+WEBHOOK_URL="http://172.28.1.2:5000/webhook"
+queue = Queue()
+
+@pytest.fixture(scope="session", autouse=True)
+def start_server():
+    flask_process = Process(target=run_server, args=(queue,))
+    flask_process.start()
+
+    yield  # This is where the testing happens.
+
+    flask_process.terminate()
 
 
 class TestConnectingToServer:
@@ -65,24 +79,29 @@ class TestReceivingNotifications:
         notifier_task = asyncio.create_task(notifier.connect())
         await notifier.wait_ready()
 
-        _, room = room_api.create_room()
+        _, room = room_api.create_room(webhook_url=WEBHOOK_URL)
         room_api.delete_room(room.id)
 
         await assert_task
         await cancel(notifier_task)
+        
+        for event in event_checks:
+            data = queue.get(timeout=2.5)
+            assert data == event
+
 
     @pytest.mark.asyncio
     async def test_peer_connected_disconnected(self, room_api: RoomApi, notifier: Notifier):
         event_checks = [
             ServerMessagePeerConnected,
-            ServerMessagePeerDisconnected
+            ServerMessageRoomDeleted
         ]
         assert_task = asyncio.create_task(assert_events(notifier, event_checks))
 
         notifier_task = asyncio.create_task(notifier.connect())
         await notifier.wait_ready()
 
-        _, room = room_api.create_room()
+        _, room = room_api.create_room(webhook_url=WEBHOOK_URL)
         peer_token, _peer = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
 
         peer_socket = PeerSocket(server_address=SERVER_ADDRESS)
@@ -95,6 +114,10 @@ class TestReceivingNotifications:
         await assert_task
         await cancel(peer_task)
         await cancel(notifier_task)
+
+        for event in event_checks:
+            data = queue.get(timeout=2.5)
+            assert data == event
 
 
 class TestReceivingMetrics:
