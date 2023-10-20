@@ -96,13 +96,6 @@ You can test the SDK by running
 poetry run ci_test
 ```
 
-Make sure to use the default configuration for Jellyfish
-
-Alternatively you can test using Docker (the previous command uses command below)
-```console
-docker-compose -f docker-compose-test.yaml run test
-```
-
 ## Format&Lint
 You can format code by running
 ```console
@@ -111,7 +104,7 @@ poetry run format
 
 You can check linter by running
 ```
-./pylint.sh
+poetry run lint
 ```
 
 ## Copyright and License
