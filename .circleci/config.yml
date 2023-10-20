@@ -19,7 +19,7 @@ jobs:
           command: poetry install --no-ansi
       - run:
           name: Lint
-          command: ./pylint.sh
+          command: poetry run lint
       - persist_to_workspace:
           root: ~/project
           paths:
