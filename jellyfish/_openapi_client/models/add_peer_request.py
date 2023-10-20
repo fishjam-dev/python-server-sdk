@@ -16,20 +16,22 @@ import re  # noqa: F401
 import json
 
 
-
 from pydantic import BaseModel, Field, StrictStr
 from jellyfish._openapi_client.models.peer_options import PeerOptions
+
 
 class AddPeerRequest(BaseModel):
     """
     AddPeerRequest
     """
+
     options: PeerOptions = Field(...)
     type: StrictStr = Field(..., description="Peer type")
     __properties = ["options", "type"]
 
     class Config:
         """Pydantic configuration"""
+
         allow_population_by_field_name = True
         validate_assignment = True
 
@@ -48,13 +50,10 @@ class AddPeerRequest(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+        _dict = self.dict(by_alias=True, exclude={}, exclude_none=True)
         # override the default output from pydantic by calling `to_dict()` of options
         if self.options:
-            _dict['options'] = self.options.to_dict()
+            _dict["options"] = self.options.to_dict()
         return _dict
 
     @classmethod
@@ -66,10 +65,12 @@ class AddPeerRequest(BaseModel):
         if not isinstance(obj, dict):
             return AddPeerRequest.parse_obj(obj)
 
-        _obj = AddPeerRequest.parse_obj({
-            "options": PeerOptions.from_dict(obj.get("options")) if obj.get("options") is not None else None,
-            "type": obj.get("type")
-        })
+        _obj = AddPeerRequest.parse_obj(
+            {
+                "options": PeerOptions.from_dict(obj.get("options"))
+                if obj.get("options") is not None
+                else None,
+                "type": obj.get("type"),
+            }
+        )
         return _obj
-
-

@@ -4,7 +4,7 @@ import asyncio
 
 from jellyfish import Notifier
 
-ASSERTION_TIMEOUT = 2.
+ASSERTION_TIMEOUT = 2.0
 
 
 async def assert_events(notifier: Notifier, event_checks: list):
@@ -31,7 +31,8 @@ async def _assert_messages(notifier_callback, message_checks):
         await asyncio.wait_for(success_event.wait(), ASSERTION_TIMEOUT)
     except asyncio.exceptions.TimeoutError as exc:
         raise asyncio.exceptions.TimeoutError(
-            f"{message_checks[0]} hasn't been received within timeout") from exc
+            f"{message_checks[0]} hasn't been received within timeout"
+        ) from exc
 
 
 async def cancel(task):

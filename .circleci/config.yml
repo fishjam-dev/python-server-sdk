@@ -16,7 +16,7 @@ jobs:
       - checkout
       - run:
           name: Install project dependencies
-          command: poetry install --no-ansi
+          command: poetry install --no-ansi --with=dev
       - run:
           name: Lint
           command: poetry run lint

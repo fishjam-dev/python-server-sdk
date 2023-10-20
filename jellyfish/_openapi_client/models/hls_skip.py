@@ -16,9 +16,6 @@ import re  # noqa: F401
 from aenum import Enum, no_arg
 
 
-
-
-
 class HlsSkip(str, Enum):
     """
     Is delta manifest requested
@@ -27,11 +24,9 @@ class HlsSkip(str, Enum):
     """
     allowed enum values
     """
-    TRUE = 'true'
+    TRUE = "true"
 
     @classmethod
     def from_json(cls, json_str: str) -> HlsSkip:
         """Create an instance of HlsSkip from a JSON string"""
         return HlsSkip(json.loads(json_str))
-
-

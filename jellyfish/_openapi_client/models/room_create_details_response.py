@@ -16,19 +16,23 @@ import re  # noqa: F401
 import json
 
 
-
 from pydantic import BaseModel, Field
-from jellyfish._openapi_client.models.room_create_details_response_data import RoomCreateDetailsResponseData
+from jellyfish._openapi_client.models.room_create_details_response_data import (
+    RoomCreateDetailsResponseData,
+)
+
 
 class RoomCreateDetailsResponse(BaseModel):
     """
     Response containing room details
     """
+
     data: RoomCreateDetailsResponseData = Field(...)
     __properties = ["data"]
 
     class Config:
         """Pydantic configuration"""
+
         allow_population_by_field_name = True
         validate_assignment = True
 
@@ -47,13 +51,10 @@ class RoomCreateDetailsResponse(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+        _dict = self.dict(by_alias=True, exclude={}, exclude_none=True)
         # override the default output from pydantic by calling `to_dict()` of data
         if self.data:
-            _dict['data'] = self.data.to_dict()
+            _dict["data"] = self.data.to_dict()
         return _dict
 
     @classmethod
@@ -65,9 +66,11 @@ class RoomCreateDetailsResponse(BaseModel):
         if not isinstance(obj, dict):
             return RoomCreateDetailsResponse.parse_obj(obj)
 
-        _obj = RoomCreateDetailsResponse.parse_obj({
-            "data": RoomCreateDetailsResponseData.from_dict(obj.get("data")) if obj.get("data") is not None else None
-        })
+        _obj = RoomCreateDetailsResponse.parse_obj(
+            {
+                "data": RoomCreateDetailsResponseData.from_dict(obj.get("data"))
+                if obj.get("data") is not None
+                else None
+            }
+        )
         return _obj
-
-

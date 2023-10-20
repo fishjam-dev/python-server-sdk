@@ -22,6 +22,7 @@ betterproto = "2.0.0b6"
 pdoc = "^14.1.0"
 pylint = "^2.17.6"
 betterproto = { version = "= 2.0.0b6", extras = ["compiler"] }
+black = "^23.10.0"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.4.2"

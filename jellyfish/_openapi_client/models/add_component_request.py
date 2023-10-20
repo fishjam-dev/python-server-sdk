@@ -20,16 +20,19 @@ from typing import Optional
 from pydantic import BaseModel, Field, StrictStr
 from jellyfish._openapi_client.models.component_options import ComponentOptions
 
+
 class AddComponentRequest(BaseModel):
     """
     AddComponentRequest
     """
+
     options: Optional[ComponentOptions] = None
     type: StrictStr = Field(..., description="Component type")
     __properties = ["options", "type"]
 
     class Config:
         """Pydantic configuration"""
+
         allow_population_by_field_name = True
         validate_assignment = True
 
@@ -48,13 +51,10 @@ class AddComponentRequest(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+        _dict = self.dict(by_alias=True, exclude={}, exclude_none=True)
         # override the default output from pydantic by calling `to_dict()` of options
         if self.options:
-            _dict['options'] = self.options.to_dict()
+            _dict["options"] = self.options.to_dict()
         return _dict
 
     @classmethod
@@ -66,10 +66,12 @@ class AddComponentRequest(BaseModel):
         if not isinstance(obj, dict):
             return AddComponentRequest.parse_obj(obj)
 
-        _obj = AddComponentRequest.parse_obj({
-            "options": ComponentOptions.from_dict(obj.get("options")) if obj.get("options") is not None else None,
-            "type": obj.get("type")
-        })
+        _obj = AddComponentRequest.parse_obj(
+            {
+                "options": ComponentOptions.from_dict(obj.get("options"))
+                if obj.get("options") is not None
+                else None,
+                "type": obj.get("type"),
+            }
+        )
         return _obj
-
-

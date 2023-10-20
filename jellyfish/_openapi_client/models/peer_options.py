@@ -24,10 +24,12 @@ from pydantic import StrictStr, Field
 
 PEEROPTIONS_ONE_OF_SCHEMAS = ["PeerOptionsWebRTC"]
 
+
 class PeerOptions(BaseModel):
     """
     Peer-specific options
     """
+
     # data type: PeerOptionsWebRTC
     oneof_schema_1_validator: Optional[PeerOptionsWebRTC] = None
     if TYPE_CHECKING:
@@ -42,29 +44,41 @@ class PeerOptions(BaseModel):
     def __init__(self, *args, **kwargs):
         if args:
             if len(args) > 1:
-                raise ValueError("If a position argument is used, only 1 is allowed to set `actual_instance`")
+                raise ValueError(
+                    "If a position argument is used, only 1 is allowed to set `actual_instance`"
+                )
             if kwargs:
-                raise ValueError("If a position argument is used, keyword arguments cannot be used.")
+                raise ValueError(
+                    "If a position argument is used, keyword arguments cannot be used."
+                )
             super().__init__(actual_instance=args[0])
         else:
             super().__init__(**kwargs)
 
-    @validator('actual_instance')
+    @validator("actual_instance")
     def actual_instance_must_validate_oneof(cls, v):
         instance = PeerOptions.construct()
         error_messages = []
         match = 0
         # validate data type: PeerOptionsWebRTC
         if not isinstance(v, PeerOptionsWebRTC):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `PeerOptionsWebRTC`")
+            error_messages.append(
+                f"Error! Input type `{type(v)}` is not `PeerOptionsWebRTC`"
+            )
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in PeerOptions with oneOf schemas: PeerOptionsWebRTC. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when setting `actual_instance` in PeerOptions with oneOf schemas: PeerOptionsWebRTC. Details: "
+                + ", ".join(error_messages)
+            )
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in PeerOptions with oneOf schemas: PeerOptionsWebRTC. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when setting `actual_instance` in PeerOptions with oneOf schemas: PeerOptionsWebRTC. Details: "
+                + ", ".join(error_messages)
+            )
         else:
             return v
 
@@ -88,10 +102,16 @@ class PeerOptions(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into PeerOptions with oneOf schemas: PeerOptionsWebRTC. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when deserializing the JSON string into PeerOptions with oneOf schemas: PeerOptionsWebRTC. Details: "
+                + ", ".join(error_messages)
+            )
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into PeerOptions with oneOf schemas: PeerOptionsWebRTC. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when deserializing the JSON string into PeerOptions with oneOf schemas: PeerOptionsWebRTC. Details: "
+                + ", ".join(error_messages)
+            )
         else:
             return instance
 
@@ -121,5 +141,3 @@ class PeerOptions(BaseModel):
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.dict())
-
-
