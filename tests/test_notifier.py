@@ -20,7 +20,7 @@ from tests.support.webhook_notifier import run_server
 HOST = 'jellyfish' if os.getenv('DOCKER_TEST') == 'TRUE' else 'localhost'
 SERVER_ADDRESS = f'{HOST}:5002'
 SERVER_API_TOKEN = 'development'
-WEBHOOK_URL="http://172.28.1.2:5000/webhook"
+WEBHOOK_URL = "http://test:5000/webhook"
 queue = Queue()
 
 @pytest.fixture(scope="session", autouse=True)
