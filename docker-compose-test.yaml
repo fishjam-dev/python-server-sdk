@@ -25,6 +25,9 @@ services:
       - "5002:5002"
       - "49999:49999"
       - "50000-50050:50000-50050/udp"
+    networks:
+      test_network:
+        ipv4_address: 172.28.0.2
 
   test:
     container_name: test
@@ -36,6 +39,15 @@ services:
       - "5000:5000"
     volumes:
       - .:/app
+    networks:
+      test_network:
+        ipv4_address: 172.28.0.3
     depends_on:
       jellyfish:
         condition: service_healthy
+
+networks:
+  test_network:
+    ipam:
+      config:
+        - subnet: 172.28.0.0/24
