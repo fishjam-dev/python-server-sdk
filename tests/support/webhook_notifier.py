@@ -7,6 +7,11 @@ app = Flask(__name__)
 DATA_QUEUE = None
 
 
+@app.route("/", methods=["GET"])
+def respond_default():
+    return Response(status=200)
+
+
 @app.route("/webhook", methods=["POST"])
 def respond_root():
     json = request.get_json()
@@ -14,6 +19,8 @@ def respond_root():
     DATA_QUEUE.put(json)
 
     return Response(status=200)
+
+
 
 
 def run_server(queue):
