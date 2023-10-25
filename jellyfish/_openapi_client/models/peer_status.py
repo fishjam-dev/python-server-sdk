@@ -16,9 +16,6 @@ import re  # noqa: F401
 from aenum import Enum, no_arg
 
 
-
-
-
 class PeerStatus(str, Enum):
     """
     Informs about the peer status
@@ -27,12 +24,10 @@ class PeerStatus(str, Enum):
     """
     allowed enum values
     """
-    CONNECTED = 'connected'
-    DISCONNECTED = 'disconnected'
+    CONNECTED = "connected"
+    DISCONNECTED = "disconnected"
 
     @classmethod
     def from_json(cls, json_str: str) -> PeerStatus:
         """Create an instance of PeerStatus from a JSON string"""
         return PeerStatus(json.loads(json_str))
-
-

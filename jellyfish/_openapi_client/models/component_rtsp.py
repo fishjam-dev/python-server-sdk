@@ -19,17 +19,22 @@ import json
 from typing import Any, Dict
 from pydantic import BaseModel, Field, StrictStr
 
+
 class ComponentRTSP(BaseModel):
     """
     Describes RTSP component
     """
+
     id: StrictStr = Field(..., description="Assigned component ID")
-    metadata: Dict[str, Any] = Field(..., description="Metadata specific to the RTSP component")
+    metadata: Dict[str, Any] = Field(
+        ..., description="Metadata specific to the RTSP component"
+    )
     type: StrictStr = Field(..., description="Component type")
     __properties = ["id", "metadata", "type"]
 
     class Config:
         """Pydantic configuration"""
+
         allow_population_by_field_name = True
         validate_assignment = True
 
@@ -48,10 +53,7 @@ class ComponentRTSP(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+        _dict = self.dict(by_alias=True, exclude={}, exclude_none=True)
         return _dict
 
     @classmethod
@@ -63,11 +65,11 @@ class ComponentRTSP(BaseModel):
         if not isinstance(obj, dict):
             return ComponentRTSP.parse_obj(obj)
 
-        _obj = ComponentRTSP.parse_obj({
-            "id": obj.get("id"),
-            "metadata": obj.get("metadata"),
-            "type": obj.get("type")
-        })
+        _obj = ComponentRTSP.parse_obj(
+            {
+                "id": obj.get("id"),
+                "metadata": obj.get("metadata"),
+                "type": obj.get("type"),
+            }
+        )
         return _obj
-
-

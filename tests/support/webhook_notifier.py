@@ -6,7 +6,8 @@ from jellyfish import receive_json
 app = Flask(__name__)
 DATA_QUEUE = None
 
-@app.route('/webhook', methods=['POST'])
+
+@app.route("/webhook", methods=["POST"])
 def respond_root():
     json = request.get_json()
     json = receive_json(json)
@@ -18,4 +19,4 @@ def respond_root():
 def run_server(queue):
     global DATA_QUEUE
     DATA_QUEUE = queue
-    app.run(port=5000, host="0.0.0.0", use_reloader=False,debug=False, threaded=True)
+    app.run(port=5000, host="0.0.0.0", use_reloader=False, debug=False, threaded=True)

@@ -23,10 +23,14 @@ from typing import Optional
 
 from jellyfish._openapi_client.models.add_component_request import AddComponentRequest
 from jellyfish._openapi_client.models.add_peer_request import AddPeerRequest
-from jellyfish._openapi_client.models.component_details_response import ComponentDetailsResponse
+from jellyfish._openapi_client.models.component_details_response import (
+    ComponentDetailsResponse,
+)
 from jellyfish._openapi_client.models.peer_details_response import PeerDetailsResponse
 from jellyfish._openapi_client.models.room_config import RoomConfig
-from jellyfish._openapi_client.models.room_create_details_response import RoomCreateDetailsResponse
+from jellyfish._openapi_client.models.room_create_details_response import (
+    RoomCreateDetailsResponse,
+)
 from jellyfish._openapi_client.models.room_details_response import RoomDetailsResponse
 from jellyfish._openapi_client.models.rooms_listing_response import RoomsListingResponse
 
@@ -34,7 +38,7 @@ from jellyfish._openapi_client.api_client import ApiClient
 from jellyfish._openapi_client.api_response import ApiResponse
 from jellyfish._openapi_client.exceptions import (  # noqa: F401
     ApiTypeError,
-    ApiValueError
+    ApiValueError,
 )
 
 
@@ -51,7 +55,14 @@ class RoomApi(object):
         self.api_client = api_client
 
     @validate_arguments
-    def add_component(self, room_id : Annotated[StrictStr, Field(..., description="Room ID")], add_component_request : Annotated[Optional[AddComponentRequest], Field(description="Component config")] = None, **kwargs) -> ComponentDetailsResponse:  # noqa: E501
+    def add_component(
+        self,
+        room_id: Annotated[StrictStr, Field(..., description="Room ID")],
+        add_component_request: Annotated[
+            Optional[AddComponentRequest], Field(description="Component config")
+        ] = None,
+        **kwargs
+    ) -> ComponentDetailsResponse:  # noqa: E501
         """Creates the component and adds it to the room  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -75,13 +86,24 @@ class RoomApi(object):
                  returns the request thread.
         :rtype: ComponentDetailsResponse
         """
-        kwargs['_return_http_data_only'] = True
-        if '_preload_content' in kwargs:
-            raise ValueError("Error! Please call the add_component_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data")
-        return self.add_component_with_http_info(room_id, add_component_request, **kwargs)  # noqa: E501
+        kwargs["_return_http_data_only"] = True
+        if "_preload_content" in kwargs:
+            raise ValueError(
+                "Error! Please call the add_component_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"
+            )
+        return self.add_component_with_http_info(
+            room_id, add_component_request, **kwargs
+        )  # noqa: E501
 
     @validate_arguments
-    def add_component_with_http_info(self, room_id : Annotated[StrictStr, Field(..., description="Room ID")], add_component_request : Annotated[Optional[AddComponentRequest], Field(description="Component config")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def add_component_with_http_info(
+        self,
+        room_id: Annotated[StrictStr, Field(..., description="Room ID")],
+        add_component_request: Annotated[
+            Optional[AddComponentRequest], Field(description="Component config")
+        ] = None,
+        **kwargs
+    ) -> ApiResponse:  # noqa: E501
         """Creates the component and adds it to the room  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -97,7 +119,7 @@ class RoomApi(object):
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
-                                 be set to none and raw_data will store the 
+                                 be set to none and raw_data will store the
                                  HTTP response body without reading/decoding.
                                  Default is True.
         :type _preload_content: bool, optional
@@ -121,75 +143,74 @@ class RoomApi(object):
 
         _params = locals()
 
-        _all_params = [
-            'room_id',
-            'add_component_request'
-        ]
+        _all_params = ["room_id", "add_component_request"]
         _all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth',
-                '_content_type',
-                '_headers'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
+                "_content_type",
+                "_headers",
             ]
         )
 
         # validate the arguments
-        for _key, _val in _params['kwargs'].items():
+        for _key, _val in _params["kwargs"].items():
             if _key not in _all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method add_component" % _key
                 )
             _params[_key] = _val
-        del _params['kwargs']
+        del _params["kwargs"]
 
         _collection_formats = {}
 
         # process the path parameters
         _path_params = {}
-        if _params['room_id']:
-            _path_params['room_id'] = _params['room_id']
-
+        if _params["room_id"]:
+            _path_params["room_id"] = _params["room_id"]
 
         # process the query parameters
         _query_params = []
         # process the header parameters
-        _header_params = dict(_params.get('_headers', {}))
+        _header_params = dict(_params.get("_headers", {}))
         # process the form parameters
         _form_params = []
         _files = {}
         # process the body parameter
         _body_params = None
-        if _params['add_component_request'] is not None:
-            _body_params = _params['add_component_request']
+        if _params["add_component_request"] is not None:
+            _body_params = _params["add_component_request"]
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # set the HTTP header `Content-Type`
-        _content_types_list = _params.get('_content_type',
-            self.api_client.select_header_content_type(
-                ['application/json']))
+        _content_types_list = _params.get(
+            "_content_type",
+            self.api_client.select_header_content_type(["application/json"]),
+        )
         if _content_types_list:
-                _header_params['Content-Type'] = _content_types_list
+            _header_params["Content-Type"] = _content_types_list
 
         # authentication setting
-        _auth_settings = ['authorization']  # noqa: E501
+        _auth_settings = ["authorization"]  # noqa: E501
 
         _response_types_map = {
-            '201': "ComponentDetailsResponse",
-            '400': "Error",
-            '401': "Error",
-            '404': "Error",
+            "201": "ComponentDetailsResponse",
+            "400": "Error",
+            "401": "Error",
+            "404": "Error",
         }
 
         return self.api_client.call_api(
-            '/room/{room_id}/component', 'POST',
+            "/room/{room_id}/component",
+            "POST",
             _path_params,
             _query_params,
             _header_params,
@@ -198,15 +219,23 @@ class RoomApi(object):
             files=_files,
             response_types_map=_response_types_map,
             auth_settings=_auth_settings,
-            async_req=_params.get('async_req'),
-            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=_params.get('_preload_content', True),
-            _request_timeout=_params.get('_request_timeout'),
+            async_req=_params.get("async_req"),
+            _return_http_data_only=_params.get("_return_http_data_only"),  # noqa: E501
+            _preload_content=_params.get("_preload_content", True),
+            _request_timeout=_params.get("_request_timeout"),
             collection_formats=_collection_formats,
-            _request_auth=_params.get('_request_auth'))
+            _request_auth=_params.get("_request_auth"),
+        )
 
     @validate_arguments
-    def add_peer(self, room_id : Annotated[StrictStr, Field(..., description="Room id")], add_peer_request : Annotated[Optional[AddPeerRequest], Field(description="Peer specification")] = None, **kwargs) -> PeerDetailsResponse:  # noqa: E501
+    def add_peer(
+        self,
+        room_id: Annotated[StrictStr, Field(..., description="Room id")],
+        add_peer_request: Annotated[
+            Optional[AddPeerRequest], Field(description="Peer specification")
+        ] = None,
+        **kwargs
+    ) -> PeerDetailsResponse:  # noqa: E501
         """Create peer  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -230,13 +259,24 @@ class RoomApi(object):
                  returns the request thread.
         :rtype: PeerDetailsResponse
         """
-        kwargs['_return_http_data_only'] = True
-        if '_preload_content' in kwargs:
-            raise ValueError("Error! Please call the add_peer_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data")
-        return self.add_peer_with_http_info(room_id, add_peer_request, **kwargs)  # noqa: E501
+        kwargs["_return_http_data_only"] = True
+        if "_preload_content" in kwargs:
+            raise ValueError(
+                "Error! Please call the add_peer_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"
+            )
+        return self.add_peer_with_http_info(
+            room_id, add_peer_request, **kwargs
+        )  # noqa: E501
 
     @validate_arguments
-    def add_peer_with_http_info(self, room_id : Annotated[StrictStr, Field(..., description="Room id")], add_peer_request : Annotated[Optional[AddPeerRequest], Field(description="Peer specification")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def add_peer_with_http_info(
+        self,
+        room_id: Annotated[StrictStr, Field(..., description="Room id")],
+        add_peer_request: Annotated[
+            Optional[AddPeerRequest], Field(description="Peer specification")
+        ] = None,
+        **kwargs
+    ) -> ApiResponse:  # noqa: E501
         """Create peer  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -252,7 +292,7 @@ class RoomApi(object):
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
-                                 be set to none and raw_data will store the 
+                                 be set to none and raw_data will store the
                                  HTTP response body without reading/decoding.
                                  Default is True.
         :type _preload_content: bool, optional
@@ -276,76 +316,75 @@ class RoomApi(object):
 
         _params = locals()
 
-        _all_params = [
-            'room_id',
-            'add_peer_request'
-        ]
+        _all_params = ["room_id", "add_peer_request"]
         _all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth',
-                '_content_type',
-                '_headers'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
+                "_content_type",
+                "_headers",
             ]
         )
 
         # validate the arguments
-        for _key, _val in _params['kwargs'].items():
+        for _key, _val in _params["kwargs"].items():
             if _key not in _all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method add_peer" % _key
                 )
             _params[_key] = _val
-        del _params['kwargs']
+        del _params["kwargs"]
 
         _collection_formats = {}
 
         # process the path parameters
         _path_params = {}
-        if _params['room_id']:
-            _path_params['room_id'] = _params['room_id']
-
+        if _params["room_id"]:
+            _path_params["room_id"] = _params["room_id"]
 
         # process the query parameters
         _query_params = []
         # process the header parameters
-        _header_params = dict(_params.get('_headers', {}))
+        _header_params = dict(_params.get("_headers", {}))
         # process the form parameters
         _form_params = []
         _files = {}
         # process the body parameter
         _body_params = None
-        if _params['add_peer_request'] is not None:
-            _body_params = _params['add_peer_request']
+        if _params["add_peer_request"] is not None:
+            _body_params = _params["add_peer_request"]
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # set the HTTP header `Content-Type`
-        _content_types_list = _params.get('_content_type',
-            self.api_client.select_header_content_type(
-                ['application/json']))
+        _content_types_list = _params.get(
+            "_content_type",
+            self.api_client.select_header_content_type(["application/json"]),
+        )
         if _content_types_list:
-                _header_params['Content-Type'] = _content_types_list
+            _header_params["Content-Type"] = _content_types_list
 
         # authentication setting
-        _auth_settings = ['authorization']  # noqa: E501
+        _auth_settings = ["authorization"]  # noqa: E501
 
         _response_types_map = {
-            '201': "PeerDetailsResponse",
-            '400': "Error",
-            '401': "Error",
-            '404': "Error",
-            '503': "Error",
+            "201": "PeerDetailsResponse",
+            "400": "Error",
+            "401": "Error",
+            "404": "Error",
+            "503": "Error",
         }
 
         return self.api_client.call_api(
-            '/room/{room_id}/peer', 'POST',
+            "/room/{room_id}/peer",
+            "POST",
             _path_params,
             _query_params,
             _header_params,
@@ -354,15 +393,22 @@ class RoomApi(object):
             files=_files,
             response_types_map=_response_types_map,
             auth_settings=_auth_settings,
-            async_req=_params.get('async_req'),
-            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=_params.get('_preload_content', True),
-            _request_timeout=_params.get('_request_timeout'),
+            async_req=_params.get("async_req"),
+            _return_http_data_only=_params.get("_return_http_data_only"),  # noqa: E501
+            _preload_content=_params.get("_preload_content", True),
+            _request_timeout=_params.get("_request_timeout"),
             collection_formats=_collection_formats,
-            _request_auth=_params.get('_request_auth'))
+            _request_auth=_params.get("_request_auth"),
+        )
 
     @validate_arguments
-    def create_room(self, room_config : Annotated[Optional[RoomConfig], Field(description="Room configuration")] = None, **kwargs) -> RoomCreateDetailsResponse:  # noqa: E501
+    def create_room(
+        self,
+        room_config: Annotated[
+            Optional[RoomConfig], Field(description="Room configuration")
+        ] = None,
+        **kwargs
+    ) -> RoomCreateDetailsResponse:  # noqa: E501
         """Creates a room  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -384,13 +430,21 @@ class RoomApi(object):
                  returns the request thread.
         :rtype: RoomCreateDetailsResponse
         """
-        kwargs['_return_http_data_only'] = True
-        if '_preload_content' in kwargs:
-            raise ValueError("Error! Please call the create_room_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data")
+        kwargs["_return_http_data_only"] = True
+        if "_preload_content" in kwargs:
+            raise ValueError(
+                "Error! Please call the create_room_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"
+            )
         return self.create_room_with_http_info(room_config, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_room_with_http_info(self, room_config : Annotated[Optional[RoomConfig], Field(description="Room configuration")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def create_room_with_http_info(
+        self,
+        room_config: Annotated[
+            Optional[RoomConfig], Field(description="Room configuration")
+        ] = None,
+        **kwargs
+    ) -> ApiResponse:  # noqa: E501
         """Creates a room  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -404,7 +458,7 @@ class RoomApi(object):
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
-                                 be set to none and raw_data will store the 
+                                 be set to none and raw_data will store the
                                  HTTP response body without reading/decoding.
                                  Default is True.
         :type _preload_content: bool, optional
@@ -428,30 +482,28 @@ class RoomApi(object):
 
         _params = locals()
 
-        _all_params = [
-            'room_config'
-        ]
+        _all_params = ["room_config"]
         _all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth',
-                '_content_type',
-                '_headers'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
+                "_content_type",
+                "_headers",
             ]
         )
 
         # validate the arguments
-        for _key, _val in _params['kwargs'].items():
+        for _key, _val in _params["kwargs"].items():
             if _key not in _all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method create_room" % _key
                 )
             _params[_key] = _val
-        del _params['kwargs']
+        del _params["kwargs"]
 
         _collection_formats = {}
 
@@ -461,37 +513,40 @@ class RoomApi(object):
         # process the query parameters
         _query_params = []
         # process the header parameters
-        _header_params = dict(_params.get('_headers', {}))
+        _header_params = dict(_params.get("_headers", {}))
         # process the form parameters
         _form_params = []
         _files = {}
         # process the body parameter
         _body_params = None
-        if _params['room_config'] is not None:
-            _body_params = _params['room_config']
+        if _params["room_config"] is not None:
+            _body_params = _params["room_config"]
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # set the HTTP header `Content-Type`
-        _content_types_list = _params.get('_content_type',
-            self.api_client.select_header_content_type(
-                ['application/json']))
+        _content_types_list = _params.get(
+            "_content_type",
+            self.api_client.select_header_content_type(["application/json"]),
+        )
         if _content_types_list:
-                _header_params['Content-Type'] = _content_types_list
+            _header_params["Content-Type"] = _content_types_list
 
         # authentication setting
-        _auth_settings = ['authorization']  # noqa: E501
+        _auth_settings = ["authorization"]  # noqa: E501
 
         _response_types_map = {
-            '201': "RoomCreateDetailsResponse",
-            '400': "Error",
-            '401': "Error",
+            "201": "RoomCreateDetailsResponse",
+            "400": "Error",
+            "401": "Error",
         }
 
         return self.api_client.call_api(
-            '/room', 'POST',
+            "/room",
+            "POST",
             _path_params,
             _query_params,
             _header_params,
@@ -500,15 +555,21 @@ class RoomApi(object):
             files=_files,
             response_types_map=_response_types_map,
             auth_settings=_auth_settings,
-            async_req=_params.get('async_req'),
-            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=_params.get('_preload_content', True),
-            _request_timeout=_params.get('_request_timeout'),
+            async_req=_params.get("async_req"),
+            _return_http_data_only=_params.get("_return_http_data_only"),  # noqa: E501
+            _preload_content=_params.get("_preload_content", True),
+            _request_timeout=_params.get("_request_timeout"),
             collection_formats=_collection_formats,
-            _request_auth=_params.get('_request_auth'))
+            _request_auth=_params.get("_request_auth"),
+        )
 
     @validate_arguments
-    def delete_component(self, room_id : Annotated[StrictStr, Field(..., description="Room ID")], id : Annotated[StrictStr, Field(..., description="Component ID")], **kwargs) -> None:  # noqa: E501
+    def delete_component(
+        self,
+        room_id: Annotated[StrictStr, Field(..., description="Room ID")],
+        id: Annotated[StrictStr, Field(..., description="Component ID")],
+        **kwargs
+    ) -> None:  # noqa: E501
         """Delete the component from the room  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -532,13 +593,20 @@ class RoomApi(object):
                  returns the request thread.
         :rtype: None
         """
-        kwargs['_return_http_data_only'] = True
-        if '_preload_content' in kwargs:
-            raise ValueError("Error! Please call the delete_component_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data")
+        kwargs["_return_http_data_only"] = True
+        if "_preload_content" in kwargs:
+            raise ValueError(
+                "Error! Please call the delete_component_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"
+            )
         return self.delete_component_with_http_info(room_id, id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def delete_component_with_http_info(self, room_id : Annotated[StrictStr, Field(..., description="Room ID")], id : Annotated[StrictStr, Field(..., description="Component ID")], **kwargs) -> ApiResponse:  # noqa: E501
+    def delete_component_with_http_info(
+        self,
+        room_id: Annotated[StrictStr, Field(..., description="Room ID")],
+        id: Annotated[StrictStr, Field(..., description="Component ID")],
+        **kwargs
+    ) -> ApiResponse:  # noqa: E501
         """Delete the component from the room  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -554,7 +622,7 @@ class RoomApi(object):
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
-                                 be set to none and raw_data will store the 
+                                 be set to none and raw_data will store the
                                  HTTP response body without reading/decoding.
                                  Default is True.
         :type _preload_content: bool, optional
@@ -578,63 +646,61 @@ class RoomApi(object):
 
         _params = locals()
 
-        _all_params = [
-            'room_id',
-            'id'
-        ]
+        _all_params = ["room_id", "id"]
         _all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth',
-                '_content_type',
-                '_headers'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
+                "_content_type",
+                "_headers",
             ]
         )
 
         # validate the arguments
-        for _key, _val in _params['kwargs'].items():
+        for _key, _val in _params["kwargs"].items():
             if _key not in _all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method delete_component" % _key
                 )
             _params[_key] = _val
-        del _params['kwargs']
+        del _params["kwargs"]
 
         _collection_formats = {}
 
         # process the path parameters
         _path_params = {}
-        if _params['room_id']:
-            _path_params['room_id'] = _params['room_id']
+        if _params["room_id"]:
+            _path_params["room_id"] = _params["room_id"]
 
-        if _params['id']:
-            _path_params['id'] = _params['id']
-
+        if _params["id"]:
+            _path_params["id"] = _params["id"]
 
         # process the query parameters
         _query_params = []
         # process the header parameters
-        _header_params = dict(_params.get('_headers', {}))
+        _header_params = dict(_params.get("_headers", {}))
         # process the form parameters
         _form_params = []
         _files = {}
         # process the body parameter
         _body_params = None
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # authentication setting
-        _auth_settings = ['authorization']  # noqa: E501
+        _auth_settings = ["authorization"]  # noqa: E501
 
         _response_types_map = {}
 
         return self.api_client.call_api(
-            '/room/{room_id}/component/{id}', 'DELETE',
+            "/room/{room_id}/component/{id}",
+            "DELETE",
             _path_params,
             _query_params,
             _header_params,
@@ -643,15 +709,21 @@ class RoomApi(object):
             files=_files,
             response_types_map=_response_types_map,
             auth_settings=_auth_settings,
-            async_req=_params.get('async_req'),
-            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=_params.get('_preload_content', True),
-            _request_timeout=_params.get('_request_timeout'),
+            async_req=_params.get("async_req"),
+            _return_http_data_only=_params.get("_return_http_data_only"),  # noqa: E501
+            _preload_content=_params.get("_preload_content", True),
+            _request_timeout=_params.get("_request_timeout"),
             collection_formats=_collection_formats,
-            _request_auth=_params.get('_request_auth'))
+            _request_auth=_params.get("_request_auth"),
+        )
 
     @validate_arguments
-    def delete_peer(self, room_id : Annotated[StrictStr, Field(..., description="Room ID")], id : Annotated[StrictStr, Field(..., description="Peer id")], **kwargs) -> None:  # noqa: E501
+    def delete_peer(
+        self,
+        room_id: Annotated[StrictStr, Field(..., description="Room ID")],
+        id: Annotated[StrictStr, Field(..., description="Peer id")],
+        **kwargs
+    ) -> None:  # noqa: E501
         """Delete peer  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -675,13 +747,20 @@ class RoomApi(object):
                  returns the request thread.
         :rtype: None
         """
-        kwargs['_return_http_data_only'] = True
-        if '_preload_content' in kwargs:
-            raise ValueError("Error! Please call the delete_peer_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data")
+        kwargs["_return_http_data_only"] = True
+        if "_preload_content" in kwargs:
+            raise ValueError(
+                "Error! Please call the delete_peer_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"
+            )
         return self.delete_peer_with_http_info(room_id, id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def delete_peer_with_http_info(self, room_id : Annotated[StrictStr, Field(..., description="Room ID")], id : Annotated[StrictStr, Field(..., description="Peer id")], **kwargs) -> ApiResponse:  # noqa: E501
+    def delete_peer_with_http_info(
+        self,
+        room_id: Annotated[StrictStr, Field(..., description="Room ID")],
+        id: Annotated[StrictStr, Field(..., description="Peer id")],
+        **kwargs
+    ) -> ApiResponse:  # noqa: E501
         """Delete peer  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -697,7 +776,7 @@ class RoomApi(object):
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
-                                 be set to none and raw_data will store the 
+                                 be set to none and raw_data will store the
                                  HTTP response body without reading/decoding.
                                  Default is True.
         :type _preload_content: bool, optional
@@ -721,63 +800,61 @@ class RoomApi(object):
 
         _params = locals()
 
-        _all_params = [
-            'room_id',
-            'id'
-        ]
+        _all_params = ["room_id", "id"]
         _all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth',
-                '_content_type',
-                '_headers'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
+                "_content_type",
+                "_headers",
             ]
         )
 
         # validate the arguments
-        for _key, _val in _params['kwargs'].items():
+        for _key, _val in _params["kwargs"].items():
             if _key not in _all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method delete_peer" % _key
                 )
             _params[_key] = _val
-        del _params['kwargs']
+        del _params["kwargs"]
 
         _collection_formats = {}
 
         # process the path parameters
         _path_params = {}
-        if _params['room_id']:
-            _path_params['room_id'] = _params['room_id']
+        if _params["room_id"]:
+            _path_params["room_id"] = _params["room_id"]
 
-        if _params['id']:
-            _path_params['id'] = _params['id']
-
+        if _params["id"]:
+            _path_params["id"] = _params["id"]
 
         # process the query parameters
         _query_params = []
         # process the header parameters
-        _header_params = dict(_params.get('_headers', {}))
+        _header_params = dict(_params.get("_headers", {}))
         # process the form parameters
         _form_params = []
         _files = {}
         # process the body parameter
         _body_params = None
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # authentication setting
-        _auth_settings = ['authorization']  # noqa: E501
+        _auth_settings = ["authorization"]  # noqa: E501
 
         _response_types_map = {}
 
         return self.api_client.call_api(
-            '/room/{room_id}/peer/{id}', 'DELETE',
+            "/room/{room_id}/peer/{id}",
+            "DELETE",
             _path_params,
             _query_params,
             _header_params,
@@ -786,15 +863,18 @@ class RoomApi(object):
             files=_files,
             response_types_map=_response_types_map,
             auth_settings=_auth_settings,
-            async_req=_params.get('async_req'),
-            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=_params.get('_preload_content', True),
-            _request_timeout=_params.get('_request_timeout'),
+            async_req=_params.get("async_req"),
+            _return_http_data_only=_params.get("_return_http_data_only"),  # noqa: E501
+            _preload_content=_params.get("_preload_content", True),
+            _request_timeout=_params.get("_request_timeout"),
             collection_formats=_collection_formats,
-            _request_auth=_params.get('_request_auth'))
+            _request_auth=_params.get("_request_auth"),
+        )
 
     @validate_arguments
-    def delete_room(self, room_id : Annotated[StrictStr, Field(..., description="Room id")], **kwargs) -> None:  # noqa: E501
+    def delete_room(
+        self, room_id: Annotated[StrictStr, Field(..., description="Room id")], **kwargs
+    ) -> None:  # noqa: E501
         """Delete the room  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -816,13 +896,17 @@ class RoomApi(object):
                  returns the request thread.
         :rtype: None
         """
-        kwargs['_return_http_data_only'] = True
-        if '_preload_content' in kwargs:
-            raise ValueError("Error! Please call the delete_room_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data")
+        kwargs["_return_http_data_only"] = True
+        if "_preload_content" in kwargs:
+            raise ValueError(
+                "Error! Please call the delete_room_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"
+            )
         return self.delete_room_with_http_info(room_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def delete_room_with_http_info(self, room_id : Annotated[StrictStr, Field(..., description="Room id")], **kwargs) -> ApiResponse:  # noqa: E501
+    def delete_room_with_http_info(
+        self, room_id: Annotated[StrictStr, Field(..., description="Room id")], **kwargs
+    ) -> ApiResponse:  # noqa: E501
         """Delete the room  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -836,7 +920,7 @@ class RoomApi(object):
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
-                                 be set to none and raw_data will store the 
+                                 be set to none and raw_data will store the
                                  HTTP response body without reading/decoding.
                                  Default is True.
         :type _preload_content: bool, optional
@@ -860,59 +944,58 @@ class RoomApi(object):
 
         _params = locals()
 
-        _all_params = [
-            'room_id'
-        ]
+        _all_params = ["room_id"]
         _all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth',
-                '_content_type',
-                '_headers'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
+                "_content_type",
+                "_headers",
             ]
         )
 
         # validate the arguments
-        for _key, _val in _params['kwargs'].items():
+        for _key, _val in _params["kwargs"].items():
             if _key not in _all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method delete_room" % _key
                 )
             _params[_key] = _val
-        del _params['kwargs']
+        del _params["kwargs"]
 
         _collection_formats = {}
 
         # process the path parameters
         _path_params = {}
-        if _params['room_id']:
-            _path_params['room_id'] = _params['room_id']
-
+        if _params["room_id"]:
+            _path_params["room_id"] = _params["room_id"]
 
         # process the query parameters
         _query_params = []
         # process the header parameters
-        _header_params = dict(_params.get('_headers', {}))
+        _header_params = dict(_params.get("_headers", {}))
         # process the form parameters
         _form_params = []
         _files = {}
         # process the body parameter
         _body_params = None
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # authentication setting
-        _auth_settings = ['authorization']  # noqa: E501
+        _auth_settings = ["authorization"]  # noqa: E501
 
         _response_types_map = {}
 
         return self.api_client.call_api(
-            '/room/{room_id}', 'DELETE',
+            "/room/{room_id}",
+            "DELETE",
             _path_params,
             _query_params,
             _header_params,
@@ -921,12 +1004,13 @@ class RoomApi(object):
             files=_files,
             response_types_map=_response_types_map,
             auth_settings=_auth_settings,
-            async_req=_params.get('async_req'),
-            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=_params.get('_preload_content', True),
-            _request_timeout=_params.get('_request_timeout'),
+            async_req=_params.get("async_req"),
+            _return_http_data_only=_params.get("_return_http_data_only"),  # noqa: E501
+            _preload_content=_params.get("_preload_content", True),
+            _request_timeout=_params.get("_request_timeout"),
             collection_formats=_collection_formats,
-            _request_auth=_params.get('_request_auth'))
+            _request_auth=_params.get("_request_auth"),
+        )
 
     @validate_arguments
     def get_all_rooms(self, **kwargs) -> RoomsListingResponse:  # noqa: E501
@@ -949,9 +1033,11 @@ class RoomApi(object):
                  returns the request thread.
         :rtype: RoomsListingResponse
         """
-        kwargs['_return_http_data_only'] = True
-        if '_preload_content' in kwargs:
-            raise ValueError("Error! Please call the get_all_rooms_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data")
+        kwargs["_return_http_data_only"] = True
+        if "_preload_content" in kwargs:
+            raise ValueError(
+                "Error! Please call the get_all_rooms_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"
+            )
         return self.get_all_rooms_with_http_info(**kwargs)  # noqa: E501
 
     @validate_arguments
@@ -967,7 +1053,7 @@ class RoomApi(object):
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
-                                 be set to none and raw_data will store the 
+                                 be set to none and raw_data will store the
                                  HTTP response body without reading/decoding.
                                  Default is True.
         :type _preload_content: bool, optional
@@ -991,29 +1077,28 @@ class RoomApi(object):
 
         _params = locals()
 
-        _all_params = [
-        ]
+        _all_params = []
         _all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth',
-                '_content_type',
-                '_headers'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
+                "_content_type",
+                "_headers",
             ]
         )
 
         # validate the arguments
-        for _key, _val in _params['kwargs'].items():
+        for _key, _val in _params["kwargs"].items():
             if _key not in _all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method get_all_rooms" % _key
                 )
             _params[_key] = _val
-        del _params['kwargs']
+        del _params["kwargs"]
 
         _collection_formats = {}
 
@@ -1023,26 +1108,28 @@ class RoomApi(object):
         # process the query parameters
         _query_params = []
         # process the header parameters
-        _header_params = dict(_params.get('_headers', {}))
+        _header_params = dict(_params.get("_headers", {}))
         # process the form parameters
         _form_params = []
         _files = {}
         # process the body parameter
         _body_params = None
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # authentication setting
-        _auth_settings = ['authorization']  # noqa: E501
+        _auth_settings = ["authorization"]  # noqa: E501
 
         _response_types_map = {
-            '200': "RoomsListingResponse",
-            '401': "Error",
+            "200": "RoomsListingResponse",
+            "401": "Error",
         }
 
         return self.api_client.call_api(
-            '/room', 'GET',
+            "/room",
+            "GET",
             _path_params,
             _query_params,
             _header_params,
@@ -1051,15 +1138,18 @@ class RoomApi(object):
             files=_files,
             response_types_map=_response_types_map,
             auth_settings=_auth_settings,
-            async_req=_params.get('async_req'),
-            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=_params.get('_preload_content', True),
-            _request_timeout=_params.get('_request_timeout'),
+            async_req=_params.get("async_req"),
+            _return_http_data_only=_params.get("_return_http_data_only"),  # noqa: E501
+            _preload_content=_params.get("_preload_content", True),
+            _request_timeout=_params.get("_request_timeout"),
             collection_formats=_collection_formats,
-            _request_auth=_params.get('_request_auth'))
+            _request_auth=_params.get("_request_auth"),
+        )
 
     @validate_arguments
-    def get_room(self, room_id : Annotated[StrictStr, Field(..., description="Room ID")], **kwargs) -> RoomDetailsResponse:  # noqa: E501
+    def get_room(
+        self, room_id: Annotated[StrictStr, Field(..., description="Room ID")], **kwargs
+    ) -> RoomDetailsResponse:  # noqa: E501
         """Shows information about the room  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -1081,13 +1171,17 @@ class RoomApi(object):
                  returns the request thread.
         :rtype: RoomDetailsResponse
         """
-        kwargs['_return_http_data_only'] = True
-        if '_preload_content' in kwargs:
-            raise ValueError("Error! Please call the get_room_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data")
+        kwargs["_return_http_data_only"] = True
+        if "_preload_content" in kwargs:
+            raise ValueError(
+                "Error! Please call the get_room_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"
+            )
         return self.get_room_with_http_info(room_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_room_with_http_info(self, room_id : Annotated[StrictStr, Field(..., description="Room ID")], **kwargs) -> ApiResponse:  # noqa: E501
+    def get_room_with_http_info(
+        self, room_id: Annotated[StrictStr, Field(..., description="Room ID")], **kwargs
+    ) -> ApiResponse:  # noqa: E501
         """Shows information about the room  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -1101,7 +1195,7 @@ class RoomApi(object):
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
-                                 be set to none and raw_data will store the 
+                                 be set to none and raw_data will store the
                                  HTTP response body without reading/decoding.
                                  Default is True.
         :type _preload_content: bool, optional
@@ -1125,63 +1219,62 @@ class RoomApi(object):
 
         _params = locals()
 
-        _all_params = [
-            'room_id'
-        ]
+        _all_params = ["room_id"]
         _all_params.extend(
             [
-                'async_req',
-                '_return_http_data_only',
-                '_preload_content',
-                '_request_timeout',
-                '_request_auth',
-                '_content_type',
-                '_headers'
+                "async_req",
+                "_return_http_data_only",
+                "_preload_content",
+                "_request_timeout",
+                "_request_auth",
+                "_content_type",
+                "_headers",
             ]
         )
 
         # validate the arguments
-        for _key, _val in _params['kwargs'].items():
+        for _key, _val in _params["kwargs"].items():
             if _key not in _all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
                     " to method get_room" % _key
                 )
             _params[_key] = _val
-        del _params['kwargs']
+        del _params["kwargs"]
 
         _collection_formats = {}
 
         # process the path parameters
         _path_params = {}
-        if _params['room_id']:
-            _path_params['room_id'] = _params['room_id']
-
+        if _params["room_id"]:
+            _path_params["room_id"] = _params["room_id"]
 
         # process the query parameters
         _query_params = []
         # process the header parameters
-        _header_params = dict(_params.get('_headers', {}))
+        _header_params = dict(_params.get("_headers", {}))
         # process the form parameters
         _form_params = []
         _files = {}
         # process the body parameter
         _body_params = None
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )  # noqa: E501
 
         # authentication setting
-        _auth_settings = ['authorization']  # noqa: E501
+        _auth_settings = ["authorization"]  # noqa: E501
 
         _response_types_map = {
-            '200': "RoomDetailsResponse",
-            '401': "Error",
-            '404': "Error",
+            "200": "RoomDetailsResponse",
+            "401": "Error",
+            "404": "Error",
         }
 
         return self.api_client.call_api(
-            '/room/{room_id}', 'GET',
+            "/room/{room_id}",
+            "GET",
             _path_params,
             _query_params,
             _header_params,
@@ -1190,9 +1283,10 @@ class RoomApi(object):
             files=_files,
             response_types_map=_response_types_map,
             auth_settings=_auth_settings,
-            async_req=_params.get('async_req'),
-            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=_params.get('_preload_content', True),
-            _request_timeout=_params.get('_request_timeout'),
+            async_req=_params.get("async_req"),
+            _return_http_data_only=_params.get("_return_http_data_only"),  # noqa: E501
+            _preload_content=_params.get("_preload_content", True),
+            _request_timeout=_params.get("_request_timeout"),
             collection_formats=_collection_formats,
-            _request_auth=_params.get('_request_auth'))
+            _request_auth=_params.get("_request_auth"),
+        )

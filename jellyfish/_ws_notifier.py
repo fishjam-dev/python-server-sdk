@@ -150,4 +150,3 @@ class Notifier:
         message = ServerMessage().parse(message)
         _which, message = betterproto.which_one_of(message, "content")
         assert isinstance(message, ServerMessageSubscribeResponse)
-

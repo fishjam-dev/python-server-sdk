@@ -16,18 +16,20 @@ import re  # noqa: F401
 import json
 
 
-
 from pydantic import BaseModel, Field, StrictStr
+
 
 class Error(BaseModel):
     """
     Error message
     """
+
     errors: StrictStr = Field(..., description="Error details")
     __properties = ["errors"]
 
     class Config:
         """Pydantic configuration"""
+
         allow_population_by_field_name = True
         validate_assignment = True
 
@@ -46,10 +48,7 @@ class Error(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+        _dict = self.dict(by_alias=True, exclude={}, exclude_none=True)
         return _dict
 
     @classmethod
@@ -61,9 +60,5 @@ class Error(BaseModel):
         if not isinstance(obj, dict):
             return Error.parse_obj(obj)
 
-        _obj = Error.parse_obj({
-            "errors": obj.get("errors")
-        })
+        _obj = Error.parse_obj({"errors": obj.get("errors")})
         return _obj
-
-

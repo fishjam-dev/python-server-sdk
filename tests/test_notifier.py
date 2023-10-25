@@ -7,9 +7,13 @@ from multiprocessing import Process, Queue
 import pytest
 
 from jellyfish import Notifier, RoomApi, PeerOptionsWebRTC
-from jellyfish.events import (ServerMessageRoomCreated, ServerMessageRoomDeleted,
-                              ServerMessagePeerConnected, ServerMessagePeerDisconnected,
-                              ServerMessageMetricsReport)
+from jellyfish.events import (
+    ServerMessageRoomCreated,
+    ServerMessageRoomDeleted,
+    ServerMessagePeerConnected,
+    ServerMessagePeerDisconnected,
+    ServerMessageMetricsReport,
+)
 
 from tests.support.peer_socket import PeerSocket
 from tests.support.asyncio_utils import assert_events, assert_metrics, cancel
@@ -22,6 +26,7 @@ SERVER_ADDRESS = f'{HOST}:5002'
 SERVER_API_TOKEN = 'development'
 WEBHOOK_URL = "http://172.28.0.3:5000/webhook"
 queue = Queue()
+
 
 @pytest.fixture(scope="session", autouse=True)
 def start_server():
@@ -36,8 +41,9 @@ def start_server():
 class TestConnectingToServer:
     @pytest.mark.asyncio
     async def test_valid_credentials(self):
-        notifier = Notifier(server_address=SERVER_ADDRESS,
-                            server_api_token=SERVER_API_TOKEN)
+        notifier = Notifier(
+            server_address=SERVER_ADDRESS, server_api_token=SERVER_API_TOKEN
+        )
 
         notifier_task = asyncio.create_task(notifier.connect())
         await notifier.wait_ready()
@@ -48,8 +54,9 @@ class TestConnectingToServer:
 
     @pytest.mark.asyncio
     async def test_invalid_credentials(self):
-        notifier = Notifier(server_address=SERVER_ADDRESS,
-                            server_api_token='wrong_token')
+        notifier = Notifier(
+            server_address=SERVER_ADDRESS, server_api_token="wrong_token"
+        )
 
         task = asyncio.create_task(notifier.connect())
 
@@ -70,10 +77,7 @@ def notifier():
 class TestReceivingNotifications:
     @pytest.mark.asyncio
     async def test_room_created_deleted(self, room_api: RoomApi, notifier: Notifier):
-        event_checks = [
-            ServerMessageRoomCreated,
-            ServerMessageRoomDeleted
-        ]
+        event_checks = [ServerMessageRoomCreated, ServerMessageRoomDeleted]
         assert_task = asyncio.create_task(assert_events(notifier, event_checks))
 
         notifier_task = asyncio.create_task(notifier.connect())
@@ -88,13 +92,14 @@ class TestReceivingNotifications:
             data = queue.get(timeout=2.5)
             assert data == event
 
-
     @pytest.mark.asyncio
-    async def test_peer_connected_disconnected(self, room_api: RoomApi, notifier: Notifier):
+    async def test_peer_connected_disconnected(
+        self, room_api: RoomApi, notifier: Notifier
+    ):
         event_checks = [
             ServerMessagePeerConnected,
             ServerMessagePeerDisconnected,
-            ServerMessageRoomDeleted
+            ServerMessageRoomDeleted,
         ]
         assert_task = asyncio.create_task(assert_events(notifier, event_checks))
 
@@ -109,7 +114,7 @@ class TestReceivingNotifications:
 
         await peer_socket.wait_ready()
 
-        room_api.delete_peer(room.id,peer.id)
+        room_api.delete_peer(room.id, peer.id)
         room_api.delete_room(room.id)
 
         await assert_task
@@ -121,11 +126,10 @@ class TestReceivingNotifications:
             assert data == event
 
     @pytest.mark.asyncio
-    async def test_peer_connected_room_deleted(self, room_api: RoomApi, notifier: Notifier):
-        event_checks = [
-            ServerMessagePeerConnected,
-            ServerMessageRoomDeleted
-        ]
+    async def test_peer_connected_room_deleted(
+        self, room_api: RoomApi, notifier: Notifier
+    ):
+        event_checks = [ServerMessagePeerConnected, ServerMessageRoomDeleted]
         assert_task = asyncio.create_task(assert_events(notifier, event_checks))
 
         notifier_task = asyncio.create_task(notifier.connect())
@@ -161,7 +165,9 @@ class TestReceivingMetrics:
 
         await peer_socket.wait_ready()
 
-        assert_task = asyncio.create_task(assert_metrics(notifier, [ServerMessageMetricsReport]))
+        assert_task = asyncio.create_task(
+            assert_metrics(notifier, [ServerMessageMetricsReport])
+        )
         notifier_task = asyncio.create_task(notifier.connect())
 
         await assert_task

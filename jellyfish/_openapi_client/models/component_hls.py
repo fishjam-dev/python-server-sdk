@@ -16,14 +16,15 @@ import re  # noqa: F401
 import json
 
 
-
 from pydantic import BaseModel, Field, StrictStr
 from jellyfish._openapi_client.models.component_metadata_hls import ComponentMetadataHLS
+
 
 class ComponentHLS(BaseModel):
     """
     Describes HLS component
     """
+
     id: StrictStr = Field(..., description="Assigned component ID")
     metadata: ComponentMetadataHLS = Field(...)
     type: StrictStr = Field(..., description="Component type")
@@ -31,6 +32,7 @@ class ComponentHLS(BaseModel):
 
     class Config:
         """Pydantic configuration"""
+
         allow_population_by_field_name = True
         validate_assignment = True
 
@@ -49,13 +51,10 @@ class ComponentHLS(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+        _dict = self.dict(by_alias=True, exclude={}, exclude_none=True)
         # override the default output from pydantic by calling `to_dict()` of metadata
         if self.metadata:
-            _dict['metadata'] = self.metadata.to_dict()
+            _dict["metadata"] = self.metadata.to_dict()
         return _dict
 
     @classmethod
@@ -67,11 +66,13 @@ class ComponentHLS(BaseModel):
         if not isinstance(obj, dict):
             return ComponentHLS.parse_obj(obj)
 
-        _obj = ComponentHLS.parse_obj({
-            "id": obj.get("id"),
-            "metadata": ComponentMetadataHLS.from_dict(obj.get("metadata")) if obj.get("metadata") is not None else None,
-            "type": obj.get("type")
-        })
+        _obj = ComponentHLS.parse_obj(
+            {
+                "id": obj.get("id"),
+                "metadata": ComponentMetadataHLS.from_dict(obj.get("metadata"))
+                if obj.get("metadata") is not None
+                else None,
+                "type": obj.get("type"),
+            }
+        )
         return _obj
-
-

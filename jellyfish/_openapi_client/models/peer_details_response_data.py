@@ -16,20 +16,24 @@ import re  # noqa: F401
 import json
 
 
-
 from pydantic import BaseModel, Field, StrictStr
 from jellyfish._openapi_client.models.peer import Peer
+
 
 class PeerDetailsResponseData(BaseModel):
     """
     PeerDetailsResponseData
     """
+
     peer: Peer = Field(...)
-    token: StrictStr = Field(..., description="Token for authorizing websocket connection")
+    token: StrictStr = Field(
+        ..., description="Token for authorizing websocket connection"
+    )
     __properties = ["peer", "token"]
 
     class Config:
         """Pydantic configuration"""
+
         allow_population_by_field_name = True
         validate_assignment = True
 
@@ -48,13 +52,10 @@ class PeerDetailsResponseData(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+        _dict = self.dict(by_alias=True, exclude={}, exclude_none=True)
         # override the default output from pydantic by calling `to_dict()` of peer
         if self.peer:
-            _dict['peer'] = self.peer.to_dict()
+            _dict["peer"] = self.peer.to_dict()
         return _dict
 
     @classmethod
@@ -66,10 +67,12 @@ class PeerDetailsResponseData(BaseModel):
         if not isinstance(obj, dict):
             return PeerDetailsResponseData.parse_obj(obj)
 
-        _obj = PeerDetailsResponseData.parse_obj({
-            "peer": Peer.from_dict(obj.get("peer")) if obj.get("peer") is not None else None,
-            "token": obj.get("token")
-        })
+        _obj = PeerDetailsResponseData.parse_obj(
+            {
+                "peer": Peer.from_dict(obj.get("peer"))
+                if obj.get("peer") is not None
+                else None,
+                "token": obj.get("token"),
+            }
+        )
         return _obj
-
-

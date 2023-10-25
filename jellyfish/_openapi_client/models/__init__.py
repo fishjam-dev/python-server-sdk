@@ -15,7 +15,9 @@
 from jellyfish._openapi_client.models.add_component_request import AddComponentRequest
 from jellyfish._openapi_client.models.add_peer_request import AddPeerRequest
 from jellyfish._openapi_client.models.component import Component
-from jellyfish._openapi_client.models.component_details_response import ComponentDetailsResponse
+from jellyfish._openapi_client.models.component_details_response import (
+    ComponentDetailsResponse,
+)
 from jellyfish._openapi_client.models.component_hls import ComponentHLS
 from jellyfish._openapi_client.models.component_metadata_hls import ComponentMetadataHLS
 from jellyfish._openapi_client.models.component_options import ComponentOptions
@@ -26,13 +28,19 @@ from jellyfish._openapi_client.models.error import Error
 from jellyfish._openapi_client.models.hls_skip import HlsSkip
 from jellyfish._openapi_client.models.peer import Peer
 from jellyfish._openapi_client.models.peer_details_response import PeerDetailsResponse
-from jellyfish._openapi_client.models.peer_details_response_data import PeerDetailsResponseData
+from jellyfish._openapi_client.models.peer_details_response_data import (
+    PeerDetailsResponseData,
+)
 from jellyfish._openapi_client.models.peer_options import PeerOptions
 from jellyfish._openapi_client.models.peer_options_web_rtc import PeerOptionsWebRTC
 from jellyfish._openapi_client.models.peer_status import PeerStatus
 from jellyfish._openapi_client.models.room import Room
 from jellyfish._openapi_client.models.room_config import RoomConfig
-from jellyfish._openapi_client.models.room_create_details_response import RoomCreateDetailsResponse
-from jellyfish._openapi_client.models.room_create_details_response_data import RoomCreateDetailsResponseData
+from jellyfish._openapi_client.models.room_create_details_response import (
+    RoomCreateDetailsResponse,
+)
+from jellyfish._openapi_client.models.room_create_details_response_data import (
+    RoomCreateDetailsResponseData,
+)
 from jellyfish._openapi_client.models.room_details_response import RoomDetailsResponse
 from jellyfish._openapi_client.models.rooms_listing_response import RoomsListingResponse
