@@ -1,20 +1,26 @@
 import os
+import sys
 
+def check_exit_code(command):
+    command_exit_code = os.system(command)
+    if command_exit_code != 0:
+        sys.exit(command_exit_code >> 8)
 
 def run_tests():
-    os.system("docker rm -f jellyfish")
-    os.system("docker compose -f docker-compose-test.yaml pull")
-    os.system("docker compose -f docker-compose-test.yaml up --remove-orphans test --exit-code-from test")
-    os.system("docker compose -f docker-compose-test.yaml down")
+    check_exit_code("docker rm -f jellyfish")
+    check_exit_code("docker compose -f docker-compose-test.yaml pull")
+    check_exit_code("docker compose -f docker-compose-test.yaml up --remove-orphans test --exit-code-from test")
+    check_exit_code("docker compose -f docker-compose-test.yaml down")
 
 
 def check_format():
-    os.system("black --check .")
+    check_exit_code("black --check .")
+    
 
 
 def run_formatter():
-    os.system("black .")
+    check_exit_code("black .")
 
 
 def run_linter():
-    os.system("poetry run pylint --rcfile=pylintrc jellyfish tests")
+    check_exit_code("poetry run pylint --rcfile=pylintrc jellyfish tests")
