@@ -21,8 +21,6 @@ def respond_root():
     return Response(status=200)
 
 
-
-
 def run_server(queue):
     global DATA_QUEUE
     DATA_QUEUE = queue

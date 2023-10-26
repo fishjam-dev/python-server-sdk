@@ -3,10 +3,10 @@
 import os
 import asyncio
 import socket
-import requests
 import time
-
 from multiprocessing import Process, Queue
+
+import requests
 import pytest
 
 from jellyfish import Notifier, RoomApi, PeerOptionsWebRTC
@@ -23,12 +23,11 @@ from tests.support.asyncio_utils import assert_events, assert_metrics, cancel
 from tests.support.webhook_notifier import run_server
 
 
-
-HOST = 'jellyfish' if os.getenv('DOCKER_TEST') == 'TRUE' else 'localhost'
-SERVER_ADDRESS = f'{HOST}:5002'
-SERVER_API_TOKEN = 'development'
-WEBHOOK_ADDRESS = 'test' if os.getenv('DOCKER_TEST') == 'TRUE' else 'localhost'
-WEBHOOK_URL =  f"http://{WEBHOOK_ADDRESS}:5000/webhook"
+HOST = "jellyfish" if os.getenv("DOCKER_TEST") == "TRUE" else "localhost"
+SERVER_ADDRESS = f"{HOST}:5002"
+SERVER_API_TOKEN = "development"
+WEBHOOK_ADDRESS = "test" if os.getenv("DOCKER_TEST") == "TRUE" else "localhost"
+WEBHOOK_URL = f"http://{WEBHOOK_ADDRESS}:5000/webhook"
 queue = Queue()
 
 
@@ -40,14 +39,14 @@ def start_server():
     timeout = 60  # wait maximum of 60 seconds
     while True:
         try:
-            response = requests.get(f'http://{WEBHOOK_ADDRESS}:5000/')
+            response = requests.get(f"http://{WEBHOOK_ADDRESS}:5000/", timeout=1_000)
             if response.status_code == 200:  # Or another condition
                 break
-        except (requests.ConnectionError, socket.error) as ex:
+        except (requests.ConnectionError, socket.error):
             time.sleep(1)  # wait for 1 second before trying again
             timeout -= 1
             if timeout == 0:
-                pytest.fail('Server did not start in the expected time')
+                pytest.fail("Server did not start in the expected time")
 
     yield  # This is where the testing happens.
 
@@ -106,7 +105,6 @@ class TestReceivingNotifications:
         await assert_task
         await cancel(notifier_task)
 
-
         for event in event_checks:
             self.assert_event(event)
 
@@ -149,7 +147,11 @@ class TestReceivingNotifications:
     async def test_peer_connected_room_deleted(
         self, room_api: RoomApi, notifier: Notifier
     ):
-        event_checks = [ServerMessageRoomCreated,ServerMessagePeerConnected, ServerMessageRoomDeleted]
+        event_checks = [
+            ServerMessageRoomCreated,
+            ServerMessagePeerConnected,
+            ServerMessageRoomDeleted,
+        ]
         assert_task = asyncio.create_task(assert_events(notifier, event_checks.copy()))
 
         notifier_task = asyncio.create_task(notifier.connect())
@@ -168,17 +170,13 @@ class TestReceivingNotifications:
         await assert_task
         await cancel(peer_task)
         await cancel(notifier_task)
-        
 
         for event in event_checks:
             self.assert_event(event)
 
-
     def assert_event(self, event):
         data = queue.get(timeout=2.5)
-        assert data == event or isinstance(data,event)
-
-
+        assert data == event or isinstance(data, event)
 
 
 class TestReceivingMetrics:
