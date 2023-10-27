@@ -21,11 +21,21 @@ betterproto = "2.0.0b6"
 [tool.poetry.group.dev.dependencies]
 pdoc = "^14.1.0"
 pylint = "^2.17.6"
+betterproto = { version = "= 2.0.0b6", extras = ["compiler"] }
+black = "^23.10.0"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.4.2"
 pytest-asyncio = "^0.21.1"
+flask = "^3.0.0"
+requests = "^2.31.0"
 
 [build-system]
 requires = ["poetry-core>=1.6.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+ci_test = "test_commands:run_tests"
+format = "test_commands:run_formatter"
+check_format = "test_commands:check_format"
+lint = "test_commands:run_linter"

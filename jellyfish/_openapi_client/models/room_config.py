@@ -19,26 +19,42 @@ import json
 from typing import Optional
 from pydantic import BaseModel, Field, StrictStr, conint, validator
 
+
 class RoomConfig(BaseModel):
     """
     Room configuration
     """
-    max_peers: Optional[conint(strict=True, ge=1)] = Field(None, alias="maxPeers", description="Maximum amount of peers allowed into the room")
-    video_codec: Optional[StrictStr] = Field(None, alias="videoCodec", description="Enforces video codec for each peer in the room")
-    __properties = ["maxPeers", "videoCodec"]
 
-    @validator('video_codec')
+    max_peers: Optional[conint(strict=True, ge=1)] = Field(
+        None,
+        alias="maxPeers",
+        description="Maximum amount of peers allowed into the room",
+    )
+    video_codec: Optional[StrictStr] = Field(
+        None,
+        alias="videoCodec",
+        description="Enforces video codec for each peer in the room",
+    )
+    webhook_url: Optional[StrictStr] = Field(
+        None,
+        alias="webhookUrl",
+        description="URL where Jellyfish notifications will be sent",
+    )
+    __properties = ["maxPeers", "videoCodec", "webhookUrl"]
+
+    @validator("video_codec")
     def video_codec_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in ('h264', 'vp8'):
+        if value not in ("h264", "vp8"):
             raise ValueError("must be one of enum values ('h264', 'vp8')")
         return value
 
     class Config:
         """Pydantic configuration"""
+
         allow_population_by_field_name = True
         validate_assignment = True
 
@@ -57,19 +73,21 @@ class RoomConfig(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+        _dict = self.dict(by_alias=True, exclude={}, exclude_none=True)
         # set to None if max_peers (nullable) is None
         # and __fields_set__ contains the field
         if self.max_peers is None and "max_peers" in self.__fields_set__:
-            _dict['maxPeers'] = None
+            _dict["maxPeers"] = None
 
         # set to None if video_codec (nullable) is None
         # and __fields_set__ contains the field
         if self.video_codec is None and "video_codec" in self.__fields_set__:
-            _dict['videoCodec'] = None
+            _dict["videoCodec"] = None
+
+        # set to None if webhook_url (nullable) is None
+        # and __fields_set__ contains the field
+        if self.webhook_url is None and "webhook_url" in self.__fields_set__:
+            _dict["webhookUrl"] = None
 
         return _dict
 
@@ -82,10 +100,11 @@ class RoomConfig(BaseModel):
         if not isinstance(obj, dict):
             return RoomConfig.parse_obj(obj)
 
-        _obj = RoomConfig.parse_obj({
-            "max_peers": obj.get("maxPeers"),
-            "video_codec": obj.get("videoCodec")
-        })
+        _obj = RoomConfig.parse_obj(
+            {
+                "max_peers": obj.get("maxPeers"),
+                "video_codec": obj.get("videoCodec"),
+                "webhook_url": obj.get("webhookUrl"),
+            }
+        )
         return _obj
-
-

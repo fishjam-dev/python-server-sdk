@@ -25,10 +25,12 @@ from pydantic import StrictStr, Field
 
 COMPONENTOPTIONS_ONE_OF_SCHEMAS = ["ComponentOptionsHLS", "ComponentOptionsRTSP"]
 
+
 class ComponentOptions(BaseModel):
     """
     Component-specific options
     """
+
     # data type: ComponentOptionsHLS
     oneof_schema_1_validator: Optional[ComponentOptionsHLS] = None
     # data type: ComponentOptionsRTSP
@@ -45,34 +47,48 @@ class ComponentOptions(BaseModel):
     def __init__(self, *args, **kwargs):
         if args:
             if len(args) > 1:
-                raise ValueError("If a position argument is used, only 1 is allowed to set `actual_instance`")
+                raise ValueError(
+                    "If a position argument is used, only 1 is allowed to set `actual_instance`"
+                )
             if kwargs:
-                raise ValueError("If a position argument is used, keyword arguments cannot be used.")
+                raise ValueError(
+                    "If a position argument is used, keyword arguments cannot be used."
+                )
             super().__init__(actual_instance=args[0])
         else:
             super().__init__(**kwargs)
 
-    @validator('actual_instance')
+    @validator("actual_instance")
     def actual_instance_must_validate_oneof(cls, v):
         instance = ComponentOptions.construct()
         error_messages = []
         match = 0
         # validate data type: ComponentOptionsHLS
         if not isinstance(v, ComponentOptionsHLS):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ComponentOptionsHLS`")
+            error_messages.append(
+                f"Error! Input type `{type(v)}` is not `ComponentOptionsHLS`"
+            )
         else:
             match += 1
         # validate data type: ComponentOptionsRTSP
         if not isinstance(v, ComponentOptionsRTSP):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ComponentOptionsRTSP`")
+            error_messages.append(
+                f"Error! Input type `{type(v)}` is not `ComponentOptionsRTSP`"
+            )
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in ComponentOptions with oneOf schemas: ComponentOptionsHLS, ComponentOptionsRTSP. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when setting `actual_instance` in ComponentOptions with oneOf schemas: ComponentOptionsHLS, ComponentOptionsRTSP. Details: "
+                + ", ".join(error_messages)
+            )
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in ComponentOptions with oneOf schemas: ComponentOptionsHLS, ComponentOptionsRTSP. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when setting `actual_instance` in ComponentOptions with oneOf schemas: ComponentOptionsHLS, ComponentOptionsRTSP. Details: "
+                + ", ".join(error_messages)
+            )
         else:
             return v
 
@@ -102,10 +118,16 @@ class ComponentOptions(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into ComponentOptions with oneOf schemas: ComponentOptionsHLS, ComponentOptionsRTSP. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when deserializing the JSON string into ComponentOptions with oneOf schemas: ComponentOptionsHLS, ComponentOptionsRTSP. Details: "
+                + ", ".join(error_messages)
+            )
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into ComponentOptions with oneOf schemas: ComponentOptionsHLS, ComponentOptionsRTSP. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when deserializing the JSON string into ComponentOptions with oneOf schemas: ComponentOptionsHLS, ComponentOptionsRTSP. Details: "
+                + ", ".join(error_messages)
+            )
         else:
             return instance
 
@@ -135,5 +157,3 @@ class ComponentOptions(BaseModel):
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.dict())
-
-

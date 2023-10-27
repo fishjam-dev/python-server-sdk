@@ -16,10 +16,13 @@ jobs:
       - checkout
       - run:
           name: Install project dependencies
-          command: poetry install --no-ansi
+          command: poetry install --no-ansi --with=dev
       - run:
           name: Lint
-          command: ./pylint.sh
+          command: poetry run lint
+      - run:
+          name: Check code formatting
+          command: poetry run check_format
       - persist_to_workspace:
           root: ~/project
           paths:
@@ -29,7 +32,7 @@ jobs:
     executor: machine_executor_amd64
     steps:
       - checkout
-      - run: docker compose -f docker-compose-test.yaml run test
+      - run: docker compose -f docker-compose-test.yaml up test --exit-code-from test
 
 
 workflows:

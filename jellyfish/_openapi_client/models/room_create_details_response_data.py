@@ -16,20 +16,25 @@ import re  # noqa: F401
 import json
 
 
-
 from pydantic import BaseModel, Field, StrictStr
 from jellyfish._openapi_client.models.room import Room
+
 
 class RoomCreateDetailsResponseData(BaseModel):
     """
     RoomCreateDetailsResponseData
     """
-    jellyfish_address: StrictStr = Field(..., description="Jellyfish instance address where the room was created. This might be different than the address of Jellyfish where the request was sent only when running a cluster of Jellyfishes.")
+
+    jellyfish_address: StrictStr = Field(
+        ...,
+        description="Jellyfish instance address where the room was created. This might be different than the address of Jellyfish where the request was sent only when running a cluster of Jellyfishes.",
+    )
     room: Room = Field(...)
     __properties = ["jellyfish_address", "room"]
 
     class Config:
         """Pydantic configuration"""
+
         allow_population_by_field_name = True
         validate_assignment = True
 
@@ -48,13 +53,10 @@ class RoomCreateDetailsResponseData(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+        _dict = self.dict(by_alias=True, exclude={}, exclude_none=True)
         # override the default output from pydantic by calling `to_dict()` of room
         if self.room:
-            _dict['room'] = self.room.to_dict()
+            _dict["room"] = self.room.to_dict()
         return _dict
 
     @classmethod
@@ -66,10 +68,12 @@ class RoomCreateDetailsResponseData(BaseModel):
         if not isinstance(obj, dict):
             return RoomCreateDetailsResponseData.parse_obj(obj)
 
-        _obj = RoomCreateDetailsResponseData.parse_obj({
-            "jellyfish_address": obj.get("jellyfish_address"),
-            "room": Room.from_dict(obj.get("room")) if obj.get("room") is not None else None
-        })
+        _obj = RoomCreateDetailsResponseData.parse_obj(
+            {
+                "jellyfish_address": obj.get("jellyfish_address"),
+                "room": Room.from_dict(obj.get("room"))
+                if obj.get("room") is not None
+                else None,
+            }
+        )
         return _obj
-
-

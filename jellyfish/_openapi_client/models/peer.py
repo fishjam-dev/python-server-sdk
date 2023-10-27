@@ -16,14 +16,15 @@ import re  # noqa: F401
 import json
 
 
-
 from pydantic import BaseModel, Field, StrictStr
 from jellyfish._openapi_client.models.peer_status import PeerStatus
+
 
 class Peer(BaseModel):
     """
     Describes peer status
     """
+
     id: StrictStr = Field(..., description="Assigned peer id")
     status: PeerStatus = Field(...)
     type: StrictStr = Field(..., description="Peer type")
@@ -31,6 +32,7 @@ class Peer(BaseModel):
 
     class Config:
         """Pydantic configuration"""
+
         allow_population_by_field_name = True
         validate_assignment = True
 
@@ -49,10 +51,7 @@ class Peer(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+        _dict = self.dict(by_alias=True, exclude={}, exclude_none=True)
         return _dict
 
     @classmethod
@@ -64,11 +63,7 @@ class Peer(BaseModel):
         if not isinstance(obj, dict):
             return Peer.parse_obj(obj)
 
-        _obj = Peer.parse_obj({
-            "id": obj.get("id"),
-            "status": obj.get("status"),
-            "type": obj.get("type")
-        })
+        _obj = Peer.parse_obj(
+            {"id": obj.get("id"), "status": obj.get("status"), "type": obj.get("type")}
+        )
         return _obj
-
-

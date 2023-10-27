@@ -7,7 +7,10 @@ from websockets import client
 from websockets.exceptions import ConnectionClosedOK
 
 from tests.support.protos.jellyfish import (
-    PeerMessage, PeerMessageAuthRequest, PeerMessageAuthenticated)
+    PeerMessage,
+    PeerMessageAuthRequest,
+    PeerMessageAuthenticated,
+)
 
 
 class PeerSocket:
@@ -18,8 +21,9 @@ class PeerSocket:
         self._ready_event = None
 
     async def connect(self, token):
-        async with client.connect(f'ws://{self._server_address}/socket/peer/websocket') \
-                as websocket:
+        async with client.connect(
+            f"ws://{self._server_address}/socket/peer/websocket"
+        ) as websocket:
             msg = PeerMessage(auth_request=PeerMessageAuthRequest(token=token))
             await websocket.send(bytes(msg))
 
@@ -30,7 +34,7 @@ class PeerSocket:
 
             message = PeerMessage().parse(message)
 
-            _type, message = betterproto.which_one_of(message, 'content')
+            _type, message = betterproto.which_one_of(message, "content")
             assert isinstance(message, PeerMessageAuthenticated)
 
             self._ready = True

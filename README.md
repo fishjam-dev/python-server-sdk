@@ -91,16 +91,20 @@ asyncio.run(test_notifier())
 
 ## Testing
 
-You can test the SDK against a local instance of Jellyfish by running
+You can test the SDK by running
 ```console
-pytest
+poetry run ci_test
 ```
 
-Make sure to use the default configuration for Jellyfish
-
-Alternatively you can test using Docker
+## Format&Lint
+You can format code by running
 ```console
-docker-compose -f docker-compose-test.yaml run test
+poetry run format
+```
+
+You can check linter by running
+```
+poetry run lint
 ```
 
 ## Copyright and License

@@ -19,15 +19,20 @@ import json
 from typing import Optional
 from pydantic import BaseModel, Field, StrictBool
 
+
 class PeerOptionsWebRTC(BaseModel):
     """
     Options specific to the WebRTC peer
     """
-    enable_simulcast: Optional[StrictBool] = Field(True, alias="enableSimulcast", description="Enables the peer to use simulcast")
+
+    enable_simulcast: Optional[StrictBool] = Field(
+        True, alias="enableSimulcast", description="Enables the peer to use simulcast"
+    )
     __properties = ["enableSimulcast"]
 
     class Config:
         """Pydantic configuration"""
+
         allow_population_by_field_name = True
         validate_assignment = True
 
@@ -46,10 +51,7 @@ class PeerOptionsWebRTC(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
+        _dict = self.dict(by_alias=True, exclude={}, exclude_none=True)
         return _dict
 
     @classmethod
@@ -61,9 +63,11 @@ class PeerOptionsWebRTC(BaseModel):
         if not isinstance(obj, dict):
             return PeerOptionsWebRTC.parse_obj(obj)
 
-        _obj = PeerOptionsWebRTC.parse_obj({
-            "enable_simulcast": obj.get("enableSimulcast") if obj.get("enableSimulcast") is not None else True
-        })
+        _obj = PeerOptionsWebRTC.parse_obj(
+            {
+                "enable_simulcast": obj.get("enableSimulcast")
+                if obj.get("enableSimulcast") is not None
+                else True
+            }
+        )
         return _obj
-
-
