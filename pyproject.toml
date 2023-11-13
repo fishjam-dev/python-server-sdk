@@ -10,7 +10,7 @@ readme = "README.md"
 packages = [{ include = "jellyfish" }]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 websockets = "^11.0.3"
 urllib3 = ">=1.25.3,<2"
 pydantic = "<2"
@@ -19,10 +19,12 @@ python-dateutil = "^2.8.2"
 betterproto = "2.0.0b6"
 
 [tool.poetry.group.dev.dependencies]
-pdoc = "^14.1.0"
 pylint = "^2.17.6"
 betterproto = { version = "= 2.0.0b6", extras = ["compiler"] }
 black = "^23.10.0"
+pdoc = "^14.1.0"
+mkdocs = "^1.5.3"
+mike = "^2.0.0"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.4.2"
@@ -39,3 +41,4 @@ ci_test = "test_commands:run_tests"
 format = "test_commands:run_formatter"
 check_format = "test_commands:check_format"
 lint = "test_commands:run_linter"
+generate_docs = "test_commands:generate_docs"
