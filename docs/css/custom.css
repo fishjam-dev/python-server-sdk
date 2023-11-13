@@ -1,6 +1,7 @@
-/* Make navbar sticky */
-/* .navbar {
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 1024 !important;
-} */
+.container .row .col-md-3 {
+    display: none;
+}
+
+#navbar-collapse {
+    display: none !important;
+}
