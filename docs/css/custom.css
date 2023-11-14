@@ -1,7 +1,34 @@
+.container-fluid .row .col-md-3 {
+    display: none;
+}
+
 .container .row .col-md-3 {
     display: none;
 }
 
+.container-fluid .row .col-md-12 {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.container-fluid .row .col-md-9 {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
 #navbar-collapse {
     display: none !important;
+}
+
+.navbar-toggler {
+    display: none !important;
+}
+
+.container-fluid .row {
+    padding-top: 56px;
+}
+
+.navbar {
+    position: fixed !important;
+    top: 0
 }
