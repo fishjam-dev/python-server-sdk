@@ -36,6 +36,7 @@ def run_linter():
 def generate_docs():
     check_exit_code(
         "pdoc \
+    --no-include-undocumented \
     --favicon https://logo.swmansion.com/membrane/\?width\=100\&variant\=signetDark\
     --logo https://logo.swmansion.com/membrane/\?width\=70\&variant\=signetDark\
     -t doc_templates \
