@@ -42,6 +42,7 @@ class RoomApi:
 
         self._api_client = jellyfish_api.ApiClient(self._configuration)
         self._room_api = jellyfish_api.RoomApi(self._api_client)
+        self._hls_api = jellyfish_api.HlsApi(self._api_client)
 
     def create_room(
         self,
@@ -126,3 +127,8 @@ class RoomApi:
         """Deletes component"""
 
         return self._room_api.delete_component(room_id, component_id)
+
+    def hls_subscribe(self, room_id: str, tracks: list):
+        """subscribes hls component for tracks"""
+
+        return self._hls_api.subscribe_tracks(room_id, {"tracks": tracks})

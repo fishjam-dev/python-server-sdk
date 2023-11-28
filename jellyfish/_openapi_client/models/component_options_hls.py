@@ -17,7 +17,10 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, StrictBool, StrictInt
+from pydantic import BaseModel, Field, StrictBool, StrictInt, StrictStr, validator
+from jellyfish._openapi_client.models.component_options_hlss3 import (
+    ComponentOptionsHLSS3,
+)
 
 
 class ComponentOptionsHLS(BaseModel):
@@ -31,12 +34,34 @@ class ComponentOptionsHLS(BaseModel):
     persistent: Optional[StrictBool] = Field(
         False, description="Whether the video is stored after end of stream"
     )
+    s3: Optional[ComponentOptionsHLSS3] = None
+    subscribe_mode: Optional[StrictStr] = Field(
+        "auto",
+        alias="subscribeMode",
+        description="Whether the HLS component should subscribe to tracks automatically or manually.",
+    )
     target_window_duration: Optional[StrictInt] = Field(
         None,
         alias="targetWindowDuration",
         description="Duration of stream available for viewer",
     )
-    __properties = ["lowLatency", "persistent", "targetWindowDuration"]
+    __properties = [
+        "lowLatency",
+        "persistent",
+        "s3",
+        "subscribeMode",
+        "targetWindowDuration",
+    ]
+
+    @validator("subscribe_mode")
+    def subscribe_mode_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in ("auto", "manual"):
+            raise ValueError("must be one of enum values ('auto', 'manual')")
+        return value
 
     class Config:
         """Pydantic configuration"""
@@ -60,6 +85,14 @@ class ComponentOptionsHLS(BaseModel):
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True, exclude={}, exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of s3
+        if self.s3:
+            _dict["s3"] = self.s3.to_dict()
+        # set to None if s3 (nullable) is None
+        # and __fields_set__ contains the field
+        if self.s3 is None and "s3" in self.__fields_set__:
+            _dict["s3"] = None
+
         # set to None if target_window_duration (nullable) is None
         # and __fields_set__ contains the field
         if (
@@ -87,6 +120,12 @@ class ComponentOptionsHLS(BaseModel):
                 "persistent": obj.get("persistent")
                 if obj.get("persistent") is not None
                 else False,
+                "s3": ComponentOptionsHLSS3.from_dict(obj.get("s3"))
+                if obj.get("s3") is not None
+                else None,
+                "subscribe_mode": obj.get("subscribeMode")
+                if obj.get("subscribeMode") is not None
+                else "auto",
                 "target_window_duration": obj.get("targetWindowDuration"),
             }
         )

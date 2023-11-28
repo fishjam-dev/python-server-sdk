@@ -17,7 +17,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, StrictBool, StrictInt
+from pydantic import BaseModel, Field, StrictBool, StrictInt, StrictStr, validator
 
 
 class ComponentMetadataHLS(BaseModel):
@@ -34,12 +34,30 @@ class ComponentMetadataHLS(BaseModel):
     playable: StrictBool = Field(
         ..., description="Whether the generated HLS playlist is playable"
     )
+    subscribe_mode: StrictStr = Field(
+        ...,
+        alias="subscribeMode",
+        description="Whether the HLS component should subscribe to tracks automatically or manually",
+    )
     target_window_duration: Optional[StrictInt] = Field(
         ...,
         alias="targetWindowDuration",
         description="Duration of stream available for viewer",
     )
-    __properties = ["lowLatency", "persistent", "playable", "targetWindowDuration"]
+    __properties = [
+        "lowLatency",
+        "persistent",
+        "playable",
+        "subscribeMode",
+        "targetWindowDuration",
+    ]
+
+    @validator("subscribe_mode")
+    def subscribe_mode_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in ("auto", "manual"):
+            raise ValueError("must be one of enum values ('auto', 'manual')")
+        return value
 
     class Config:
         """Pydantic configuration"""
@@ -87,6 +105,7 @@ class ComponentMetadataHLS(BaseModel):
                 "low_latency": obj.get("lowLatency"),
                 "persistent": obj.get("persistent"),
                 "playable": obj.get("playable"),
+                "subscribe_mode": obj.get("subscribeMode"),
                 "target_window_duration": obj.get("targetWindowDuration"),
             }
         )
