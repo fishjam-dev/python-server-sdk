@@ -16,7 +16,6 @@ __version__ = "1.0.0"
 
 # import apis into sdk package
 from jellyfish._openapi_client.api.hls_api import HlsApi
-from jellyfish._openapi_client.api.recording_api import RecordingApi
 from jellyfish._openapi_client.api.room_api import RoomApi
 
 # import ApiClient
@@ -56,9 +55,6 @@ from jellyfish._openapi_client.models.peer_details_response_data import (
 from jellyfish._openapi_client.models.peer_options import PeerOptions
 from jellyfish._openapi_client.models.peer_options_web_rtc import PeerOptionsWebRTC
 from jellyfish._openapi_client.models.peer_status import PeerStatus
-from jellyfish._openapi_client.models.recording_list_response import (
-    RecordingListResponse,
-)
 from jellyfish._openapi_client.models.room import Room
 from jellyfish._openapi_client.models.room_config import RoomConfig
 from jellyfish._openapi_client.models.room_create_details_response import (
