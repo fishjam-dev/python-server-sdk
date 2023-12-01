@@ -15,7 +15,7 @@
 __version__ = "1.0.0"
 
 # import apis into sdk package
-from jellyfish._openapi_client.api.default_api import DefaultApi
+from jellyfish._openapi_client.api.hls_api import HlsApi
 from jellyfish._openapi_client.api.room_api import RoomApi
 
 # import ApiClient
@@ -40,6 +40,9 @@ from jellyfish._openapi_client.models.component_hls import ComponentHLS
 from jellyfish._openapi_client.models.component_metadata_hls import ComponentMetadataHLS
 from jellyfish._openapi_client.models.component_options import ComponentOptions
 from jellyfish._openapi_client.models.component_options_hls import ComponentOptionsHLS
+from jellyfish._openapi_client.models.component_options_hlss3 import (
+    ComponentOptionsHLSS3,
+)
 from jellyfish._openapi_client.models.component_options_rtsp import ComponentOptionsRTSP
 from jellyfish._openapi_client.models.component_rtsp import ComponentRTSP
 from jellyfish._openapi_client.models.error import Error
@@ -62,3 +65,5 @@ from jellyfish._openapi_client.models.room_create_details_response_data import (
 )
 from jellyfish._openapi_client.models.room_details_response import RoomDetailsResponse
 from jellyfish._openapi_client.models.rooms_listing_response import RoomsListingResponse
+from jellyfish._openapi_client.models.s3_credentials import S3Credentials
+from jellyfish._openapi_client.models.subscription_config import SubscriptionConfig

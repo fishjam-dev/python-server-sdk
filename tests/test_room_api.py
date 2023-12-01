@@ -11,7 +11,7 @@ from jellyfish import ComponentOptionsRTSP, ComponentOptionsHLS, PeerOptionsWebR
 
 from jellyfish import ValidationError
 
-from jellyfish import UnauthorizedException, NotFoundException
+from jellyfish import UnauthorizedException, NotFoundException, BadRequestException
 
 
 HOST = "jellyfish" if os.getenv("DOCKER_TEST") == "TRUE" else "localhost"
@@ -171,6 +171,21 @@ class TestDeleteComponent:
 
         with pytest.raises(NotFoundException):
             room_api.delete_component(room.id, "invalid_id")
+
+
+class TestHLSSubscribe:
+    def test_valid_subscription(self, room_api: RoomApi):
+        _, room = room_api.create_room(video_codec=CODEC_H264)
+        _ = room_api.add_component(
+            room.id, options=ComponentOptionsHLS(subscribe_mode="manual")
+        )
+        assert room_api.hls_subscribe(room.id, ["track-id"]) is None
+
+    def test_invalid_subscription(self, room_api: RoomApi):
+        _, room = room_api.create_room(video_codec=CODEC_H264)
+        _ = room_api.add_component(room.id, options=HLS_OPTIONS)
+        with pytest.raises(BadRequestException):
+            room_api.hls_subscribe(room.id, ["track-id"])
 
 
 class TestAddPeer:
