@@ -8,6 +8,7 @@ from pydantic.error_wrappers import ValidationError
 
 # API
 from jellyfish._room_api import RoomApi
+from jellyfish._recording_api import RecordingApi
 from jellyfish._ws_notifier import Notifier
 from jellyfish._webhook_notifier import receive_json
 
@@ -38,6 +39,7 @@ from jellyfish._openapi_client.exceptions import (
 
 __all__ = [
     "RoomApi",
+    "RecordingApi",
     "Notifier",
     "receive_json",
     "Room",

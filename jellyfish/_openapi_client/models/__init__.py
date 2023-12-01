@@ -37,6 +37,9 @@ from jellyfish._openapi_client.models.peer_details_response_data import (
 from jellyfish._openapi_client.models.peer_options import PeerOptions
 from jellyfish._openapi_client.models.peer_options_web_rtc import PeerOptionsWebRTC
 from jellyfish._openapi_client.models.peer_status import PeerStatus
+from jellyfish._openapi_client.models.recording_list_response import (
+    RecordingListResponse,
+)
 from jellyfish._openapi_client.models.room import Room
 from jellyfish._openapi_client.models.room_config import RoomConfig
 from jellyfish._openapi_client.models.room_create_details_response import (
