@@ -6,7 +6,7 @@ from jellyfish import _openapi_client as jellyfish_api
 
 
 class RecordingApi:
-    """Allows for managing rooms"""
+    """Allows for managing recordings"""
 
     def __init__(
         self,
