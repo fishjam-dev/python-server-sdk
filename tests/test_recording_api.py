@@ -5,7 +5,8 @@ import os
 import pytest
 
 from jellyfish import RecordingApi
-from jellyfish import NotFoundException
+
+# from jellyfish import NotFoundException
 
 
 HOST = "jellyfish" if os.getenv("DOCKER_TEST") == "TRUE" else "localhost"
@@ -28,5 +29,5 @@ class TestGetList:
 
 class TestDelete:
     def test_invalid_recording(self, recording_api: RecordingApi):
-        with pytest.raises(NotFoundException):
+        with pytest.raises(Exception):
             recording_api.delete("invalid-id")

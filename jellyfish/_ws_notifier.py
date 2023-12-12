@@ -3,21 +3,20 @@ Notifier listening to WebSocket events
 """
 
 import asyncio
-from typing import Callable, Any
+from typing import Any, Callable
 
 import betterproto
-
 from websockets import client
 from websockets.exceptions import ConnectionClosed
 
 from jellyfish.events import (
     ServerMessage,
-    ServerMessageAuthRequest,
     ServerMessageAuthenticated,
-    ServerMessageSubscribeRequest,
+    ServerMessageAuthRequest,
     ServerMessageEventType,
-    ServerMessageSubscribeResponse,
     ServerMessageMetricsReport,
+    ServerMessageSubscribeRequest,
+    ServerMessageSubscribeResponse,
 )
 
 

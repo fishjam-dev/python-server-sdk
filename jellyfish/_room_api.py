@@ -2,22 +2,34 @@
 RoomApi used to manage rooms
 """
 
-from typing import Union, Literal
+from typing import Literal, Union
 
-from jellyfish import _openapi_client as jellyfish_api
+from jellyfish._openapi_client import AuthenticatedClient
+from jellyfish._openapi_client.api.room import (
+    add_component,
+    add_peer,
+    create_room,
+    delete_component,
+    delete_peer,
+    delete_room,
+    get_all_rooms,
+    get_room,
+)
 
-from jellyfish._openapi_client import (
-    AddPeerRequest,
-    AddComponentRequest,
-    PeerOptions,
-    PeerOptionsWebRTC,
-    Component,
-    ComponentOptions,
-    ComponentOptionsHLS,
-    ComponentOptionsRTSP,
+from jellyfish._openapi_client.api.hls import subscribe_tracks
+
+from jellyfish._openapi_client.models import (
+    AddPeerJsonBody,
+    AddComponentJsonBody,
+    SubscriptionConfig,
     Room,
+    PeerOptionsWebRTC,
     RoomConfig,
     Peer,
+    ComponentOptionsHLS,
+    ComponentOptionsRTSP,
+    RoomConfigVideoCodec,
+    Error,
 )
 
 
@@ -36,13 +48,10 @@ class RoomApi:
         """
 
         protocol = "https" if secure else "http"
-        self._configuration = jellyfish_api.Configuration(
-            host=f"{protocol}://{server_address}", access_token=server_api_token
-        )
 
-        self._api_client = jellyfish_api.ApiClient(self._configuration)
-        self._room_api = jellyfish_api.RoomApi(self._api_client)
-        self._hls_api = jellyfish_api.HlsApi(self._api_client)
+        self._client = AuthenticatedClient(
+            f"{protocol}://{server_address}", token=server_api_token
+        )
 
     def create_room(
         self,
@@ -60,27 +69,33 @@ class RoomApi:
         In such case, a new `RoomApi` instance has to be created using the returned address
         in order to interact with the room.
         """
-        room_config = RoomConfig(
-            maxPeers=max_peers, videoCodec=video_codec, webhook_url=webhook_url
-        )
-        resp = self._room_api.create_room(room_config)
 
+        if video_codec is not None:
+            video_codec = RoomConfigVideoCodec(video_codec)
+        else:
+            video_codec = None
+
+        room_config = RoomConfig(
+            max_peers=max_peers, video_codec=video_codec, webhook_url=webhook_url
+        )
+
+        resp = self._request(create_room, json_body=room_config)
         return (resp.data.jellyfish_address, resp.data.room)
 
     def delete_room(self, room_id: str) -> None:
         """Deletes a room"""
 
-        return self._room_api.delete_room(room_id)
+        return self._request(delete_room, room_id=room_id)
 
     def get_all_rooms(self) -> list:
         """Returns list of all rooms"""
 
-        return self._room_api.get_all_rooms().data
+        return self._request(get_all_rooms).data
 
     def get_room(self, room_id: str) -> Room:
         """Returns room with the given id"""
 
-        return self._room_api.get_room(room_id).data
+        return self._request(get_room, room_id=room_id).data
 
     def add_peer(self, room_id: str, options: PeerOptionsWebRTC) -> (str, Peer):
         """
@@ -93,20 +108,19 @@ class RoomApi:
         """
 
         peer_type = "webrtc"
-        options = PeerOptions(options)
-        request = AddPeerRequest(type=peer_type, options=options)
+        json_body = AddPeerJsonBody(type=peer_type, options=options)
 
-        resp = self._room_api.add_peer(room_id, request)
+        resp = self._request(add_peer, room_id=room_id, json_body=json_body)
         return (resp.data.token, resp.data.peer)
 
     def delete_peer(self, room_id: str, peer_id: str) -> None:
         """Deletes peer"""
 
-        return self._room_api.delete_peer(room_id, peer_id)
+        return self._request(delete_peer, id=peer_id, room_id=room_id)
 
     def add_component(
         self, room_id: str, options: Union[ComponentOptionsHLS, ComponentOptionsRTSP]
-    ) -> Component:
+    ) -> any:
         """Creates component in the room"""
 
         if isinstance(options, ComponentOptionsHLS):
@@ -118,17 +132,27 @@ class RoomApi:
                 "options must be either ComponentOptionsHLS or ComponentOptionsRTSP"
             )
 
-        options = ComponentOptions(options)
-        request = AddComponentRequest(type=component_type, options=options)
+        json_body = AddComponentJsonBody(type=component_type, options=options)
 
-        return self._room_api.add_component(room_id, request).data
+        return self._request(add_component, room_id=room_id, json_body=json_body).data
 
     def delete_component(self, room_id: str, component_id: str) -> None:
         """Deletes component"""
 
-        return self._room_api.delete_component(room_id, component_id)
+        return self._request(delete_component, id=component_id, room_id=room_id)
 
     def hls_subscribe(self, room_id: str, tracks: list):
         """subscribes hls component for tracks"""
 
-        return self._hls_api.subscribe_tracks(room_id, {"tracks": tracks})
+        subscription_config = SubscriptionConfig(tracks=tracks)
+
+        return self._request(
+            subscribe_tracks, room_id=room_id, json_body=subscription_config
+        )
+
+    def _request(self, method, **kwargs):
+        resp = method.sync(client=self._client, **kwargs)
+        if isinstance(resp, Error):
+            raise RuntimeError(resp.errors)
+
+        return resp

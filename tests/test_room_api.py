@@ -6,12 +6,16 @@ import os
 import pytest
 
 from jellyfish import RoomApi, RoomConfig
-from jellyfish import Room
-from jellyfish import ComponentOptionsRTSP, ComponentOptionsHLS, PeerOptionsWebRTC
+from jellyfish import Room, ComponentHLS, ComponentRTSP
+from jellyfish import (
+    ComponentOptionsRTSP,
+    ComponentOptionsHLS,
+    ComponentOptionsHLSSubscribeMode,
+    PeerOptionsWebRTC,
+)
 
-from jellyfish import ValidationError
 
-from jellyfish import UnauthorizedException, NotFoundException, BadRequestException
+# from jellyfish import UnauthorizedException, NotFoundException, BadRequestException
 
 
 HOST = "jellyfish" if os.getenv("DOCKER_TEST") == "TRUE" else "localhost"
@@ -27,7 +31,7 @@ COMPONENT_RTSP = "rtsp"
 
 HLS_OPTIONS = ComponentOptionsHLS()
 RTSP_OPTIONS = ComponentOptionsRTSP(
-    sourceUri="rtsp://ef36c6dff23ecc5bbe311cc880d95dc8.se:2137/does/not/matter"
+    source_uri="rtsp://ef36c6dff23ecc5bbe311cc880d95dc8.se:2137/does/not/matter"
 )
 
 
@@ -35,7 +39,7 @@ class TestAuthentication:
     def test_invalid_token(self):
         room_api = RoomApi(server_address=SERVER_ADDRESS, server_api_token="invalid")
 
-        with pytest.raises(UnauthorizedException):
+        with pytest.raises(RuntimeError):
             room_api.create_room()
 
     def test_valid_token(self):
@@ -89,11 +93,11 @@ class TestCreateRoom:
         assert room in room_api.get_all_rooms()
 
     def test_invalid_max_peers(self, room_api):
-        with pytest.raises(ValidationError):
+        with pytest.raises(RuntimeError):
             room_api.create_room(max_peers="10", video_codec=CODEC_H264)
 
     def test_invalid_video_codec(self, room_api):
-        with pytest.raises(ValidationError):
+        with pytest.raises(ValueError):
             room_api.create_room(max_peers=MAX_PEERS, video_codec="h420")
 
 
@@ -105,7 +109,7 @@ class TestDeleteRoom:
         assert room not in room_api.get_all_rooms()
 
     def test_invalid(self, room_api):
-        with pytest.raises(NotFoundException):
+        with pytest.raises(RuntimeError):
             room_api.delete_room("invalid_id")
 
 
@@ -126,11 +130,11 @@ class TestGetRoom:
             components=[],
             peers=[],
             id=room.id,
-            config=RoomConfig(maxPeers=None, videoCodec=None),
+            config=RoomConfig(max_peers=None, video_codec=None),
         ) == room_api.get_room(room.id)
 
     def test_invalid(self, room_api: RoomApi):
-        with pytest.raises(NotFoundException):
+        with pytest.raises(RuntimeError):
             room_api.get_room("invalid_id")
 
 
@@ -140,16 +144,16 @@ class TestAddComponent:
 
         room_api.add_component(room.id, options=HLS_OPTIONS)
 
-        component = room_api.get_room(room.id).components[0].actual_instance
+        component = room_api.get_room(room.id).components[0]
 
-        assert component.type == COMPONENT_HLS
+        assert isinstance(component, ComponentHLS)
 
     def test_with_options_rtsp(self, room_api: RoomApi):
         _, room = room_api.create_room(video_codec=CODEC_H264)
 
         room_api.add_component(room.id, options=RTSP_OPTIONS)
-        component = room_api.get_room(room.id).components[0].actual_instance
-        assert component.type == COMPONENT_RTSP
+        component = room_api.get_room(room.id).components[0]
+        assert isinstance(component, ComponentRTSP)
 
     def test_invalid_type(self, room_api: RoomApi):
         _, room = room_api.create_room(video_codec=CODEC_H264)
@@ -161,7 +165,7 @@ class TestAddComponent:
 class TestDeleteComponent:
     def test_valid_component(self, room_api: RoomApi):
         _, room = room_api.create_room(video_codec=CODEC_H264)
-        component = room_api.add_component(room.id, options=HLS_OPTIONS).actual_instance
+        component = room_api.add_component(room.id, options=HLS_OPTIONS)
 
         room_api.delete_component(room.id, component.id)
         assert [] == room_api.get_room(room.id).components
@@ -169,7 +173,7 @@ class TestDeleteComponent:
     def test_invalid_component(self, room_api: RoomApi):
         _, room = room_api.create_room()
 
-        with pytest.raises(NotFoundException):
+        with pytest.raises(RuntimeError):
             room_api.delete_component(room.id, "invalid_id")
 
 
@@ -177,14 +181,17 @@ class TestHLSSubscribe:
     def test_valid_subscription(self, room_api: RoomApi):
         _, room = room_api.create_room(video_codec=CODEC_H264)
         _ = room_api.add_component(
-            room.id, options=ComponentOptionsHLS(subscribe_mode="manual")
+            room.id,
+            options=ComponentOptionsHLS(
+                subscribe_mode=ComponentOptionsHLSSubscribeMode("manual")
+            ),
         )
         assert room_api.hls_subscribe(room.id, ["track-id"]) is None
 
     def test_invalid_subscription(self, room_api: RoomApi):
         _, room = room_api.create_room(video_codec=CODEC_H264)
         _ = room_api.add_component(room.id, options=HLS_OPTIONS)
-        with pytest.raises(BadRequestException):
+        with pytest.raises(RuntimeError):
             room_api.hls_subscribe(room.id, ["track-id"])
 
 
@@ -200,7 +207,7 @@ class TestAddPeer:
         _, room = room_api.create_room()
 
         _token, peer = room_api.add_peer(
-            room.id, options=PeerOptionsWebRTC(enableSimulcast=True)
+            room.id, options=PeerOptionsWebRTC(enable_simulcast=True)
         )
 
         self._assert_peer_created(room_api, peer, room.id)
@@ -217,7 +224,7 @@ class TestDeletePeer:
     def test_valid(self, room_api: RoomApi):
         _, room = room_api.create_room()
         _, peer = room_api.add_peer(
-            room.id, options=PeerOptionsWebRTC(enableSimulcast=True)
+            room.id, options=PeerOptionsWebRTC(enable_simulcast=True)
         )
 
         room_api.delete_peer(room.id, peer.id)
@@ -227,5 +234,5 @@ class TestDeletePeer:
     def test_invalid(self, room_api: RoomApi):
         _, room = room_api.create_room()
 
-        with pytest.raises(NotFoundException):
+        with pytest.raises(RuntimeError):
             room_api.delete_peer(room.id, peer_id="invalid_peer_id")

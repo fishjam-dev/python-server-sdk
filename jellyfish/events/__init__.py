@@ -2,27 +2,24 @@
 Server events being sent Jellyfish
 """
 
+# Exported messages
 # Private messages
 from jellyfish.events._protos.jellyfish import (
     ServerMessage,
     ServerMessageAuthenticated,
     ServerMessageAuthRequest,
-    ServerMessageEventType,
-    ServerMessageSubscribeResponse,
-    ServerMessageSubscribeRequest,
-)
-
-# Exported messages
-from jellyfish.events._protos.jellyfish import (
     ServerMessageComponentCrashed,
+    ServerMessageEventType,
     ServerMessageHlsPlayable,
     ServerMessageMetricsReport,
-    ServerMessagePeerCrashed,
     ServerMessagePeerConnected,
+    ServerMessagePeerCrashed,
     ServerMessagePeerDisconnected,
     ServerMessageRoomCrashed,
-    ServerMessageRoomDeleted,
     ServerMessageRoomCreated,
+    ServerMessageRoomDeleted,
+    ServerMessageSubscribeRequest,
+    ServerMessageSubscribeResponse,
 )
 
 __all__ = [
