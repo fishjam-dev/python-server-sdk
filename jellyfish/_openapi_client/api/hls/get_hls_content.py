@@ -6,7 +6,6 @@ import httpx
 from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...models.error import Error
-from ...models.hls_skip import HlsSkip
 from ...types import UNSET, Response, Unset
 
 
@@ -16,7 +15,7 @@ def _get_kwargs(
     *,
     field_hls_msn: Union[Unset, None, int] = UNSET,
     field_hls_part: Union[Unset, None, int] = UNSET,
-    field_hls_skip: Union[Unset, None, HlsSkip] = UNSET,
+    field_hls_skip: Union[Unset, None, str] = UNSET,
     range_: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
     headers = {}
@@ -28,11 +27,7 @@ def _get_kwargs(
 
     params["_HLS_part"] = field_hls_part
 
-    json_field_hls_skip: Union[Unset, None, str] = UNSET
-    if not isinstance(field_hls_skip, Unset):
-        json_field_hls_skip = field_hls_skip.value if field_hls_skip else None
-
-    params["_HLS_skip"] = json_field_hls_skip
+    params["_HLS_skip"] = field_hls_skip
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
@@ -85,7 +80,7 @@ def sync_detailed(
     client: Union[AuthenticatedClient, Client],
     field_hls_msn: Union[Unset, None, int] = UNSET,
     field_hls_part: Union[Unset, None, int] = UNSET,
-    field_hls_skip: Union[Unset, None, HlsSkip] = UNSET,
+    field_hls_skip: Union[Unset, None, str] = UNSET,
     range_: Union[Unset, str] = UNSET,
 ) -> Response[Union[Error, str]]:
     """Retrieve HLS Content
@@ -95,7 +90,7 @@ def sync_detailed(
         filename (str):
         field_hls_msn (Union[Unset, None, int]): Segment sequence number Example: 10.
         field_hls_part (Union[Unset, None, int]): Partial segment sequence number Example: 10.
-        field_hls_skip (Union[Unset, None, HlsSkip]): Is delta manifest requested Example: YES.
+        field_hls_skip (Union[Unset, None, str]): Is delta manifest requested Example: True.
         range_ (Union[Unset, str]):
 
     Raises:
@@ -129,7 +124,7 @@ def sync(
     client: Union[AuthenticatedClient, Client],
     field_hls_msn: Union[Unset, None, int] = UNSET,
     field_hls_part: Union[Unset, None, int] = UNSET,
-    field_hls_skip: Union[Unset, None, HlsSkip] = UNSET,
+    field_hls_skip: Union[Unset, None, str] = UNSET,
     range_: Union[Unset, str] = UNSET,
 ) -> Optional[Union[Error, str]]:
     """Retrieve HLS Content
@@ -139,7 +134,7 @@ def sync(
         filename (str):
         field_hls_msn (Union[Unset, None, int]): Segment sequence number Example: 10.
         field_hls_part (Union[Unset, None, int]): Partial segment sequence number Example: 10.
-        field_hls_skip (Union[Unset, None, HlsSkip]): Is delta manifest requested Example: YES.
+        field_hls_skip (Union[Unset, None, str]): Is delta manifest requested Example: True.
         range_ (Union[Unset, str]):
 
     Raises:
@@ -168,7 +163,7 @@ async def asyncio_detailed(
     client: Union[AuthenticatedClient, Client],
     field_hls_msn: Union[Unset, None, int] = UNSET,
     field_hls_part: Union[Unset, None, int] = UNSET,
-    field_hls_skip: Union[Unset, None, HlsSkip] = UNSET,
+    field_hls_skip: Union[Unset, None, str] = UNSET,
     range_: Union[Unset, str] = UNSET,
 ) -> Response[Union[Error, str]]:
     """Retrieve HLS Content
@@ -178,7 +173,7 @@ async def asyncio_detailed(
         filename (str):
         field_hls_msn (Union[Unset, None, int]): Segment sequence number Example: 10.
         field_hls_part (Union[Unset, None, int]): Partial segment sequence number Example: 10.
-        field_hls_skip (Union[Unset, None, HlsSkip]): Is delta manifest requested Example: YES.
+        field_hls_skip (Union[Unset, None, str]): Is delta manifest requested Example: True.
         range_ (Union[Unset, str]):
 
     Raises:
@@ -210,7 +205,7 @@ async def asyncio(
     client: Union[AuthenticatedClient, Client],
     field_hls_msn: Union[Unset, None, int] = UNSET,
     field_hls_part: Union[Unset, None, int] = UNSET,
-    field_hls_skip: Union[Unset, None, HlsSkip] = UNSET,
+    field_hls_skip: Union[Unset, None, str] = UNSET,
     range_: Union[Unset, str] = UNSET,
 ) -> Optional[Union[Error, str]]:
     """Retrieve HLS Content
@@ -220,7 +215,7 @@ async def asyncio(
         filename (str):
         field_hls_msn (Union[Unset, None, int]): Segment sequence number Example: 10.
         field_hls_part (Union[Unset, None, int]): Partial segment sequence number Example: 10.
-        field_hls_skip (Union[Unset, None, HlsSkip]): Is delta manifest requested Example: YES.
+        field_hls_skip (Union[Unset, None, str]): Is delta manifest requested Example: True.
         range_ (Union[Unset, str]):
 
     Raises:

@@ -14,7 +14,6 @@ from .component_properties_hls_subscribe_mode import ComponentPropertiesHLSSubsc
 from .component_properties_rtsp import ComponentPropertiesRTSP
 from .component_rtsp import ComponentRTSP
 from .error import Error
-from .hls_skip import HlsSkip
 from .peer import Peer
 from .peer_details_response import PeerDetailsResponse
 from .peer_details_response_data import PeerDetailsResponseData
@@ -46,7 +45,6 @@ __all__ = (
     "ComponentPropertiesRTSP",
     "ComponentRTSP",
     "Error",
-    "HlsSkip",
     "Peer",
     "PeerDetailsResponse",
     "PeerDetailsResponseData",

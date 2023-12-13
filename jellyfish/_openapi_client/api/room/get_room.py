@@ -13,8 +13,6 @@ from ...types import Response
 def _get_kwargs(
     room_id: str,
 ) -> Dict[str, Any]:
-    pass
-
     return {
         "method": "get",
         "url": "/room/{room_id}".format(

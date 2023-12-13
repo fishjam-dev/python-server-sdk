@@ -1,9 +1,7 @@
 import os
+import shutil
 import sys
 from pathlib import Path
-import shutil
-import pdoc as p
-from pdoc import render
 
 
 def check_exit_code(command):
@@ -55,3 +53,11 @@ def generate_docs():
     # ...and rename the .html files to .md so that mkdocs picks them up!
     for f in out.glob("**/*.html"):
         f.rename(f.with_suffix(".md"))
+
+
+def generate_client():
+    check_exit_code(
+        "openapi-python-client generate\
+            --url https://raw.githubusercontent.com/jellyfish-dev/jellyfish/main/openapi.yaml \
+            --config openapi-python-client-config.yaml"
+    )

@@ -13,8 +13,6 @@ def _get_kwargs(
     recording_id: str,
     filename: str,
 ) -> Dict[str, Any]:
-    pass
-
     return {
         "method": "get",
         "url": "/recording/{recording_id}/{filename}".format(

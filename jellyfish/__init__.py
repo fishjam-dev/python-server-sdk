@@ -19,15 +19,13 @@ from jellyfish._openapi_client.models import (
     Room,
     RoomConfig,
     RoomConfigVideoCodec,
-    Error,
 )
+from jellyfish._recording_api import RecordingApi
+from jellyfish._room_api import RoomApi
 
 # API
 from jellyfish._webhook_notifier import receive_json
 from jellyfish._ws_notifier import Notifier
-from jellyfish._recording_api import RecordingApi
-from jellyfish._room_api import RoomApi
-
 
 __all__ = [
     "RoomApi",

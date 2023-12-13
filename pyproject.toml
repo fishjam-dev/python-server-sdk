@@ -24,8 +24,8 @@ black = "^23.10.0"
 pdoc = "^14.1.0"
 mkdocs = "^1.5.3"
 mike = "^2.0.0"
-openapi-python-client = "^0.15.2"
-ruff = "^0.1.6"
+openapi-python-client = "^0.16.0"
+ruff = "^0.1.7"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.4.2"
@@ -38,8 +38,14 @@ requires = ["poetry-core>=1.6.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-ci_test = "test_commands:run_tests"
-format = "test_commands:run_formatter"
-check_format = "test_commands:check_format"
-lint = "test_commands:run_linter"
-generate_docs = "test_commands:generate_docs"
+ci_test = "poetry_scripts:run_tests"
+format = "poetry_scripts:run_formatter"
+check_format = "poetry_scripts:check_format"
+lint = "poetry_scripts:run_linter"
+generate_docs = "poetry_scripts:generate_docs"
+generate_client = "poetry_scripts:generate_client"
+
+[tool.ruff]
+select = ["F", "I"]
+line-length = 120
+include = ["pyproject.toml", "jellyfish/_openapi_client/**/*.py"]

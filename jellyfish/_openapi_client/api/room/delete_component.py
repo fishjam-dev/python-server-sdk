@@ -13,8 +13,6 @@ def _get_kwargs(
     room_id: str,
     id: str,
 ) -> Dict[str, Any]:
-    pass
-
     return {
         "method": "delete",
         "url": "/room/{room_id}/component/{id}".format(
