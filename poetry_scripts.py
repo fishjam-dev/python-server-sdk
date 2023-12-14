@@ -59,5 +59,6 @@ def generate_client():
     check_exit_code(
         "openapi-python-client generate\
             --url https://raw.githubusercontent.com/jellyfish-dev/jellyfish/main/openapi.yaml \
-            --config openapi-python-client-config.yaml"
+            --config openapi-python-client-config.yaml \
+            --custom-template-path=openapi_templates"
     )

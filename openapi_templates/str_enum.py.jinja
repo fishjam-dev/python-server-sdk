@@ -1,0 +1,11 @@
+from enum import Enum
+
+class {{ enum.class_info.name }}(str, Enum):
+    """{{ enum.description }}"""
+    {% for key, value in enum.values|dictsort(true) %}
+    {{ key }} = "{{ value }}"
+    """{{ enum.class_info.name }}: {{ value }}"""
+    {% endfor %}
+
+    def __str__(self) -> str:
+        return str(self.value)

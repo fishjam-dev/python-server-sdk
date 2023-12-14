@@ -32,24 +32,24 @@ from jellyfish._webhook_notifier import receive_json
 from jellyfish._ws_notifier import Notifier
 
 __all__ = [
-    "ComponentPropertiesHLSSubscribeMode",
-    "RoomConfigVideoCodec",
-    "ComponentPropertiesRTSP",
     "RoomApi",
     "RecordingApi",
     "Notifier",
     "receive_json",
     "Room",
+    "RoomConfig",
+    "RoomConfigVideoCodec",
     "Peer",
+    "PeerOptionsWebRTC",
     "PeerStatus",
     "ComponentHLS",
-    "ComponentPropertiesHLS",
-    "ComponentOptionsHLSSubscribeMode",
-    "ComponentRTSP",
     "ComponentOptionsHLS",
-    "RoomConfig",
+    "ComponentOptionsHLSSubscribeMode",
+    "ComponentPropertiesHLS",
+    "ComponentPropertiesHLSSubscribeMode",
+    "ComponentRTSP",
     "ComponentOptionsRTSP",
-    "PeerOptionsWebRTC",
+    "ComponentPropertiesRTSP",
     "events",
 ]
 
