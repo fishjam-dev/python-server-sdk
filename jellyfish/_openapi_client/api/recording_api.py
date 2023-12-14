@@ -327,6 +327,7 @@ class RecordingApi(object):
 
         _response_types_map = {
             "200": "str",
+            "400": "Error",
             "404": "Error",
         }
 

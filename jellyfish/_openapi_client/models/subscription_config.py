@@ -25,10 +25,11 @@ class SubscriptionConfig(BaseModel):
     Subscription config
     """
 
-    tracks: Optional[conlist(StrictStr)] = Field(
-        None, description="List of tracks that hls endpoint will subscribe for"
+    origins: Optional[conlist(StrictStr)] = Field(
+        None,
+        description="List of peers and components ids whose tracks the HLS endpoint will subscribe to",
     )
-    __properties = ["tracks"]
+    __properties = ["origins"]
 
     class Config:
         """Pydantic configuration"""
@@ -63,5 +64,5 @@ class SubscriptionConfig(BaseModel):
         if not isinstance(obj, dict):
             return SubscriptionConfig.parse_obj(obj)
 
-        _obj = SubscriptionConfig.parse_obj({"tracks": obj.get("tracks")})
+        _obj = SubscriptionConfig.parse_obj({"origins": obj.get("origins")})
         return _obj

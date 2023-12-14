@@ -244,6 +244,7 @@ class HlsApi(object):
 
         _response_types_map = {
             "200": "str",
+            "400": "Error",
             "404": "Error",
         }
 
@@ -267,7 +268,7 @@ class HlsApi(object):
         )
 
     @validate_arguments
-    def subscribe_tracks(
+    def subscribe_hls_to(
         self,
         room_id: Annotated[StrictStr, Field(..., description="Room ID")],
         subscription_config: Annotated[
@@ -275,12 +276,12 @@ class HlsApi(object):
         ] = None,
         **kwargs
     ) -> None:  # noqa: E501
-        """Subscribe hls component for tracks  # noqa: E501
+        """Subscribe the HLS component to the tracks of peers or components  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.subscribe_tracks(room_id, subscription_config, async_req=True)
+        >>> thread = api.subscribe_hls_to(room_id, subscription_config, async_req=True)
         >>> result = thread.get()
 
         :param room_id: Room ID (required)
@@ -301,14 +302,14 @@ class HlsApi(object):
         kwargs["_return_http_data_only"] = True
         if "_preload_content" in kwargs:
             raise ValueError(
-                "Error! Please call the subscribe_tracks_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"
+                "Error! Please call the subscribe_hls_to_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"
             )
-        return self.subscribe_tracks_with_http_info(
+        return self.subscribe_hls_to_with_http_info(
             room_id, subscription_config, **kwargs
         )  # noqa: E501
 
     @validate_arguments
-    def subscribe_tracks_with_http_info(
+    def subscribe_hls_to_with_http_info(
         self,
         room_id: Annotated[StrictStr, Field(..., description="Room ID")],
         subscription_config: Annotated[
@@ -316,12 +317,12 @@ class HlsApi(object):
         ] = None,
         **kwargs
     ) -> ApiResponse:  # noqa: E501
-        """Subscribe hls component for tracks  # noqa: E501
+        """Subscribe the HLS component to the tracks of peers or components  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.subscribe_tracks_with_http_info(room_id, subscription_config, async_req=True)
+        >>> thread = api.subscribe_hls_to_with_http_info(room_id, subscription_config, async_req=True)
         >>> result = thread.get()
 
         :param room_id: Room ID (required)
@@ -373,7 +374,7 @@ class HlsApi(object):
             if _key not in _all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method subscribe_tracks" % _key
+                    " to method subscribe_hls_to" % _key
                 )
             _params[_key] = _val
         del _params["kwargs"]

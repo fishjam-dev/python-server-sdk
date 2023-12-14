@@ -17,18 +17,20 @@ import json
 
 
 from pydantic import BaseModel, Field, StrictStr
-from jellyfish._openapi_client.models.component_metadata_hls import ComponentMetadataHLS
+from jellyfish._openapi_client.models.component_properties_hls import (
+    ComponentPropertiesHLS,
+)
 
 
 class ComponentHLS(BaseModel):
     """
-    Describes HLS component
+    Describes the HLS component
     """
 
     id: StrictStr = Field(..., description="Assigned component ID")
-    metadata: ComponentMetadataHLS = Field(...)
+    properties: ComponentPropertiesHLS = Field(...)
     type: StrictStr = Field(..., description="Component type")
-    __properties = ["id", "metadata", "type"]
+    __properties = ["id", "properties", "type"]
 
     class Config:
         """Pydantic configuration"""
@@ -52,9 +54,9 @@ class ComponentHLS(BaseModel):
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True, exclude={}, exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of metadata
-        if self.metadata:
-            _dict["metadata"] = self.metadata.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of properties
+        if self.properties:
+            _dict["properties"] = self.properties.to_dict()
         return _dict
 
     @classmethod
@@ -69,8 +71,8 @@ class ComponentHLS(BaseModel):
         _obj = ComponentHLS.parse_obj(
             {
                 "id": obj.get("id"),
-                "metadata": ComponentMetadataHLS.from_dict(obj.get("metadata"))
-                if obj.get("metadata") is not None
+                "properties": ComponentPropertiesHLS.from_dict(obj.get("properties"))
+                if obj.get("properties") is not None
                 else None,
                 "type": obj.get("type"),
             }

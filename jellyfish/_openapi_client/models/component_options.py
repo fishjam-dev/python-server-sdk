@@ -18,12 +18,17 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
+from jellyfish._openapi_client.models.component_options_file import ComponentOptionsFile
 from jellyfish._openapi_client.models.component_options_hls import ComponentOptionsHLS
 from jellyfish._openapi_client.models.component_options_rtsp import ComponentOptionsRTSP
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-COMPONENTOPTIONS_ONE_OF_SCHEMAS = ["ComponentOptionsHLS", "ComponentOptionsRTSP"]
+COMPONENTOPTIONS_ONE_OF_SCHEMAS = [
+    "ComponentOptionsFile",
+    "ComponentOptionsHLS",
+    "ComponentOptionsRTSP",
+]
 
 
 class ComponentOptions(BaseModel):
@@ -35,8 +40,12 @@ class ComponentOptions(BaseModel):
     oneof_schema_1_validator: Optional[ComponentOptionsHLS] = None
     # data type: ComponentOptionsRTSP
     oneof_schema_2_validator: Optional[ComponentOptionsRTSP] = None
+    # data type: ComponentOptionsFile
+    oneof_schema_3_validator: Optional[ComponentOptionsFile] = None
     if TYPE_CHECKING:
-        actual_instance: Union[ComponentOptionsHLS, ComponentOptionsRTSP]
+        actual_instance: Union[
+            ComponentOptionsFile, ComponentOptionsHLS, ComponentOptionsRTSP
+        ]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(COMPONENTOPTIONS_ONE_OF_SCHEMAS, const=True)
@@ -77,16 +86,23 @@ class ComponentOptions(BaseModel):
             )
         else:
             match += 1
+        # validate data type: ComponentOptionsFile
+        if not isinstance(v, ComponentOptionsFile):
+            error_messages.append(
+                f"Error! Input type `{type(v)}` is not `ComponentOptionsFile`"
+            )
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
             raise ValueError(
-                "Multiple matches found when setting `actual_instance` in ComponentOptions with oneOf schemas: ComponentOptionsHLS, ComponentOptionsRTSP. Details: "
+                "Multiple matches found when setting `actual_instance` in ComponentOptions with oneOf schemas: ComponentOptionsFile, ComponentOptionsHLS, ComponentOptionsRTSP. Details: "
                 + ", ".join(error_messages)
             )
         elif match == 0:
             # no match
             raise ValueError(
-                "No match found when setting `actual_instance` in ComponentOptions with oneOf schemas: ComponentOptionsHLS, ComponentOptionsRTSP. Details: "
+                "No match found when setting `actual_instance` in ComponentOptions with oneOf schemas: ComponentOptionsFile, ComponentOptionsHLS, ComponentOptionsRTSP. Details: "
                 + ", ".join(error_messages)
             )
         else:
@@ -115,17 +131,23 @@ class ComponentOptions(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into ComponentOptionsFile
+        try:
+            instance.actual_instance = ComponentOptionsFile.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
             raise ValueError(
-                "Multiple matches found when deserializing the JSON string into ComponentOptions with oneOf schemas: ComponentOptionsHLS, ComponentOptionsRTSP. Details: "
+                "Multiple matches found when deserializing the JSON string into ComponentOptions with oneOf schemas: ComponentOptionsFile, ComponentOptionsHLS, ComponentOptionsRTSP. Details: "
                 + ", ".join(error_messages)
             )
         elif match == 0:
             # no match
             raise ValueError(
-                "No match found when deserializing the JSON string into ComponentOptions with oneOf schemas: ComponentOptionsHLS, ComponentOptionsRTSP. Details: "
+                "No match found when deserializing the JSON string into ComponentOptions with oneOf schemas: ComponentOptionsFile, ComponentOptionsHLS, ComponentOptionsRTSP. Details: "
                 + ", ".join(error_messages)
             )
         else:

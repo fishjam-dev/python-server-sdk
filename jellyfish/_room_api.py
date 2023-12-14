@@ -128,7 +128,14 @@ class RoomApi:
 
         return self._room_api.delete_component(room_id, component_id)
 
-    def hls_subscribe(self, room_id: str, tracks: list):
-        """subscribes hls component for tracks"""
+    def hls_subscribe(self, room_id: str, origins: list):
+        """
+        In order to subscribe to HLS peers/components,
+        the HLS component should be initialized with the subscribe_mode set to manual.
+        This mode proves beneficial when you do not wish to record or stream
+        all the available streams within a room via HLS.
+        It allows for selective addition instead you can manually select specific streams.
+        For instance, you could opt to record only the stream of an event's host
+        """
 
-        return self._hls_api.subscribe_tracks(room_id, {"tracks": tracks})
+        return self._hls_api.subscribe_hls_to(room_id, {"origins": origins})

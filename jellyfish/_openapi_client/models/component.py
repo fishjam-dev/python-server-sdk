@@ -18,12 +18,13 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
+from jellyfish._openapi_client.models.component_file import ComponentFile
 from jellyfish._openapi_client.models.component_hls import ComponentHLS
 from jellyfish._openapi_client.models.component_rtsp import ComponentRTSP
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-COMPONENT_ONE_OF_SCHEMAS = ["ComponentHLS", "ComponentRTSP"]
+COMPONENT_ONE_OF_SCHEMAS = ["ComponentFile", "ComponentHLS", "ComponentRTSP"]
 
 
 class Component(BaseModel):
@@ -35,8 +36,10 @@ class Component(BaseModel):
     oneof_schema_1_validator: Optional[ComponentHLS] = None
     # data type: ComponentRTSP
     oneof_schema_2_validator: Optional[ComponentRTSP] = None
+    # data type: ComponentFile
+    oneof_schema_3_validator: Optional[ComponentFile] = None
     if TYPE_CHECKING:
-        actual_instance: Union[ComponentHLS, ComponentRTSP]
+        actual_instance: Union[ComponentFile, ComponentHLS, ComponentRTSP]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(COMPONENT_ONE_OF_SCHEMAS, const=True)
@@ -79,16 +82,23 @@ class Component(BaseModel):
             )
         else:
             match += 1
+        # validate data type: ComponentFile
+        if not isinstance(v, ComponentFile):
+            error_messages.append(
+                f"Error! Input type `{type(v)}` is not `ComponentFile`"
+            )
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
             raise ValueError(
-                "Multiple matches found when setting `actual_instance` in Component with oneOf schemas: ComponentHLS, ComponentRTSP. Details: "
+                "Multiple matches found when setting `actual_instance` in Component with oneOf schemas: ComponentFile, ComponentHLS, ComponentRTSP. Details: "
                 + ", ".join(error_messages)
             )
         elif match == 0:
             # no match
             raise ValueError(
-                "No match found when setting `actual_instance` in Component with oneOf schemas: ComponentHLS, ComponentRTSP. Details: "
+                "No match found when setting `actual_instance` in Component with oneOf schemas: ComponentFile, ComponentHLS, ComponentRTSP. Details: "
                 + ", ".join(error_messages)
             )
         else:
@@ -112,6 +122,11 @@ class Component(BaseModel):
                 "Failed to lookup data type from the field `type` in the input."
             )
 
+        # check if data type is `ComponentFile`
+        if _data_type == "ComponentFile":
+            instance.actual_instance = ComponentFile.from_json(json_str)
+            return instance
+
         # check if data type is `ComponentHLS`
         if _data_type == "ComponentHLS":
             instance.actual_instance = ComponentHLS.from_json(json_str)
@@ -120,6 +135,11 @@ class Component(BaseModel):
         # check if data type is `ComponentRTSP`
         if _data_type == "ComponentRTSP":
             instance.actual_instance = ComponentRTSP.from_json(json_str)
+            return instance
+
+        # check if data type is `ComponentFile`
+        if _data_type == "file":
+            instance.actual_instance = ComponentFile.from_json(json_str)
             return instance
 
         # check if data type is `ComponentHLS`
@@ -144,17 +164,23 @@ class Component(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into ComponentFile
+        try:
+            instance.actual_instance = ComponentFile.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
             raise ValueError(
-                "Multiple matches found when deserializing the JSON string into Component with oneOf schemas: ComponentHLS, ComponentRTSP. Details: "
+                "Multiple matches found when deserializing the JSON string into Component with oneOf schemas: ComponentFile, ComponentHLS, ComponentRTSP. Details: "
                 + ", ".join(error_messages)
             )
         elif match == 0:
             # no match
             raise ValueError(
-                "No match found when deserializing the JSON string into Component with oneOf schemas: ComponentHLS, ComponentRTSP. Details: "
+                "No match found when deserializing the JSON string into Component with oneOf schemas: ComponentFile, ComponentHLS, ComponentRTSP. Details: "
                 + ", ".join(error_messages)
             )
         else:

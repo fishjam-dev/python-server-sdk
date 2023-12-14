@@ -16,21 +16,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
 from pydantic import BaseModel, Field, StrictStr
 
 
-class ComponentRTSP(BaseModel):
+class ComponentFile(BaseModel):
     """
-    Describes the RTSP component
+    Describes the File component
     """
 
     id: StrictStr = Field(..., description="Assigned component ID")
-    properties: Dict[str, Any] = Field(
-        ..., description="Properties specific to the RTSP component"
-    )
     type: StrictStr = Field(..., description="Component type")
-    __properties = ["id", "properties", "type"]
+    __properties = ["id", "type"]
 
     class Config:
         """Pydantic configuration"""
@@ -47,8 +43,8 @@ class ComponentRTSP(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ComponentRTSP:
-        """Create an instance of ComponentRTSP from a JSON string"""
+    def from_json(cls, json_str: str) -> ComponentFile:
+        """Create an instance of ComponentFile from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -57,19 +53,13 @@ class ComponentRTSP(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ComponentRTSP:
-        """Create an instance of ComponentRTSP from a dict"""
+    def from_dict(cls, obj: dict) -> ComponentFile:
+        """Create an instance of ComponentFile from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ComponentRTSP.parse_obj(obj)
+            return ComponentFile.parse_obj(obj)
 
-        _obj = ComponentRTSP.parse_obj(
-            {
-                "id": obj.get("id"),
-                "properties": obj.get("properties"),
-                "type": obj.get("type"),
-            }
-        )
+        _obj = ComponentFile.parse_obj({"id": obj.get("id"), "type": obj.get("type")})
         return _obj

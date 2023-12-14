@@ -179,13 +179,13 @@ class TestHLSSubscribe:
         _ = room_api.add_component(
             room.id, options=ComponentOptionsHLS(subscribe_mode="manual")
         )
-        assert room_api.hls_subscribe(room.id, ["track-id"]) is None
+        assert room_api.hls_subscribe(room.id, ["peer-id"]) is None
 
     def test_invalid_subscription(self, room_api: RoomApi):
         _, room = room_api.create_room(video_codec=CODEC_H264)
         _ = room_api.add_component(room.id, options=HLS_OPTIONS)
         with pytest.raises(BadRequestException):
-            room_api.hls_subscribe(room.id, ["track-id"])
+            room_api.hls_subscribe(room.id, ["component-id"])
 
 
 class TestAddPeer:

@@ -20,9 +20,9 @@ from typing import Optional
 from pydantic import BaseModel, Field, StrictBool, StrictInt, StrictStr, validator
 
 
-class ComponentMetadataHLS(BaseModel):
+class ComponentPropertiesHLS(BaseModel):
     """
-    Metadata specific to the HLS component
+    Properties specific to the HLS component
     """
 
     low_latency: StrictBool = Field(
@@ -74,8 +74,8 @@ class ComponentMetadataHLS(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ComponentMetadataHLS:
-        """Create an instance of ComponentMetadataHLS from a JSON string"""
+    def from_json(cls, json_str: str) -> ComponentPropertiesHLS:
+        """Create an instance of ComponentPropertiesHLS from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -92,15 +92,15 @@ class ComponentMetadataHLS(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ComponentMetadataHLS:
-        """Create an instance of ComponentMetadataHLS from a dict"""
+    def from_dict(cls, obj: dict) -> ComponentPropertiesHLS:
+        """Create an instance of ComponentPropertiesHLS from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ComponentMetadataHLS.parse_obj(obj)
+            return ComponentPropertiesHLS.parse_obj(obj)
 
-        _obj = ComponentMetadataHLS.parse_obj(
+        _obj = ComponentPropertiesHLS.parse_obj(
             {
                 "low_latency": obj.get("lowLatency"),
                 "persistent": obj.get("persistent"),
