@@ -8,13 +8,10 @@ T = TypeVar("T", bound="Error")
 
 @_attrs_define
 class Error:
-    """Error message
-
-    Attributes:
-        errors (str): Error details Example: Token has expired.
-    """
+    """Error message"""
 
     errors: str
+    """Error details"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:

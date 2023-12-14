@@ -10,13 +10,10 @@ T = TypeVar("T", bound="PeerOptionsWebRTC")
 
 @_attrs_define
 class PeerOptionsWebRTC:
-    """Options specific to the WebRTC peer
-
-    Attributes:
-        enable_simulcast (Union[Unset, bool]): Enables the peer to use simulcast Default: True.
-    """
+    """Options specific to the WebRTC peer"""
 
     enable_simulcast: Union[Unset, bool] = True
+    """Enables the peer to use simulcast"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:

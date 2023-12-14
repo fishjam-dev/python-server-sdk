@@ -11,18 +11,14 @@ T = TypeVar("T", bound="RoomConfig")
 
 @_attrs_define
 class RoomConfig:
-    """Room configuration
-
-    Attributes:
-        max_peers (Union[Unset, None, int]): Maximum amount of peers allowed into the room Example: 10.
-        video_codec (Union[Unset, None, RoomConfigVideoCodec]): Enforces video codec for each peer in the room
-        webhook_url (Union[Unset, None, str]): URL where Jellyfish notifications will be sent Example:
-            https://backend.address.com/jellyfish-notifications-endpoint.
-    """
+    """Room configuration"""
 
     max_peers: Union[Unset, None, int] = UNSET
+    """Maximum amount of peers allowed into the room"""
     video_codec: Union[Unset, None, RoomConfigVideoCodec] = UNSET
+    """Enforces video codec for each peer in the room"""
     webhook_url: Union[Unset, None, str] = UNSET
+    """URL where Jellyfish notifications will be sent"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:

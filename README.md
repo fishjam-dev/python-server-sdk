@@ -26,27 +26,27 @@ Create a `RoomApi` instance, providing the jellyfish server address and api toke
 ```python
 from jellyfish import RoomApi
 
-room_api = RoomApi(server_address='localhost:5002', server_api_token='development')
+room_api = RoomApi(server_address="localhost:5002", server_api_token="development")
 ```
 
 You can use it to interact with Jellyfish, manage rooms, peers and components
 
 ```python
 # Create a room
-jellyfish_address, room = room_api.create_room(video_codec='h264')
-# 'localhost:5002', Room(components=[], config=RoomConfig(max_peers=None, video_codec='h264'), id='5a099a31-0eb2-4c28-84af-a1ec55c228af', peers=[]))
+jellyfish_address, room = room_api.create_room(video_codec="h264", webhook_url="http://localhost:5000/webhook")
+# '127.0.0.1:5002', Room(components=[], config=RoomConfig(max_peers=None, video_codec=<RoomConfigVideoCodec.H264: 'h264'>, webhook_url='http://localhost:5000/webhook'), id='1d905478-ccfc-44d6-a6e7-8ccb1b38d955', peers=[])
 
 # Add peer to the room
 from jellyfish import PeerOptionsWebRTC
 
 peer_token, peer_webrtc = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
-# 'AgDYfrCSigFiAA', Peer(id='2869fb5', status=<PeerStatus.DISCONNECTED: 'disconnected'>, type='webrtc')
+# 'M8TUGhj-L11KpyG-2zBPIo', Peer(id='b1232c7e-c969-4450-acdf-ea24f3cdd7f6', status=<PeerStatus.DISCONNECTED: 'disconnected'>, type='webrtc')
 
 # Add component to the room
 from jellyfish import ComponentOptionsHLS
 
 component_hls = room_api.add_component(room.id, options=ComponentOptionsHLS())
-# Component(actual_instance=ComponentHLS(id='c0dfab50-cafd-438d-985e-7b8f97ae55e3', metadata=ComponentMetadataHLS(low_latency=False, playable=False), type='hls'))
+# ComponentHLS(id='5f062447-a9f7-45ed-8d1b-511f77dc78ae', properties=ComponentPropertiesHLS(low_latency=False, persistent=False, playable=False, subscribe_mode=<ComponentPropertiesHLSSubscribeMode.AUTO: 'auto'>, target_window_duration=None), type='hls')
 ```
 
 #### Notifier
@@ -96,14 +96,14 @@ You can test the SDK by running
 poetry run ci_test
 ```
 
-## Format&Lint
+## Format & Lint
 You can format code by running
 ```console
 poetry run format
 ```
 
 You can check linter by running
-```
+```console
 poetry run lint
 ```
 

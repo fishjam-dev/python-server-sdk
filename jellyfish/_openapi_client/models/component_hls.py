@@ -12,17 +12,14 @@ T = TypeVar("T", bound="ComponentHLS")
 
 @_attrs_define
 class ComponentHLS:
-    """Describes the HLS component
-
-    Attributes:
-        id (str): Assigned component ID Example: component-1.
-        properties (ComponentPropertiesHLS): Properties specific to the HLS component
-        type (str): Component type Example: hls.
-    """
+    """Describes the HLS component"""
 
     id: str
+    """Assigned component ID"""
     properties: "ComponentPropertiesHLS"
+    """Properties specific to the HLS component"""
     type: str
+    """Component type"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:

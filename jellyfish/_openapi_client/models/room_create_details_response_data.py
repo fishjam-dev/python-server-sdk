@@ -12,16 +12,12 @@ T = TypeVar("T", bound="RoomCreateDetailsResponseData")
 
 @_attrs_define
 class RoomCreateDetailsResponseData:
-    """
-    Attributes:
-        jellyfish_address (str): Jellyfish instance address where the room was created. This might be different than the
-            address of Jellyfish where the request was sent only when running a cluster of Jellyfishes. Example:
-            jellyfish1:5003.
-        room (Room): Description of the room state
-    """
+    """ """
 
     jellyfish_address: str
+    """Jellyfish instance address where the room was created. This might be different than the address of Jellyfish where the request was sent only when running a cluster of Jellyfishes."""
     room: "Room"
+    """Description of the room state"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:

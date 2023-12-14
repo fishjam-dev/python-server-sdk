@@ -12,13 +12,10 @@ T = TypeVar("T", bound="PeerDetailsResponse")
 
 @_attrs_define
 class PeerDetailsResponse:
-    """Response containing peer details and their token
-
-    Attributes:
-        data (PeerDetailsResponseData):
-    """
+    """Response containing peer details and their token"""
 
     data: "PeerDetailsResponseData"
+    """"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:

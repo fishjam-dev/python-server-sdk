@@ -3,13 +3,12 @@ Server events being sent Jellyfish
 """
 
 # Exported messages
-# Private messages
 from jellyfish.events._protos.jellyfish import (
-    ServerMessage,
-    ServerMessageAuthenticated,
-    ServerMessageAuthRequest,
+    ServerMessage,  # noqa: F401
+    ServerMessageAuthenticated,  # noqa: F401
+    ServerMessageAuthRequest,  # noqa: F401
     ServerMessageComponentCrashed,
-    ServerMessageEventType,
+    ServerMessageEventType,  # noqa: F401
     ServerMessageHlsPlayable,
     ServerMessageMetricsReport,
     ServerMessagePeerConnected,
@@ -18,8 +17,8 @@ from jellyfish.events._protos.jellyfish import (
     ServerMessageRoomCrashed,
     ServerMessageRoomCreated,
     ServerMessageRoomDeleted,
-    ServerMessageSubscribeRequest,
-    ServerMessageSubscribeResponse,
+    ServerMessageSubscribeRequest,  # noqa: F401
+    ServerMessageSubscribeResponse,  # noqa: F401
 )
 
 __all__ = [

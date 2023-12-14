@@ -3,31 +3,25 @@ from typing import Any, Dict, List, Optional, Type, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.component_properties_hls_subscribe_mode import (
-    ComponentPropertiesHLSSubscribeMode,
-)
+from ..models.component_properties_hls_subscribe_mode import ComponentPropertiesHLSSubscribeMode
 
 T = TypeVar("T", bound="ComponentPropertiesHLS")
 
 
 @_attrs_define
 class ComponentPropertiesHLS:
-    """Properties specific to the HLS component
-
-    Attributes:
-        low_latency (bool): Whether the component uses LL-HLS
-        persistent (bool): Whether the video is stored after end of stream
-        playable (bool): Whether the generated HLS playlist is playable
-        subscribe_mode (ComponentPropertiesHLSSubscribeMode): Whether the HLS component should subscribe to tracks
-            automatically or manually
-        target_window_duration (Optional[int]): Duration of stream available for viewer
-    """
+    """Properties specific to the HLS component"""
 
     low_latency: bool
+    """Whether the component uses LL-HLS"""
     persistent: bool
+    """Whether the video is stored after end of stream"""
     playable: bool
+    """Whether the generated HLS playlist is playable"""
     subscribe_mode: ComponentPropertiesHLSSubscribeMode
+    """Whether the HLS component should subscribe to tracks automatically or manually"""
     target_window_duration: Optional[int]
+    """Duration of stream available for viewer"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:

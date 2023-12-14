@@ -10,17 +10,14 @@ T = TypeVar("T", bound="Peer")
 
 @_attrs_define
 class Peer:
-    """Describes peer status
-
-    Attributes:
-        id (str): Assigned peer id Example: peer-1.
-        status (PeerStatus): Informs about the peer status Example: disconnected.
-        type (str): Peer type Example: webrtc.
-    """
+    """Describes peer status"""
 
     id: str
+    """Assigned peer id"""
     status: PeerStatus
+    """Informs about the peer status"""
     type: str
+    """Peer type"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:

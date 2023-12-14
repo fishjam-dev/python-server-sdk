@@ -8,13 +8,10 @@ T = TypeVar("T", bound="RecordingListResponse")
 
 @_attrs_define
 class RecordingListResponse:
-    """Response containing list of all recording
-
-    Attributes:
-        data (List[str]):
-    """
+    """Response containing list of all recording"""
 
     data: List[str]
+    """None"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:

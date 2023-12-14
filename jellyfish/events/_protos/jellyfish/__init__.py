@@ -16,45 +16,27 @@ class ServerMessageEventType(betterproto.Enum):
 
 @dataclass(eq=False, repr=False)
 class ServerMessage(betterproto.Message):
-    room_crashed: "ServerMessageRoomCrashed" = betterproto.message_field(
-        1, group="content"
-    )
-    peer_connected: "ServerMessagePeerConnected" = betterproto.message_field(
-        2, group="content"
-    )
+    room_crashed: "ServerMessageRoomCrashed" = betterproto.message_field(1, group="content")
+    peer_connected: "ServerMessagePeerConnected" = betterproto.message_field(2, group="content")
     peer_disconnected: "ServerMessagePeerDisconnected" = betterproto.message_field(
         3, group="content"
     )
-    peer_crashed: "ServerMessagePeerCrashed" = betterproto.message_field(
-        4, group="content"
-    )
+    peer_crashed: "ServerMessagePeerCrashed" = betterproto.message_field(4, group="content")
     component_crashed: "ServerMessageComponentCrashed" = betterproto.message_field(
         5, group="content"
     )
-    authenticated: "ServerMessageAuthenticated" = betterproto.message_field(
-        6, group="content"
-    )
-    auth_request: "ServerMessageAuthRequest" = betterproto.message_field(
-        7, group="content"
-    )
+    authenticated: "ServerMessageAuthenticated" = betterproto.message_field(6, group="content")
+    auth_request: "ServerMessageAuthRequest" = betterproto.message_field(7, group="content")
     subscribe_request: "ServerMessageSubscribeRequest" = betterproto.message_field(
         8, group="content"
     )
     subscribe_response: "ServerMessageSubscribeResponse" = betterproto.message_field(
         9, group="content"
     )
-    room_created: "ServerMessageRoomCreated" = betterproto.message_field(
-        10, group="content"
-    )
-    room_deleted: "ServerMessageRoomDeleted" = betterproto.message_field(
-        11, group="content"
-    )
-    metrics_report: "ServerMessageMetricsReport" = betterproto.message_field(
-        12, group="content"
-    )
-    hls_playable: "ServerMessageHlsPlayable" = betterproto.message_field(
-        13, group="content"
-    )
+    room_created: "ServerMessageRoomCreated" = betterproto.message_field(10, group="content")
+    room_deleted: "ServerMessageRoomDeleted" = betterproto.message_field(11, group="content")
+    metrics_report: "ServerMessageMetricsReport" = betterproto.message_field(12, group="content")
+    hls_playable: "ServerMessageHlsPlayable" = betterproto.message_field(13, group="content")
 
 
 @dataclass(eq=False, repr=False)

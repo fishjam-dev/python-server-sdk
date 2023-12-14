@@ -12,13 +12,10 @@ T = TypeVar("T", bound="RoomsListingResponse")
 
 @_attrs_define
 class RoomsListingResponse:
-    """Response containing list of all rooms
-
-    Attributes:
-        data (List['Room']):
-    """
+    """Response containing list of all rooms"""
 
     data: List["Room"]
+    """None"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:

@@ -8,15 +8,12 @@ T = TypeVar("T", bound="ComponentFile")
 
 @_attrs_define
 class ComponentFile:
-    """Describes the File component
-
-    Attributes:
-        id (str): Assigned component ID Example: component-1.
-        type (str): Component type Example: file.
-    """
+    """Describes the File component"""
 
     id: str
+    """Assigned component ID"""
     type: str
+    """Component type"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:

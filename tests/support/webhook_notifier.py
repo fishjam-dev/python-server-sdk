@@ -1,6 +1,7 @@
 # pylint: disable=locally-disabled, missing-class-docstring, missing-function-docstring, redefined-outer-name, too-few-public-methods, missing-module-docstring, global-statement
 
-from flask import Flask, request, Response
+from flask import Flask, Response, request
+
 from jellyfish import receive_json
 
 app = Flask(__name__)

@@ -10,13 +10,10 @@ T = TypeVar("T", bound="SubscriptionConfig")
 
 @_attrs_define
 class SubscriptionConfig:
-    """Subscription config
-
-    Attributes:
-        tracks (Union[Unset, List[str]]): List of tracks that hls endpoint will subscribe for
-    """
+    """Subscription config"""
 
     tracks: Union[Unset, List[str]] = UNSET
+    """List of tracks that hls endpoint will subscribe for"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:

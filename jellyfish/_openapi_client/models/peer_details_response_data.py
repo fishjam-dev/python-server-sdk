@@ -12,14 +12,12 @@ T = TypeVar("T", bound="PeerDetailsResponseData")
 
 @_attrs_define
 class PeerDetailsResponseData:
-    """
-    Attributes:
-        peer (Peer): Describes peer status
-        token (str): Token for authorizing websocket connection Example: 5cdac726-57a3-4ecb-b1d5-72a3d62ec242.
-    """
+    """ """
 
     peer: "Peer"
+    """Describes peer status"""
     token: str
+    """Token for authorizing websocket connection"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:

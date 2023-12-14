@@ -10,23 +10,18 @@ T = TypeVar("T", bound="ComponentOptionsRTSP")
 
 @_attrs_define
 class ComponentOptionsRTSP:
-    """Options specific to the RTSP component
-
-    Attributes:
-        source_uri (str): URI of RTSP source stream Example: rtsp://localhost:554/stream.
-        keep_alive_interval (Union[Unset, int]): Interval (in ms) in which keep-alive RTSP messages will be sent to the
-            remote stream source Default: 15000.
-        pierce_nat (Union[Unset, bool]): Whether to attempt to create client-side NAT binding by sending an empty
-            datagram from client to source, after the completion of RTSP setup Default: True.
-        reconnect_delay (Union[Unset, int]): Delay (in ms) between successive reconnect attempts Default: 15000.
-        rtp_port (Union[Unset, int]): Local port RTP stream will be received at Default: 20000.
-    """
+    """Options specific to the RTSP component"""
 
     source_uri: str
+    """URI of RTSP source stream"""
     keep_alive_interval: Union[Unset, int] = 15000
+    """Interval (in ms) in which keep-alive RTSP messages will be sent to the remote stream source"""
     pierce_nat: Union[Unset, bool] = True
+    """Whether to attempt to create client-side NAT binding by sending an empty datagram from client to source, after the completion of RTSP setup"""
     reconnect_delay: Union[Unset, int] = 15000
+    """Delay (in ms) between successive reconnect attempts"""
     rtp_port: Union[Unset, int] = 20000
+    """Local port RTP stream will be received at"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:

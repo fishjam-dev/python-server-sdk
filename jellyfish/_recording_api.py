@@ -3,7 +3,7 @@ RecordingApi used to manage rooms
 """
 
 from jellyfish._openapi_client import AuthenticatedClient
-from jellyfish._openapi_client.api.recording import get_recordings, delete_recording
+from jellyfish._openapi_client.api.recording import delete_recording, get_recordings
 from jellyfish._openapi_client.models import Error
 
 
@@ -22,9 +22,7 @@ class RecordingApi:
         """
 
         protocol = "https" if secure else "http"
-        self._client = AuthenticatedClient(
-            f"{protocol}://{server_address}", token=server_api_token
-        )
+        self._client = AuthenticatedClient(f"{protocol}://{server_address}", token=server_api_token)
 
     def get_list(self) -> list:
         """Returns a list of available recordings"""

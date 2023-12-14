@@ -1,27 +1,25 @@
 # pylint: disable=locally-disabled, missing-class-docstring, missing-function-docstring, redefined-outer-name, too-few-public-methods, missing-module-docstring
 
-import os
 import asyncio
+import os
 import socket
 import time
 from multiprocessing import Process, Queue
 
-import requests
 import pytest
+import requests
 
-from jellyfish import Notifier, RoomApi, PeerOptionsWebRTC
+from jellyfish import Notifier, PeerOptionsWebRTC, RoomApi
 from jellyfish.events import (
-    ServerMessageRoomCreated,
-    ServerMessageRoomDeleted,
+    ServerMessageMetricsReport,
     ServerMessagePeerConnected,
     ServerMessagePeerDisconnected,
-    ServerMessageMetricsReport,
+    ServerMessageRoomCreated,
+    ServerMessageRoomDeleted,
 )
-
-from tests.support.peer_socket import PeerSocket
 from tests.support.asyncio_utils import assert_events, assert_metrics, cancel
+from tests.support.peer_socket import PeerSocket
 from tests.support.webhook_notifier import run_server
-
 
 HOST = "jellyfish" if os.getenv("DOCKER_TEST") == "TRUE" else "localhost"
 SERVER_ADDRESS = f"{HOST}:5002"
@@ -56,9 +54,7 @@ def start_server():
 class TestConnectingToServer:
     @pytest.mark.asyncio
     async def test_valid_credentials(self):
-        notifier = Notifier(
-            server_address=SERVER_ADDRESS, server_api_token=SERVER_API_TOKEN
-        )
+        notifier = Notifier(server_address=SERVER_ADDRESS, server_api_token=SERVER_API_TOKEN)
 
         notifier_task = asyncio.create_task(notifier.connect())
         await notifier.wait_ready()
@@ -69,9 +65,7 @@ class TestConnectingToServer:
 
     @pytest.mark.asyncio
     async def test_invalid_credentials(self):
-        notifier = Notifier(
-            server_address=SERVER_ADDRESS, server_api_token="wrong_token"
-        )
+        notifier = Notifier(server_address=SERVER_ADDRESS, server_api_token="wrong_token")
 
         task = asyncio.create_task(notifier.connect())
 
@@ -86,9 +80,7 @@ def room_api():
 
 @pytest.fixture
 def notifier():
-    notifier = Notifier(
-        server_address=SERVER_ADDRESS, server_api_token=SERVER_API_TOKEN
-    )
+    notifier = Notifier(server_address=SERVER_ADDRESS, server_api_token=SERVER_API_TOKEN)
 
     @notifier.on_server_notification
     def handle_notification(_server_notification):
@@ -121,9 +113,7 @@ class TestReceivingNotifications:
             self.assert_event(event)
 
     @pytest.mark.asyncio
-    async def test_peer_connected_disconnected(
-        self, room_api: RoomApi, notifier: Notifier
-    ):
+    async def test_peer_connected_disconnected(self, room_api: RoomApi, notifier: Notifier):
         event_checks = [
             ServerMessageRoomCreated,
             ServerMessagePeerConnected,
@@ -156,9 +146,7 @@ class TestReceivingNotifications:
             self.assert_event(event)
 
     @pytest.mark.asyncio
-    async def test_peer_connected_room_deleted(
-        self, room_api: RoomApi, notifier: Notifier
-    ):
+    async def test_peer_connected_room_deleted(self, room_api: RoomApi, notifier: Notifier):
         event_checks = [
             ServerMessageRoomCreated,
             ServerMessagePeerConnected,
@@ -202,9 +190,7 @@ class TestReceivingMetrics:
 
         await peer_socket.wait_ready()
 
-        assert_task = asyncio.create_task(
-            assert_metrics(notifier, [ServerMessageMetricsReport])
-        )
+        assert_task = asyncio.create_task(assert_metrics(notifier, [ServerMessageMetricsReport]))
         notifier_task = asyncio.create_task(notifier.connect())
 
         await assert_task

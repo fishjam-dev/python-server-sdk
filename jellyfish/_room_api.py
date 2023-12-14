@@ -5,6 +5,7 @@ RoomApi used to manage rooms
 from typing import Literal, Union
 
 from jellyfish._openapi_client import AuthenticatedClient
+from jellyfish._openapi_client.api.hls import subscribe_tracks
 from jellyfish._openapi_client.api.room import (
     add_component,
     add_peer,
@@ -15,21 +16,20 @@ from jellyfish._openapi_client.api.room import (
     get_all_rooms,
     get_room,
 )
-
-from jellyfish._openapi_client.api.hls import subscribe_tracks
-
 from jellyfish._openapi_client.models import (
-    AddPeerJsonBody,
     AddComponentJsonBody,
-    SubscriptionConfig,
-    Room,
-    PeerOptionsWebRTC,
-    RoomConfig,
-    Peer,
+    AddPeerJsonBody,
+    ComponentHLS,
     ComponentOptionsHLS,
     ComponentOptionsRTSP,
-    RoomConfigVideoCodec,
+    ComponentRTSP,
     Error,
+    Peer,
+    PeerOptionsWebRTC,
+    Room,
+    RoomConfig,
+    RoomConfigVideoCodec,
+    SubscriptionConfig,
 )
 
 
@@ -49,9 +49,7 @@ class RoomApi:
 
         protocol = "https" if secure else "http"
 
-        self._client = AuthenticatedClient(
-            f"{protocol}://{server_address}", token=server_api_token
-        )
+        self._client = AuthenticatedClient(f"{protocol}://{server_address}", token=server_api_token)
 
     def create_room(
         self,
@@ -120,7 +118,7 @@ class RoomApi:
 
     def add_component(
         self, room_id: str, options: Union[ComponentOptionsHLS, ComponentOptionsRTSP]
-    ) -> any:
+    ) -> Union[ComponentHLS, ComponentRTSP]:
         """Creates component in the room"""
 
         if isinstance(options, ComponentOptionsHLS):
@@ -128,9 +126,7 @@ class RoomApi:
         elif isinstance(options, ComponentOptionsRTSP):
             component_type = "rtsp"
         else:
-            raise ValueError(
-                "options must be either ComponentOptionsHLS or ComponentOptionsRTSP"
-            )
+            raise ValueError("options must be either ComponentOptionsHLS or ComponentOptionsRTSP")
 
         json_body = AddComponentJsonBody(type=component_type, options=options)
 
@@ -146,9 +142,7 @@ class RoomApi:
 
         subscription_config = SubscriptionConfig(tracks=tracks)
 
-        return self._request(
-            subscribe_tracks, room_id=room_id, json_body=subscription_config
-        )
+        return self._request(subscribe_tracks, room_id=room_id, json_body=subscription_config)
 
     def _request(self, method, **kwargs):
         resp = method.sync(client=self._client, **kwargs)

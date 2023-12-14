@@ -12,17 +12,14 @@ T = TypeVar("T", bound="ComponentRTSP")
 
 @_attrs_define
 class ComponentRTSP:
-    """Describes the RTSP component
-
-    Attributes:
-        id (str): Assigned component ID Example: component-1.
-        properties (ComponentPropertiesRTSP): Properties specific to the RTSP component
-        type (str): Component type Example: hls.
-    """
+    """Describes the RTSP component"""
 
     id: str
+    """Assigned component ID"""
     properties: "ComponentPropertiesRTSP"
+    """Properties specific to the RTSP component"""
     type: str
+    """Component type"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:

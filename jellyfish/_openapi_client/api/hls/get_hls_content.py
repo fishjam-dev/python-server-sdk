@@ -90,7 +90,8 @@ def sync_detailed(
         filename (str):
         field_hls_msn (Union[Unset, None, int]): Segment sequence number Example: 10.
         field_hls_part (Union[Unset, None, int]): Partial segment sequence number Example: 10.
-        field_hls_skip (Union[Unset, None, str]): Is delta manifest requested Example: True.
+        field_hls_skip (Union[Unset, None, str]): Set to "YES" if delta manifest should be
+            requested Example: True.
         range_ (Union[Unset, str]):
 
     Raises:
@@ -134,7 +135,8 @@ def sync(
         filename (str):
         field_hls_msn (Union[Unset, None, int]): Segment sequence number Example: 10.
         field_hls_part (Union[Unset, None, int]): Partial segment sequence number Example: 10.
-        field_hls_skip (Union[Unset, None, str]): Is delta manifest requested Example: True.
+        field_hls_skip (Union[Unset, None, str]): Set to "YES" if delta manifest should be
+            requested Example: True.
         range_ (Union[Unset, str]):
 
     Raises:
@@ -173,7 +175,8 @@ async def asyncio_detailed(
         filename (str):
         field_hls_msn (Union[Unset, None, int]): Segment sequence number Example: 10.
         field_hls_part (Union[Unset, None, int]): Partial segment sequence number Example: 10.
-        field_hls_skip (Union[Unset, None, str]): Is delta manifest requested Example: True.
+        field_hls_skip (Union[Unset, None, str]): Set to "YES" if delta manifest should be
+            requested Example: True.
         range_ (Union[Unset, str]):
 
     Raises:
@@ -215,7 +218,8 @@ async def asyncio(
         filename (str):
         field_hls_msn (Union[Unset, None, int]): Segment sequence number Example: 10.
         field_hls_part (Union[Unset, None, int]): Partial segment sequence number Example: 10.
-        field_hls_skip (Union[Unset, None, str]): Is delta manifest requested Example: True.
+        field_hls_skip (Union[Unset, None, str]): Set to "YES" if delta manifest should be
+            requested Example: True.
         range_ (Union[Unset, str]):
 
     Raises:

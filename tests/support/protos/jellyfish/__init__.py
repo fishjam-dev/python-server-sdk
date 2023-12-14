@@ -10,12 +10,8 @@ import betterproto
 
 @dataclass(eq=False, repr=False)
 class PeerMessage(betterproto.Message):
-    authenticated: "PeerMessageAuthenticated" = betterproto.message_field(
-        1, group="content"
-    )
-    auth_request: "PeerMessageAuthRequest" = betterproto.message_field(
-        2, group="content"
-    )
+    authenticated: "PeerMessageAuthenticated" = betterproto.message_field(1, group="content")
+    auth_request: "PeerMessageAuthRequest" = betterproto.message_field(2, group="content")
     media_event: "PeerMessageMediaEvent" = betterproto.message_field(3, group="content")
 
 

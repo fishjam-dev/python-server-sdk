@@ -12,13 +12,10 @@ T = TypeVar("T", bound="RoomCreateDetailsResponse")
 
 @_attrs_define
 class RoomCreateDetailsResponse:
-    """Response containing room details
-
-    Attributes:
-        data (RoomCreateDetailsResponseData):
-    """
+    """Response containing room details"""
 
     data: "RoomCreateDetailsResponseData"
+    """"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
@@ -36,9 +33,7 @@ class RoomCreateDetailsResponse:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.room_create_details_response_data import (
-            RoomCreateDetailsResponseData,
-        )
+        from ..models.room_create_details_response_data import RoomCreateDetailsResponseData
 
         d = src_dict.copy()
         data = RoomCreateDetailsResponseData.from_dict(d.pop("data"))

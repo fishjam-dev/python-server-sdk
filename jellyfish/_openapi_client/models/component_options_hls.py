@@ -3,9 +3,7 @@ from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.component_options_hls_subscribe_mode import (
-    ComponentOptionsHLSSubscribeMode,
-)
+from ..models.component_options_hls_subscribe_mode import ComponentOptionsHLSSubscribeMode
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -17,25 +15,20 @@ T = TypeVar("T", bound="ComponentOptionsHLS")
 
 @_attrs_define
 class ComponentOptionsHLS:
-    """Options specific to the HLS component
-
-    Attributes:
-        low_latency (Union[Unset, bool]): Whether the component should use LL-HLS
-        persistent (Union[Unset, bool]): Whether the video is stored after end of stream
-        s3 (Union[Unset, None, S3Credentials]): An AWS S3 credential that will be used to send HLS stream. The stream
-            will only be uploaded if credentials are provided
-        subscribe_mode (Union[Unset, ComponentOptionsHLSSubscribeMode]): Whether the HLS component should subscribe to
-            tracks automatically or manually. Default: ComponentOptionsHLSSubscribeMode.AUTO.
-        target_window_duration (Union[Unset, None, int]): Duration of stream available for viewer
-    """
+    """Options specific to the HLS component"""
 
     low_latency: Union[Unset, bool] = False
+    """Whether the component should use LL-HLS"""
     persistent: Union[Unset, bool] = False
+    """Whether the video is stored after end of stream"""
     s3: Union[Unset, None, "S3Credentials"] = UNSET
+    """An AWS S3 credential that will be used to send HLS stream. The stream will only be uploaded if credentials are provided"""
     subscribe_mode: Union[
         Unset, ComponentOptionsHLSSubscribeMode
     ] = ComponentOptionsHLSSubscribeMode.AUTO
+    """Whether the HLS component should subscribe to tracks automatically or manually."""
     target_window_duration: Union[Unset, None, int] = UNSET
+    """Duration of stream available for viewer"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:

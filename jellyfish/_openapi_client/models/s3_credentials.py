@@ -11,17 +11,16 @@ class S3Credentials:
     """An AWS S3 credential that will be used to send HLS stream. The stream will only be uploaded if credentials are
     provided
 
-        Attributes:
-            access_key_id (str): An AWS access key identifier, linked to your AWS account.
-            bucket (str): The name of the S3 bucket where your data will be stored.
-            region (str): The AWS region where your bucket is located.
-            secret_access_key (str): The secret key that is linked to the Access Key ID.
     """
 
     access_key_id: str
+    """An AWS access key identifier, linked to your AWS account."""
     bucket: str
+    """The name of the S3 bucket where your data will be stored."""
     region: str
+    """The AWS region where your bucket is located."""
     secret_access_key: str
+    """The secret key that is linked to the Access Key ID."""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:

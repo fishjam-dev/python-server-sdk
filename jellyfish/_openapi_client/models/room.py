@@ -16,19 +16,16 @@ T = TypeVar("T", bound="Room")
 
 @_attrs_define
 class Room:
-    """Description of the room state
-
-    Attributes:
-        components (List[Union['ComponentFile', 'ComponentHLS', 'ComponentRTSP']]):
-        config (RoomConfig): Room configuration
-        id (str): Room ID Example: room-1.
-        peers (List['Peer']):
-    """
+    """Description of the room state"""
 
     components: List[Union["ComponentFile", "ComponentHLS", "ComponentRTSP"]]
+    """List of all components"""
     config: "RoomConfig"
+    """Room configuration"""
     id: str
+    """Room ID"""
     peers: List["Peer"]
+    """List of all peers"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:

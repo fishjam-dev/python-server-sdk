@@ -12,14 +12,12 @@ T = TypeVar("T", bound="AddPeerJsonBody")
 
 @_attrs_define
 class AddPeerJsonBody:
-    """
-    Attributes:
-        options (PeerOptionsWebRTC): Options specific to the WebRTC peer
-        type (str): Peer type Example: webrtc.
-    """
+    """ """
 
     options: "PeerOptionsWebRTC"
+    """Options specific to the WebRTC peer"""
     type: str
+    """Peer type"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:

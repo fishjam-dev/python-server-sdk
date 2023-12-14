@@ -8,14 +8,10 @@ T = TypeVar("T", bound="ComponentOptionsFile")
 
 @_attrs_define
 class ComponentOptionsFile:
-    """Options specific to the File component
-
-    Attributes:
-        file_path (str): Path to track file. Must be either OPUS encapsulated in Ogg or raw h264 Example:
-            /root/video.h264.
-    """
+    """Options specific to the File component"""
 
     file_path: str
+    """Path to track file. Must be either OPUS encapsulated in Ogg or raw h264"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
