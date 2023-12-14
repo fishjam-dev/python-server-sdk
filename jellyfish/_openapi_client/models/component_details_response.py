@@ -1,12 +1,4 @@
-from typing import (
-    TYPE_CHECKING,
-    Any,
-    Dict,
-    List,
-    Type,
-    TypeVar,
-    Union,
-)
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -27,8 +19,10 @@ class ComponentDetailsResponse:
     data: Union["ComponentFile", "ComponentHLS", "ComponentRTSP"]
     """Describes component"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    """@private"""
 
     def to_dict(self) -> Dict[str, Any]:
+        """@private"""
         from ..models.component_hls import ComponentHLS
         from ..models.component_rtsp import ComponentRTSP
 
@@ -55,6 +49,7 @@ class ComponentDetailsResponse:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        """@private"""
         from ..models.component_file import ComponentFile
         from ..models.component_hls import ComponentHLS
         from ..models.component_rtsp import ComponentRTSP
@@ -95,6 +90,7 @@ class ComponentDetailsResponse:
 
     @property
     def additional_keys(self) -> List[str]:
+        """@private"""
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

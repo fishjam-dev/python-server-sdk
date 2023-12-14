@@ -19,8 +19,10 @@ class PeerDetailsResponseData:
     token: str
     """Token for authorizing websocket connection"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    """@private"""
 
     def to_dict(self) -> Dict[str, Any]:
+        """@private"""
         peer = self.peer.to_dict()
 
         token = self.token
@@ -38,6 +40,7 @@ class PeerDetailsResponseData:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        """@private"""
         from ..models.peer import Peer
 
         d = src_dict.copy()
@@ -55,6 +58,7 @@ class PeerDetailsResponseData:
 
     @property
     def additional_keys(self) -> List[str]:
+        """@private"""
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

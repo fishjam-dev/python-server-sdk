@@ -19,8 +19,10 @@ class Peer:
     type: str
     """Peer type"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    """@private"""
 
     def to_dict(self) -> Dict[str, Any]:
+        """@private"""
         id = self.id
         status = self.status.value
 
@@ -40,6 +42,7 @@ class Peer:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        """@private"""
         d = src_dict.copy()
         id = d.pop("id")
 
@@ -58,6 +61,7 @@ class Peer:
 
     @property
     def additional_keys(self) -> List[str]:
+        """@private"""
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

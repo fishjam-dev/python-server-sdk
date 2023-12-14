@@ -9,12 +9,12 @@ import betterproto
 from websockets import client
 from websockets.exceptions import ConnectionClosed
 
-from jellyfish.events import (
+from jellyfish.events import ServerMessageMetricsReport
+from jellyfish.events._protos.jellyfish import (
     ServerMessage,
     ServerMessageAuthenticated,
     ServerMessageAuthRequest,
     ServerMessageEventType,
-    ServerMessageMetricsReport,
     ServerMessageSubscribeRequest,
     ServerMessageSubscribeResponse,
 )

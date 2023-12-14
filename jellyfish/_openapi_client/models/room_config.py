@@ -20,8 +20,10 @@ class RoomConfig:
     webhook_url: Union[Unset, None, str] = UNSET
     """URL where Jellyfish notifications will be sent"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    """@private"""
 
     def to_dict(self) -> Dict[str, Any]:
+        """@private"""
         max_peers = self.max_peers
         video_codec: Union[Unset, None, str] = UNSET
         if not isinstance(self.video_codec, Unset):
@@ -43,6 +45,7 @@ class RoomConfig:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        """@private"""
         d = src_dict.copy()
         max_peers = d.pop("maxPeers", UNSET)
 
@@ -68,6 +71,7 @@ class RoomConfig:
 
     @property
     def additional_keys(self) -> List[str]:
+        """@private"""
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

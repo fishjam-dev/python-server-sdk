@@ -11,8 +11,11 @@ class ComponentPropertiesRTSP:
     """Properties specific to the RTSP component"""
 
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    """@private"""
 
     def to_dict(self) -> Dict[str, Any]:
+        """@private"""
+
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
@@ -21,6 +24,7 @@ class ComponentPropertiesRTSP:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        """@private"""
         d = src_dict.copy()
         component_properties_rtsp = cls()
 
@@ -29,6 +33,7 @@ class ComponentPropertiesRTSP:
 
     @property
     def additional_keys(self) -> List[str]:
+        """@private"""
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

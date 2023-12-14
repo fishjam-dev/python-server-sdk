@@ -19,8 +19,10 @@ class AddPeerJsonBody:
     type: str
     """Peer type"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    """@private"""
 
     def to_dict(self) -> Dict[str, Any]:
+        """@private"""
         options = self.options.to_dict()
 
         type = self.type
@@ -38,6 +40,7 @@ class AddPeerJsonBody:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        """@private"""
         from ..models.peer_options_web_rtc import PeerOptionsWebRTC
 
         d = src_dict.copy()
@@ -55,6 +58,7 @@ class AddPeerJsonBody:
 
     @property
     def additional_keys(self) -> List[str]:
+        """@private"""
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

@@ -72,6 +72,7 @@ class {{ class_name }}:
     {% endfor %}
     {% if model.additional_properties %}
     additional_properties: Dict[str, {{ additional_property_type }}] = _attrs_field(init=False, factory=dict)
+    """@private"""
     {% endif %}
 
 {% macro _to_dict(multipart=False) %}
@@ -123,6 +124,7 @@ return field_dict
 {% endmacro %}
 
     def to_dict(self) -> Dict[str, Any]:
+        """@private"""
     {% for lazy_import in model.lazy_imports %}
         {{ lazy_import }}
     {% endfor %}
@@ -135,6 +137,7 @@ return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        """@private"""
     {% for lazy_import in model.lazy_imports %}
         {{ lazy_import }}
     {% endfor %}
@@ -187,6 +190,7 @@ return field_dict
     {% if model.additional_properties %}
     @property
     def additional_keys(self) -> List[str]:
+        """@private"""
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> {{ additional_property_type }}:

@@ -13,8 +13,10 @@ class ComponentOptionsFile:
     file_path: str
     """Path to track file. Must be either OPUS encapsulated in Ogg or raw h264"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    """@private"""
 
     def to_dict(self) -> Dict[str, Any]:
+        """@private"""
         file_path = self.file_path
 
         field_dict: Dict[str, Any] = {}
@@ -29,6 +31,7 @@ class ComponentOptionsFile:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        """@private"""
         d = src_dict.copy()
         file_path = d.pop("filePath")
 
@@ -41,6 +44,7 @@ class ComponentOptionsFile:
 
     @property
     def additional_keys(self) -> List[str]:
+        """@private"""
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

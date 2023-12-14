@@ -22,8 +22,10 @@ class S3Credentials:
     secret_access_key: str
     """The secret key that is linked to the Access Key ID."""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    """@private"""
 
     def to_dict(self) -> Dict[str, Any]:
+        """@private"""
         access_key_id = self.access_key_id
         bucket = self.bucket
         region = self.region
@@ -44,6 +46,7 @@ class S3Credentials:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        """@private"""
         d = src_dict.copy()
         access_key_id = d.pop("accessKeyId")
 
@@ -65,6 +68,7 @@ class S3Credentials:
 
     @property
     def additional_keys(self) -> List[str]:
+        """@private"""
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

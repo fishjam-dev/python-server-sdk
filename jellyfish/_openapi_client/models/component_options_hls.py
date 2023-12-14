@@ -30,8 +30,10 @@ class ComponentOptionsHLS:
     target_window_duration: Union[Unset, None, int] = UNSET
     """Duration of stream available for viewer"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    """@private"""
 
     def to_dict(self) -> Dict[str, Any]:
+        """@private"""
         low_latency = self.low_latency
         persistent = self.persistent
         s3: Union[Unset, None, Dict[str, Any]] = UNSET
@@ -62,6 +64,7 @@ class ComponentOptionsHLS:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        """@private"""
         from ..models.s3_credentials import S3Credentials
 
         d = src_dict.copy()
@@ -100,6 +103,7 @@ class ComponentOptionsHLS:
 
     @property
     def additional_keys(self) -> List[str]:
+        """@private"""
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

@@ -23,8 +23,10 @@ class ComponentPropertiesHLS:
     target_window_duration: Optional[int]
     """Duration of stream available for viewer"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    """@private"""
 
     def to_dict(self) -> Dict[str, Any]:
+        """@private"""
         low_latency = self.low_latency
         persistent = self.persistent
         playable = self.playable
@@ -48,6 +50,7 @@ class ComponentPropertiesHLS:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        """@private"""
         d = src_dict.copy()
         low_latency = d.pop("lowLatency")
 
@@ -72,6 +75,7 @@ class ComponentPropertiesHLS:
 
     @property
     def additional_keys(self) -> List[str]:
+        """@private"""
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

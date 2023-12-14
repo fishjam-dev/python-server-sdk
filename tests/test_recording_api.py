@@ -27,5 +27,5 @@ class TestGetList:
 
 class TestDelete:
     def test_invalid_recording(self, recording_api: RecordingApi):
-        with pytest.raises(Exception):
+        with pytest.raises(RuntimeError):
             recording_api.delete("invalid-id")

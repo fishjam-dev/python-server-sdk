@@ -15,8 +15,10 @@ class PeerOptionsWebRTC:
     enable_simulcast: Union[Unset, bool] = True
     """Enables the peer to use simulcast"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    """@private"""
 
     def to_dict(self) -> Dict[str, Any]:
+        """@private"""
         enable_simulcast = self.enable_simulcast
 
         field_dict: Dict[str, Any] = {}
@@ -29,6 +31,7 @@ class PeerOptionsWebRTC:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        """@private"""
         d = src_dict.copy()
         enable_simulcast = d.pop("enableSimulcast", UNSET)
 
@@ -41,6 +44,7 @@ class PeerOptionsWebRTC:
 
     @property
     def additional_keys(self) -> List[str]:
+        """@private"""
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

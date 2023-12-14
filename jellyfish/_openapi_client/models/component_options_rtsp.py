@@ -23,8 +23,10 @@ class ComponentOptionsRTSP:
     rtp_port: Union[Unset, int] = 20000
     """Local port RTP stream will be received at"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    """@private"""
 
     def to_dict(self) -> Dict[str, Any]:
+        """@private"""
         source_uri = self.source_uri
         keep_alive_interval = self.keep_alive_interval
         pierce_nat = self.pierce_nat
@@ -51,6 +53,7 @@ class ComponentOptionsRTSP:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        """@private"""
         d = src_dict.copy()
         source_uri = d.pop("sourceUri")
 
@@ -75,6 +78,7 @@ class ComponentOptionsRTSP:
 
     @property
     def additional_keys(self) -> List[str]:
+        """@private"""
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:
