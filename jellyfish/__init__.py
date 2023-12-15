@@ -5,7 +5,7 @@
 # pylint: disable=locally-disabled, no-name-in-module, import-error
 
 # Server Messages
-from jellyfish import events
+from jellyfish import errors, events
 
 # Models
 from jellyfish._openapi_client.models import (
@@ -24,12 +24,12 @@ from jellyfish._openapi_client.models import (
     RoomConfig,
     RoomConfigVideoCodec,
 )
-from jellyfish._recording_api import RecordingApi
-from jellyfish._room_api import RoomApi
 
 # API
 from jellyfish._webhook_notifier import receive_json
 from jellyfish._ws_notifier import Notifier
+from jellyfish.api._recording_api import RecordingApi
+from jellyfish.api._room_api import RoomApi
 
 __all__ = [
     "RoomApi",
@@ -51,6 +51,7 @@ __all__ = [
     "ComponentOptionsRTSP",
     "ComponentPropertiesRTSP",
     "events",
+    "errors",
 ]
 
 __docformat__ = "restructuredtext"

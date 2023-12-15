@@ -3,6 +3,8 @@ import shutil
 import sys
 from pathlib import Path
 
+# ruff: noqa: E501
+
 
 def check_exit_code(command):
     command_exit_code = os.system(command)
@@ -14,7 +16,8 @@ def run_tests():
     check_exit_code("docker rm -f jellyfish")
     check_exit_code("docker compose -f docker-compose-test.yaml pull")
     check_exit_code(
-        "docker compose -f docker-compose-test.yaml up --remove-orphans test --exit-code-from test"
+        "docker compose -f docker-compose-test.yaml up --remove-orphans test \
+        --exit-code-from test"
     )
     check_exit_code("docker compose -f docker-compose-test.yaml down")
 
@@ -55,9 +58,9 @@ def generate_docs():
         f.rename(f.with_suffix(".md"))
 
 
-def generate_client():
+def update_client():
     check_exit_code(
-        "openapi-python-client generate\
+        "openapi-python-client update\
             --url https://raw.githubusercontent.com/jellyfish-dev/jellyfish/main/openapi.yaml \
             --config openapi-python-client-config.yaml \
             --custom-template-path=openapi_templates"

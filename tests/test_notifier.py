@@ -82,14 +82,6 @@ def room_api():
 def notifier():
     notifier = Notifier(server_address=SERVER_ADDRESS, server_api_token=SERVER_API_TOKEN)
 
-    @notifier.on_server_notification
-    def handle_notification(_server_notification):
-        pass
-
-    @notifier.on_metrics
-    def handle_metrics(_metrics_report):
-        pass
-
     return notifier
 
 

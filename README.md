@@ -49,6 +49,8 @@ component_hls = room_api.add_component(room.id, options=ComponentOptionsHLS())
 # ComponentHLS(id='5f062447-a9f7-45ed-8d1b-511f77dc78ae', properties=ComponentPropertiesHLS(low_latency=False, persistent=False, playable=False, subscribe_mode=<ComponentPropertiesHLSSubscribeMode.AUTO: 'auto'>, target_window_duration=None), type='hls')
 ```
 
+All methods in `RoomApi` may raise one of the exceptions deriving from `jellyfish.errors.HTTPError`. They are defined in `jellyfish.errors`.
+
 #### Notifier
 
 Create `Notifier` instance

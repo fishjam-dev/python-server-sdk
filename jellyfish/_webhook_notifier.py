@@ -11,10 +11,10 @@ import betterproto
 import jellyfish
 from jellyfish.events._protos.jellyfish import ServerMessage
 
-server_messages = tuple(m[0] for m in inspect.getmembers(jellyfish.events, inspect.isclass))
+SERVER_MESSAGE_TYPES = tuple(m[0] for m in inspect.getmembers(jellyfish.events, inspect.isclass))
 
 
-def receive_json(json: Dict) -> Union[server_messages]:
+def receive_json(json: Dict) -> Union[SERVER_MESSAGE_TYPES]:
     """
     Transform received json notification to adequate notification instance.
 

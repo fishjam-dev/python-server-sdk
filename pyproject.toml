@@ -20,7 +20,6 @@ httpx = ">=0.20.0,<0.26.0"
 attrs = ">=21.3.0"
 
 [tool.poetry.group.dev.dependencies]
-pylint = "^2.17.6"
 betterproto = { version = "= 2.0.0b6", extras = ["compiler"] }
 pdoc = "^14.1.0"
 mkdocs = "^1.5.3"
@@ -44,7 +43,7 @@ format = "poetry_scripts:run_formatter"
 lint = "poetry_scripts:run_linter"
 fix_lint = "poetry_scripts:run_linter_fix"
 generate_docs = "poetry_scripts:generate_docs"
-generate_client = "poetry_scripts:generate_client"
+update_client = "poetry_scripts:update_client"
 
 [tool.ruff]
 select = ["F", "I"]

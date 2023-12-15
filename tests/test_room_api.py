@@ -22,6 +22,12 @@ from jellyfish import (
     RoomConfig,
     RoomConfigVideoCodec,
 )
+from jellyfish.errors import (
+    BadRequestError,
+    NotFoundError,
+    ServiceUnavailableError,
+    UnauthorizedError,
+)
 
 HOST = "jellyfish" if os.getenv("DOCKER_TEST") == "TRUE" else "localhost"
 SERVER_ADDRESS = f"{HOST}:5002"
@@ -40,7 +46,7 @@ class TestAuthentication:
     def test_invalid_token(self):
         room_api = RoomApi(server_address=SERVER_ADDRESS, server_api_token="invalid")
 
-        with pytest.raises(RuntimeError):
+        with pytest.raises(UnauthorizedError):
             room_api.create_room()
 
     def test_valid_token(self):
@@ -96,7 +102,7 @@ class TestCreateRoom:
         assert room in room_api.get_all_rooms()
 
     def test_invalid_max_peers(self, room_api):
-        with pytest.raises(RuntimeError):
+        with pytest.raises(BadRequestError):
             room_api.create_room(max_peers="10", video_codec=CODEC_H264, webhook_url=None)
 
     def test_invalid_video_codec(self, room_api):
@@ -112,7 +118,7 @@ class TestDeleteRoom:
         assert room not in room_api.get_all_rooms()
 
     def test_invalid(self, room_api):
-        with pytest.raises(RuntimeError):
+        with pytest.raises(NotFoundError):
             room_api.delete_room("invalid_id")
 
 
@@ -137,7 +143,7 @@ class TestGetRoom:
         ) == room_api.get_room(room.id)
 
     def test_invalid(self, room_api: RoomApi):
-        with pytest.raises(RuntimeError):
+        with pytest.raises(NotFoundError):
             room_api.get_room("invalid_id")
 
 
@@ -192,7 +198,7 @@ class TestDeleteComponent:
     def test_invalid_component(self, room_api: RoomApi):
         _, room = room_api.create_room()
 
-        with pytest.raises(RuntimeError):
+        with pytest.raises(NotFoundError):
             room_api.delete_component(room.id, "invalid_id")
 
 
@@ -208,7 +214,7 @@ class TestHLSSubscribe:
     def test_invalid_subscription(self, room_api: RoomApi):
         _, room = room_api.create_room(video_codec=CODEC_H264)
         _ = room_api.add_component(room.id, options=HLS_OPTIONS)
-        with pytest.raises(RuntimeError):
+        with pytest.raises(BadRequestError):
             room_api.hls_subscribe(room.id, ["track-id"])
 
 
@@ -233,6 +239,16 @@ class TestAddPeer:
 
         self._assert_peer_created(room_api, peer, room.id)
 
+    def test_peer_limit_reached(self, room_api: RoomApi):
+        _, room = room_api.create_room(max_peers=1)
+
+        _token, peer = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
+
+        self._assert_peer_created(room_api, peer, room.id)
+
+        with pytest.raises(ServiceUnavailableError):
+            room_api.add_peer(room.id, options=PeerOptionsWebRTC())
+
 
 class TestDeletePeer:
     def test_valid(self, room_api: RoomApi):
@@ -246,5 +262,5 @@ class TestDeletePeer:
     def test_invalid(self, room_api: RoomApi):
         _, room = room_api.create_room()
 
-        with pytest.raises(RuntimeError):
+        with pytest.raises(NotFoundError):
             room_api.delete_peer(room.id, peer_id="invalid_peer_id")
