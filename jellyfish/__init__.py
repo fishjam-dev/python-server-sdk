@@ -4,7 +4,7 @@
 
 # pylint: disable=locally-disabled, no-name-in-module, import-error
 
-# Server Messages
+# Exceptions and Server Messages
 from jellyfish import errors, events
 
 # Models
@@ -53,5 +53,4 @@ __all__ = [
     "events",
     "errors",
 ]
-
 __docformat__ = "restructuredtext"
