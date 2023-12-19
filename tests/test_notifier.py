@@ -1,27 +1,25 @@
 # pylint: disable=locally-disabled, missing-class-docstring, missing-function-docstring, redefined-outer-name, too-few-public-methods, missing-module-docstring
 
-import os
 import asyncio
+import os
 import socket
 import time
 from multiprocessing import Process, Queue
 
-import requests
 import pytest
+import requests
 
-from jellyfish import Notifier, RoomApi, PeerOptionsWebRTC
+from jellyfish import Notifier, PeerOptionsWebRTC, RoomApi
 from jellyfish.events import (
-    ServerMessageRoomCreated,
-    ServerMessageRoomDeleted,
+    ServerMessageMetricsReport,
     ServerMessagePeerConnected,
     ServerMessagePeerDisconnected,
-    ServerMessageMetricsReport,
+    ServerMessageRoomCreated,
+    ServerMessageRoomDeleted,
 )
-
-from tests.support.peer_socket import PeerSocket
 from tests.support.asyncio_utils import assert_events, assert_metrics, cancel
+from tests.support.peer_socket import PeerSocket
 from tests.support.webhook_notifier import run_server
-
 
 HOST = "jellyfish" if os.getenv("DOCKER_TEST") == "TRUE" else "localhost"
 SERVER_ADDRESS = f"{HOST}:5002"
@@ -86,7 +84,11 @@ def room_api():
 
 @pytest.fixture
 def notifier():
-    return Notifier(server_address=SERVER_ADDRESS, server_api_token=SERVER_API_TOKEN)
+    notifier = Notifier(
+        server_address=SERVER_ADDRESS, server_api_token=SERVER_API_TOKEN
+    )
+
+    return notifier
 
 
 class TestReceivingNotifications:

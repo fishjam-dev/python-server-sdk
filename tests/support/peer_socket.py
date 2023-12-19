@@ -1,15 +1,15 @@
 # pylint: disable=locally-disabled, missing-class-docstring, missing-function-docstring, redefined-outer-name, too-few-public-methods, missing-module-docstring
 
 import asyncio
-import betterproto
 
+import betterproto
 from websockets import client
 from websockets.exceptions import ConnectionClosedOK
 
 from tests.support.protos.jellyfish import (
     PeerMessage,
-    PeerMessageAuthRequest,
     PeerMessageAuthenticated,
+    PeerMessageAuthRequest,
 )
 
 

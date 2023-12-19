@@ -4,38 +4,32 @@
 
 # pylint: disable=locally-disabled, no-name-in-module, import-error
 
-from pydantic.error_wrappers import ValidationError
-
-# API
-from jellyfish._room_api import RoomApi
-from jellyfish._recording_api import RecordingApi
-from jellyfish._ws_notifier import Notifier
-from jellyfish._webhook_notifier import receive_json
+# Exceptions and Server Messages
+from jellyfish import errors, events
 
 # Models
-from jellyfish._openapi_client import (
+from jellyfish._openapi_client.models import (
+    ComponentHLS,
+    ComponentOptionsHLS,
+    ComponentOptionsHLSSubscribeMode,
+    ComponentOptionsRTSP,
+    ComponentPropertiesHLS,
+    ComponentPropertiesHLSSubscribeMode,
+    ComponentPropertiesRTSP,
+    ComponentRTSP,
+    Peer,
+    PeerOptionsWebRTC,
+    PeerStatus,
     Room,
     RoomConfig,
-    Peer,
-    Component,
-    ComponentHLS,
-    ComponentRTSP,
-    ComponentOptions,
-    ComponentOptionsRTSP,
-    ComponentOptionsHLS,
-    PeerOptionsWebRTC,
+    RoomConfigVideoCodec,
 )
 
-# Server Messages
-from jellyfish import events
-
-# Exceptions
-from jellyfish._openapi_client.exceptions import (
-    UnauthorizedException,
-    NotFoundException,
-    BadRequestException,
-)
-
+# API
+from jellyfish._webhook_notifier import receive_json
+from jellyfish._ws_notifier import Notifier
+from jellyfish.api._recording_api import RecordingApi
+from jellyfish.api._room_api import RoomApi
 
 __all__ = [
     "RoomApi",
@@ -43,19 +37,20 @@ __all__ = [
     "Notifier",
     "receive_json",
     "Room",
-    "Peer",
-    "Component",
-    "ComponentHLS",
-    "ComponentRTSP",
-    "ComponentOptionsHLS",
     "RoomConfig",
-    "ComponentOptions",
-    "ComponentOptionsRTSP",
+    "RoomConfigVideoCodec",
+    "Peer",
     "PeerOptionsWebRTC",
+    "PeerStatus",
+    "ComponentHLS",
+    "ComponentOptionsHLS",
+    "ComponentOptionsHLSSubscribeMode",
+    "ComponentPropertiesHLS",
+    "ComponentPropertiesHLSSubscribeMode",
+    "ComponentRTSP",
+    "ComponentOptionsRTSP",
+    "ComponentPropertiesRTSP",
     "events",
-    "UnauthorizedException",
-    "NotFoundException",
-    "BadRequestException",
+    "errors",
 ]
-
 __docformat__ = "restructuredtext"

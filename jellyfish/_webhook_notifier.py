@@ -3,16 +3,18 @@ Module defining a function allowing decoding received webhook
 notification from jellyfish to notification structs.
 """
 
-from typing import Any, Dict
+from typing import Dict
 
 import betterproto
 
-from jellyfish.events import ServerMessage
+from jellyfish.events._protos.jellyfish import ServerMessage
 
 
-def receive_json(json: Dict) -> Any:
+def receive_json(json: Dict) -> betterproto.Message:
     """
     Transform received json notification to adequate notification instance.
+
+    The available notifications are listed in `jellyfish.events` module.
     """
     msg = json["notification"]
     msg = bytes(msg, "utf-8")

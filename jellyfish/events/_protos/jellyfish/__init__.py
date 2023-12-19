@@ -55,6 +55,12 @@ class ServerMessage(betterproto.Message):
     hls_playable: "ServerMessageHlsPlayable" = betterproto.message_field(
         13, group="content"
     )
+    hls_uploaded: "ServerMessageHlsUploaded" = betterproto.message_field(
+        14, group="content"
+    )
+    hls_upload_crashed: "ServerMessageHlsUploadCrashed" = betterproto.message_field(
+        15, group="content"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -125,3 +131,13 @@ class ServerMessageMetricsReport(betterproto.Message):
 class ServerMessageHlsPlayable(betterproto.Message):
     room_id: str = betterproto.string_field(1)
     component_id: str = betterproto.string_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class ServerMessageHlsUploaded(betterproto.Message):
+    room_id: str = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class ServerMessageHlsUploadCrashed(betterproto.Message):
+    room_id: str = betterproto.string_field(1)

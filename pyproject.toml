@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "jellyfish-server-sdk"
-version = "0.1.0"
+version = "0.2.0-dev"
 description = "Python server SDK for the Jellyfish media server"
 authors = ["Jellyfish Team"]
 homepage = "https://github.com/jellyfish-dev/python-server-sdk"
@@ -13,18 +13,19 @@ packages = [{ include = "jellyfish" }]
 python = "^3.8"
 websockets = "^11.0.3"
 urllib3 = ">=1.25.3,<2"
-pydantic = "<2"
 aenum = "^3.1.15"
 python-dateutil = "^2.8.2"
 betterproto = "2.0.0b6"
+httpx = ">=0.20.0,<0.26.0"
+attrs = ">=21.3.0"
 
 [tool.poetry.group.dev.dependencies]
-pylint = "^2.17.6"
 betterproto = { version = "= 2.0.0b6", extras = ["compiler"] }
-black = "^23.10.0"
 pdoc = "^14.1.0"
 mkdocs = "^1.5.3"
 mike = "^2.0.0"
+openapi-python-client = "^0.16.0"
+ruff = "^0.1.7"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.4.2"
@@ -37,8 +38,19 @@ requires = ["poetry-core>=1.6.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-ci_test = "test_commands:run_tests"
-format = "test_commands:run_formatter"
-check_format = "test_commands:check_format"
-lint = "test_commands:run_linter"
-generate_docs = "test_commands:generate_docs"
+ci_test = "poetry_scripts:run_tests"
+format = "poetry_scripts:run_formatter"
+lint = "poetry_scripts:run_linter"
+fix_lint = "poetry_scripts:run_linter_fix"
+generate_docs = "poetry_scripts:generate_docs"
+update_client = "poetry_scripts:update_client"
+
+[tool.ruff]
+select = ["F", "I"]
+
+[tool.ruff.lint]
+select = ["F", "I", "E"]
+ignore = []
+
+[tool.ruff.extend-per-file-ignores]
+"jellyfish/_openapi_client/**" = ["E501"]
