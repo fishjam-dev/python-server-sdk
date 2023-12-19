@@ -13,7 +13,9 @@ class BaseApi:
     ):
         protocol = "https" if secure else "http"
 
-        self.client = AuthenticatedClient(f"{protocol}://{server_address}", token=server_api_token)
+        self.client = AuthenticatedClient(
+            f"{protocol}://{server_address}", token=server_api_token
+        )
 
     def _request(self, method, **kwargs):
         response: Response = method.sync_detailed(client=self.client, **kwargs)

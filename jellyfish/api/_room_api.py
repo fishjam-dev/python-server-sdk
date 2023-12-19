@@ -44,7 +44,9 @@ class RoomApi(BaseApi):
         Set secure to `True` for `https` and `False` for `http` connection (default).
         """
         super().__init__(
-            server_address=server_address, server_api_token=server_api_token, secure=secure
+            server_address=server_address,
+            server_api_token=server_api_token,
+            secure=secure,
         )
 
     def create_room(
@@ -60,8 +62,8 @@ class RoomApi(BaseApi):
         in which the room has been created and the created `Room`
 
         The returned address may be different from the current `RoomApi` instance.
-        In such case, a new `RoomApi` instance has to be created using the returned address
-        in order to interact with the room.
+        In such case, a new `RoomApi` instance has to be created using
+        the returned address in order to interact with the room.
         """
 
         if video_codec is not None:
@@ -97,8 +99,8 @@ class RoomApi(BaseApi):
 
         Currently only `webrtc` peer is supported
 
-        Returns a tuple (`peer_token`, `Peer`) - the token needed by Peer to authenticate
-        to Jellyfish and the new `Peer`
+        Returns a tuple (`peer_token`, `Peer`) - the token needed by Peer
+        to authenticate to Jellyfish and the new `Peer`
         """
 
         peer_type = "webrtc"
@@ -122,11 +124,15 @@ class RoomApi(BaseApi):
         elif isinstance(options, ComponentOptionsRTSP):
             component_type = "rtsp"
         else:
-            raise ValueError("options must be either ComponentOptionsHLS or ComponentOptionsRTSP")
+            raise ValueError(
+                "options must be either ComponentOptionsHLS or ComponentOptionsRTSP"
+            )
 
         json_body = AddComponentJsonBody(type=component_type, options=options)
 
-        return self._request(room_add_component, room_id=room_id, json_body=json_body).data
+        return self._request(
+            room_add_component, room_id=room_id, json_body=json_body
+        ).data
 
     def delete_component(self, room_id: str, component_id: str) -> None:
         """Deletes component"""
@@ -138,4 +144,6 @@ class RoomApi(BaseApi):
 
         subscription_config = SubscriptionConfig(tracks=tracks)
 
-        return self._request(hls_subscribe_tracks, room_id=room_id, json_body=subscription_config)
+        return self._request(
+            hls_subscribe_tracks, room_id=room_id, json_body=subscription_config
+        )

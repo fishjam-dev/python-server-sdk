@@ -86,7 +86,9 @@ class Notifier:
                     )
 
                 if self._metrics_handler:
-                    await self._subscribe_event(event=ServerMessageEventType.EVENT_TYPE_METRICS)
+                    await self._subscribe_event(
+                        event=ServerMessageEventType.EVENT_TYPE_METRICS
+                    )
 
                 self._ready = True
                 if self._ready_event:
@@ -111,7 +113,9 @@ class Notifier:
         await self._ready_event.wait()
 
     async def _authenticate(self):
-        msg = ServerMessage(auth_request=ServerMessageAuthRequest(token=self._server_api_token))
+        msg = ServerMessage(
+            auth_request=ServerMessageAuthRequest(token=self._server_api_token)
+        )
         await self._websocket.send(bytes(msg))
 
         try:

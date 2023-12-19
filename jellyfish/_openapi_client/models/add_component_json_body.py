@@ -70,13 +70,17 @@ class AddComponentJsonBody:
 
         def _parse_options(
             data: object,
-        ) -> Union["ComponentOptionsFile", "ComponentOptionsHLS", "ComponentOptionsRTSP", Unset]:
+        ) -> Union[
+            "ComponentOptionsFile", "ComponentOptionsHLS", "ComponentOptionsRTSP", Unset
+        ]:
             if isinstance(data, Unset):
                 return data
             try:
                 if not isinstance(data, dict):
                     raise TypeError()
-                componentsschemas_component_options_type_0 = ComponentOptionsHLS.from_dict(data)
+                componentsschemas_component_options_type_0 = (
+                    ComponentOptionsHLS.from_dict(data)
+                )
 
                 return componentsschemas_component_options_type_0
             except:  # noqa: E722
@@ -84,14 +88,18 @@ class AddComponentJsonBody:
             try:
                 if not isinstance(data, dict):
                     raise TypeError()
-                componentsschemas_component_options_type_1 = ComponentOptionsRTSP.from_dict(data)
+                componentsschemas_component_options_type_1 = (
+                    ComponentOptionsRTSP.from_dict(data)
+                )
 
                 return componentsschemas_component_options_type_1
             except:  # noqa: E722
                 pass
             if not isinstance(data, dict):
                 raise TypeError()
-            componentsschemas_component_options_type_2 = ComponentOptionsFile.from_dict(data)
+            componentsschemas_component_options_type_2 = ComponentOptionsFile.from_dict(
+                data
+            )
 
             return componentsschemas_component_options_type_2
 

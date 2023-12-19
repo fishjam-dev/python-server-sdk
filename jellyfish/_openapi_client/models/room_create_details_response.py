@@ -36,7 +36,9 @@ class RoomCreateDetailsResponse:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         """@private"""
-        from ..models.room_create_details_response_data import RoomCreateDetailsResponseData
+        from ..models.room_create_details_response_data import (
+            RoomCreateDetailsResponseData,
+        )
 
         d = src_dict.copy()
         data = RoomCreateDetailsResponseData.from_dict(d.pop("data"))

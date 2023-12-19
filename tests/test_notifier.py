@@ -54,7 +54,9 @@ def start_server():
 class TestConnectingToServer:
     @pytest.mark.asyncio
     async def test_valid_credentials(self):
-        notifier = Notifier(server_address=SERVER_ADDRESS, server_api_token=SERVER_API_TOKEN)
+        notifier = Notifier(
+            server_address=SERVER_ADDRESS, server_api_token=SERVER_API_TOKEN
+        )
 
         notifier_task = asyncio.create_task(notifier.connect())
         await notifier.wait_ready()
@@ -65,7 +67,9 @@ class TestConnectingToServer:
 
     @pytest.mark.asyncio
     async def test_invalid_credentials(self):
-        notifier = Notifier(server_address=SERVER_ADDRESS, server_api_token="wrong_token")
+        notifier = Notifier(
+            server_address=SERVER_ADDRESS, server_api_token="wrong_token"
+        )
 
         task = asyncio.create_task(notifier.connect())
 
@@ -80,7 +84,9 @@ def room_api():
 
 @pytest.fixture
 def notifier():
-    notifier = Notifier(server_address=SERVER_ADDRESS, server_api_token=SERVER_API_TOKEN)
+    notifier = Notifier(
+        server_address=SERVER_ADDRESS, server_api_token=SERVER_API_TOKEN
+    )
 
     return notifier
 
@@ -105,7 +111,9 @@ class TestReceivingNotifications:
             self.assert_event(event)
 
     @pytest.mark.asyncio
-    async def test_peer_connected_disconnected(self, room_api: RoomApi, notifier: Notifier):
+    async def test_peer_connected_disconnected(
+        self, room_api: RoomApi, notifier: Notifier
+    ):
         event_checks = [
             ServerMessageRoomCreated,
             ServerMessagePeerConnected,
@@ -138,7 +146,9 @@ class TestReceivingNotifications:
             self.assert_event(event)
 
     @pytest.mark.asyncio
-    async def test_peer_connected_room_deleted(self, room_api: RoomApi, notifier: Notifier):
+    async def test_peer_connected_room_deleted(
+        self, room_api: RoomApi, notifier: Notifier
+    ):
         event_checks = [
             ServerMessageRoomCreated,
             ServerMessagePeerConnected,
@@ -182,7 +192,9 @@ class TestReceivingMetrics:
 
         await peer_socket.wait_ready()
 
-        assert_task = asyncio.create_task(assert_metrics(notifier, [ServerMessageMetricsReport]))
+        assert_task = asyncio.create_task(
+            assert_metrics(notifier, [ServerMessageMetricsReport])
+        )
         notifier_task = asyncio.create_task(notifier.connect())
 
         await assert_task

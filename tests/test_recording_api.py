@@ -14,7 +14,9 @@ SERVER_API_TOKEN = "development"
 
 @pytest.fixture
 def recording_api():
-    return RecordingApi(server_address=SERVER_ADDRESS, server_api_token=SERVER_API_TOKEN)
+    return RecordingApi(
+        server_address=SERVER_ADDRESS, server_api_token=SERVER_API_TOKEN
+    )
 
 
 class TestGetList:

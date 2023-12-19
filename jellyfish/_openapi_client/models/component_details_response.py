@@ -56,7 +56,9 @@ class ComponentDetailsResponse:
 
         d = src_dict.copy()
 
-        def _parse_data(data: object) -> Union["ComponentFile", "ComponentHLS", "ComponentRTSP"]:
+        def _parse_data(
+            data: object,
+        ) -> Union["ComponentFile", "ComponentHLS", "ComponentRTSP"]:
             try:
                 if not isinstance(data, dict):
                     raise TypeError()

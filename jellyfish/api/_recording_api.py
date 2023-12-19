@@ -21,7 +21,9 @@ class RecordingApi(BaseApi):
         """
 
         super().__init__(
-            server_address=server_address, server_api_token=server_api_token, secure=secure
+            server_address=server_address,
+            server_api_token=server_api_token,
+            secure=secure,
         )
 
     def get_list(self) -> list:

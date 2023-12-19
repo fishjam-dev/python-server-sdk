@@ -50,7 +50,9 @@ class TestAuthentication:
             room_api.create_room()
 
     def test_valid_token(self):
-        room_api = RoomApi(server_address=SERVER_ADDRESS, server_api_token=SERVER_API_TOKEN)
+        room_api = RoomApi(
+            server_address=SERVER_ADDRESS, server_api_token=SERVER_API_TOKEN
+        )
 
         _, room = room_api.create_room()
 
@@ -94,7 +96,9 @@ class TestCreateRoom:
         assert room == Room(
             components=[],
             config=RoomConfig(
-                max_peers=MAX_PEERS, video_codec=RoomConfigVideoCodec(CODEC_H264), webhook_url=None
+                max_peers=MAX_PEERS,
+                video_codec=RoomConfigVideoCodec(CODEC_H264),
+                webhook_url=None,
             ),
             id=room.id,
             peers=[],
@@ -103,7 +107,9 @@ class TestCreateRoom:
 
     def test_invalid_max_peers(self, room_api):
         with pytest.raises(BadRequestError):
-            room_api.create_room(max_peers="10", video_codec=CODEC_H264, webhook_url=None)
+            room_api.create_room(
+                max_peers="10", video_codec=CODEC_H264, webhook_url=None
+            )
 
     def test_invalid_video_codec(self, room_api):
         with pytest.raises(ValueError):
@@ -207,7 +213,9 @@ class TestHLSSubscribe:
         _, room = room_api.create_room(video_codec=CODEC_H264)
         _ = room_api.add_component(
             room.id,
-            options=ComponentOptionsHLS(subscribe_mode=ComponentOptionsHLSSubscribeMode("manual")),
+            options=ComponentOptionsHLS(
+                subscribe_mode=ComponentOptionsHLSSubscribeMode("manual")
+            ),
         )
         assert room_api.hls_subscribe(room.id, ["track-id"]) is None
 
@@ -228,7 +236,9 @@ class TestAddPeer:
     def test_with_specified_options(self, room_api: RoomApi):
         _, room = room_api.create_room()
 
-        _token, peer = room_api.add_peer(room.id, options=PeerOptionsWebRTC(enable_simulcast=True))
+        _token, peer = room_api.add_peer(
+            room.id, options=PeerOptionsWebRTC(enable_simulcast=True)
+        )
 
         self._assert_peer_created(room_api, peer, room.id)
 
@@ -253,7 +263,9 @@ class TestAddPeer:
 class TestDeletePeer:
     def test_valid(self, room_api: RoomApi):
         _, room = room_api.create_room()
-        _, peer = room_api.add_peer(room.id, options=PeerOptionsWebRTC(enable_simulcast=True))
+        _, peer = room_api.add_peer(
+            room.id, options=PeerOptionsWebRTC(enable_simulcast=True)
+        )
 
         room_api.delete_peer(room.id, peer.id)
 

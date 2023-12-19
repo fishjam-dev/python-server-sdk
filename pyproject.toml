@@ -47,7 +47,6 @@ update_client = "poetry_scripts:update_client"
 
 [tool.ruff]
 select = ["F", "I"]
-line-length = 100
 
 [tool.ruff.lint]
 select = ["F", "I", "E"]

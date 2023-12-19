@@ -3,7 +3,9 @@ from typing import Any, Dict, List, Optional, Type, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.component_properties_hls_subscribe_mode import ComponentPropertiesHLSSubscribeMode
+from ..models.component_properties_hls_subscribe_mode import (
+    ComponentPropertiesHLSSubscribeMode,
+)
 
 T = TypeVar("T", bound="ComponentPropertiesHLS")
 
