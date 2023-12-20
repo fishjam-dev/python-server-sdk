@@ -15,6 +15,8 @@ class RoomConfig:
 
     max_peers: Union[Unset, None, int] = UNSET
     """Maximum amount of peers allowed into the room"""
+    room_id: Union[Unset, None, str] = UNSET
+    """Custom id used for identifying room within Jellyfish. Must be unique across all rooms. If not provided, random UUID is generated."""
     video_codec: Union[Unset, None, RoomConfigVideoCodec] = UNSET
     """Enforces video codec for each peer in the room"""
     webhook_url: Union[Unset, None, str] = UNSET
@@ -25,6 +27,7 @@ class RoomConfig:
     def to_dict(self) -> Dict[str, Any]:
         """@private"""
         max_peers = self.max_peers
+        room_id = self.room_id
         video_codec: Union[Unset, None, str] = UNSET
         if not isinstance(self.video_codec, Unset):
             video_codec = self.video_codec.value if self.video_codec else None
@@ -36,6 +39,8 @@ class RoomConfig:
         field_dict.update({})
         if max_peers is not UNSET:
             field_dict["maxPeers"] = max_peers
+        if room_id is not UNSET:
+            field_dict["roomId"] = room_id
         if video_codec is not UNSET:
             field_dict["videoCodec"] = video_codec
         if webhook_url is not UNSET:
@@ -48,6 +53,8 @@ class RoomConfig:
         """@private"""
         d = src_dict.copy()
         max_peers = d.pop("maxPeers", UNSET)
+
+        room_id = d.pop("roomId", UNSET)
 
         _video_codec = d.pop("videoCodec", UNSET)
         video_codec: Union[Unset, None, RoomConfigVideoCodec]
@@ -62,6 +69,7 @@ class RoomConfig:
 
         room_config = cls(
             max_peers=max_peers,
+            room_id=room_id,
             video_codec=video_codec,
             webhook_url=webhook_url,
         )

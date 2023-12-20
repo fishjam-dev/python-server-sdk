@@ -12,22 +12,22 @@ T = TypeVar("T", bound="SubscriptionConfig")
 class SubscriptionConfig:
     """Subscription config"""
 
-    tracks: Union[Unset, List[str]] = UNSET
-    """List of tracks that hls endpoint will subscribe for"""
+    origins: Union[Unset, List[str]] = UNSET
+    """List of peers and components ids whose tracks the HLS endpoint will subscribe to"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
     """@private"""
 
     def to_dict(self) -> Dict[str, Any]:
         """@private"""
-        tracks: Union[Unset, List[str]] = UNSET
-        if not isinstance(self.tracks, Unset):
-            tracks = self.tracks
+        origins: Union[Unset, List[str]] = UNSET
+        if not isinstance(self.origins, Unset):
+            origins = self.origins
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if tracks is not UNSET:
-            field_dict["tracks"] = tracks
+        if origins is not UNSET:
+            field_dict["origins"] = origins
 
         return field_dict
 
@@ -35,10 +35,10 @@ class SubscriptionConfig:
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         """@private"""
         d = src_dict.copy()
-        tracks = cast(List[str], d.pop("tracks", UNSET))
+        origins = cast(List[str], d.pop("origins", UNSET))
 
         subscription_config = cls(
-            tracks=tracks,
+            origins=origins,
         )
 
         subscription_config.additional_properties = d

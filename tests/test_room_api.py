@@ -81,7 +81,9 @@ class TestCreateRoom:
 
         assert room == Room(
             components=[],
-            config=RoomConfig(max_peers=None, video_codec=None, webhook_url=None),
+            config=RoomConfig(
+                room_id=room.id, max_peers=None, video_codec=None, webhook_url=None
+            ),
             id=room.id,
             peers=[],
         )
@@ -96,6 +98,7 @@ class TestCreateRoom:
         assert room == Room(
             components=[],
             config=RoomConfig(
+                room_id=room.id,
                 max_peers=MAX_PEERS,
                 video_codec=RoomConfigVideoCodec(CODEC_H264),
                 webhook_url=None,
@@ -145,7 +148,9 @@ class TestGetRoom:
             components=[],
             peers=[],
             id=room.id,
-            config=RoomConfig(max_peers=None, video_codec=None, webhook_url=None),
+            config=RoomConfig(
+                room_id=room.id, max_peers=None, video_codec=None, webhook_url=None
+            ),
         ) == room_api.get_room(room.id)
 
     def test_invalid(self, room_api: RoomApi):
@@ -217,13 +222,13 @@ class TestHLSSubscribe:
                 subscribe_mode=ComponentOptionsHLSSubscribeMode("manual")
             ),
         )
-        assert room_api.hls_subscribe(room.id, ["track-id"]) is None
+        assert room_api.hls_subscribe(room.id, ["peer-id"]) is None
 
     def test_invalid_subscription(self, room_api: RoomApi):
         _, room = room_api.create_room(video_codec=CODEC_H264)
         _ = room_api.add_component(room.id, options=HLS_OPTIONS)
         with pytest.raises(BadRequestError):
-            room_api.hls_subscribe(room.id, ["track-id"])
+            room_api.hls_subscribe(room.id, ["component-id"])
 
 
 class TestAddPeer:

@@ -63,7 +63,7 @@ def sync_detailed(
     client: Union[AuthenticatedClient, Client],
     json_body: SubscriptionConfig,
 ) -> Response[Union[Any, Error]]:
-    """Subscribe hls component for tracks
+    """Subscribe the HLS component to the tracks of peers or components
 
     Args:
         room_id (str):
@@ -95,7 +95,7 @@ def sync(
     client: Union[AuthenticatedClient, Client],
     json_body: SubscriptionConfig,
 ) -> Optional[Union[Any, Error]]:
-    """Subscribe hls component for tracks
+    """Subscribe the HLS component to the tracks of peers or components
 
     Args:
         room_id (str):
@@ -122,7 +122,7 @@ async def asyncio_detailed(
     client: Union[AuthenticatedClient, Client],
     json_body: SubscriptionConfig,
 ) -> Response[Union[Any, Error]]:
-    """Subscribe hls component for tracks
+    """Subscribe the HLS component to the tracks of peers or components
 
     Args:
         room_id (str):
@@ -152,7 +152,7 @@ async def asyncio(
     client: Union[AuthenticatedClient, Client],
     json_body: SubscriptionConfig,
 ) -> Optional[Union[Any, Error]]:
-    """Subscribe hls component for tracks
+    """Subscribe the HLS component to the tracks of peers or components
 
     Args:
         room_id (str):
