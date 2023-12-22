@@ -119,7 +119,7 @@ class TestCreateRoom:
         with pytest.raises(ValueError):
             room_api.create_room(max_peers=MAX_PEERS, video_codec="h420")
 
-    def test_custom_room_id(self, room_api):
+    def test_valid_room_id(self, room_api):
         room_id = str(uuid.uuid4())
         _, room = room_api.create_room(room_id=room_id)
 
@@ -135,6 +135,18 @@ class TestCreateRoom:
             peers=[],
         )
         assert room in room_api.get_all_rooms()
+
+    def test_duplicated_room_id(self, room_api):
+        room_id = str(uuid.uuid4())
+        _, room = room_api.create_room(room_id=room_id)
+
+        with pytest.raises(BadRequestError) as exception_info:
+            _, room = room_api.create_room(room_id=room_id)
+
+        assert (
+            str(exception_info.value)
+            == f'Cannot add room with id "{room_id}" - room already exists'
+        )
 
 
 class TestDeleteRoom:
@@ -242,11 +254,16 @@ class TestHLSSubscribe:
         )
         assert room_api.hls_subscribe(room.id, ["peer-id"]) is None
 
-    def test_invalid_subscription(self, room_api: RoomApi):
+    def test_invalid_subscription_in_auto_mode(self, room_api: RoomApi):
         _, room = room_api.create_room(video_codec=CODEC_H264)
         _ = room_api.add_component(room.id, options=HLS_OPTIONS)
-        with pytest.raises(BadRequestError):
+        with pytest.raises(BadRequestError) as exception_info:
             room_api.hls_subscribe(room.id, ["component-id"])
+
+        assert (
+            str(exception_info.value)
+            == "HLS component option `subscribe_mode` is set to :auto"
+        )
 
 
 class TestAddPeer:
