@@ -143,7 +143,7 @@ class RoomApi(BaseApi):
 
         return self._request(room_delete_component, id=component_id, room_id=room_id)
 
-    def hls_subscribe(self, room_id: str, origins: list[str]):
+    def hls_subscribe(self, room_id: str, origins: [str]):
         """
         In order to subscribe to HLS peers/components,
         the HLS component should be initialized with the subscribe_mode set to manual.
