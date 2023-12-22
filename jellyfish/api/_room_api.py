@@ -4,7 +4,7 @@ RoomApi used to manage rooms
 
 from typing import Literal, Union
 
-from jellyfish._openapi_client.api.hls import subscribe_tracks as hls_subscribe_tracks
+from jellyfish._openapi_client.api.hls import subscribe_hls_to as hls_subscribe_hls_to
 from jellyfish._openapi_client.api.room import add_component as room_add_component
 from jellyfish._openapi_client.api.room import add_peer as room_add_peer
 from jellyfish._openapi_client.api.room import create_room as room_create_room
@@ -51,6 +51,7 @@ class RoomApi(BaseApi):
 
     def create_room(
         self,
+        room_id: str = None,
         max_peers: int = None,
         video_codec: Literal["h264", "vp8"] = None,
         webhook_url: str = None,
@@ -72,7 +73,10 @@ class RoomApi(BaseApi):
             video_codec = None
 
         room_config = RoomConfig(
-            max_peers=max_peers, video_codec=video_codec, webhook_url=webhook_url
+            room_id=room_id,
+            max_peers=max_peers,
+            video_codec=video_codec,
+            webhook_url=webhook_url,
         )
 
         resp = self._request(room_create_room, json_body=room_config)
@@ -139,11 +143,19 @@ class RoomApi(BaseApi):
 
         return self._request(room_delete_component, id=component_id, room_id=room_id)
 
-    def hls_subscribe(self, room_id: str, tracks: list):
-        """subscribes hls component for tracks"""
-
-        subscription_config = SubscriptionConfig(tracks=tracks)
+    def hls_subscribe(self, room_id: str, origins: [str]):
+        """
+        In order to subscribe to HLS peers/components,
+        the HLS component should be initialized with the subscribe_mode set to manual.
+        This mode proves beneficial when you do not wish to record or stream
+        all the available streams within a room via HLS.
+        It allows for selective addition instead –
+        you can manually select specific streams.
+        For instance, you could opt to record only the stream of an event's host.
+        """
 
         return self._request(
-            hls_subscribe_tracks, room_id=room_id, json_body=subscription_config
+            hls_subscribe_hls_to,
+            room_id=room_id,
+            json_body=SubscriptionConfig(origins=origins),
         )

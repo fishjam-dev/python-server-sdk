@@ -10,8 +10,6 @@ class HTTPError(Exception):
     def from_response(response: Response):
         """@private"""
         errors = response.parsed.errors
-        print("resp errors", errors)
-
         if response.status_code == HTTPStatus.BAD_REQUEST:
             return BadRequestError(errors)
 

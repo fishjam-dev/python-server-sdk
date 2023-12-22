@@ -2,6 +2,7 @@
 
 
 import os
+import uuid
 
 import pytest
 
@@ -81,7 +82,9 @@ class TestCreateRoom:
 
         assert room == Room(
             components=[],
-            config=RoomConfig(max_peers=None, video_codec=None, webhook_url=None),
+            config=RoomConfig(
+                room_id=room.id, max_peers=None, video_codec=None, webhook_url=None
+            ),
             id=room.id,
             peers=[],
         )
@@ -96,6 +99,7 @@ class TestCreateRoom:
         assert room == Room(
             components=[],
             config=RoomConfig(
+                room_id=room.id,
                 max_peers=MAX_PEERS,
                 video_codec=RoomConfigVideoCodec(CODEC_H264),
                 webhook_url=None,
@@ -114,6 +118,35 @@ class TestCreateRoom:
     def test_invalid_video_codec(self, room_api):
         with pytest.raises(ValueError):
             room_api.create_room(max_peers=MAX_PEERS, video_codec="h420")
+
+    def test_valid_room_id(self, room_api):
+        room_id = str(uuid.uuid4())
+        _, room = room_api.create_room(room_id=room_id)
+
+        assert room == Room(
+            components=[],
+            config=RoomConfig(
+                room_id=room.id,
+                max_peers=None,
+                video_codec=None,
+                webhook_url=None,
+            ),
+            id=room_id,
+            peers=[],
+        )
+        assert room in room_api.get_all_rooms()
+
+    def test_duplicated_room_id(self, room_api):
+        room_id = str(uuid.uuid4())
+        _, room = room_api.create_room(room_id=room_id)
+
+        with pytest.raises(BadRequestError) as exception_info:
+            _, room = room_api.create_room(room_id=room_id)
+
+        assert (
+            str(exception_info.value)
+            == f'Cannot add room with id "{room_id}" - room already exists'
+        )
 
 
 class TestDeleteRoom:
@@ -145,7 +178,9 @@ class TestGetRoom:
             components=[],
             peers=[],
             id=room.id,
-            config=RoomConfig(max_peers=None, video_codec=None, webhook_url=None),
+            config=RoomConfig(
+                room_id=room.id, max_peers=None, video_codec=None, webhook_url=None
+            ),
         ) == room_api.get_room(room.id)
 
     def test_invalid(self, room_api: RoomApi):
@@ -217,13 +252,18 @@ class TestHLSSubscribe:
                 subscribe_mode=ComponentOptionsHLSSubscribeMode("manual")
             ),
         )
-        assert room_api.hls_subscribe(room.id, ["track-id"]) is None
+        assert room_api.hls_subscribe(room.id, ["peer-id"]) is None
 
-    def test_invalid_subscription(self, room_api: RoomApi):
+    def test_invalid_subscription_in_auto_mode(self, room_api: RoomApi):
         _, room = room_api.create_room(video_codec=CODEC_H264)
         _ = room_api.add_component(room.id, options=HLS_OPTIONS)
-        with pytest.raises(BadRequestError):
-            room_api.hls_subscribe(room.id, ["track-id"])
+        with pytest.raises(BadRequestError) as exception_info:
+            room_api.hls_subscribe(room.id, ["component-id"])
+
+        assert (
+            str(exception_info.value)
+            == "HLS component option `subscribe_mode` is set to :auto"
+        )
 
 
 class TestAddPeer:
