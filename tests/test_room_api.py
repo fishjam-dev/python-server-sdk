@@ -2,6 +2,7 @@
 
 
 import os
+import uuid
 
 import pytest
 
@@ -117,6 +118,23 @@ class TestCreateRoom:
     def test_invalid_video_codec(self, room_api):
         with pytest.raises(ValueError):
             room_api.create_room(max_peers=MAX_PEERS, video_codec="h420")
+
+    def test_custom_room_id(self, room_api):
+        room_id = str(uuid.uuid4())
+        _, room = room_api.create_room(room_id=room_id)
+
+        assert room == Room(
+            components=[],
+            config=RoomConfig(
+                room_id=room.id,
+                max_peers=None,
+                video_codec=None,
+                webhook_url=None,
+            ),
+            id=room_id,
+            peers=[],
+        )
+        assert room in room_api.get_all_rooms()
 
 
 class TestDeleteRoom:

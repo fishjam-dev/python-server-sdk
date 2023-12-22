@@ -51,6 +51,7 @@ class RoomApi(BaseApi):
 
     def create_room(
         self,
+        room_id: str = None,
         max_peers: int = None,
         video_codec: Literal["h264", "vp8"] = None,
         webhook_url: str = None,
@@ -72,7 +73,10 @@ class RoomApi(BaseApi):
             video_codec = None
 
         room_config = RoomConfig(
-            max_peers=max_peers, video_codec=video_codec, webhook_url=webhook_url
+            room_id=room_id,
+            max_peers=max_peers,
+            video_codec=video_codec,
+            webhook_url=webhook_url,
         )
 
         resp = self._request(room_create_room, json_body=room_config)
