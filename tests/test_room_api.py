@@ -7,10 +7,13 @@ import uuid
 import pytest
 
 from jellyfish import (
+    ComponentFile,
     ComponentHLS,
+    ComponentOptionsFile,
     ComponentOptionsHLS,
     ComponentOptionsHLSSubscribeMode,
     ComponentOptionsRTSP,
+    ComponentPropertiesFile,
     ComponentPropertiesHLS,
     ComponentPropertiesHLSSubscribeMode,
     ComponentPropertiesRTSP,
@@ -41,6 +44,7 @@ HLS_OPTIONS = ComponentOptionsHLS()
 RTSP_OPTIONS = ComponentOptionsRTSP(
     source_uri="rtsp://ef36c6dff23ecc5bbe311cc880d95dc8.se:2137/does/not/matter"
 )
+FILE_OPTIONS = ComponentOptionsFile(file_path="video.h264")
 
 
 class TestAuthentication:
@@ -192,7 +196,7 @@ class TestAddComponent:
     def test_with_options_hls(self, room_api: RoomApi):
         _, room = room_api.create_room(video_codec=CODEC_H264)
 
-        room_api.add_component(room.id, options=HLS_OPTIONS)
+        response = room_api.add_component(room.id, options=HLS_OPTIONS)
 
         component = room_api.get_room(room.id).components[0]
 
@@ -204,22 +208,47 @@ class TestAddComponent:
             target_window_duration=None,
         )
         properties.additional_properties = {"s3": None}
-
         component_hls = ComponentHLS(id=component.id, type="hls", properties=properties)
 
+        assert response == component_hls
         assert component == component_hls
 
     def test_with_options_rtsp(self, room_api: RoomApi):
         _, room = room_api.create_room(video_codec=CODEC_H264)
 
-        room_api.add_component(room.id, options=RTSP_OPTIONS)
+        response = room_api.add_component(room.id, options=RTSP_OPTIONS)
         component = room_api.get_room(room.id).components[0]
 
         component_rtsp = ComponentRTSP(
-            id=component.id, type="rtsp", properties=ComponentPropertiesRTSP()
+            id=component.id,
+            type="rtsp",
+            properties=ComponentPropertiesRTSP(
+                source_uri=RTSP_OPTIONS.source_uri,
+                keep_alive_interval=RTSP_OPTIONS.keep_alive_interval,
+                reconnect_delay=RTSP_OPTIONS.reconnect_delay,
+                rtp_port=RTSP_OPTIONS.rtp_port,
+                pierce_nat=RTSP_OPTIONS.pierce_nat,
+            ),
         )
 
+        assert response == component_rtsp
         assert component == component_rtsp
+
+    def test_with_options_file(self, room_api: RoomApi):
+        _, room = room_api.create_room()
+
+        response = room_api.add_component(room.id, options=FILE_OPTIONS)
+
+        component = room_api.get_room(room.id).components[0]
+
+        component_file = ComponentFile(
+            id=component.id,
+            type="file",
+            properties=ComponentPropertiesFile(file_path=FILE_OPTIONS.file_path),
+        )
+
+        assert response == component_file
+        assert component == component_file
 
     def test_invalid_type(self, room_api: RoomApi):
         _, room = room_api.create_room(video_codec=CODEC_H264)

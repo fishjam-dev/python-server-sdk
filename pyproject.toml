@@ -40,6 +40,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.scripts]
 ci_test = "poetry_scripts:run_tests"
 format = "poetry_scripts:run_formatter"
+format_check = "poetry_scripts:run_format_check"
 lint = "poetry_scripts:run_linter"
 fix_lint = "poetry_scripts:run_linter_fix"
 generate_docs = "poetry_scripts:generate_docs"

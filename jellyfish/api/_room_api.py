@@ -16,7 +16,9 @@ from jellyfish._openapi_client.api.room import get_room as room_get_room
 from jellyfish._openapi_client.models import (
     AddComponentJsonBody,
     AddPeerJsonBody,
+    ComponentFile,
     ComponentHLS,
+    ComponentOptionsFile,
     ComponentOptionsHLS,
     ComponentOptionsRTSP,
     ComponentRTSP,
@@ -119,17 +121,22 @@ class RoomApi(BaseApi):
         return self._request(room_delete_peer, id=peer_id, room_id=room_id)
 
     def add_component(
-        self, room_id: str, options: Union[ComponentOptionsHLS, ComponentOptionsRTSP]
-    ) -> Union[ComponentHLS, ComponentRTSP]:
+        self,
+        room_id: str,
+        options: Union[ComponentOptionsFile, ComponentOptionsHLS, ComponentOptionsRTSP],
+    ) -> Union[ComponentFile, ComponentHLS, ComponentRTSP]:
         """Creates component in the room"""
 
-        if isinstance(options, ComponentOptionsHLS):
+        if isinstance(options, ComponentOptionsFile):
+            component_type = "file"
+        elif isinstance(options, ComponentOptionsHLS):
             component_type = "hls"
         elif isinstance(options, ComponentOptionsRTSP):
             component_type = "rtsp"
         else:
             raise ValueError(
-                "options must be either ComponentOptionsHLS or ComponentOptionsRTSP"
+                "options must be ComponentFile, ComponentOptionsHLS"
+                "or ComponentOptionsRTSP"
             )
 
         json_body = AddComponentJsonBody(type=component_type, options=options)

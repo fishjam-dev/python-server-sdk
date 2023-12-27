@@ -9,6 +9,7 @@ from .component_options_file import ComponentOptionsFile
 from .component_options_hls import ComponentOptionsHLS
 from .component_options_hls_subscribe_mode import ComponentOptionsHLSSubscribeMode
 from .component_options_rtsp import ComponentOptionsRTSP
+from .component_properties_file import ComponentPropertiesFile
 from .component_properties_hls import ComponentPropertiesHLS
 from .component_properties_hls_subscribe_mode import ComponentPropertiesHLSSubscribeMode
 from .component_properties_rtsp import ComponentPropertiesRTSP
@@ -40,6 +41,7 @@ __all__ = (
     "ComponentOptionsHLS",
     "ComponentOptionsHLSSubscribeMode",
     "ComponentOptionsRTSP",
+    "ComponentPropertiesFile",
     "ComponentPropertiesHLS",
     "ComponentPropertiesHLSSubscribeMode",
     "ComponentPropertiesRTSP",

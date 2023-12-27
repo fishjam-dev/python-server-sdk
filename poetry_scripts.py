@@ -24,6 +24,10 @@ def run_formatter():
     check_exit_code("ruff format .")
 
 
+def run_format_check():
+    check_exit_code("ruff format . --check")
+
+
 def run_linter():
     check_exit_code("ruff check .")
 

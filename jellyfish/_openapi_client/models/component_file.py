@@ -1,7 +1,13 @@
-from typing import Any, Dict, List, Type, TypeVar
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+if TYPE_CHECKING:
+    from ..models.component_properties_file import ComponentPropertiesFile
+
 
 T = TypeVar("T", bound="ComponentFile")
 
@@ -14,6 +20,8 @@ class ComponentFile:
     """Assigned component ID"""
     type: str
     """Component type"""
+    properties: Union[Unset, "ComponentPropertiesFile"] = UNSET
+    """Properties specific to the File component"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
     """@private"""
 
@@ -21,6 +29,9 @@ class ComponentFile:
         """@private"""
         id = self.id
         type = self.type
+        properties: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.properties, Unset):
+            properties = self.properties.to_dict()
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -30,20 +41,32 @@ class ComponentFile:
                 "type": type,
             }
         )
+        if properties is not UNSET:
+            field_dict["properties"] = properties
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         """@private"""
+        from ..models.component_properties_file import ComponentPropertiesFile
+
         d = src_dict.copy()
         id = d.pop("id")
 
         type = d.pop("type")
 
+        _properties = d.pop("properties", UNSET)
+        properties: Union[Unset, ComponentPropertiesFile]
+        if isinstance(_properties, Unset):
+            properties = UNSET
+        else:
+            properties = ComponentPropertiesFile.from_dict(_properties)
+
         component_file = cls(
             id=id,
             type=type,
+            properties=properties,
         )
 
         component_file.additional_properties = d
