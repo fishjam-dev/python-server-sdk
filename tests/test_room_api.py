@@ -234,6 +234,7 @@ class TestAddComponent:
         assert response == component_rtsp
         assert component == component_rtsp
 
+    @pytest.mark.file_component_sources
     def test_with_options_file(self, room_api: RoomApi):
         _, room = room_api.create_room()
 

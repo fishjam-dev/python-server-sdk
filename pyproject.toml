@@ -55,3 +55,8 @@ ignore = []
 
 [tool.ruff.extend-per-file-ignores]
 "jellyfish/_openapi_client/**" = ["E501"]
+
+[tool.pytest.ini_options]
+markers = [
+    "file_component_sources: Tests requiring files uploaded for File Component"
+]
