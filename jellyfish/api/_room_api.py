@@ -127,17 +127,18 @@ class RoomApi(BaseApi):
     ) -> Union[ComponentFile, ComponentHLS, ComponentRTSP]:
         """Creates component in the room"""
 
-        if isinstance(options, ComponentOptionsFile):
-            component_type = "file"
-        elif isinstance(options, ComponentOptionsHLS):
-            component_type = "hls"
-        elif isinstance(options, ComponentOptionsRTSP):
-            component_type = "rtsp"
-        else:
-            raise ValueError(
-                "options must be ComponentFile, ComponentOptionsHLS"
-                "or ComponentOptionsRTSP"
-            )
+        match options:
+            case ComponentOptionsFile():
+                component_type = "file"
+            case ComponentOptionsHLS():
+                component_type = "hls"
+            case ComponentOptionsRTSP():
+                component_type = "rtsp"
+            case _:
+                raise ValueError(
+                    "options must be ComponentFile, ComponentOptionsHLS"
+                    "or ComponentOptionsRTSP"
+                )
 
         json_body = AddComponentJsonBody(type=component_type, options=options)
 
