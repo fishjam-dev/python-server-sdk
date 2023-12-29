@@ -245,14 +245,14 @@ class TestAddComponent:
         response = room_api.add_component(room.id, options=test_data.options)
         component = room_api.get_room(room.id).components[0]
 
-        component_file = test_data.component(
+        component = test_data.component(
             id=component.id,
             type=test_data.type,
             properties=test_data.properties,
         )
 
-        assert response == component_file
-        assert component == component_file
+        assert response == component
+        assert component == component
 
 
 class TestDeleteComponent:

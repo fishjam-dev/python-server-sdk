@@ -100,7 +100,7 @@ poetry run ci_test
 
 In local development you can use
 ```
-poetry run pytest -m "not file_component_sources"
+poetry run local_test
 ```
 
 ## Format & Lint
