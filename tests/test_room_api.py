@@ -3,14 +3,18 @@
 
 import os
 import uuid
+from dataclasses import dataclass
 
 import pytest
 
 from jellyfish import (
+    ComponentFile,
     ComponentHLS,
+    ComponentOptionsFile,
     ComponentOptionsHLS,
     ComponentOptionsHLSSubscribeMode,
     ComponentOptionsRTSP,
+    ComponentPropertiesFile,
     ComponentPropertiesHLS,
     ComponentPropertiesHLSSubscribeMode,
     ComponentPropertiesRTSP,
@@ -38,9 +42,28 @@ MAX_PEERS = 10
 CODEC_H264 = "h264"
 
 HLS_OPTIONS = ComponentOptionsHLS()
+HLS_PROPERTIES = ComponentPropertiesHLS(
+    low_latency=False,
+    persistent=False,
+    playable=False,
+    subscribe_mode=ComponentPropertiesHLSSubscribeMode("auto"),
+    target_window_duration=None,
+)
+HLS_PROPERTIES.additional_properties = {"s3": None}
+
 RTSP_OPTIONS = ComponentOptionsRTSP(
     source_uri="rtsp://ef36c6dff23ecc5bbe311cc880d95dc8.se:2137/does/not/matter"
 )
+RTSP_PROPERTIES = ComponentPropertiesRTSP(
+    source_uri=RTSP_OPTIONS.source_uri,
+    keep_alive_interval=15000,
+    reconnect_delay=15000,
+    rtp_port=20000,
+    pierce_nat=True,
+)
+
+FILE_OPTIONS = ComponentOptionsFile(file_path="video.h264")
+FILE_PROPERTIES = ComponentPropertiesFile(file_path=FILE_OPTIONS.file_path)
 
 
 class TestAuthentication:
@@ -188,44 +211,48 @@ class TestGetRoom:
             room_api.get_room("invalid_id")
 
 
+@dataclass
+class ComponentTestData:
+    component: any
+    type: str
+    options: any
+    properties: any
+
+
 class TestAddComponent:
-    def test_with_options_hls(self, room_api: RoomApi):
-        _, room = room_api.create_room(video_codec=CODEC_H264)
+    def test_with_options_hls(self, room_api):
+        data = ComponentTestData(ComponentHLS, "hls", HLS_OPTIONS, HLS_PROPERTIES)
+        self._test_component(room_api, data)
 
-        room_api.add_component(room.id, options=HLS_OPTIONS)
+    def test_with_options_rtsp(self, room_api):
+        data = ComponentTestData(ComponentRTSP, "rtsp", RTSP_OPTIONS, RTSP_PROPERTIES)
+        self._test_component(room_api, data)
 
-        component = room_api.get_room(room.id).components[0]
-
-        properties = ComponentPropertiesHLS(
-            low_latency=False,
-            persistent=False,
-            playable=False,
-            subscribe_mode=ComponentPropertiesHLSSubscribeMode("auto"),
-            target_window_duration=None,
-        )
-        properties.additional_properties = {"s3": None}
-
-        component_hls = ComponentHLS(id=component.id, type="hls", properties=properties)
-
-        assert component == component_hls
-
-    def test_with_options_rtsp(self, room_api: RoomApi):
-        _, room = room_api.create_room(video_codec=CODEC_H264)
-
-        room_api.add_component(room.id, options=RTSP_OPTIONS)
-        component = room_api.get_room(room.id).components[0]
-
-        component_rtsp = ComponentRTSP(
-            id=component.id, type="rtsp", properties=ComponentPropertiesRTSP()
-        )
-
-        assert component == component_rtsp
+    @pytest.mark.file_component_sources
+    def test_with_options_file(self, room_api):
+        data = ComponentTestData(ComponentFile, "file", FILE_OPTIONS, FILE_PROPERTIES)
+        self._test_component(room_api, data)
 
     def test_invalid_type(self, room_api: RoomApi):
         _, room = room_api.create_room(video_codec=CODEC_H264)
 
         with pytest.raises(ValueError):
             room_api.add_component(room.id, options=PeerOptionsWebRTC())
+
+    def _test_component(self, room_api: RoomApi, test_data: ComponentTestData):
+        _, room = room_api.create_room(video_codec=CODEC_H264)
+
+        response = room_api.add_component(room.id, options=test_data.options)
+        component = room_api.get_room(room.id).components[0]
+
+        component = test_data.component(
+            id=component.id,
+            type=test_data.type,
+            properties=test_data.properties,
+        )
+
+        assert response == component
+        assert component == component
 
 
 class TestDeleteComponent:

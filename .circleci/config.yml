@@ -20,6 +20,9 @@ jobs:
       - run:
           name: Lint
           command: poetry run lint
+      - run: 
+          name: Check format
+          command: poetry run format_check
       - persist_to_workspace:
           root: ~/project
           paths:

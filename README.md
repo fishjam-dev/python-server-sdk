@@ -98,6 +98,11 @@ You can test the SDK by running
 poetry run ci_test
 ```
 
+In local development you can use
+```
+poetry run local_test
+```
+
 ## Format & Lint
 You can format code by running
 ```console

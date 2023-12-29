@@ -9,10 +9,13 @@ from jellyfish import errors, events
 
 # Models
 from jellyfish._openapi_client.models import (
+    ComponentFile,
     ComponentHLS,
+    ComponentOptionsFile,
     ComponentOptionsHLS,
     ComponentOptionsHLSSubscribeMode,
     ComponentOptionsRTSP,
+    ComponentPropertiesFile,
     ComponentPropertiesHLS,
     ComponentPropertiesHLSSubscribeMode,
     ComponentPropertiesRTSP,
@@ -50,6 +53,9 @@ __all__ = [
     "ComponentRTSP",
     "ComponentOptionsRTSP",
     "ComponentPropertiesRTSP",
+    "ComponentFile",
+    "ComponentOptionsFile",
+    "ComponentPropertiesFile",
     "events",
     "errors",
 ]

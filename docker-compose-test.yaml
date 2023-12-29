@@ -25,6 +25,8 @@ services:
       - "5002:5002"
       - "49999:49999"
       - "50000-50050:50000-50050/udp"
+    volumes:
+      - ./tests/fixtures:/app/jellyfish_resources/file_component_sources
 
   test:
     container_name: test
