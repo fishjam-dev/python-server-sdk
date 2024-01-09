@@ -53,6 +53,10 @@ All methods in `RoomApi` may raise one of the exceptions deriving from `jellyfis
 
 #### Notifier
 
+Notifier allows for receiving real-time updates from the Jellyfish Server.
+
+You can read more about notifications in the [Jellyfish Docs](https://jellyfish-dev.github.io/jellyfish-docs/next/getting_started/notifications).
+
 Create `Notifier` instance
 ```python
 from jellyfish import Notifier
@@ -99,7 +103,7 @@ poetry run ci_test
 ```
 
 In local development you can use
-```
+```console
 poetry run local_test
 ```
 
