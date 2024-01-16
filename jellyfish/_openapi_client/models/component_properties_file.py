@@ -11,7 +11,7 @@ class ComponentPropertiesFile:
     """Properties specific to the File component"""
 
     file_path: str
-    """Path to track file. Must be either OPUS encapsulated in Ogg or raw h264"""
+    """Relative path to track file. Must be either OPUS encapsulated in Ogg or raw h264"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
     """@private"""
 

@@ -249,6 +249,7 @@ class TestAddComponent:
             id=component.id,
             type=test_data.type,
             properties=test_data.properties,
+            tracks=[],
         )
 
         assert response == component
@@ -295,7 +296,12 @@ class TestHLSSubscribe:
 
 class TestAddPeer:
     def _assert_peer_created(self, room_api, webrtc_peer, room_id):
-        peer = Peer(id=webrtc_peer.id, type="webrtc", status=PeerStatus("disconnected"))
+        peer = Peer(
+            id=webrtc_peer.id,
+            type="webrtc",
+            status=PeerStatus("disconnected"),
+            tracks=[],
+        )
 
         room = room_api.get_room(room_id)
         assert peer in room.peers
