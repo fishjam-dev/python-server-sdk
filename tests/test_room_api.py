@@ -63,7 +63,7 @@ RTSP_PROPERTIES = ComponentPropertiesRTSP(
 )
 
 FILE_OPTIONS = ComponentOptionsFile(file_path="video.h264")
-FILE_PROPERTIES = ComponentPropertiesFile(file_path=FILE_OPTIONS.file_path)
+FILE_PROPERTIES = ComponentPropertiesFile(file_path=FILE_OPTIONS.file_path, framerate=30)
 
 
 class TestAuthentication:
