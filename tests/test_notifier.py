@@ -17,7 +17,7 @@ from jellyfish.events import (
     ServerMessageRoomCreated,
     ServerMessageRoomDeleted,
     ServerMessageTrackAdded,
-    ServerMessageTrackRemoved
+    ServerMessageTrackRemoved,
 )
 from tests.support.asyncio_utils import assert_events, assert_metrics, cancel
 from tests.support.peer_socket import PeerSocket
@@ -32,6 +32,7 @@ queue = Queue()
 
 CODEC_H264 = "h264"
 FILE_OPTIONS = ComponentOptionsFile(file_path="video.h264")
+
 
 @pytest.fixture(scope="session", autouse=True)
 def start_server():

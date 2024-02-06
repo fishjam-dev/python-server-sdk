@@ -63,7 +63,9 @@ RTSP_PROPERTIES = ComponentPropertiesRTSP(
 )
 
 FILE_OPTIONS = ComponentOptionsFile(file_path="video.h264")
-FILE_PROPERTIES = ComponentPropertiesFile(file_path=FILE_OPTIONS.file_path, framerate=30)
+FILE_PROPERTIES = ComponentPropertiesFile(
+    file_path=FILE_OPTIONS.file_path, framerate=30
+)
 
 
 class TestAuthentication:
@@ -301,7 +303,7 @@ class TestAddPeer:
             type="webrtc",
             status=PeerStatus("disconnected"),
             tracks=[],
-            metadata=None
+            metadata=None,
         )
 
         room = room_api.get_room(room_id)

@@ -67,7 +67,8 @@ def generate_docs():
 def update_client():
     check_exit_code(
         "openapi-python-client update\
-            --url https://raw.githubusercontent.com/jellyfish-dev/jellyfish/RTC-435-rest-track-metadata/openapi.yaml \
+            --url https://raw.githubusercontent.com/jellyfish-dev/"
+        "jellyfish/main/openapi.yaml \
             --config openapi-python-client-config.yaml \
             --custom-template-path=openapi_templates"
     )
