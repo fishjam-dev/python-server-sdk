@@ -14,6 +14,12 @@ class ServerMessageEventType(betterproto.Enum):
     EVENT_TYPE_METRICS = 2
 
 
+class ServerMessageTrackType(betterproto.Enum):
+    TRACK_TYPE_UNSPECIFIED = 0
+    TRACK_TYPE_VIDEO = 1
+    TRACK_TYPE_AUDIO = 2
+
+
 @dataclass(eq=False, repr=False)
 class ServerMessage(betterproto.Message):
     room_crashed: "ServerMessageRoomCrashed" = betterproto.message_field(
@@ -60,6 +66,18 @@ class ServerMessage(betterproto.Message):
     )
     hls_upload_crashed: "ServerMessageHlsUploadCrashed" = betterproto.message_field(
         15, group="content"
+    )
+    peer_metadata_updated: "ServerMessagePeerMetadataUpdated" = (
+        betterproto.message_field(16, group="content")
+    )
+    track_added: "ServerMessageTrackAdded" = betterproto.message_field(
+        17, group="content"
+    )
+    track_removed: "ServerMessageTrackRemoved" = betterproto.message_field(
+        18, group="content"
+    )
+    track_metadata_updated: "ServerMessageTrackMetadataUpdated" = (
+        betterproto.message_field(19, group="content")
     )
 
 
@@ -141,3 +159,41 @@ class ServerMessageHlsUploaded(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class ServerMessageHlsUploadCrashed(betterproto.Message):
     room_id: str = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class ServerMessagePeerMetadataUpdated(betterproto.Message):
+    room_id: str = betterproto.string_field(1)
+    peer_id: str = betterproto.string_field(2)
+    metadata: str = betterproto.string_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class ServerMessageTrack(betterproto.Message):
+    id: str = betterproto.string_field(1)
+    type: "ServerMessageTrackType" = betterproto.enum_field(2)
+    metadata: str = betterproto.string_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class ServerMessageTrackAdded(betterproto.Message):
+    room_id: str = betterproto.string_field(1)
+    peer_id: str = betterproto.string_field(2, group="endpoint_info")
+    component_id: str = betterproto.string_field(3, group="endpoint_info")
+    track: "ServerMessageTrack" = betterproto.message_field(4)
+
+
+@dataclass(eq=False, repr=False)
+class ServerMessageTrackRemoved(betterproto.Message):
+    room_id: str = betterproto.string_field(1)
+    peer_id: str = betterproto.string_field(2, group="endpoint_info")
+    component_id: str = betterproto.string_field(3, group="endpoint_info")
+    track: "ServerMessageTrack" = betterproto.message_field(4)
+
+
+@dataclass(eq=False, repr=False)
+class ServerMessageTrackMetadataUpdated(betterproto.Message):
+    room_id: str = betterproto.string_field(1)
+    peer_id: str = betterproto.string_field(2, group="endpoint_info")
+    component_id: str = betterproto.string_field(3, group="endpoint_info")
+    track: "ServerMessageTrack" = betterproto.message_field(4)

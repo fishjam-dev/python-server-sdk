@@ -18,6 +18,8 @@ class Peer:
 
     id: str
     """Assigned peer id"""
+    metadata: Any
+    """Custom metadata set by the peer"""
     status: PeerStatus
     """Informs about the peer status"""
     tracks: List["Track"]
@@ -30,6 +32,7 @@ class Peer:
     def to_dict(self) -> Dict[str, Any]:
         """@private"""
         id = self.id
+        metadata = self.metadata
         status = self.status.value
 
         tracks = []
@@ -45,6 +48,7 @@ class Peer:
         field_dict.update(
             {
                 "id": id,
+                "metadata": metadata,
                 "status": status,
                 "tracks": tracks,
                 "type": type,
@@ -61,6 +65,8 @@ class Peer:
         d = src_dict.copy()
         id = d.pop("id")
 
+        metadata = d.pop("metadata")
+
         status = PeerStatus(d.pop("status"))
 
         tracks = []
@@ -74,6 +80,7 @@ class Peer:
 
         peer = cls(
             id=id,
+            metadata=metadata,
             status=status,
             tracks=tracks,
             type=type,

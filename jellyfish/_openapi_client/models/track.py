@@ -3,7 +3,6 @@ from typing import Any, Dict, List, Type, TypeVar, Union
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.track_encoding import TrackEncoding
 from ..models.track_type import TrackType
 from ..types import UNSET, Unset
 
@@ -14,11 +13,9 @@ T = TypeVar("T", bound="Track")
 class Track:
     """Describes media track of a Peer or Component"""
 
-    encoding: Union[Unset, TrackEncoding] = UNSET
-    """None"""
     id: Union[Unset, str] = UNSET
     """None"""
-    metadata: Union[Unset, None, str] = UNSET
+    metadata: Union[Unset, Any] = UNSET
     """None"""
     type: Union[Unset, TrackType] = UNSET
     """None"""
@@ -27,10 +24,6 @@ class Track:
 
     def to_dict(self) -> Dict[str, Any]:
         """@private"""
-        encoding: Union[Unset, str] = UNSET
-        if not isinstance(self.encoding, Unset):
-            encoding = self.encoding.value
-
         id = self.id
         metadata = self.metadata
         type: Union[Unset, str] = UNSET
@@ -40,8 +33,6 @@ class Track:
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if encoding is not UNSET:
-            field_dict["encoding"] = encoding
         if id is not UNSET:
             field_dict["id"] = id
         if metadata is not UNSET:
@@ -55,13 +46,6 @@ class Track:
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         """@private"""
         d = src_dict.copy()
-        _encoding = d.pop("encoding", UNSET)
-        encoding: Union[Unset, TrackEncoding]
-        if isinstance(_encoding, Unset):
-            encoding = UNSET
-        else:
-            encoding = TrackEncoding(_encoding)
-
         id = d.pop("id", UNSET)
 
         metadata = d.pop("metadata", UNSET)
@@ -74,7 +58,6 @@ class Track:
             type = TrackType(_type)
 
         track = cls(
-            encoding=encoding,
             id=id,
             metadata=metadata,
             type=type,

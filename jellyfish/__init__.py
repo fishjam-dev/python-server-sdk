@@ -29,7 +29,7 @@ from jellyfish._openapi_client.models import (
 )
 
 # API
-from jellyfish._webhook_notifier import receive_json
+from jellyfish._webhook_notifier import receive_binary
 from jellyfish._ws_notifier import Notifier
 from jellyfish.api._recording_api import RecordingApi
 from jellyfish.api._room_api import RoomApi
@@ -38,7 +38,7 @@ __all__ = [
     "RoomApi",
     "RecordingApi",
     "Notifier",
-    "receive_json",
+    "receive_binary",
     "Room",
     "RoomConfig",
     "RoomConfigVideoCodec",

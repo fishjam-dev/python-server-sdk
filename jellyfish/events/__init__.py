@@ -13,6 +13,9 @@ from jellyfish.events._protos.jellyfish import (
     ServerMessageRoomCrashed,
     ServerMessageRoomCreated,
     ServerMessageRoomDeleted,
+    ServerMessageTrackAdded,
+    ServerMessageTrackMetadataUpdated,
+    ServerMessageTrackRemoved,
 )
 
 __all__ = [
@@ -25,4 +28,7 @@ __all__ = [
     "ServerMessageRoomCrashed",
     "ServerMessageRoomDeleted",
     "ServerMessageRoomCreated",
+    "ServerMessageTrackAdded",
+    "ServerMessageTrackMetadataUpdated",
+    "ServerMessageTrackRemoved",
 ]

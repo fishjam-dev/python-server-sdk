@@ -15,6 +15,10 @@ from .component_properties_hls_subscribe_mode import ComponentPropertiesHLSSubsc
 from .component_properties_rtsp import ComponentPropertiesRTSP
 from .component_rtsp import ComponentRTSP
 from .error import Error
+from .health_report import HealthReport
+from .health_report_distribution import HealthReportDistribution
+from .health_report_status import HealthReportStatus
+from .healthcheck_response import HealthcheckResponse
 from .peer import Peer
 from .peer_details_response import PeerDetailsResponse
 from .peer_details_response_data import PeerDetailsResponseData
@@ -31,7 +35,6 @@ from .rooms_listing_response import RoomsListingResponse
 from .s3_credentials import S3Credentials
 from .subscription_config import SubscriptionConfig
 from .track import Track
-from .track_encoding import TrackEncoding
 from .track_type import TrackType
 
 __all__ = (
@@ -50,6 +53,10 @@ __all__ = (
     "ComponentPropertiesRTSP",
     "ComponentRTSP",
     "Error",
+    "HealthcheckResponse",
+    "HealthReport",
+    "HealthReportDistribution",
+    "HealthReportStatus",
     "Peer",
     "PeerDetailsResponse",
     "PeerDetailsResponseData",
@@ -66,6 +73,5 @@ __all__ = (
     "S3Credentials",
     "SubscriptionConfig",
     "Track",
-    "TrackEncoding",
     "TrackType",
 )
