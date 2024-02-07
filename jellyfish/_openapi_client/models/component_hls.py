@@ -5,6 +5,7 @@ from attrs import field as _attrs_field
 
 if TYPE_CHECKING:
     from ..models.component_properties_hls import ComponentPropertiesHLS
+    from ..models.track import Track
 
 
 T = TypeVar("T", bound="ComponentHLS")
@@ -18,6 +19,8 @@ class ComponentHLS:
     """Assigned component ID"""
     properties: "ComponentPropertiesHLS"
     """Properties specific to the HLS component"""
+    tracks: List["Track"]
+    """List of all component's tracks"""
     type: str
     """Component type"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -28,6 +31,12 @@ class ComponentHLS:
         id = self.id
         properties = self.properties.to_dict()
 
+        tracks = []
+        for tracks_item_data in self.tracks:
+            tracks_item = tracks_item_data.to_dict()
+
+            tracks.append(tracks_item)
+
         type = self.type
 
         field_dict: Dict[str, Any] = {}
@@ -36,6 +45,7 @@ class ComponentHLS:
             {
                 "id": id,
                 "properties": properties,
+                "tracks": tracks,
                 "type": type,
             }
         )
@@ -46,17 +56,26 @@ class ComponentHLS:
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         """@private"""
         from ..models.component_properties_hls import ComponentPropertiesHLS
+        from ..models.track import Track
 
         d = src_dict.copy()
         id = d.pop("id")
 
         properties = ComponentPropertiesHLS.from_dict(d.pop("properties"))
 
+        tracks = []
+        _tracks = d.pop("tracks")
+        for tracks_item_data in _tracks:
+            tracks_item = Track.from_dict(tracks_item_data)
+
+            tracks.append(tracks_item)
+
         type = d.pop("type")
 
         component_hls = cls(
             id=id,
             properties=properties,
+            tracks=tracks,
             type=type,
         )
 

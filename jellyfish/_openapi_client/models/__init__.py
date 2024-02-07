@@ -34,6 +34,8 @@ from .room_details_response import RoomDetailsResponse
 from .rooms_listing_response import RoomsListingResponse
 from .s3_credentials import S3Credentials
 from .subscription_config import SubscriptionConfig
+from .track import Track
+from .track_type import TrackType
 
 __all__ = (
     "AddComponentJsonBody",
@@ -70,4 +72,6 @@ __all__ = (
     "RoomsListingResponse",
     "S3Credentials",
     "SubscriptionConfig",
+    "Track",
+    "TrackType",
 )
