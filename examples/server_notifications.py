@@ -3,11 +3,12 @@ import asyncio
 from jellyfish import Notifier, RoomApi
 from jellyfish.events import ServerMessageTrackAdded, ServerMessageTrackType
 
-notifier = Notifier(server_address='localhost:5002', server_api_token='development')
+notifier = Notifier(server_address="localhost:5002", server_api_token="development")
+
 
 @notifier.on_server_notification
 def handle_notification(server_notification):
-    print(f'Received a notification: {server_notification}')
+    print(f"Received a notification: {server_notification}")
 
     if isinstance(server_notification, ServerMessageTrackAdded):
         if server_notification.track.type == ServerMessageTrackType.TRACK_TYPE_AUDIO:
@@ -18,7 +19,8 @@ def handle_notification(server_notification):
 
 @notifier.on_metrics
 def handle_metrics(metrics_report):
-    print(f'Received WebRTC metrics: {metrics_report}')
+    print(f"Received WebRTC metrics: {metrics_report}")
+
 
 async def test_notifier():
     notifier_task = asyncio.create_task(notifier.connect())
@@ -31,5 +33,6 @@ async def test_notifier():
     room_api.create_room()
 
     await notifier_task
+
 
 asyncio.run(test_notifier())

@@ -3,7 +3,9 @@ from jellyfish import ComponentOptionsHLS, PeerOptionsWebRTC, RoomApi
 # Create a room
 room_api = RoomApi(server_address="localhost:5002", server_api_token="development")
 
-jellyfish_address, room = room_api.create_room(video_codec="h264", webhook_url="http://localhost:5000/webhook")
+jellyfish_address, room = room_api.create_room(
+    video_codec="h264", webhook_url="http://localhost:5000/webhook"
+)
 print((jellyfish_address, room))
 
 # Add peer to the room
