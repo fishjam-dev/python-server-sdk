@@ -10,6 +10,8 @@ import betterproto
 
 @dataclass(eq=False, repr=False)
 class PeerMessage(betterproto.Message):
+    """Defines any type of message sent between JF and a peer"""
+
     authenticated: "PeerMessageAuthenticated" = betterproto.message_field(
         1, group="content"
     )
@@ -21,14 +23,20 @@ class PeerMessage(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class PeerMessageAuthenticated(betterproto.Message):
+    """Response sent by JF, confirming successfull authentication"""
+
     pass
 
 
 @dataclass(eq=False, repr=False)
 class PeerMessageAuthRequest(betterproto.Message):
+    """Request sent by peer, to authenticate to JF server"""
+
     token: str = betterproto.string_field(1)
 
 
 @dataclass(eq=False, repr=False)
 class PeerMessageMediaEvent(betterproto.Message):
+    """Any type of WebRTC messages passed betweend JF and peer"""
+
     data: str = betterproto.string_field(1)
