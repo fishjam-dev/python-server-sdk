@@ -46,7 +46,7 @@ def generate_docs():
     --include-undocumented \
     --favicon https://logo.swmansion.com/membrane/\?width\=100\&variant\=signetDark\
     --logo https://logo.swmansion.com/membrane/\?width\=70\&variant\=signetDark\
-    -t doc_templates \
+    -t templates/doc \
     -o doc \
     jellyfish"
     )
@@ -70,5 +70,5 @@ def update_client():
             --url https://raw.githubusercontent.com/jellyfish-dev/"
         "jellyfish/main/openapi.yaml \
             --config openapi-python-client-config.yaml \
-            --custom-template-path=openapi_templates"
+            --custom-template-path=templates/openapi"
     )

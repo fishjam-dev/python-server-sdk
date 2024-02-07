@@ -1,33 +1,33 @@
-from typing import Any, Dict, List, Optional, Type, TypeVar
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-T = TypeVar("T", bound="ComponentPropertiesFile")
+if TYPE_CHECKING:
+    from ..models.health_report import HealthReport
+
+
+T = TypeVar("T", bound="HealthcheckResponse")
 
 
 @_attrs_define
-class ComponentPropertiesFile:
-    """Properties specific to the File component"""
+class HealthcheckResponse:
+    """Response containing health report of Jellyfish"""
 
-    file_path: str
-    """Relative path to track file. Must be either OPUS encapsulated in Ogg or raw h264"""
-    framerate: Optional[int]
-    """Framerate of video in a file. It is only valid for video track"""
+    data: "HealthReport"
+    """Describes overall Jellyfish health"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
     """@private"""
 
     def to_dict(self) -> Dict[str, Any]:
         """@private"""
-        file_path = self.file_path
-        framerate = self.framerate
+        data = self.data.to_dict()
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "filePath": file_path,
-                "framerate": framerate,
+                "data": data,
             }
         )
 
@@ -36,18 +36,17 @@ class ComponentPropertiesFile:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         """@private"""
+        from ..models.health_report import HealthReport
+
         d = src_dict.copy()
-        file_path = d.pop("filePath")
+        data = HealthReport.from_dict(d.pop("data"))
 
-        framerate = d.pop("framerate")
-
-        component_properties_file = cls(
-            file_path=file_path,
-            framerate=framerate,
+        healthcheck_response = cls(
+            data=data,
         )
 
-        component_properties_file.additional_properties = d
-        return component_properties_file
+        healthcheck_response.additional_properties = d
+        return healthcheck_response
 
     @property
     def additional_keys(self) -> List[str]:

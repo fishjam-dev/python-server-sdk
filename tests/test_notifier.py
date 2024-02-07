@@ -9,13 +9,15 @@ from multiprocessing import Process, Queue
 import pytest
 import requests
 
-from jellyfish import Notifier, PeerOptionsWebRTC, RoomApi
+from jellyfish import ComponentOptionsFile, Notifier, PeerOptionsWebRTC, RoomApi
 from jellyfish.events import (
     ServerMessageMetricsReport,
     ServerMessagePeerConnected,
     ServerMessagePeerDisconnected,
     ServerMessageRoomCreated,
     ServerMessageRoomDeleted,
+    ServerMessageTrackAdded,
+    ServerMessageTrackRemoved,
 )
 from tests.support.asyncio_utils import assert_events, assert_metrics, cancel
 from tests.support.peer_socket import PeerSocket
@@ -27,6 +29,9 @@ SERVER_API_TOKEN = "development"
 WEBHOOK_ADDRESS = "test" if os.getenv("DOCKER_TEST") == "TRUE" else "localhost"
 WEBHOOK_URL = f"http://{WEBHOOK_ADDRESS}:5000/webhook"
 queue = Queue()
+
+CODEC_H264 = "h264"
+FILE_OPTIONS = ComponentOptionsFile(file_path="video.h264")
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -171,6 +176,33 @@ class TestReceivingNotifications:
 
         await assert_task
         await cancel(peer_task)
+        await cancel(notifier_task)
+
+        for event in event_checks:
+            self.assert_event(event)
+
+    @pytest.mark.asyncio
+    @pytest.mark.file_component_sources
+    async def test_file_component_connected_room_deleted(
+        self, room_api: RoomApi, notifier: Notifier
+    ):
+        event_checks = [
+            ServerMessageRoomCreated,
+            ServerMessageTrackAdded,
+            ServerMessageTrackRemoved,
+            ServerMessageRoomDeleted,
+        ]
+        assert_task = asyncio.create_task(assert_events(notifier, event_checks.copy()))
+
+        notifier_task = asyncio.create_task(notifier.connect())
+        await notifier.wait_ready()
+
+        _, room = room_api.create_room(webhook_url=WEBHOOK_URL)
+        room_api.add_component(room.id, options=FILE_OPTIONS)
+
+        room_api.delete_room(room.id)
+
+        await assert_task
         await cancel(notifier_task)
 
         for event in event_checks:

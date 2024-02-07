@@ -2,7 +2,7 @@
 
 from flask import Flask, Response, request
 
-from jellyfish import receive_json
+from jellyfish import receive_binary
 
 app = Flask(__name__)
 DATA_QUEUE = None
@@ -15,9 +15,9 @@ def respond_default():
 
 @app.route("/webhook", methods=["POST"])
 def respond_root():
-    json = request.get_json()
-    json = receive_json(json)
-    DATA_QUEUE.put(json)
+    data = request.get_data()
+    msg = receive_binary(data)
+    DATA_QUEUE.put(msg)
 
     return Response(status=200)
 
