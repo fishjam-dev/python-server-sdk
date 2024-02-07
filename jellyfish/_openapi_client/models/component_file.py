@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.component_properties_file import ComponentPropertiesFile
-    from ..models.track import Track
 
 
 T = TypeVar("T", bound="ComponentFile")
@@ -19,8 +18,6 @@ class ComponentFile:
 
     id: str
     """Assigned component ID"""
-    tracks: List["Track"]
-    """List of all component's tracks"""
     type: str
     """Component type"""
     properties: Union[Unset, "ComponentPropertiesFile"] = UNSET
@@ -31,12 +28,6 @@ class ComponentFile:
     def to_dict(self) -> Dict[str, Any]:
         """@private"""
         id = self.id
-        tracks = []
-        for tracks_item_data in self.tracks:
-            tracks_item = tracks_item_data.to_dict()
-
-            tracks.append(tracks_item)
-
         type = self.type
         properties: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.properties, Unset):
@@ -47,7 +38,6 @@ class ComponentFile:
         field_dict.update(
             {
                 "id": id,
-                "tracks": tracks,
                 "type": type,
             }
         )
@@ -60,17 +50,9 @@ class ComponentFile:
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         """@private"""
         from ..models.component_properties_file import ComponentPropertiesFile
-        from ..models.track import Track
 
         d = src_dict.copy()
         id = d.pop("id")
-
-        tracks = []
-        _tracks = d.pop("tracks")
-        for tracks_item_data in _tracks:
-            tracks_item = Track.from_dict(tracks_item_data)
-
-            tracks.append(tracks_item)
 
         type = d.pop("type")
 
@@ -83,7 +65,6 @@ class ComponentFile:
 
         component_file = cls(
             id=id,
-            tracks=tracks,
             type=type,
             properties=properties,
         )
