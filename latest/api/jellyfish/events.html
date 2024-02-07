@@ -35,6 +35,9 @@
                             <li class="navitem">
                                 <a href="../../index.html" class="nav-link">Home</a>
                             </li>
+                            <li class="navitem">
+                                <a href="../../server_notifications.html" class="nav-link">Server Notifications</a>
+                            </li>
                             <li class="dropdown active">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Api <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
@@ -127,63 +130,47 @@
             <input type="search" placeholder="Search..." role="searchbox" aria-label="search"
                    pattern=".+" required>
 
+            <h2>Contents</h2>
+            <ul>
+  <li><a href="#server-notifications">Server Notifications</a></li>
+</ul>
+
 
 
             <h2>API Documentation</h2>
                 <ul class="memberlist">
             <li>
-                    <a class="class" href="#ServerMessageComponentCrashed">ServerMessageComponentCrashed</a>
+                    <a class="class" href="#ServerMessageRoomCreated">ServerMessageRoomCreated</a>
                             <ul class="memberlist">
                         <li>
-                                <a class="function" href="#ServerMessageComponentCrashed.__init__">ServerMessageComponentCrashed</a>
+                                <a class="function" href="#ServerMessageRoomCreated.__init__">ServerMessageRoomCreated</a>
                         </li>
                         <li>
-                                <a class="variable" href="#ServerMessageComponentCrashed.room_id">room_id</a>
-                        </li>
-                        <li>
-                                <a class="variable" href="#ServerMessageComponentCrashed.component_id">component_id</a>
+                                <a class="variable" href="#ServerMessageRoomCreated.room_id">room_id</a>
                         </li>
                 </ul>
 
             </li>
             <li>
-                    <a class="class" href="#ServerMessageHlsPlayable">ServerMessageHlsPlayable</a>
+                    <a class="class" href="#ServerMessageRoomDeleted">ServerMessageRoomDeleted</a>
                             <ul class="memberlist">
                         <li>
-                                <a class="function" href="#ServerMessageHlsPlayable.__init__">ServerMessageHlsPlayable</a>
+                                <a class="function" href="#ServerMessageRoomDeleted.__init__">ServerMessageRoomDeleted</a>
                         </li>
                         <li>
-                                <a class="variable" href="#ServerMessageHlsPlayable.room_id">room_id</a>
-                        </li>
-                        <li>
-                                <a class="variable" href="#ServerMessageHlsPlayable.component_id">component_id</a>
+                                <a class="variable" href="#ServerMessageRoomDeleted.room_id">room_id</a>
                         </li>
                 </ul>
 
             </li>
             <li>
-                    <a class="class" href="#ServerMessageMetricsReport">ServerMessageMetricsReport</a>
+                    <a class="class" href="#ServerMessageRoomCrashed">ServerMessageRoomCrashed</a>
                             <ul class="memberlist">
                         <li>
-                                <a class="function" href="#ServerMessageMetricsReport.__init__">ServerMessageMetricsReport</a>
+                                <a class="function" href="#ServerMessageRoomCrashed.__init__">ServerMessageRoomCrashed</a>
                         </li>
                         <li>
-                                <a class="variable" href="#ServerMessageMetricsReport.metrics">metrics</a>
-                        </li>
-                </ul>
-
-            </li>
-            <li>
-                    <a class="class" href="#ServerMessagePeerCrashed">ServerMessagePeerCrashed</a>
-                            <ul class="memberlist">
-                        <li>
-                                <a class="function" href="#ServerMessagePeerCrashed.__init__">ServerMessagePeerCrashed</a>
-                        </li>
-                        <li>
-                                <a class="variable" href="#ServerMessagePeerCrashed.room_id">room_id</a>
-                        </li>
-                        <li>
-                                <a class="variable" href="#ServerMessagePeerCrashed.peer_id">peer_id</a>
+                                <a class="variable" href="#ServerMessageRoomCrashed.room_id">room_id</a>
                         </li>
                 </ul>
 
@@ -219,37 +206,154 @@
 
             </li>
             <li>
-                    <a class="class" href="#ServerMessageRoomCrashed">ServerMessageRoomCrashed</a>
+                    <a class="class" href="#ServerMessagePeerCrashed">ServerMessagePeerCrashed</a>
                             <ul class="memberlist">
                         <li>
-                                <a class="function" href="#ServerMessageRoomCrashed.__init__">ServerMessageRoomCrashed</a>
+                                <a class="function" href="#ServerMessagePeerCrashed.__init__">ServerMessagePeerCrashed</a>
                         </li>
                         <li>
-                                <a class="variable" href="#ServerMessageRoomCrashed.room_id">room_id</a>
+                                <a class="variable" href="#ServerMessagePeerCrashed.room_id">room_id</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#ServerMessagePeerCrashed.peer_id">peer_id</a>
                         </li>
                 </ul>
 
             </li>
             <li>
-                    <a class="class" href="#ServerMessageRoomDeleted">ServerMessageRoomDeleted</a>
+                    <a class="class" href="#ServerMessageComponentCrashed">ServerMessageComponentCrashed</a>
                             <ul class="memberlist">
                         <li>
-                                <a class="function" href="#ServerMessageRoomDeleted.__init__">ServerMessageRoomDeleted</a>
+                                <a class="function" href="#ServerMessageComponentCrashed.__init__">ServerMessageComponentCrashed</a>
                         </li>
                         <li>
-                                <a class="variable" href="#ServerMessageRoomDeleted.room_id">room_id</a>
+                                <a class="variable" href="#ServerMessageComponentCrashed.room_id">room_id</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#ServerMessageComponentCrashed.component_id">component_id</a>
                         </li>
                 </ul>
 
             </li>
             <li>
-                    <a class="class" href="#ServerMessageRoomCreated">ServerMessageRoomCreated</a>
+                    <a class="class" href="#ServerMessageTrack">ServerMessageTrack</a>
                             <ul class="memberlist">
                         <li>
-                                <a class="function" href="#ServerMessageRoomCreated.__init__">ServerMessageRoomCreated</a>
+                                <a class="function" href="#ServerMessageTrack.__init__">ServerMessageTrack</a>
                         </li>
                         <li>
-                                <a class="variable" href="#ServerMessageRoomCreated.room_id">room_id</a>
+                                <a class="variable" href="#ServerMessageTrack.id">id</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#ServerMessageTrack.type">type</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#ServerMessageTrack.metadata">metadata</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
+                    <a class="class" href="#ServerMessageTrackType">ServerMessageTrackType</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="variable" href="#ServerMessageTrackType.TRACK_TYPE_UNSPECIFIED">TRACK_TYPE_UNSPECIFIED</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#ServerMessageTrackType.TRACK_TYPE_VIDEO">TRACK_TYPE_VIDEO</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#ServerMessageTrackType.TRACK_TYPE_AUDIO">TRACK_TYPE_AUDIO</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
+                    <a class="class" href="#ServerMessageTrackAdded">ServerMessageTrackAdded</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="function" href="#ServerMessageTrackAdded.__init__">ServerMessageTrackAdded</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#ServerMessageTrackAdded.room_id">room_id</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#ServerMessageTrackAdded.peer_id">peer_id</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#ServerMessageTrackAdded.component_id">component_id</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#ServerMessageTrackAdded.track">track</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
+                    <a class="class" href="#ServerMessageTrackMetadataUpdated">ServerMessageTrackMetadataUpdated</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="function" href="#ServerMessageTrackMetadataUpdated.__init__">ServerMessageTrackMetadataUpdated</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#ServerMessageTrackMetadataUpdated.room_id">room_id</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#ServerMessageTrackMetadataUpdated.peer_id">peer_id</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#ServerMessageTrackMetadataUpdated.component_id">component_id</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#ServerMessageTrackMetadataUpdated.track">track</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
+                    <a class="class" href="#ServerMessageTrackRemoved">ServerMessageTrackRemoved</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="function" href="#ServerMessageTrackRemoved.__init__">ServerMessageTrackRemoved</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#ServerMessageTrackRemoved.room_id">room_id</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#ServerMessageTrackRemoved.peer_id">peer_id</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#ServerMessageTrackRemoved.component_id">component_id</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#ServerMessageTrackRemoved.track">track</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
+                    <a class="class" href="#ServerMessageHlsPlayable">ServerMessageHlsPlayable</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="function" href="#ServerMessageHlsPlayable.__init__">ServerMessageHlsPlayable</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#ServerMessageHlsPlayable.room_id">room_id</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#ServerMessageHlsPlayable.component_id">component_id</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
+                    <a class="class" href="#ServerMessageMetricsReport">ServerMessageMetricsReport</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="function" href="#ServerMessageMetricsReport.__init__">ServerMessageMetricsReport</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#ServerMessageMetricsReport.metrics">metrics</a>
                         </li>
                 </ul>
 
@@ -268,7 +372,22 @@
     <main class="pdoc">
             <section class="module-info">
 
-                        <div class="docstring"><p>Server events being sent Jellyfish</p>
+                        <div class="docstring"><h1 id="server-notifications">Server Notifications</h1>
+
+<p>The Jellyfish can send one of the following notifications:</p>
+
+<p><code><a href="#ServerMessageRoomCreated">ServerMessageRoomCreated</a></code>,
+<code><a href="#ServerMessageRoomDeleted">ServerMessageRoomDeleted</a></code>,
+<code><a href="#ServerMessageRoomCrashed">ServerMessageRoomCrashed</a></code>,
+<code><a href="#ServerMessagePeerConnected">ServerMessagePeerConnected</a></code>,
+<code><a href="#ServerMessagePeerDisconnected">ServerMessagePeerDisconnected</a></code>,
+<code><a href="#ServerMessagePeerCrashed">ServerMessagePeerCrashed</a></code>,
+<code><a href="#ServerMessageComponentCrashed">ServerMessageComponentCrashed</a></code>,
+<code><a href="#ServerMessageTrackAdded">ServerMessageTrackAdded</a></code>,
+<code><a href="#ServerMessageTrackMetadataUpdated">ServerMessageTrackMetadataUpdated</a></code>,
+<code><a href="#ServerMessageTrackRemoved">ServerMessageTrackRemoved</a></code>,
+<code><a href="#ServerMessageHlsPlayable">ServerMessageHlsPlayable</a></code>,
+<code><a href="#ServerMessageMetricsReport">ServerMessageMetricsReport</a></code></p>
 </div>
 
                         <input id="mod-events-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
@@ -276,7 +395,7 @@
                         <label class="view-source-button" for="mod-events-view-source"><span>View Source</span></label>
 
                         <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a><span class="sd">Server events being sent Jellyfish</span>
+</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a><span class="sd">.. include:: ../../docs/server_notifications.md</span>
 </span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a>
 </span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="c1"># Exported messages</span>
@@ -290,76 +409,77 @@
 </span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>    <span class="n">ServerMessageRoomCrashed</span><span class="p">,</span>
 </span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>    <span class="n">ServerMessageRoomCreated</span><span class="p">,</span>
 </span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>    <span class="n">ServerMessageRoomDeleted</span><span class="p">,</span>
-</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a><span class="p">)</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>
-</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>    <span class="s2">&quot;ServerMessageComponentCrashed&quot;</span><span class="p">,</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>    <span class="s2">&quot;ServerMessageHlsPlayable&quot;</span><span class="p">,</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>    <span class="s2">&quot;ServerMessageMetricsReport&quot;</span><span class="p">,</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>    <span class="s2">&quot;ServerMessagePeerCrashed&quot;</span><span class="p">,</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>    <span class="s2">&quot;ServerMessagePeerConnected&quot;</span><span class="p">,</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>    <span class="s2">&quot;ServerMessagePeerDisconnected&quot;</span><span class="p">,</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>    <span class="s2">&quot;ServerMessageRoomCrashed&quot;</span><span class="p">,</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>    <span class="s2">&quot;ServerMessageRoomDeleted&quot;</span><span class="p">,</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>    <span class="s2">&quot;ServerMessageRoomCreated&quot;</span><span class="p">,</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a><span class="p">]</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>    <span class="n">ServerMessageTrack</span><span class="p">,</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>    <span class="n">ServerMessageTrackAdded</span><span class="p">,</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>    <span class="n">ServerMessageTrackMetadataUpdated</span><span class="p">,</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>    <span class="n">ServerMessageTrackRemoved</span><span class="p">,</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>    <span class="n">ServerMessageTrackType</span><span class="p">,</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a><span class="p">)</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>    <span class="s2">&quot;ServerMessageRoomCreated&quot;</span><span class="p">,</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>    <span class="s2">&quot;ServerMessageRoomDeleted&quot;</span><span class="p">,</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>    <span class="s2">&quot;ServerMessageRoomCrashed&quot;</span><span class="p">,</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>    <span class="s2">&quot;ServerMessagePeerConnected&quot;</span><span class="p">,</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>    <span class="s2">&quot;ServerMessagePeerDisconnected&quot;</span><span class="p">,</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>    <span class="s2">&quot;ServerMessagePeerCrashed&quot;</span><span class="p">,</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>    <span class="s2">&quot;ServerMessageComponentCrashed&quot;</span><span class="p">,</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>    <span class="s2">&quot;ServerMessageTrack&quot;</span><span class="p">,</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>    <span class="s2">&quot;ServerMessageTrackType&quot;</span><span class="p">,</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>    <span class="s2">&quot;ServerMessageTrackAdded&quot;</span><span class="p">,</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>    <span class="s2">&quot;ServerMessageTrackMetadataUpdated&quot;</span><span class="p">,</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>    <span class="s2">&quot;ServerMessageTrackRemoved&quot;</span><span class="p">,</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>    <span class="s2">&quot;ServerMessageHlsPlayable&quot;</span><span class="p">,</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>    <span class="s2">&quot;ServerMessageMetricsReport&quot;</span><span class="p">,</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a><span class="p">]</span>
 </span></pre></div>
 
 
             </section>
-                <section id="ServerMessageComponentCrashed">
-                            <input id="ServerMessageComponentCrashed-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                <section id="ServerMessageRoomCreated">
+                            <input id="ServerMessageRoomCreated-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr class">
                     <div class="decorator">@dataclass(eq=False, repr=False)</div>
 
     <span class="def">class</span>
-    <span class="name">ServerMessageComponentCrashed</span><wbr>(<span class="base">betterproto.Message</span>):
+    <span class="name">ServerMessageRoomCreated</span><wbr>(<span class="base">betterproto.Message</span>):
 
-                <label class="view-source-button" for="ServerMessageComponentCrashed-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="ServerMessageRoomCreated-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#ServerMessageComponentCrashed"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ServerMessageComponentCrashed-90"><a href="#ServerMessageComponentCrashed-90"><span class="linenos">90</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span id="ServerMessageComponentCrashed-91"><a href="#ServerMessageComponentCrashed-91"><span class="linenos">91</span></a><span class="k">class</span> <span class="nc">ServerMessageComponentCrashed</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
-</span><span id="ServerMessageComponentCrashed-92"><a href="#ServerMessageComponentCrashed-92"><span class="linenos">92</span></a>    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span><span id="ServerMessageComponentCrashed-93"><a href="#ServerMessageComponentCrashed-93"><span class="linenos">93</span></a>    <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <a class="headerlink" href="#ServerMessageRoomCreated"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ServerMessageRoomCreated-158"><a href="#ServerMessageRoomCreated-158"><span class="linenos">158</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="ServerMessageRoomCreated-159"><a href="#ServerMessageRoomCreated-159"><span class="linenos">159</span></a><span class="k">class</span> <span class="nc">ServerMessageRoomCreated</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+</span><span id="ServerMessageRoomCreated-160"><a href="#ServerMessageRoomCreated-160"><span class="linenos">160</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Notification sent when a room is created&quot;&quot;&quot;</span>
+</span><span id="ServerMessageRoomCreated-161"><a href="#ServerMessageRoomCreated-161"><span class="linenos">161</span></a>
+</span><span id="ServerMessageRoomCreated-162"><a href="#ServerMessageRoomCreated-162"><span class="linenos">162</span></a>    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </span></pre></div>
 
 
+            <div class="docstring"><p>Notification sent when a room is created</p>
+</div>
 
 
-                            <div id="ServerMessageComponentCrashed.__init__" class="classattr">
+                            <div id="ServerMessageRoomCreated.__init__" class="classattr">
                                 <div class="attr function">
 
-        <span class="name">ServerMessageComponentCrashed</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span>, </span><span class="param"><span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span></span>)</span>
+        <span class="name">ServerMessageRoomCreated</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span></span>)</span>
 
 
     </div>
-    <a class="headerlink" href="#ServerMessageComponentCrashed.__init__"></a>
+    <a class="headerlink" href="#ServerMessageRoomCreated.__init__"></a>
 
 
 
                             </div>
-                            <div id="ServerMessageComponentCrashed.room_id" class="classattr">
+                            <div id="ServerMessageRoomCreated.room_id" class="classattr">
                                 <div class="attr variable">
             <span class="name">room_id</span><span class="annotation">: str</span>        =
 <span class="default_value">&lt;object object&gt;</span>
 
 
     </div>
-    <a class="headerlink" href="#ServerMessageComponentCrashed.room_id"></a>
-
-
-
-                            </div>
-                            <div id="ServerMessageComponentCrashed.component_id" class="classattr">
-                                <div class="attr variable">
-            <span class="name">component_id</span><span class="annotation">: str</span>        =
-<span class="default_value">&lt;object object&gt;</span>
-
-
-    </div>
-    <a class="headerlink" href="#ServerMessageComponentCrashed.component_id"></a>
+    <a class="headerlink" href="#ServerMessageRoomCreated.room_id"></a>
 
 
 
@@ -368,74 +488,65 @@
                                 <h5>Inherited Members</h5>
                                 <dl>
                                     <div><dt>betterproto.Message</dt>
-                                <dd id="ServerMessageComponentCrashed.SerializeToString" class="function">SerializeToString</dd>
-                <dd id="ServerMessageComponentCrashed.parse" class="function">parse</dd>
-                <dd id="ServerMessageComponentCrashed.FromString" class="function">FromString</dd>
-                <dd id="ServerMessageComponentCrashed.to_dict" class="function">to_dict</dd>
-                <dd id="ServerMessageComponentCrashed.from_dict" class="function">from_dict</dd>
-                <dd id="ServerMessageComponentCrashed.to_json" class="function">to_json</dd>
-                <dd id="ServerMessageComponentCrashed.from_json" class="function">from_json</dd>
-                <dd id="ServerMessageComponentCrashed.to_pydict" class="function">to_pydict</dd>
-                <dd id="ServerMessageComponentCrashed.from_pydict" class="function">from_pydict</dd>
-                <dd id="ServerMessageComponentCrashed.is_set" class="function">is_set</dd>
+                                <dd id="ServerMessageRoomCreated.SerializeToString" class="function">SerializeToString</dd>
+                <dd id="ServerMessageRoomCreated.parse" class="function">parse</dd>
+                <dd id="ServerMessageRoomCreated.FromString" class="function">FromString</dd>
+                <dd id="ServerMessageRoomCreated.to_dict" class="function">to_dict</dd>
+                <dd id="ServerMessageRoomCreated.from_dict" class="function">from_dict</dd>
+                <dd id="ServerMessageRoomCreated.to_json" class="function">to_json</dd>
+                <dd id="ServerMessageRoomCreated.from_json" class="function">from_json</dd>
+                <dd id="ServerMessageRoomCreated.to_pydict" class="function">to_pydict</dd>
+                <dd id="ServerMessageRoomCreated.from_pydict" class="function">from_pydict</dd>
+                <dd id="ServerMessageRoomCreated.is_set" class="function">is_set</dd>
 
             </div>
                                 </dl>
                             </div>
                 </section>
-                <section id="ServerMessageHlsPlayable">
-                            <input id="ServerMessageHlsPlayable-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                <section id="ServerMessageRoomDeleted">
+                            <input id="ServerMessageRoomDeleted-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr class">
                     <div class="decorator">@dataclass(eq=False, repr=False)</div>
 
     <span class="def">class</span>
-    <span class="name">ServerMessageHlsPlayable</span><wbr>(<span class="base">betterproto.Message</span>):
+    <span class="name">ServerMessageRoomDeleted</span><wbr>(<span class="base">betterproto.Message</span>):
 
-                <label class="view-source-button" for="ServerMessageHlsPlayable-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="ServerMessageRoomDeleted-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#ServerMessageHlsPlayable"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ServerMessageHlsPlayable-131"><a href="#ServerMessageHlsPlayable-131"><span class="linenos">131</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span id="ServerMessageHlsPlayable-132"><a href="#ServerMessageHlsPlayable-132"><span class="linenos">132</span></a><span class="k">class</span> <span class="nc">ServerMessageHlsPlayable</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
-</span><span id="ServerMessageHlsPlayable-133"><a href="#ServerMessageHlsPlayable-133"><span class="linenos">133</span></a>    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span><span id="ServerMessageHlsPlayable-134"><a href="#ServerMessageHlsPlayable-134"><span class="linenos">134</span></a>    <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <a class="headerlink" href="#ServerMessageRoomDeleted"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ServerMessageRoomDeleted-165"><a href="#ServerMessageRoomDeleted-165"><span class="linenos">165</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="ServerMessageRoomDeleted-166"><a href="#ServerMessageRoomDeleted-166"><span class="linenos">166</span></a><span class="k">class</span> <span class="nc">ServerMessageRoomDeleted</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+</span><span id="ServerMessageRoomDeleted-167"><a href="#ServerMessageRoomDeleted-167"><span class="linenos">167</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Notification sent when a room is deleted&quot;&quot;&quot;</span>
+</span><span id="ServerMessageRoomDeleted-168"><a href="#ServerMessageRoomDeleted-168"><span class="linenos">168</span></a>
+</span><span id="ServerMessageRoomDeleted-169"><a href="#ServerMessageRoomDeleted-169"><span class="linenos">169</span></a>    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </span></pre></div>
 
 
+            <div class="docstring"><p>Notification sent when a room is deleted</p>
+</div>
 
 
-                            <div id="ServerMessageHlsPlayable.__init__" class="classattr">
+                            <div id="ServerMessageRoomDeleted.__init__" class="classattr">
                                 <div class="attr function">
 
-        <span class="name">ServerMessageHlsPlayable</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span>, </span><span class="param"><span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span></span>)</span>
+        <span class="name">ServerMessageRoomDeleted</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span></span>)</span>
 
 
     </div>
-    <a class="headerlink" href="#ServerMessageHlsPlayable.__init__"></a>
+    <a class="headerlink" href="#ServerMessageRoomDeleted.__init__"></a>
 
 
 
                             </div>
-                            <div id="ServerMessageHlsPlayable.room_id" class="classattr">
+                            <div id="ServerMessageRoomDeleted.room_id" class="classattr">
                                 <div class="attr variable">
             <span class="name">room_id</span><span class="annotation">: str</span>        =
 <span class="default_value">&lt;object object&gt;</span>
 
 
     </div>
-    <a class="headerlink" href="#ServerMessageHlsPlayable.room_id"></a>
-
-
-
-                            </div>
-                            <div id="ServerMessageHlsPlayable.component_id" class="classattr">
-                                <div class="attr variable">
-            <span class="name">component_id</span><span class="annotation">: str</span>        =
-<span class="default_value">&lt;object object&gt;</span>
-
-
-    </div>
-    <a class="headerlink" href="#ServerMessageHlsPlayable.component_id"></a>
+    <a class="headerlink" href="#ServerMessageRoomDeleted.room_id"></a>
 
 
 
@@ -444,137 +555,65 @@
                                 <h5>Inherited Members</h5>
                                 <dl>
                                     <div><dt>betterproto.Message</dt>
-                                <dd id="ServerMessageHlsPlayable.SerializeToString" class="function">SerializeToString</dd>
-                <dd id="ServerMessageHlsPlayable.parse" class="function">parse</dd>
-                <dd id="ServerMessageHlsPlayable.FromString" class="function">FromString</dd>
-                <dd id="ServerMessageHlsPlayable.to_dict" class="function">to_dict</dd>
-                <dd id="ServerMessageHlsPlayable.from_dict" class="function">from_dict</dd>
-                <dd id="ServerMessageHlsPlayable.to_json" class="function">to_json</dd>
-                <dd id="ServerMessageHlsPlayable.from_json" class="function">from_json</dd>
-                <dd id="ServerMessageHlsPlayable.to_pydict" class="function">to_pydict</dd>
-                <dd id="ServerMessageHlsPlayable.from_pydict" class="function">from_pydict</dd>
-                <dd id="ServerMessageHlsPlayable.is_set" class="function">is_set</dd>
+                                <dd id="ServerMessageRoomDeleted.SerializeToString" class="function">SerializeToString</dd>
+                <dd id="ServerMessageRoomDeleted.parse" class="function">parse</dd>
+                <dd id="ServerMessageRoomDeleted.FromString" class="function">FromString</dd>
+                <dd id="ServerMessageRoomDeleted.to_dict" class="function">to_dict</dd>
+                <dd id="ServerMessageRoomDeleted.from_dict" class="function">from_dict</dd>
+                <dd id="ServerMessageRoomDeleted.to_json" class="function">to_json</dd>
+                <dd id="ServerMessageRoomDeleted.from_json" class="function">from_json</dd>
+                <dd id="ServerMessageRoomDeleted.to_pydict" class="function">to_pydict</dd>
+                <dd id="ServerMessageRoomDeleted.from_pydict" class="function">from_pydict</dd>
+                <dd id="ServerMessageRoomDeleted.is_set" class="function">is_set</dd>
 
             </div>
                                 </dl>
                             </div>
                 </section>
-                <section id="ServerMessageMetricsReport">
-                            <input id="ServerMessageMetricsReport-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                <section id="ServerMessageRoomCrashed">
+                            <input id="ServerMessageRoomCrashed-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr class">
                     <div class="decorator">@dataclass(eq=False, repr=False)</div>
 
     <span class="def">class</span>
-    <span class="name">ServerMessageMetricsReport</span><wbr>(<span class="base">betterproto.Message</span>):
+    <span class="name">ServerMessageRoomCrashed</span><wbr>(<span class="base">betterproto.Message</span>):
 
-                <label class="view-source-button" for="ServerMessageMetricsReport-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="ServerMessageRoomCrashed-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#ServerMessageMetricsReport"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ServerMessageMetricsReport-126"><a href="#ServerMessageMetricsReport-126"><span class="linenos">126</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span id="ServerMessageMetricsReport-127"><a href="#ServerMessageMetricsReport-127"><span class="linenos">127</span></a><span class="k">class</span> <span class="nc">ServerMessageMetricsReport</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
-</span><span id="ServerMessageMetricsReport-128"><a href="#ServerMessageMetricsReport-128"><span class="linenos">128</span></a>    <span class="n">metrics</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <a class="headerlink" href="#ServerMessageRoomCrashed"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ServerMessageRoomCrashed-91"><a href="#ServerMessageRoomCrashed-91"><span class="linenos">91</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="ServerMessageRoomCrashed-92"><a href="#ServerMessageRoomCrashed-92"><span class="linenos">92</span></a><span class="k">class</span> <span class="nc">ServerMessageRoomCrashed</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+</span><span id="ServerMessageRoomCrashed-93"><a href="#ServerMessageRoomCrashed-93"><span class="linenos">93</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Notification sent when a room crashes&quot;&quot;&quot;</span>
+</span><span id="ServerMessageRoomCrashed-94"><a href="#ServerMessageRoomCrashed-94"><span class="linenos">94</span></a>
+</span><span id="ServerMessageRoomCrashed-95"><a href="#ServerMessageRoomCrashed-95"><span class="linenos">95</span></a>    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </span></pre></div>
 
 
+            <div class="docstring"><p>Notification sent when a room crashes</p>
+</div>
 
 
-                            <div id="ServerMessageMetricsReport.__init__" class="classattr">
+                            <div id="ServerMessageRoomCrashed.__init__" class="classattr">
                                 <div class="attr function">
 
-        <span class="name">ServerMessageMetricsReport</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">metrics</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span></span>)</span>
+        <span class="name">ServerMessageRoomCrashed</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span></span>)</span>
 
 
     </div>
-    <a class="headerlink" href="#ServerMessageMetricsReport.__init__"></a>
+    <a class="headerlink" href="#ServerMessageRoomCrashed.__init__"></a>
 
 
 
                             </div>
-                            <div id="ServerMessageMetricsReport.metrics" class="classattr">
-                                <div class="attr variable">
-            <span class="name">metrics</span><span class="annotation">: str</span>        =
-<span class="default_value">&lt;object object&gt;</span>
-
-
-    </div>
-    <a class="headerlink" href="#ServerMessageMetricsReport.metrics"></a>
-
-
-
-                            </div>
-                            <div class="inherited">
-                                <h5>Inherited Members</h5>
-                                <dl>
-                                    <div><dt>betterproto.Message</dt>
-                                <dd id="ServerMessageMetricsReport.SerializeToString" class="function">SerializeToString</dd>
-                <dd id="ServerMessageMetricsReport.parse" class="function">parse</dd>
-                <dd id="ServerMessageMetricsReport.FromString" class="function">FromString</dd>
-                <dd id="ServerMessageMetricsReport.to_dict" class="function">to_dict</dd>
-                <dd id="ServerMessageMetricsReport.from_dict" class="function">from_dict</dd>
-                <dd id="ServerMessageMetricsReport.to_json" class="function">to_json</dd>
-                <dd id="ServerMessageMetricsReport.from_json" class="function">from_json</dd>
-                <dd id="ServerMessageMetricsReport.to_pydict" class="function">to_pydict</dd>
-                <dd id="ServerMessageMetricsReport.from_pydict" class="function">from_pydict</dd>
-                <dd id="ServerMessageMetricsReport.is_set" class="function">is_set</dd>
-
-            </div>
-                                </dl>
-                            </div>
-                </section>
-                <section id="ServerMessagePeerCrashed">
-                            <input id="ServerMessagePeerCrashed-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr class">
-                    <div class="decorator">@dataclass(eq=False, repr=False)</div>
-
-    <span class="def">class</span>
-    <span class="name">ServerMessagePeerCrashed</span><wbr>(<span class="base">betterproto.Message</span>):
-
-                <label class="view-source-button" for="ServerMessagePeerCrashed-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#ServerMessagePeerCrashed"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ServerMessagePeerCrashed-84"><a href="#ServerMessagePeerCrashed-84"><span class="linenos">84</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span id="ServerMessagePeerCrashed-85"><a href="#ServerMessagePeerCrashed-85"><span class="linenos">85</span></a><span class="k">class</span> <span class="nc">ServerMessagePeerCrashed</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
-</span><span id="ServerMessagePeerCrashed-86"><a href="#ServerMessagePeerCrashed-86"><span class="linenos">86</span></a>    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span><span id="ServerMessagePeerCrashed-87"><a href="#ServerMessagePeerCrashed-87"><span class="linenos">87</span></a>    <span class="n">peer_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</span></pre></div>
-
-
-
-
-                            <div id="ServerMessagePeerCrashed.__init__" class="classattr">
-                                <div class="attr function">
-
-        <span class="name">ServerMessagePeerCrashed</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span>, </span><span class="param"><span class="n">peer_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span></span>)</span>
-
-
-    </div>
-    <a class="headerlink" href="#ServerMessagePeerCrashed.__init__"></a>
-
-
-
-                            </div>
-                            <div id="ServerMessagePeerCrashed.room_id" class="classattr">
+                            <div id="ServerMessageRoomCrashed.room_id" class="classattr">
                                 <div class="attr variable">
             <span class="name">room_id</span><span class="annotation">: str</span>        =
 <span class="default_value">&lt;object object&gt;</span>
 
 
     </div>
-    <a class="headerlink" href="#ServerMessagePeerCrashed.room_id"></a>
-
-
-
-                            </div>
-                            <div id="ServerMessagePeerCrashed.peer_id" class="classattr">
-                                <div class="attr variable">
-            <span class="name">peer_id</span><span class="annotation">: str</span>        =
-<span class="default_value">&lt;object object&gt;</span>
-
-
-    </div>
-    <a class="headerlink" href="#ServerMessagePeerCrashed.peer_id"></a>
+    <a class="headerlink" href="#ServerMessageRoomCrashed.room_id"></a>
 
 
 
@@ -583,16 +622,16 @@
                                 <h5>Inherited Members</h5>
                                 <dl>
                                     <div><dt>betterproto.Message</dt>
-                                <dd id="ServerMessagePeerCrashed.SerializeToString" class="function">SerializeToString</dd>
-                <dd id="ServerMessagePeerCrashed.parse" class="function">parse</dd>
-                <dd id="ServerMessagePeerCrashed.FromString" class="function">FromString</dd>
-                <dd id="ServerMessagePeerCrashed.to_dict" class="function">to_dict</dd>
-                <dd id="ServerMessagePeerCrashed.from_dict" class="function">from_dict</dd>
-                <dd id="ServerMessagePeerCrashed.to_json" class="function">to_json</dd>
-                <dd id="ServerMessagePeerCrashed.from_json" class="function">from_json</dd>
-                <dd id="ServerMessagePeerCrashed.to_pydict" class="function">to_pydict</dd>
-                <dd id="ServerMessagePeerCrashed.from_pydict" class="function">from_pydict</dd>
-                <dd id="ServerMessagePeerCrashed.is_set" class="function">is_set</dd>
+                                <dd id="ServerMessageRoomCrashed.SerializeToString" class="function">SerializeToString</dd>
+                <dd id="ServerMessageRoomCrashed.parse" class="function">parse</dd>
+                <dd id="ServerMessageRoomCrashed.FromString" class="function">FromString</dd>
+                <dd id="ServerMessageRoomCrashed.to_dict" class="function">to_dict</dd>
+                <dd id="ServerMessageRoomCrashed.from_dict" class="function">from_dict</dd>
+                <dd id="ServerMessageRoomCrashed.to_json" class="function">to_json</dd>
+                <dd id="ServerMessageRoomCrashed.from_json" class="function">from_json</dd>
+                <dd id="ServerMessageRoomCrashed.to_pydict" class="function">to_pydict</dd>
+                <dd id="ServerMessageRoomCrashed.from_pydict" class="function">from_pydict</dd>
+                <dd id="ServerMessageRoomCrashed.is_set" class="function">is_set</dd>
 
             </div>
                                 </dl>
@@ -610,13 +649,17 @@
 
     </div>
     <a class="headerlink" href="#ServerMessagePeerConnected"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ServerMessagePeerConnected-72"><a href="#ServerMessagePeerConnected-72"><span class="linenos">72</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span id="ServerMessagePeerConnected-73"><a href="#ServerMessagePeerConnected-73"><span class="linenos">73</span></a><span class="k">class</span> <span class="nc">ServerMessagePeerConnected</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
-</span><span id="ServerMessagePeerConnected-74"><a href="#ServerMessagePeerConnected-74"><span class="linenos">74</span></a>    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span><span id="ServerMessagePeerConnected-75"><a href="#ServerMessagePeerConnected-75"><span class="linenos">75</span></a>    <span class="n">peer_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ServerMessagePeerConnected-98"><a href="#ServerMessagePeerConnected-98"><span class="linenos"> 98</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="ServerMessagePeerConnected-99"><a href="#ServerMessagePeerConnected-99"><span class="linenos"> 99</span></a><span class="k">class</span> <span class="nc">ServerMessagePeerConnected</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+</span><span id="ServerMessagePeerConnected-100"><a href="#ServerMessagePeerConnected-100"><span class="linenos">100</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Notification sent when a peer connects&quot;&quot;&quot;</span>
+</span><span id="ServerMessagePeerConnected-101"><a href="#ServerMessagePeerConnected-101"><span class="linenos">101</span></a>
+</span><span id="ServerMessagePeerConnected-102"><a href="#ServerMessagePeerConnected-102"><span class="linenos">102</span></a>    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="ServerMessagePeerConnected-103"><a href="#ServerMessagePeerConnected-103"><span class="linenos">103</span></a>    <span class="n">peer_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </span></pre></div>
 
 
+            <div class="docstring"><p>Notification sent when a peer connects</p>
+</div>
 
 
                             <div id="ServerMessagePeerConnected.__init__" class="classattr">
@@ -686,13 +729,17 @@
 
     </div>
     <a class="headerlink" href="#ServerMessagePeerDisconnected"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ServerMessagePeerDisconnected-78"><a href="#ServerMessagePeerDisconnected-78"><span class="linenos">78</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span id="ServerMessagePeerDisconnected-79"><a href="#ServerMessagePeerDisconnected-79"><span class="linenos">79</span></a><span class="k">class</span> <span class="nc">ServerMessagePeerDisconnected</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
-</span><span id="ServerMessagePeerDisconnected-80"><a href="#ServerMessagePeerDisconnected-80"><span class="linenos">80</span></a>    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span><span id="ServerMessagePeerDisconnected-81"><a href="#ServerMessagePeerDisconnected-81"><span class="linenos">81</span></a>    <span class="n">peer_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ServerMessagePeerDisconnected-106"><a href="#ServerMessagePeerDisconnected-106"><span class="linenos">106</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="ServerMessagePeerDisconnected-107"><a href="#ServerMessagePeerDisconnected-107"><span class="linenos">107</span></a><span class="k">class</span> <span class="nc">ServerMessagePeerDisconnected</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+</span><span id="ServerMessagePeerDisconnected-108"><a href="#ServerMessagePeerDisconnected-108"><span class="linenos">108</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Notification sent when a peer disconnects from JF&quot;&quot;&quot;</span>
+</span><span id="ServerMessagePeerDisconnected-109"><a href="#ServerMessagePeerDisconnected-109"><span class="linenos">109</span></a>
+</span><span id="ServerMessagePeerDisconnected-110"><a href="#ServerMessagePeerDisconnected-110"><span class="linenos">110</span></a>    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="ServerMessagePeerDisconnected-111"><a href="#ServerMessagePeerDisconnected-111"><span class="linenos">111</span></a>    <span class="n">peer_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </span></pre></div>
 
 
+            <div class="docstring"><p>Notification sent when a peer disconnects from JF</p>
+</div>
 
 
                             <div id="ServerMessagePeerDisconnected.__init__" class="classattr">
@@ -750,46 +797,63 @@
                                 </dl>
                             </div>
                 </section>
-                <section id="ServerMessageRoomCrashed">
-                            <input id="ServerMessageRoomCrashed-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                <section id="ServerMessagePeerCrashed">
+                            <input id="ServerMessagePeerCrashed-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr class">
                     <div class="decorator">@dataclass(eq=False, repr=False)</div>
 
     <span class="def">class</span>
-    <span class="name">ServerMessageRoomCrashed</span><wbr>(<span class="base">betterproto.Message</span>):
+    <span class="name">ServerMessagePeerCrashed</span><wbr>(<span class="base">betterproto.Message</span>):
 
-                <label class="view-source-button" for="ServerMessageRoomCrashed-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="ServerMessagePeerCrashed-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#ServerMessageRoomCrashed"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ServerMessageRoomCrashed-67"><a href="#ServerMessageRoomCrashed-67"><span class="linenos">67</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span id="ServerMessageRoomCrashed-68"><a href="#ServerMessageRoomCrashed-68"><span class="linenos">68</span></a><span class="k">class</span> <span class="nc">ServerMessageRoomCrashed</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
-</span><span id="ServerMessageRoomCrashed-69"><a href="#ServerMessageRoomCrashed-69"><span class="linenos">69</span></a>    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <a class="headerlink" href="#ServerMessagePeerCrashed"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ServerMessagePeerCrashed-114"><a href="#ServerMessagePeerCrashed-114"><span class="linenos">114</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="ServerMessagePeerCrashed-115"><a href="#ServerMessagePeerCrashed-115"><span class="linenos">115</span></a><span class="k">class</span> <span class="nc">ServerMessagePeerCrashed</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+</span><span id="ServerMessagePeerCrashed-116"><a href="#ServerMessagePeerCrashed-116"><span class="linenos">116</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Notification sent when a peer crashes&quot;&quot;&quot;</span>
+</span><span id="ServerMessagePeerCrashed-117"><a href="#ServerMessagePeerCrashed-117"><span class="linenos">117</span></a>
+</span><span id="ServerMessagePeerCrashed-118"><a href="#ServerMessagePeerCrashed-118"><span class="linenos">118</span></a>    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="ServerMessagePeerCrashed-119"><a href="#ServerMessagePeerCrashed-119"><span class="linenos">119</span></a>    <span class="n">peer_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </span></pre></div>
 
 
+            <div class="docstring"><p>Notification sent when a peer crashes</p>
+</div>
 
 
-                            <div id="ServerMessageRoomCrashed.__init__" class="classattr">
+                            <div id="ServerMessagePeerCrashed.__init__" class="classattr">
                                 <div class="attr function">
 
-        <span class="name">ServerMessageRoomCrashed</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span></span>)</span>
+        <span class="name">ServerMessagePeerCrashed</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span>, </span><span class="param"><span class="n">peer_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span></span>)</span>
 
 
     </div>
-    <a class="headerlink" href="#ServerMessageRoomCrashed.__init__"></a>
+    <a class="headerlink" href="#ServerMessagePeerCrashed.__init__"></a>
 
 
 
                             </div>
-                            <div id="ServerMessageRoomCrashed.room_id" class="classattr">
+                            <div id="ServerMessagePeerCrashed.room_id" class="classattr">
                                 <div class="attr variable">
             <span class="name">room_id</span><span class="annotation">: str</span>        =
 <span class="default_value">&lt;object object&gt;</span>
 
 
     </div>
-    <a class="headerlink" href="#ServerMessageRoomCrashed.room_id"></a>
+    <a class="headerlink" href="#ServerMessagePeerCrashed.room_id"></a>
+
+
+
+                            </div>
+                            <div id="ServerMessagePeerCrashed.peer_id" class="classattr">
+                                <div class="attr variable">
+            <span class="name">peer_id</span><span class="annotation">: str</span>        =
+<span class="default_value">&lt;object object&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessagePeerCrashed.peer_id"></a>
 
 
 
@@ -798,61 +862,78 @@
                                 <h5>Inherited Members</h5>
                                 <dl>
                                     <div><dt>betterproto.Message</dt>
-                                <dd id="ServerMessageRoomCrashed.SerializeToString" class="function">SerializeToString</dd>
-                <dd id="ServerMessageRoomCrashed.parse" class="function">parse</dd>
-                <dd id="ServerMessageRoomCrashed.FromString" class="function">FromString</dd>
-                <dd id="ServerMessageRoomCrashed.to_dict" class="function">to_dict</dd>
-                <dd id="ServerMessageRoomCrashed.from_dict" class="function">from_dict</dd>
-                <dd id="ServerMessageRoomCrashed.to_json" class="function">to_json</dd>
-                <dd id="ServerMessageRoomCrashed.from_json" class="function">from_json</dd>
-                <dd id="ServerMessageRoomCrashed.to_pydict" class="function">to_pydict</dd>
-                <dd id="ServerMessageRoomCrashed.from_pydict" class="function">from_pydict</dd>
-                <dd id="ServerMessageRoomCrashed.is_set" class="function">is_set</dd>
+                                <dd id="ServerMessagePeerCrashed.SerializeToString" class="function">SerializeToString</dd>
+                <dd id="ServerMessagePeerCrashed.parse" class="function">parse</dd>
+                <dd id="ServerMessagePeerCrashed.FromString" class="function">FromString</dd>
+                <dd id="ServerMessagePeerCrashed.to_dict" class="function">to_dict</dd>
+                <dd id="ServerMessagePeerCrashed.from_dict" class="function">from_dict</dd>
+                <dd id="ServerMessagePeerCrashed.to_json" class="function">to_json</dd>
+                <dd id="ServerMessagePeerCrashed.from_json" class="function">from_json</dd>
+                <dd id="ServerMessagePeerCrashed.to_pydict" class="function">to_pydict</dd>
+                <dd id="ServerMessagePeerCrashed.from_pydict" class="function">from_pydict</dd>
+                <dd id="ServerMessagePeerCrashed.is_set" class="function">is_set</dd>
 
             </div>
                                 </dl>
                             </div>
                 </section>
-                <section id="ServerMessageRoomDeleted">
-                            <input id="ServerMessageRoomDeleted-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                <section id="ServerMessageComponentCrashed">
+                            <input id="ServerMessageComponentCrashed-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr class">
                     <div class="decorator">@dataclass(eq=False, repr=False)</div>
 
     <span class="def">class</span>
-    <span class="name">ServerMessageRoomDeleted</span><wbr>(<span class="base">betterproto.Message</span>):
+    <span class="name">ServerMessageComponentCrashed</span><wbr>(<span class="base">betterproto.Message</span>):
 
-                <label class="view-source-button" for="ServerMessageRoomDeleted-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="ServerMessageComponentCrashed-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#ServerMessageRoomDeleted"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ServerMessageRoomDeleted-121"><a href="#ServerMessageRoomDeleted-121"><span class="linenos">121</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span id="ServerMessageRoomDeleted-122"><a href="#ServerMessageRoomDeleted-122"><span class="linenos">122</span></a><span class="k">class</span> <span class="nc">ServerMessageRoomDeleted</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
-</span><span id="ServerMessageRoomDeleted-123"><a href="#ServerMessageRoomDeleted-123"><span class="linenos">123</span></a>    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <a class="headerlink" href="#ServerMessageComponentCrashed"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ServerMessageComponentCrashed-122"><a href="#ServerMessageComponentCrashed-122"><span class="linenos">122</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="ServerMessageComponentCrashed-123"><a href="#ServerMessageComponentCrashed-123"><span class="linenos">123</span></a><span class="k">class</span> <span class="nc">ServerMessageComponentCrashed</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+</span><span id="ServerMessageComponentCrashed-124"><a href="#ServerMessageComponentCrashed-124"><span class="linenos">124</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Notification sent when a component crashes&quot;&quot;&quot;</span>
+</span><span id="ServerMessageComponentCrashed-125"><a href="#ServerMessageComponentCrashed-125"><span class="linenos">125</span></a>
+</span><span id="ServerMessageComponentCrashed-126"><a href="#ServerMessageComponentCrashed-126"><span class="linenos">126</span></a>    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="ServerMessageComponentCrashed-127"><a href="#ServerMessageComponentCrashed-127"><span class="linenos">127</span></a>    <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </span></pre></div>
 
 
+            <div class="docstring"><p>Notification sent when a component crashes</p>
+</div>
 
 
-                            <div id="ServerMessageRoomDeleted.__init__" class="classattr">
+                            <div id="ServerMessageComponentCrashed.__init__" class="classattr">
                                 <div class="attr function">
 
-        <span class="name">ServerMessageRoomDeleted</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span></span>)</span>
+        <span class="name">ServerMessageComponentCrashed</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span>, </span><span class="param"><span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span></span>)</span>
 
 
     </div>
-    <a class="headerlink" href="#ServerMessageRoomDeleted.__init__"></a>
+    <a class="headerlink" href="#ServerMessageComponentCrashed.__init__"></a>
 
 
 
                             </div>
-                            <div id="ServerMessageRoomDeleted.room_id" class="classattr">
+                            <div id="ServerMessageComponentCrashed.room_id" class="classattr">
                                 <div class="attr variable">
             <span class="name">room_id</span><span class="annotation">: str</span>        =
 <span class="default_value">&lt;object object&gt;</span>
 
 
     </div>
-    <a class="headerlink" href="#ServerMessageRoomDeleted.room_id"></a>
+    <a class="headerlink" href="#ServerMessageComponentCrashed.room_id"></a>
+
+
+
+                            </div>
+                            <div id="ServerMessageComponentCrashed.component_id" class="classattr">
+                                <div class="attr variable">
+            <span class="name">component_id</span><span class="annotation">: str</span>        =
+<span class="default_value">&lt;object object&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageComponentCrashed.component_id"></a>
 
 
 
@@ -861,61 +942,91 @@
                                 <h5>Inherited Members</h5>
                                 <dl>
                                     <div><dt>betterproto.Message</dt>
-                                <dd id="ServerMessageRoomDeleted.SerializeToString" class="function">SerializeToString</dd>
-                <dd id="ServerMessageRoomDeleted.parse" class="function">parse</dd>
-                <dd id="ServerMessageRoomDeleted.FromString" class="function">FromString</dd>
-                <dd id="ServerMessageRoomDeleted.to_dict" class="function">to_dict</dd>
-                <dd id="ServerMessageRoomDeleted.from_dict" class="function">from_dict</dd>
-                <dd id="ServerMessageRoomDeleted.to_json" class="function">to_json</dd>
-                <dd id="ServerMessageRoomDeleted.from_json" class="function">from_json</dd>
-                <dd id="ServerMessageRoomDeleted.to_pydict" class="function">to_pydict</dd>
-                <dd id="ServerMessageRoomDeleted.from_pydict" class="function">from_pydict</dd>
-                <dd id="ServerMessageRoomDeleted.is_set" class="function">is_set</dd>
+                                <dd id="ServerMessageComponentCrashed.SerializeToString" class="function">SerializeToString</dd>
+                <dd id="ServerMessageComponentCrashed.parse" class="function">parse</dd>
+                <dd id="ServerMessageComponentCrashed.FromString" class="function">FromString</dd>
+                <dd id="ServerMessageComponentCrashed.to_dict" class="function">to_dict</dd>
+                <dd id="ServerMessageComponentCrashed.from_dict" class="function">from_dict</dd>
+                <dd id="ServerMessageComponentCrashed.to_json" class="function">to_json</dd>
+                <dd id="ServerMessageComponentCrashed.from_json" class="function">from_json</dd>
+                <dd id="ServerMessageComponentCrashed.to_pydict" class="function">to_pydict</dd>
+                <dd id="ServerMessageComponentCrashed.from_pydict" class="function">from_pydict</dd>
+                <dd id="ServerMessageComponentCrashed.is_set" class="function">is_set</dd>
 
             </div>
                                 </dl>
                             </div>
                 </section>
-                <section id="ServerMessageRoomCreated">
-                            <input id="ServerMessageRoomCreated-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                <section id="ServerMessageTrack">
+                            <input id="ServerMessageTrack-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr class">
                     <div class="decorator">@dataclass(eq=False, repr=False)</div>
 
     <span class="def">class</span>
-    <span class="name">ServerMessageRoomCreated</span><wbr>(<span class="base">betterproto.Message</span>):
+    <span class="name">ServerMessageTrack</span><wbr>(<span class="base">betterproto.Message</span>):
 
-                <label class="view-source-button" for="ServerMessageRoomCreated-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="ServerMessageTrack-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#ServerMessageRoomCreated"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ServerMessageRoomCreated-116"><a href="#ServerMessageRoomCreated-116"><span class="linenos">116</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span id="ServerMessageRoomCreated-117"><a href="#ServerMessageRoomCreated-117"><span class="linenos">117</span></a><span class="k">class</span> <span class="nc">ServerMessageRoomCreated</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
-</span><span id="ServerMessageRoomCreated-118"><a href="#ServerMessageRoomCreated-118"><span class="linenos">118</span></a>    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <a class="headerlink" href="#ServerMessageTrack"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ServerMessageTrack-212"><a href="#ServerMessageTrack-212"><span class="linenos">212</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="ServerMessageTrack-213"><a href="#ServerMessageTrack-213"><span class="linenos">213</span></a><span class="k">class</span> <span class="nc">ServerMessageTrack</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+</span><span id="ServerMessageTrack-214"><a href="#ServerMessageTrack-214"><span class="linenos">214</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Describes a media track&quot;&quot;&quot;</span>
+</span><span id="ServerMessageTrack-215"><a href="#ServerMessageTrack-215"><span class="linenos">215</span></a>
+</span><span id="ServerMessageTrack-216"><a href="#ServerMessageTrack-216"><span class="linenos">216</span></a>    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="ServerMessageTrack-217"><a href="#ServerMessageTrack-217"><span class="linenos">217</span></a>    <span class="nb">type</span><span class="p">:</span> <span class="s2">&quot;ServerMessageTrackType&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">enum_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span><span id="ServerMessageTrack-218"><a href="#ServerMessageTrack-218"><span class="linenos">218</span></a>    <span class="n">metadata</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </span></pre></div>
 
 
+            <div class="docstring"><p>Describes a media track</p>
+</div>
 
 
-                            <div id="ServerMessageRoomCreated.__init__" class="classattr">
+                            <div id="ServerMessageTrack.__init__" class="classattr">
                                 <div class="attr function">
 
-        <span class="name">ServerMessageRoomCreated</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span></span>)</span>
+        <span class="name">ServerMessageTrack</span><span class="signature pdoc-code multiline">(<span class="param">   <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span>,</span><span class="param"> <span class="nb">type</span><span class="p">:</span> <span class="n"><a href="#ServerMessageTrackType">ServerMessageTrackType</a></span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span>,</span><span class="param">   <span class="n">metadata</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span></span>)</span>
 
 
     </div>
-    <a class="headerlink" href="#ServerMessageRoomCreated.__init__"></a>
+    <a class="headerlink" href="#ServerMessageTrack.__init__"></a>
 
 
 
                             </div>
-                            <div id="ServerMessageRoomCreated.room_id" class="classattr">
+                            <div id="ServerMessageTrack.id" class="classattr">
                                 <div class="attr variable">
-            <span class="name">room_id</span><span class="annotation">: str</span>        =
+            <span class="name">id</span><span class="annotation">: str</span>        =
 <span class="default_value">&lt;object object&gt;</span>
 
 
     </div>
-    <a class="headerlink" href="#ServerMessageRoomCreated.room_id"></a>
+    <a class="headerlink" href="#ServerMessageTrack.id"></a>
+
+
+
+                            </div>
+                            <div id="ServerMessageTrack.type" class="classattr">
+                                <div class="attr variable">
+            <span class="name">type</span><span class="annotation">: <a href="#ServerMessageTrackType">ServerMessageTrackType</a></span>        =
+<span class="default_value">&lt;object object&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrack.type"></a>
+
+
+
+                            </div>
+                            <div id="ServerMessageTrack.metadata" class="classattr">
+                                <div class="attr variable">
+            <span class="name">metadata</span><span class="annotation">: str</span>        =
+<span class="default_value">&lt;object object&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrack.metadata"></a>
 
 
 
@@ -924,16 +1035,568 @@
                                 <h5>Inherited Members</h5>
                                 <dl>
                                     <div><dt>betterproto.Message</dt>
-                                <dd id="ServerMessageRoomCreated.SerializeToString" class="function">SerializeToString</dd>
-                <dd id="ServerMessageRoomCreated.parse" class="function">parse</dd>
-                <dd id="ServerMessageRoomCreated.FromString" class="function">FromString</dd>
-                <dd id="ServerMessageRoomCreated.to_dict" class="function">to_dict</dd>
-                <dd id="ServerMessageRoomCreated.from_dict" class="function">from_dict</dd>
-                <dd id="ServerMessageRoomCreated.to_json" class="function">to_json</dd>
-                <dd id="ServerMessageRoomCreated.from_json" class="function">from_json</dd>
-                <dd id="ServerMessageRoomCreated.to_pydict" class="function">to_pydict</dd>
-                <dd id="ServerMessageRoomCreated.from_pydict" class="function">from_pydict</dd>
-                <dd id="ServerMessageRoomCreated.is_set" class="function">is_set</dd>
+                                <dd id="ServerMessageTrack.SerializeToString" class="function">SerializeToString</dd>
+                <dd id="ServerMessageTrack.parse" class="function">parse</dd>
+                <dd id="ServerMessageTrack.FromString" class="function">FromString</dd>
+                <dd id="ServerMessageTrack.to_dict" class="function">to_dict</dd>
+                <dd id="ServerMessageTrack.from_dict" class="function">from_dict</dd>
+                <dd id="ServerMessageTrack.to_json" class="function">to_json</dd>
+                <dd id="ServerMessageTrack.from_json" class="function">from_json</dd>
+                <dd id="ServerMessageTrack.to_pydict" class="function">to_pydict</dd>
+                <dd id="ServerMessageTrack.from_pydict" class="function">from_pydict</dd>
+                <dd id="ServerMessageTrack.is_set" class="function">is_set</dd>
+
+            </div>
+                                </dl>
+                            </div>
+                </section>
+                <section id="ServerMessageTrackType">
+                            <input id="ServerMessageTrackType-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr class">
+
+    <span class="def">class</span>
+    <span class="name">ServerMessageTrackType</span><wbr>(<span class="base">betterproto.Enum</span>):
+
+                <label class="view-source-button" for="ServerMessageTrackType-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrackType"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ServerMessageTrackType-20"><a href="#ServerMessageTrackType-20"><span class="linenos">20</span></a><span class="k">class</span> <span class="nc">ServerMessageTrackType</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+</span><span id="ServerMessageTrackType-21"><a href="#ServerMessageTrackType-21"><span class="linenos">21</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Defines types of tracks being published by peers and component&quot;&quot;&quot;</span>
+</span><span id="ServerMessageTrackType-22"><a href="#ServerMessageTrackType-22"><span class="linenos">22</span></a>
+</span><span id="ServerMessageTrackType-23"><a href="#ServerMessageTrackType-23"><span class="linenos">23</span></a>    <span class="n">TRACK_TYPE_UNSPECIFIED</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="ServerMessageTrackType-24"><a href="#ServerMessageTrackType-24"><span class="linenos">24</span></a>    <span class="n">TRACK_TYPE_VIDEO</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span id="ServerMessageTrackType-25"><a href="#ServerMessageTrackType-25"><span class="linenos">25</span></a>    <span class="n">TRACK_TYPE_AUDIO</span> <span class="o">=</span> <span class="mi">2</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Defines types of tracks being published by peers and component</p>
+</div>
+
+
+                            <div id="ServerMessageTrackType.TRACK_TYPE_UNSPECIFIED" class="classattr">
+                                <div class="attr variable">
+            <span class="name">TRACK_TYPE_UNSPECIFIED</span>        =
+<span class="default_value">&lt;<a href="#ServerMessageTrackType.TRACK_TYPE_UNSPECIFIED">ServerMessageTrackType.TRACK_TYPE_UNSPECIFIED</a>: 0&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrackType.TRACK_TYPE_UNSPECIFIED"></a>
+
+
+
+                            </div>
+                            <div id="ServerMessageTrackType.TRACK_TYPE_VIDEO" class="classattr">
+                                <div class="attr variable">
+            <span class="name">TRACK_TYPE_VIDEO</span>        =
+<span class="default_value">&lt;<a href="#ServerMessageTrackType.TRACK_TYPE_VIDEO">ServerMessageTrackType.TRACK_TYPE_VIDEO</a>: 1&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrackType.TRACK_TYPE_VIDEO"></a>
+
+
+
+                            </div>
+                            <div id="ServerMessageTrackType.TRACK_TYPE_AUDIO" class="classattr">
+                                <div class="attr variable">
+            <span class="name">TRACK_TYPE_AUDIO</span>        =
+<span class="default_value">&lt;<a href="#ServerMessageTrackType.TRACK_TYPE_AUDIO">ServerMessageTrackType.TRACK_TYPE_AUDIO</a>: 2&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrackType.TRACK_TYPE_AUDIO"></a>
+
+
+
+                            </div>
+                            <div class="inherited">
+                                <h5>Inherited Members</h5>
+                                <dl>
+                                    <div><dt>betterproto.Enum</dt>
+                                <dd id="ServerMessageTrackType.from_string" class="function">from_string</dd>
+
+            </div>
+            <div><dt>enum.Enum</dt>
+                                <dd id="ServerMessageTrackType.name" class="variable">name</dd>
+                <dd id="ServerMessageTrackType.value" class="variable">value</dd>
+
+            </div>
+            <div><dt>builtins.int</dt>
+                                <dd id="ServerMessageTrackType.conjugate" class="function">conjugate</dd>
+                <dd id="ServerMessageTrackType.bit_length" class="function">bit_length</dd>
+                <dd id="ServerMessageTrackType.to_bytes" class="function">to_bytes</dd>
+                <dd id="ServerMessageTrackType.from_bytes" class="function">from_bytes</dd>
+                <dd id="ServerMessageTrackType.as_integer_ratio" class="function">as_integer_ratio</dd>
+                <dd id="ServerMessageTrackType.real" class="variable">real</dd>
+                <dd id="ServerMessageTrackType.imag" class="variable">imag</dd>
+                <dd id="ServerMessageTrackType.numerator" class="variable">numerator</dd>
+                <dd id="ServerMessageTrackType.denominator" class="variable">denominator</dd>
+
+            </div>
+                                </dl>
+                            </div>
+                </section>
+                <section id="ServerMessageTrackAdded">
+                            <input id="ServerMessageTrackAdded-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr class">
+                    <div class="decorator">@dataclass(eq=False, repr=False)</div>
+
+    <span class="def">class</span>
+    <span class="name">ServerMessageTrackAdded</span><wbr>(<span class="base">betterproto.Message</span>):
+
+                <label class="view-source-button" for="ServerMessageTrackAdded-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrackAdded"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ServerMessageTrackAdded-221"><a href="#ServerMessageTrackAdded-221"><span class="linenos">221</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="ServerMessageTrackAdded-222"><a href="#ServerMessageTrackAdded-222"><span class="linenos">222</span></a><span class="k">class</span> <span class="nc">ServerMessageTrackAdded</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+</span><span id="ServerMessageTrackAdded-223"><a href="#ServerMessageTrackAdded-223"><span class="linenos">223</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Notification sent when peer or component adds new track&quot;&quot;&quot;</span>
+</span><span id="ServerMessageTrackAdded-224"><a href="#ServerMessageTrackAdded-224"><span class="linenos">224</span></a>
+</span><span id="ServerMessageTrackAdded-225"><a href="#ServerMessageTrackAdded-225"><span class="linenos">225</span></a>    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="ServerMessageTrackAdded-226"><a href="#ServerMessageTrackAdded-226"><span class="linenos">226</span></a>    <span class="n">peer_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s2">&quot;endpoint_info&quot;</span><span class="p">)</span>
+</span><span id="ServerMessageTrackAdded-227"><a href="#ServerMessageTrackAdded-227"><span class="linenos">227</span></a>    <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s2">&quot;endpoint_info&quot;</span><span class="p">)</span>
+</span><span id="ServerMessageTrackAdded-228"><a href="#ServerMessageTrackAdded-228"><span class="linenos">228</span></a>    <span class="n">track</span><span class="p">:</span> <span class="s2">&quot;ServerMessageTrack&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Notification sent when peer or component adds new track</p>
+</div>
+
+
+                            <div id="ServerMessageTrackAdded.__init__" class="classattr">
+                                <div class="attr function">
+
+        <span class="name">ServerMessageTrackAdded</span><span class="signature pdoc-code multiline">(<span class="param">  <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span>,</span><span class="param"> <span class="n">peer_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span>,</span><span class="param"> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span>,</span><span class="param">    <span class="n">track</span><span class="p">:</span> <span class="n"><a href="#ServerMessageTrack">ServerMessageTrack</a></span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span></span>)</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrackAdded.__init__"></a>
+
+
+
+                            </div>
+                            <div id="ServerMessageTrackAdded.room_id" class="classattr">
+                                <div class="attr variable">
+            <span class="name">room_id</span><span class="annotation">: str</span>        =
+<span class="default_value">&lt;object object&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrackAdded.room_id"></a>
+
+
+
+                            </div>
+                            <div id="ServerMessageTrackAdded.peer_id" class="classattr">
+                                <div class="attr variable">
+            <span class="name">peer_id</span><span class="annotation">: str</span>        =
+<span class="default_value">&lt;object object&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrackAdded.peer_id"></a>
+
+
+
+                            </div>
+                            <div id="ServerMessageTrackAdded.component_id" class="classattr">
+                                <div class="attr variable">
+            <span class="name">component_id</span><span class="annotation">: str</span>        =
+<span class="default_value">&lt;object object&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrackAdded.component_id"></a>
+
+
+
+                            </div>
+                            <div id="ServerMessageTrackAdded.track" class="classattr">
+                                <div class="attr variable">
+            <span class="name">track</span><span class="annotation">: <a href="#ServerMessageTrack">ServerMessageTrack</a></span>        =
+<span class="default_value">&lt;object object&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrackAdded.track"></a>
+
+
+
+                            </div>
+                            <div class="inherited">
+                                <h5>Inherited Members</h5>
+                                <dl>
+                                    <div><dt>betterproto.Message</dt>
+                                <dd id="ServerMessageTrackAdded.SerializeToString" class="function">SerializeToString</dd>
+                <dd id="ServerMessageTrackAdded.parse" class="function">parse</dd>
+                <dd id="ServerMessageTrackAdded.FromString" class="function">FromString</dd>
+                <dd id="ServerMessageTrackAdded.to_dict" class="function">to_dict</dd>
+                <dd id="ServerMessageTrackAdded.from_dict" class="function">from_dict</dd>
+                <dd id="ServerMessageTrackAdded.to_json" class="function">to_json</dd>
+                <dd id="ServerMessageTrackAdded.from_json" class="function">from_json</dd>
+                <dd id="ServerMessageTrackAdded.to_pydict" class="function">to_pydict</dd>
+                <dd id="ServerMessageTrackAdded.from_pydict" class="function">from_pydict</dd>
+                <dd id="ServerMessageTrackAdded.is_set" class="function">is_set</dd>
+
+            </div>
+                                </dl>
+                            </div>
+                </section>
+                <section id="ServerMessageTrackMetadataUpdated">
+                            <input id="ServerMessageTrackMetadataUpdated-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr class">
+                    <div class="decorator">@dataclass(eq=False, repr=False)</div>
+
+    <span class="def">class</span>
+    <span class="name">ServerMessageTrackMetadataUpdated</span><wbr>(<span class="base">betterproto.Message</span>):
+
+                <label class="view-source-button" for="ServerMessageTrackMetadataUpdated-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrackMetadataUpdated"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ServerMessageTrackMetadataUpdated-241"><a href="#ServerMessageTrackMetadataUpdated-241"><span class="linenos">241</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="ServerMessageTrackMetadataUpdated-242"><a href="#ServerMessageTrackMetadataUpdated-242"><span class="linenos">242</span></a><span class="k">class</span> <span class="nc">ServerMessageTrackMetadataUpdated</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+</span><span id="ServerMessageTrackMetadataUpdated-243"><a href="#ServerMessageTrackMetadataUpdated-243"><span class="linenos">243</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Notification sent when metadata of a multimedia track is updated&quot;&quot;&quot;</span>
+</span><span id="ServerMessageTrackMetadataUpdated-244"><a href="#ServerMessageTrackMetadataUpdated-244"><span class="linenos">244</span></a>
+</span><span id="ServerMessageTrackMetadataUpdated-245"><a href="#ServerMessageTrackMetadataUpdated-245"><span class="linenos">245</span></a>    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="ServerMessageTrackMetadataUpdated-246"><a href="#ServerMessageTrackMetadataUpdated-246"><span class="linenos">246</span></a>    <span class="n">peer_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s2">&quot;endpoint_info&quot;</span><span class="p">)</span>
+</span><span id="ServerMessageTrackMetadataUpdated-247"><a href="#ServerMessageTrackMetadataUpdated-247"><span class="linenos">247</span></a>    <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s2">&quot;endpoint_info&quot;</span><span class="p">)</span>
+</span><span id="ServerMessageTrackMetadataUpdated-248"><a href="#ServerMessageTrackMetadataUpdated-248"><span class="linenos">248</span></a>    <span class="n">track</span><span class="p">:</span> <span class="s2">&quot;ServerMessageTrack&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Notification sent when metadata of a multimedia track is updated</p>
+</div>
+
+
+                            <div id="ServerMessageTrackMetadataUpdated.__init__" class="classattr">
+                                <div class="attr function">
+
+        <span class="name">ServerMessageTrackMetadataUpdated</span><span class="signature pdoc-code multiline">(<span class="param">    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span>,</span><span class="param"> <span class="n">peer_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span>,</span><span class="param"> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span>,</span><span class="param">    <span class="n">track</span><span class="p">:</span> <span class="n"><a href="#ServerMessageTrack">ServerMessageTrack</a></span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span></span>)</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrackMetadataUpdated.__init__"></a>
+
+
+
+                            </div>
+                            <div id="ServerMessageTrackMetadataUpdated.room_id" class="classattr">
+                                <div class="attr variable">
+            <span class="name">room_id</span><span class="annotation">: str</span>        =
+<span class="default_value">&lt;object object&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrackMetadataUpdated.room_id"></a>
+
+
+
+                            </div>
+                            <div id="ServerMessageTrackMetadataUpdated.peer_id" class="classattr">
+                                <div class="attr variable">
+            <span class="name">peer_id</span><span class="annotation">: str</span>        =
+<span class="default_value">&lt;object object&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrackMetadataUpdated.peer_id"></a>
+
+
+
+                            </div>
+                            <div id="ServerMessageTrackMetadataUpdated.component_id" class="classattr">
+                                <div class="attr variable">
+            <span class="name">component_id</span><span class="annotation">: str</span>        =
+<span class="default_value">&lt;object object&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrackMetadataUpdated.component_id"></a>
+
+
+
+                            </div>
+                            <div id="ServerMessageTrackMetadataUpdated.track" class="classattr">
+                                <div class="attr variable">
+            <span class="name">track</span><span class="annotation">: <a href="#ServerMessageTrack">ServerMessageTrack</a></span>        =
+<span class="default_value">&lt;object object&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrackMetadataUpdated.track"></a>
+
+
+
+                            </div>
+                            <div class="inherited">
+                                <h5>Inherited Members</h5>
+                                <dl>
+                                    <div><dt>betterproto.Message</dt>
+                                <dd id="ServerMessageTrackMetadataUpdated.SerializeToString" class="function">SerializeToString</dd>
+                <dd id="ServerMessageTrackMetadataUpdated.parse" class="function">parse</dd>
+                <dd id="ServerMessageTrackMetadataUpdated.FromString" class="function">FromString</dd>
+                <dd id="ServerMessageTrackMetadataUpdated.to_dict" class="function">to_dict</dd>
+                <dd id="ServerMessageTrackMetadataUpdated.from_dict" class="function">from_dict</dd>
+                <dd id="ServerMessageTrackMetadataUpdated.to_json" class="function">to_json</dd>
+                <dd id="ServerMessageTrackMetadataUpdated.from_json" class="function">from_json</dd>
+                <dd id="ServerMessageTrackMetadataUpdated.to_pydict" class="function">to_pydict</dd>
+                <dd id="ServerMessageTrackMetadataUpdated.from_pydict" class="function">from_pydict</dd>
+                <dd id="ServerMessageTrackMetadataUpdated.is_set" class="function">is_set</dd>
+
+            </div>
+                                </dl>
+                            </div>
+                </section>
+                <section id="ServerMessageTrackRemoved">
+                            <input id="ServerMessageTrackRemoved-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr class">
+                    <div class="decorator">@dataclass(eq=False, repr=False)</div>
+
+    <span class="def">class</span>
+    <span class="name">ServerMessageTrackRemoved</span><wbr>(<span class="base">betterproto.Message</span>):
+
+                <label class="view-source-button" for="ServerMessageTrackRemoved-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrackRemoved"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ServerMessageTrackRemoved-231"><a href="#ServerMessageTrackRemoved-231"><span class="linenos">231</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="ServerMessageTrackRemoved-232"><a href="#ServerMessageTrackRemoved-232"><span class="linenos">232</span></a><span class="k">class</span> <span class="nc">ServerMessageTrackRemoved</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+</span><span id="ServerMessageTrackRemoved-233"><a href="#ServerMessageTrackRemoved-233"><span class="linenos">233</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Notification sent when a track is removed&quot;&quot;&quot;</span>
+</span><span id="ServerMessageTrackRemoved-234"><a href="#ServerMessageTrackRemoved-234"><span class="linenos">234</span></a>
+</span><span id="ServerMessageTrackRemoved-235"><a href="#ServerMessageTrackRemoved-235"><span class="linenos">235</span></a>    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="ServerMessageTrackRemoved-236"><a href="#ServerMessageTrackRemoved-236"><span class="linenos">236</span></a>    <span class="n">peer_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s2">&quot;endpoint_info&quot;</span><span class="p">)</span>
+</span><span id="ServerMessageTrackRemoved-237"><a href="#ServerMessageTrackRemoved-237"><span class="linenos">237</span></a>    <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s2">&quot;endpoint_info&quot;</span><span class="p">)</span>
+</span><span id="ServerMessageTrackRemoved-238"><a href="#ServerMessageTrackRemoved-238"><span class="linenos">238</span></a>    <span class="n">track</span><span class="p">:</span> <span class="s2">&quot;ServerMessageTrack&quot;</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">message_field</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Notification sent when a track is removed</p>
+</div>
+
+
+                            <div id="ServerMessageTrackRemoved.__init__" class="classattr">
+                                <div class="attr function">
+
+        <span class="name">ServerMessageTrackRemoved</span><span class="signature pdoc-code multiline">(<span class="param">    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span>,</span><span class="param"> <span class="n">peer_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span>,</span><span class="param"> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span>,</span><span class="param">    <span class="n">track</span><span class="p">:</span> <span class="n"><a href="#ServerMessageTrack">ServerMessageTrack</a></span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span></span>)</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrackRemoved.__init__"></a>
+
+
+
+                            </div>
+                            <div id="ServerMessageTrackRemoved.room_id" class="classattr">
+                                <div class="attr variable">
+            <span class="name">room_id</span><span class="annotation">: str</span>        =
+<span class="default_value">&lt;object object&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrackRemoved.room_id"></a>
+
+
+
+                            </div>
+                            <div id="ServerMessageTrackRemoved.peer_id" class="classattr">
+                                <div class="attr variable">
+            <span class="name">peer_id</span><span class="annotation">: str</span>        =
+<span class="default_value">&lt;object object&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrackRemoved.peer_id"></a>
+
+
+
+                            </div>
+                            <div id="ServerMessageTrackRemoved.component_id" class="classattr">
+                                <div class="attr variable">
+            <span class="name">component_id</span><span class="annotation">: str</span>        =
+<span class="default_value">&lt;object object&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrackRemoved.component_id"></a>
+
+
+
+                            </div>
+                            <div id="ServerMessageTrackRemoved.track" class="classattr">
+                                <div class="attr variable">
+            <span class="name">track</span><span class="annotation">: <a href="#ServerMessageTrack">ServerMessageTrack</a></span>        =
+<span class="default_value">&lt;object object&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageTrackRemoved.track"></a>
+
+
+
+                            </div>
+                            <div class="inherited">
+                                <h5>Inherited Members</h5>
+                                <dl>
+                                    <div><dt>betterproto.Message</dt>
+                                <dd id="ServerMessageTrackRemoved.SerializeToString" class="function">SerializeToString</dd>
+                <dd id="ServerMessageTrackRemoved.parse" class="function">parse</dd>
+                <dd id="ServerMessageTrackRemoved.FromString" class="function">FromString</dd>
+                <dd id="ServerMessageTrackRemoved.to_dict" class="function">to_dict</dd>
+                <dd id="ServerMessageTrackRemoved.from_dict" class="function">from_dict</dd>
+                <dd id="ServerMessageTrackRemoved.to_json" class="function">to_json</dd>
+                <dd id="ServerMessageTrackRemoved.from_json" class="function">from_json</dd>
+                <dd id="ServerMessageTrackRemoved.to_pydict" class="function">to_pydict</dd>
+                <dd id="ServerMessageTrackRemoved.from_pydict" class="function">from_pydict</dd>
+                <dd id="ServerMessageTrackRemoved.is_set" class="function">is_set</dd>
+
+            </div>
+                                </dl>
+                            </div>
+                </section>
+                <section id="ServerMessageHlsPlayable">
+                            <input id="ServerMessageHlsPlayable-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr class">
+                    <div class="decorator">@dataclass(eq=False, repr=False)</div>
+
+    <span class="def">class</span>
+    <span class="name">ServerMessageHlsPlayable</span><wbr>(<span class="base">betterproto.Message</span>):
+
+                <label class="view-source-button" for="ServerMessageHlsPlayable-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#ServerMessageHlsPlayable"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ServerMessageHlsPlayable-179"><a href="#ServerMessageHlsPlayable-179"><span class="linenos">179</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="ServerMessageHlsPlayable-180"><a href="#ServerMessageHlsPlayable-180"><span class="linenos">180</span></a><span class="k">class</span> <span class="nc">ServerMessageHlsPlayable</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+</span><span id="ServerMessageHlsPlayable-181"><a href="#ServerMessageHlsPlayable-181"><span class="linenos">181</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Notification sent when the HLS stream becomes available in a room&quot;&quot;&quot;</span>
+</span><span id="ServerMessageHlsPlayable-182"><a href="#ServerMessageHlsPlayable-182"><span class="linenos">182</span></a>
+</span><span id="ServerMessageHlsPlayable-183"><a href="#ServerMessageHlsPlayable-183"><span class="linenos">183</span></a>    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="ServerMessageHlsPlayable-184"><a href="#ServerMessageHlsPlayable-184"><span class="linenos">184</span></a>    <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Notification sent when the HLS stream becomes available in a room</p>
+</div>
+
+
+                            <div id="ServerMessageHlsPlayable.__init__" class="classattr">
+                                <div class="attr function">
+
+        <span class="name">ServerMessageHlsPlayable</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span>, </span><span class="param"><span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span></span>)</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageHlsPlayable.__init__"></a>
+
+
+
+                            </div>
+                            <div id="ServerMessageHlsPlayable.room_id" class="classattr">
+                                <div class="attr variable">
+            <span class="name">room_id</span><span class="annotation">: str</span>        =
+<span class="default_value">&lt;object object&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageHlsPlayable.room_id"></a>
+
+
+
+                            </div>
+                            <div id="ServerMessageHlsPlayable.component_id" class="classattr">
+                                <div class="attr variable">
+            <span class="name">component_id</span><span class="annotation">: str</span>        =
+<span class="default_value">&lt;object object&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageHlsPlayable.component_id"></a>
+
+
+
+                            </div>
+                            <div class="inherited">
+                                <h5>Inherited Members</h5>
+                                <dl>
+                                    <div><dt>betterproto.Message</dt>
+                                <dd id="ServerMessageHlsPlayable.SerializeToString" class="function">SerializeToString</dd>
+                <dd id="ServerMessageHlsPlayable.parse" class="function">parse</dd>
+                <dd id="ServerMessageHlsPlayable.FromString" class="function">FromString</dd>
+                <dd id="ServerMessageHlsPlayable.to_dict" class="function">to_dict</dd>
+                <dd id="ServerMessageHlsPlayable.from_dict" class="function">from_dict</dd>
+                <dd id="ServerMessageHlsPlayable.to_json" class="function">to_json</dd>
+                <dd id="ServerMessageHlsPlayable.from_json" class="function">from_json</dd>
+                <dd id="ServerMessageHlsPlayable.to_pydict" class="function">to_pydict</dd>
+                <dd id="ServerMessageHlsPlayable.from_pydict" class="function">from_pydict</dd>
+                <dd id="ServerMessageHlsPlayable.is_set" class="function">is_set</dd>
+
+            </div>
+                                </dl>
+                            </div>
+                </section>
+                <section id="ServerMessageMetricsReport">
+                            <input id="ServerMessageMetricsReport-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr class">
+                    <div class="decorator">@dataclass(eq=False, repr=False)</div>
+
+    <span class="def">class</span>
+    <span class="name">ServerMessageMetricsReport</span><wbr>(<span class="base">betterproto.Message</span>):
+
+                <label class="view-source-button" for="ServerMessageMetricsReport-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#ServerMessageMetricsReport"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ServerMessageMetricsReport-172"><a href="#ServerMessageMetricsReport-172"><span class="linenos">172</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="ServerMessageMetricsReport-173"><a href="#ServerMessageMetricsReport-173"><span class="linenos">173</span></a><span class="k">class</span> <span class="nc">ServerMessageMetricsReport</span><span class="p">(</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">):</span>
+</span><span id="ServerMessageMetricsReport-174"><a href="#ServerMessageMetricsReport-174"><span class="linenos">174</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Message containing WebRTC metrics from JF&quot;&quot;&quot;</span>
+</span><span id="ServerMessageMetricsReport-175"><a href="#ServerMessageMetricsReport-175"><span class="linenos">175</span></a>
+</span><span id="ServerMessageMetricsReport-176"><a href="#ServerMessageMetricsReport-176"><span class="linenos">176</span></a>    <span class="n">metrics</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">string_field</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Message containing WebRTC metrics from JF</p>
+</div>
+
+
+                            <div id="ServerMessageMetricsReport.__init__" class="classattr">
+                                <div class="attr function">
+
+        <span class="name">ServerMessageMetricsReport</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">metrics</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nb">object</span> <span class="nb">object</span><span class="o">&gt;</span></span>)</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageMetricsReport.__init__"></a>
+
+
+
+                            </div>
+                            <div id="ServerMessageMetricsReport.metrics" class="classattr">
+                                <div class="attr variable">
+            <span class="name">metrics</span><span class="annotation">: str</span>        =
+<span class="default_value">&lt;object object&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ServerMessageMetricsReport.metrics"></a>
+
+
+
+                            </div>
+                            <div class="inherited">
+                                <h5>Inherited Members</h5>
+                                <dl>
+                                    <div><dt>betterproto.Message</dt>
+                                <dd id="ServerMessageMetricsReport.SerializeToString" class="function">SerializeToString</dd>
+                <dd id="ServerMessageMetricsReport.parse" class="function">parse</dd>
+                <dd id="ServerMessageMetricsReport.FromString" class="function">FromString</dd>
+                <dd id="ServerMessageMetricsReport.to_dict" class="function">to_dict</dd>
+                <dd id="ServerMessageMetricsReport.from_dict" class="function">from_dict</dd>
+                <dd id="ServerMessageMetricsReport.to_json" class="function">to_json</dd>
+                <dd id="ServerMessageMetricsReport.from_json" class="function">from_json</dd>
+                <dd id="ServerMessageMetricsReport.to_pydict" class="function">to_pydict</dd>
+                <dd id="ServerMessageMetricsReport.from_pydict" class="function">from_pydict</dd>
+                <dd id="ServerMessageMetricsReport.is_set" class="function">is_set</dd>
 
             </div>
                                 </dl>
