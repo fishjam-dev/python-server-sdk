@@ -9,12 +9,16 @@ import betterproto
 
 
 class ServerMessageEventType(betterproto.Enum):
+    """Defines message groups for which client can subscribe"""
+
     EVENT_TYPE_UNSPECIFIED = 0
     EVENT_TYPE_SERVER_NOTIFICATION = 1
     EVENT_TYPE_METRICS = 2
 
 
 class ServerMessageTrackType(betterproto.Enum):
+    """Defines types of tracks being published by peers and component"""
+
     TRACK_TYPE_UNSPECIFIED = 0
     TRACK_TYPE_VIDEO = 1
     TRACK_TYPE_AUDIO = 2
@@ -22,6 +26,8 @@ class ServerMessageTrackType(betterproto.Enum):
 
 @dataclass(eq=False, repr=False)
 class ServerMessage(betterproto.Message):
+    """Defines any type of message passed between JF and server client"""
+
     room_crashed: "ServerMessageRoomCrashed" = betterproto.message_field(
         1, group="content"
     )
@@ -83,86 +89,120 @@ class ServerMessage(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class ServerMessageRoomCrashed(betterproto.Message):
+    """Notification sent when a room crashes"""
+
     room_id: str = betterproto.string_field(1)
 
 
 @dataclass(eq=False, repr=False)
 class ServerMessagePeerConnected(betterproto.Message):
+    """Notification sent when a peer connects"""
+
     room_id: str = betterproto.string_field(1)
     peer_id: str = betterproto.string_field(2)
 
 
 @dataclass(eq=False, repr=False)
 class ServerMessagePeerDisconnected(betterproto.Message):
+    """Notification sent when a peer disconnects from JF"""
+
     room_id: str = betterproto.string_field(1)
     peer_id: str = betterproto.string_field(2)
 
 
 @dataclass(eq=False, repr=False)
 class ServerMessagePeerCrashed(betterproto.Message):
+    """Notification sent when a peer crashes"""
+
     room_id: str = betterproto.string_field(1)
     peer_id: str = betterproto.string_field(2)
 
 
 @dataclass(eq=False, repr=False)
 class ServerMessageComponentCrashed(betterproto.Message):
+    """Notification sent when a component crashes"""
+
     room_id: str = betterproto.string_field(1)
     component_id: str = betterproto.string_field(2)
 
 
 @dataclass(eq=False, repr=False)
 class ServerMessageAuthenticated(betterproto.Message):
+    """Response sent by JF, confirming successfull authentication"""
+
     pass
 
 
 @dataclass(eq=False, repr=False)
 class ServerMessageAuthRequest(betterproto.Message):
+    """Request sent by client, to authenticate to JF server"""
+
     token: str = betterproto.string_field(1)
 
 
 @dataclass(eq=False, repr=False)
 class ServerMessageSubscribeRequest(betterproto.Message):
+    """Request sent by client to subsribe for certain message type"""
+
     event_type: "ServerMessageEventType" = betterproto.enum_field(1)
 
 
 @dataclass(eq=False, repr=False)
 class ServerMessageSubscribeResponse(betterproto.Message):
+    """Response sent by JF, confirming subscription for message type"""
+
     event_type: "ServerMessageEventType" = betterproto.enum_field(1)
 
 
 @dataclass(eq=False, repr=False)
 class ServerMessageRoomCreated(betterproto.Message):
+    """Notification sent when a room is created"""
+
     room_id: str = betterproto.string_field(1)
 
 
 @dataclass(eq=False, repr=False)
 class ServerMessageRoomDeleted(betterproto.Message):
+    """Notification sent when a room is deleted"""
+
     room_id: str = betterproto.string_field(1)
 
 
 @dataclass(eq=False, repr=False)
 class ServerMessageMetricsReport(betterproto.Message):
+    """Message containing WebRTC metrics from JF"""
+
     metrics: str = betterproto.string_field(1)
 
 
 @dataclass(eq=False, repr=False)
 class ServerMessageHlsPlayable(betterproto.Message):
+    """Notification sent when the HLS stream becomes available in a room"""
+
     room_id: str = betterproto.string_field(1)
     component_id: str = betterproto.string_field(2)
 
 
 @dataclass(eq=False, repr=False)
 class ServerMessageHlsUploaded(betterproto.Message):
+    """
+    Notification sent when the HLS recording is successfully uploded to AWS S3
+    """
+
     room_id: str = betterproto.string_field(1)
 
 
 @dataclass(eq=False, repr=False)
 class ServerMessageHlsUploadCrashed(betterproto.Message):
+    """Notification sent when the upload of HLS recording to AWS S3 fails"""
+
     room_id: str = betterproto.string_field(1)
 
 
 @dataclass(eq=False, repr=False)
 class ServerMessagePeerMetadataUpdated(betterproto.Message):
+    """Notification sent when peer updates its metadata"""
+
     room_id: str = betterproto.string_field(1)
     peer_id: str = betterproto.string_field(2)
     metadata: str = betterproto.string_field(3)
@@ -170,6 +210,8 @@ class ServerMessagePeerMetadataUpdated(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class ServerMessageTrack(betterproto.Message):
+    """Describes a media track"""
+
     id: str = betterproto.string_field(1)
     type: "ServerMessageTrackType" = betterproto.enum_field(2)
     metadata: str = betterproto.string_field(3)
@@ -177,6 +219,8 @@ class ServerMessageTrack(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class ServerMessageTrackAdded(betterproto.Message):
+    """Notification sent when peer or component adds new track"""
+
     room_id: str = betterproto.string_field(1)
     peer_id: str = betterproto.string_field(2, group="endpoint_info")
     component_id: str = betterproto.string_field(3, group="endpoint_info")
@@ -185,6 +229,8 @@ class ServerMessageTrackAdded(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class ServerMessageTrackRemoved(betterproto.Message):
+    """Notification sent when a track is removed"""
+
     room_id: str = betterproto.string_field(1)
     peer_id: str = betterproto.string_field(2, group="endpoint_info")
     component_id: str = betterproto.string_field(3, group="endpoint_info")
@@ -193,6 +239,8 @@ class ServerMessageTrackRemoved(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class ServerMessageTrackMetadataUpdated(betterproto.Message):
+    """Notification sent when metadata of a multimedia track is updated"""
+
     room_id: str = betterproto.string_field(1)
     peer_id: str = betterproto.string_field(2, group="endpoint_info")
     component_id: str = betterproto.string_field(3, group="endpoint_info")

@@ -1,12 +1,20 @@
 import asyncio
 
 from jellyfish import Notifier, RoomApi
+from jellyfish.events import ServerMessageTrackAdded, ServerMessageTrackType
 
 notifier = Notifier(server_address='localhost:5002', server_api_token='development')
 
 @notifier.on_server_notification
 def handle_notification(server_notification):
     print(f'Received a notification: {server_notification}')
+
+    if isinstance(server_notification, ServerMessageTrackAdded):
+        if server_notification.track.type == ServerMessageTrackType.TRACK_TYPE_AUDIO:
+            print("New audio track has been added")
+        elif server_notification.track.type == ServerMessageTrackType.TRACK_TYPE_VIDEO:
+            print("New video track has been added")
+
 
 @notifier.on_metrics
 def handle_metrics(metrics_report):

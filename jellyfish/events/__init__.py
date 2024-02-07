@@ -1,5 +1,5 @@
 """
-Server events being sent Jellyfish
+.. include:: ../../docs/server_notifications.md
 """
 
 # Exported messages
@@ -13,22 +13,26 @@ from jellyfish.events._protos.jellyfish import (
     ServerMessageRoomCrashed,
     ServerMessageRoomCreated,
     ServerMessageRoomDeleted,
+    ServerMessageTrack,
     ServerMessageTrackAdded,
     ServerMessageTrackMetadataUpdated,
     ServerMessageTrackRemoved,
+    ServerMessageTrackType,
 )
 
 __all__ = [
-    "ServerMessageComponentCrashed",
-    "ServerMessageHlsPlayable",
-    "ServerMessageMetricsReport",
-    "ServerMessagePeerCrashed",
+    "ServerMessageRoomCreated",
+    "ServerMessageRoomDeleted",
+    "ServerMessageRoomCrashed",
     "ServerMessagePeerConnected",
     "ServerMessagePeerDisconnected",
-    "ServerMessageRoomCrashed",
-    "ServerMessageRoomDeleted",
-    "ServerMessageRoomCreated",
+    "ServerMessagePeerCrashed",
+    "ServerMessageComponentCrashed",
+    "ServerMessageTrack",
+    "ServerMessageTrackType",
     "ServerMessageTrackAdded",
     "ServerMessageTrackMetadataUpdated",
     "ServerMessageTrackRemoved",
+    "ServerMessageHlsPlayable",
+    "ServerMessageMetricsReport",
 ]
