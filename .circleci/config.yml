@@ -30,6 +30,11 @@ jobs:
   
   test:
     executor: machine_executor_amd64
+    parameters:
+      python_version:
+        type: string
+    environment:
+      PYTHON_VERSION: <<parameters.python_version>>
     steps:
       - checkout
       - run: docker compose -f docker-compose-test.yaml up test --exit-code-from test
@@ -39,4 +44,12 @@ workflows:
   build:
     jobs:
       - lint
-      - test
+      - test:
+          matrix:
+              parameters:
+                python_version:
+                  - 3.8
+                  - 3.9
+                  - 3.10
+                  - 3.11
+                  - 3.12
