@@ -5,8 +5,6 @@ RoomApi used to manage rooms
 from typing import Literal, Union
 
 from jellyfish._openapi_client.api.hls import subscribe_hls_to as hls_subscribe_hls_to
-from jellyfish._openapi_client.api.sip import dial as sip_dial
-from jellyfish._openapi_client.api.sip import end_call as sip_end_call
 from jellyfish._openapi_client.api.room import add_component as room_add_component
 from jellyfish._openapi_client.api.room import add_peer as room_add_peer
 from jellyfish._openapi_client.api.room import create_room as room_create_room
@@ -15,17 +13,19 @@ from jellyfish._openapi_client.api.room import delete_peer as room_delete_peer
 from jellyfish._openapi_client.api.room import delete_room as room_delete_room
 from jellyfish._openapi_client.api.room import get_all_rooms as room_get_all_rooms
 from jellyfish._openapi_client.api.room import get_room as room_get_room
+from jellyfish._openapi_client.api.sip import dial as sip_dial
+from jellyfish._openapi_client.api.sip import end_call as sip_end_call
 from jellyfish._openapi_client.models import (
     AddComponentJsonBody,
     AddPeerJsonBody,
     ComponentFile,
-    ComponentOptionsFile,
-    ComponentSIP,
-    ComponentOptionsSIP,
     ComponentHLS,
+    ComponentOptionsFile,
     ComponentOptionsHLS,
-    ComponentRTSP,
     ComponentOptionsRTSP,
+    ComponentOptionsSIP,
+    ComponentRTSP,
+    ComponentSIP,
     Peer,
     PeerOptionsWebRTC,
     Room,
@@ -127,7 +127,12 @@ class RoomApi(BaseApi):
     def add_component(
         self,
         room_id: str,
-        options: Union[ComponentOptionsFile, ComponentOptionsHLS, ComponentOptionsRTSP, ComponentOptionsSIP],
+        options: Union[
+            ComponentOptionsFile,
+            ComponentOptionsHLS,
+            ComponentOptionsRTSP,
+            ComponentOptionsSIP,
+        ],
     ) -> Union[ComponentFile, ComponentHLS, ComponentRTSP, ComponentSIP]:
         """Creates component in the room"""
 
@@ -177,8 +182,9 @@ class RoomApi(BaseApi):
         """
         Starts a phone call from a specified component to a provided phone number.
 
-        This is asynchronous operation. 
-        In case of providing incorrect phone number you will receive a notification `ComponentCrashed`.
+        This is asynchronous operation.
+        In case of providing incorrect phone number you will receive
+        notification `ComponentCrashed`.
         """
 
         return self._request(

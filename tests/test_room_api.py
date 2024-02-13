@@ -14,13 +14,13 @@ from jellyfish import (
     ComponentOptionsHLS,
     ComponentOptionsHLSSubscribeMode,
     ComponentOptionsRTSP,
+    ComponentOptionsSIP,
     ComponentPropertiesFile,
     ComponentPropertiesHLS,
     ComponentPropertiesHLSSubscribeMode,
     ComponentPropertiesRTSP,
-    ComponentRTSP,
-    ComponentOptionsSIP,
     ComponentPropertiesSIP,
+    ComponentRTSP,
     ComponentSIP,
     Credentials,
     Peer,
@@ -66,16 +66,14 @@ RTSP_PROPERTIES = ComponentPropertiesRTSP(
     pierce_nat=True,
 )
 
-SIP_PHONE_NUMBER="1234"
+SIP_PHONE_NUMBER = "1234"
 
-SIP_CREDENTIALS=Credentials(address="my-sip-registrar.net",username="user-name",password="pass-word")
+SIP_CREDENTIALS = Credentials(
+    address="my-sip-registrar.net", username="user-name", password="pass-word"
+)
 
-SIP_OPTIONS = ComponentOptionsSIP(
-    registrar_credentials=SIP_CREDENTIALS
-)
-SIP_PROPERTIES = ComponentPropertiesSIP(
-    registrar_credentials=SIP_CREDENTIALS
-)
+SIP_OPTIONS = ComponentOptionsSIP(registrar_credentials=SIP_CREDENTIALS)
+SIP_PROPERTIES = ComponentPropertiesSIP(registrar_credentials=SIP_CREDENTIALS)
 
 FILE_OPTIONS = ComponentOptionsFile(file_path="video.h264")
 FILE_PROPERTIES = ComponentPropertiesFile(
@@ -314,18 +312,18 @@ class TestHLSSubscribe:
             == "HLS component option `subscribe_mode` is set to :auto"
         )
 
+
 class TestSIPCall:
     def test_happy_path(self, room_api: RoomApi):
         _, room = room_api.create_room(video_codec=CODEC_H264)
         component = room_api.add_component(
             room.id,
-            options=ComponentOptionsSIP(
-                registrar_credentials=SIP_CREDENTIALS
-            ),
+            options=ComponentOptionsSIP(registrar_credentials=SIP_CREDENTIALS),
         )
         assert room_api.sip_dial(room.id, component.id, SIP_PHONE_NUMBER) is None
 
         assert room_api.sip_end_call(room.id, component.id) is None
+
 
 class TestAddPeer:
     def _assert_peer_created(self, room_api, webrtc_peer, room_id):
