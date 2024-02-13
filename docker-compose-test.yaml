@@ -30,7 +30,7 @@ services:
 
   test:
     container_name: test
-    image: cimg/python:3.8
+    image: "cimg/python:${PYTHON_VERSION:-3.8}"
     command: sh -c "cd /app && \ poetry config virtualenvs.in-project false && \ poetry install --no-ansi && \ poetry run pytest -s"
     environment:
       DOCKER_TEST: "TRUE"
