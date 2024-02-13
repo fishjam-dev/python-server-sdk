@@ -7,6 +7,7 @@ if TYPE_CHECKING:
     from ..models.component_file import ComponentFile
     from ..models.component_hls import ComponentHLS
     from ..models.component_rtsp import ComponentRTSP
+    from ..models.component_sip import ComponentSIP
     from ..models.peer import Peer
     from ..models.room_config import RoomConfig
 
@@ -18,7 +19,9 @@ T = TypeVar("T", bound="Room")
 class Room:
     """Description of the room state"""
 
-    components: List[Union["ComponentFile", "ComponentHLS", "ComponentRTSP"]]
+    components: List[
+        Union["ComponentFile", "ComponentHLS", "ComponentRTSP", "ComponentSIP"]
+    ]
     """List of all components"""
     config: "RoomConfig"
     """Room configuration"""
@@ -31,6 +34,7 @@ class Room:
 
     def to_dict(self) -> Dict[str, Any]:
         """@private"""
+        from ..models.component_file import ComponentFile
         from ..models.component_hls import ComponentHLS
         from ..models.component_rtsp import ComponentRTSP
 
@@ -42,6 +46,9 @@ class Room:
                 components_item = components_item_data.to_dict()
 
             elif isinstance(components_item_data, ComponentRTSP):
+                components_item = components_item_data.to_dict()
+
+            elif isinstance(components_item_data, ComponentFile):
                 components_item = components_item_data.to_dict()
 
             else:
@@ -77,6 +84,7 @@ class Room:
         from ..models.component_file import ComponentFile
         from ..models.component_hls import ComponentHLS
         from ..models.component_rtsp import ComponentRTSP
+        from ..models.component_sip import ComponentSIP
         from ..models.peer import Peer
         from ..models.room_config import RoomConfig
 
@@ -87,7 +95,9 @@ class Room:
 
             def _parse_components_item(
                 data: object,
-            ) -> Union["ComponentFile", "ComponentHLS", "ComponentRTSP"]:
+            ) -> Union[
+                "ComponentFile", "ComponentHLS", "ComponentRTSP", "ComponentSIP"
+            ]:
                 try:
                     if not isinstance(data, dict):
                         raise TypeError()
@@ -104,11 +114,19 @@ class Room:
                     return componentsschemas_component_type_1
                 except:  # noqa: E722
                     pass
+                try:
+                    if not isinstance(data, dict):
+                        raise TypeError()
+                    componentsschemas_component_type_2 = ComponentFile.from_dict(data)
+
+                    return componentsschemas_component_type_2
+                except:  # noqa: E722
+                    pass
                 if not isinstance(data, dict):
                     raise TypeError()
-                componentsschemas_component_type_2 = ComponentFile.from_dict(data)
+                componentsschemas_component_type_3 = ComponentSIP.from_dict(data)
 
-                return componentsschemas_component_type_2
+                return componentsschemas_component_type_3
 
             components_item = _parse_components_item(components_item_data)
 

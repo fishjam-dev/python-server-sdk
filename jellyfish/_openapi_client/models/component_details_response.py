@@ -7,6 +7,7 @@ if TYPE_CHECKING:
     from ..models.component_file import ComponentFile
     from ..models.component_hls import ComponentHLS
     from ..models.component_rtsp import ComponentRTSP
+    from ..models.component_sip import ComponentSIP
 
 
 T = TypeVar("T", bound="ComponentDetailsResponse")
@@ -16,13 +17,14 @@ T = TypeVar("T", bound="ComponentDetailsResponse")
 class ComponentDetailsResponse:
     """Response containing component details"""
 
-    data: Union["ComponentFile", "ComponentHLS", "ComponentRTSP"]
+    data: Union["ComponentFile", "ComponentHLS", "ComponentRTSP", "ComponentSIP"]
     """Describes component"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
     """@private"""
 
     def to_dict(self) -> Dict[str, Any]:
         """@private"""
+        from ..models.component_file import ComponentFile
         from ..models.component_hls import ComponentHLS
         from ..models.component_rtsp import ComponentRTSP
 
@@ -32,6 +34,9 @@ class ComponentDetailsResponse:
             data = self.data.to_dict()
 
         elif isinstance(self.data, ComponentRTSP):
+            data = self.data.to_dict()
+
+        elif isinstance(self.data, ComponentFile):
             data = self.data.to_dict()
 
         else:
@@ -53,12 +58,13 @@ class ComponentDetailsResponse:
         from ..models.component_file import ComponentFile
         from ..models.component_hls import ComponentHLS
         from ..models.component_rtsp import ComponentRTSP
+        from ..models.component_sip import ComponentSIP
 
         d = src_dict.copy()
 
         def _parse_data(
             data: object,
-        ) -> Union["ComponentFile", "ComponentHLS", "ComponentRTSP"]:
+        ) -> Union["ComponentFile", "ComponentHLS", "ComponentRTSP", "ComponentSIP"]:
             try:
                 if not isinstance(data, dict):
                     raise TypeError()
@@ -75,11 +81,19 @@ class ComponentDetailsResponse:
                 return componentsschemas_component_type_1
             except:  # noqa: E722
                 pass
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                componentsschemas_component_type_2 = ComponentFile.from_dict(data)
+
+                return componentsschemas_component_type_2
+            except:  # noqa: E722
+                pass
             if not isinstance(data, dict):
                 raise TypeError()
-            componentsschemas_component_type_2 = ComponentFile.from_dict(data)
+            componentsschemas_component_type_3 = ComponentSIP.from_dict(data)
 
-            return componentsschemas_component_type_2
+            return componentsschemas_component_type_3
 
         data = _parse_data(d.pop("data"))
 

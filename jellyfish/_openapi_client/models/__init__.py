@@ -9,11 +9,16 @@ from .component_options_file import ComponentOptionsFile
 from .component_options_hls import ComponentOptionsHLS
 from .component_options_hls_subscribe_mode import ComponentOptionsHLSSubscribeMode
 from .component_options_rtsp import ComponentOptionsRTSP
+from .component_options_sip import ComponentOptionsSIP
 from .component_properties_file import ComponentPropertiesFile
 from .component_properties_hls import ComponentPropertiesHLS
 from .component_properties_hls_subscribe_mode import ComponentPropertiesHLSSubscribeMode
 from .component_properties_rtsp import ComponentPropertiesRTSP
+from .component_properties_sip import ComponentPropertiesSIP
 from .component_rtsp import ComponentRTSP
+from .component_sip import ComponentSIP
+from .credentials import Credentials
+from .dial_config import DialConfig
 from .error import Error
 from .health_report import HealthReport
 from .health_report_distribution import HealthReportDistribution
@@ -47,11 +52,16 @@ __all__ = (
     "ComponentOptionsHLS",
     "ComponentOptionsHLSSubscribeMode",
     "ComponentOptionsRTSP",
+    "ComponentOptionsSIP",
     "ComponentPropertiesFile",
     "ComponentPropertiesHLS",
     "ComponentPropertiesHLSSubscribeMode",
     "ComponentPropertiesRTSP",
+    "ComponentPropertiesSIP",
     "ComponentRTSP",
+    "ComponentSIP",
+    "Credentials",
+    "DialConfig",
     "Error",
     "HealthcheckResponse",
     "HealthReport",

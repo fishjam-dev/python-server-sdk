@@ -5,6 +5,8 @@ RoomApi used to manage rooms
 from typing import Literal, Union
 
 from jellyfish._openapi_client.api.hls import subscribe_hls_to as hls_subscribe_hls_to
+from jellyfish._openapi_client.api.sip import dial as sip_dial
+from jellyfish._openapi_client.api.sip import end_call as sip_end_call
 from jellyfish._openapi_client.api.room import add_component as room_add_component
 from jellyfish._openapi_client.api.room import add_peer as room_add_peer
 from jellyfish._openapi_client.api.room import create_room as room_create_room
@@ -17,11 +19,13 @@ from jellyfish._openapi_client.models import (
     AddComponentJsonBody,
     AddPeerJsonBody,
     ComponentFile,
-    ComponentHLS,
     ComponentOptionsFile,
+    ComponentSIP,
+    ComponentOptionsSIP,
+    ComponentHLS,
     ComponentOptionsHLS,
-    ComponentOptionsRTSP,
     ComponentRTSP,
+    ComponentOptionsRTSP,
     Peer,
     PeerOptionsWebRTC,
     Room,
@@ -123,8 +127,8 @@ class RoomApi(BaseApi):
     def add_component(
         self,
         room_id: str,
-        options: Union[ComponentOptionsFile, ComponentOptionsHLS, ComponentOptionsRTSP],
-    ) -> Union[ComponentFile, ComponentHLS, ComponentRTSP]:
+        options: Union[ComponentOptionsFile, ComponentOptionsHLS, ComponentOptionsRTSP, ComponentOptionsSIP],
+    ) -> Union[ComponentFile, ComponentHLS, ComponentRTSP, ComponentSIP]:
         """Creates component in the room"""
 
         if isinstance(options, ComponentOptionsFile):
@@ -133,10 +137,12 @@ class RoomApi(BaseApi):
             component_type = "hls"
         elif isinstance(options, ComponentOptionsRTSP):
             component_type = "rtsp"
+        elif isinstance(options, ComponentOptionsSIP):
+            component_type = "sip"
         else:
             raise ValueError(
-                "options must be ComponentFile, ComponentOptionsHLS"
-                "or ComponentOptionsRTSP"
+                "options must be ComponentFile, ComponentOptionsHLS,"
+                "ComponentOptionsRTSP or ComponentOptionsSIP"
             )
 
         json_body = AddComponentJsonBody(type=component_type, options=options)
@@ -165,4 +171,32 @@ class RoomApi(BaseApi):
             hls_subscribe_hls_to,
             room_id=room_id,
             json_body=SubscriptionConfig(origins=origins),
+        )
+
+    def sip_dial(self, room_id: str, component_id: str, phone_number: str):
+        """
+        Starts a phone call from a specified component to a provided phone number.
+
+        This is asynchronous operation. 
+        In case of providing incorrect phone number you will receive a notification `ComponentCrashed`.
+        """
+
+        return self._request(
+            sip_dial,
+            room_id=room_id,
+            component_id=component_id,
+            json_body={"phoneNumber": phone_number},
+        )
+
+    def sip_end_call(self, room_id: str, component_id: str):
+        """
+        End a phone call on a specified SIP component.
+
+        This is asynchronous operation.
+        """
+
+        return self._request(
+            sip_end_call,
+            room_id=room_id,
+            component_id=component_id,
         )
