@@ -4,7 +4,9 @@ from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 if TYPE_CHECKING:
-    from ..models.credentials import Credentials
+    from ..models.component_properties_sipsip_credentials import (
+        ComponentPropertiesSIPSIPCredentials,
+    )
 
 
 T = TypeVar("T", bound="ComponentPropertiesSIP")
@@ -14,7 +16,7 @@ T = TypeVar("T", bound="ComponentPropertiesSIP")
 class ComponentPropertiesSIP:
     """Properties specific to the SIP component"""
 
-    registrar_credentials: "Credentials"
+    registrar_credentials: "ComponentPropertiesSIPSIPCredentials"
     """Credentials used to authorize in SIP Provider service"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
     """@private"""
@@ -36,10 +38,14 @@ class ComponentPropertiesSIP:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         """@private"""
-        from ..models.credentials import Credentials
+        from ..models.component_properties_sipsip_credentials import (
+            ComponentPropertiesSIPSIPCredentials,
+        )
 
         d = src_dict.copy()
-        registrar_credentials = Credentials.from_dict(d.pop("registrarCredentials"))
+        registrar_credentials = ComponentPropertiesSIPSIPCredentials.from_dict(
+            d.pop("registrarCredentials")
+        )
 
         component_properties_sip = cls(
             registrar_credentials=registrar_credentials,

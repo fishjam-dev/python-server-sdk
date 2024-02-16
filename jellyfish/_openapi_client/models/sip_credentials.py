@@ -1,35 +1,37 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar
+from typing import Any, Dict, List, Type, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-if TYPE_CHECKING:
-    from ..models.component_options_sipsip_credentials import (
-        ComponentOptionsSIPSIPCredentials,
-    )
-
-
-T = TypeVar("T", bound="ComponentOptionsSIP")
+T = TypeVar("T", bound="SIPCredentials")
 
 
 @_attrs_define
-class ComponentOptionsSIP:
-    """Options specific to the SIP component"""
-
-    registrar_credentials: "ComponentOptionsSIPSIPCredentials"
+class SIPCredentials:
     """Credentials used to authorize in SIP Provider service"""
+
+    address: str
+    """SIP provider address. Can be in the form of FQDN (my-sip-registrar.net) or IPv4 (1.2.3.4). Port can be specified e.g: 5.6.7.8:9999. If not given, the default SIP port `5060` will be assumed"""
+    password: str
+    """Password in SIP service provider"""
+    username: str
+    """Username in SIP service provider"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
     """@private"""
 
     def to_dict(self) -> Dict[str, Any]:
         """@private"""
-        registrar_credentials = self.registrar_credentials.to_dict()
+        address = self.address
+        password = self.password
+        username = self.username
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "registrarCredentials": registrar_credentials,
+                "address": address,
+                "password": password,
+                "username": username,
             }
         )
 
@@ -38,21 +40,21 @@ class ComponentOptionsSIP:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         """@private"""
-        from ..models.component_options_sipsip_credentials import (
-            ComponentOptionsSIPSIPCredentials,
-        )
-
         d = src_dict.copy()
-        registrar_credentials = ComponentOptionsSIPSIPCredentials.from_dict(
-            d.pop("registrarCredentials")
+        address = d.pop("address")
+
+        password = d.pop("password")
+
+        username = d.pop("username")
+
+        sip_credentials = cls(
+            address=address,
+            password=password,
+            username=username,
         )
 
-        component_options_sip = cls(
-            registrar_credentials=registrar_credentials,
-        )
-
-        component_options_sip.additional_properties = d
-        return component_options_sip
+        sip_credentials.additional_properties = d
+        return sip_credentials
 
     @property
     def additional_keys(self) -> List[str]:

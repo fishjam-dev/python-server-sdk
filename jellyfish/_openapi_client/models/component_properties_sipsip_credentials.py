@@ -3,11 +3,11 @@ from typing import Any, Dict, List, Type, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-T = TypeVar("T", bound="Credentials")
+T = TypeVar("T", bound="ComponentPropertiesSIPSIPCredentials")
 
 
 @_attrs_define
-class Credentials:
+class ComponentPropertiesSIPSIPCredentials:
     """Credentials used to authorize in SIP Provider service"""
 
     address: str
@@ -47,14 +47,14 @@ class Credentials:
 
         username = d.pop("username")
 
-        credentials = cls(
+        component_properties_sipsip_credentials = cls(
             address=address,
             password=password,
             username=username,
         )
 
-        credentials.additional_properties = d
-        return credentials
+        component_properties_sipsip_credentials.additional_properties = d
+        return component_properties_sipsip_credentials
 
     @property
     def additional_keys(self) -> List[str]:

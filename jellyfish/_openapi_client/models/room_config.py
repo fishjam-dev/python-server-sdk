@@ -15,6 +15,8 @@ class RoomConfig:
 
     max_peers: Union[Unset, None, int] = UNSET
     """Maximum amount of peers allowed into the room"""
+    peerless_purge_timeout: Union[Unset, None, int] = UNSET
+    """Duration (in seconds) after which the room will be removed if no peers are connected. If not provided, this feature is disabled."""
     room_id: Union[Unset, None, str] = UNSET
     """Custom id used for identifying room within Jellyfish. Must be unique across all rooms. If not provided, random UUID is generated."""
     video_codec: Union[Unset, None, RoomConfigVideoCodec] = UNSET
@@ -27,6 +29,7 @@ class RoomConfig:
     def to_dict(self) -> Dict[str, Any]:
         """@private"""
         max_peers = self.max_peers
+        peerless_purge_timeout = self.peerless_purge_timeout
         room_id = self.room_id
         video_codec: Union[Unset, None, str] = UNSET
         if not isinstance(self.video_codec, Unset):
@@ -39,6 +42,8 @@ class RoomConfig:
         field_dict.update({})
         if max_peers is not UNSET:
             field_dict["maxPeers"] = max_peers
+        if peerless_purge_timeout is not UNSET:
+            field_dict["peerlessPurgeTimeout"] = peerless_purge_timeout
         if room_id is not UNSET:
             field_dict["roomId"] = room_id
         if video_codec is not UNSET:
@@ -53,6 +58,8 @@ class RoomConfig:
         """@private"""
         d = src_dict.copy()
         max_peers = d.pop("maxPeers", UNSET)
+
+        peerless_purge_timeout = d.pop("peerlessPurgeTimeout", UNSET)
 
         room_id = d.pop("roomId", UNSET)
 
@@ -69,6 +76,7 @@ class RoomConfig:
 
         room_config = cls(
             max_peers=max_peers,
+            peerless_purge_timeout=peerless_purge_timeout,
             room_id=room_id,
             video_codec=video_codec,
             webhook_url=webhook_url,

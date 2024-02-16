@@ -16,6 +16,7 @@ def _get_kwargs(
     *,
     json_body: DialConfig,
 ) -> Dict[str, Any]:
+
     json_json_body = json_body.to_dict()
 
     return {
@@ -38,6 +39,10 @@ def _parse_response(
         response_400 = Error.from_dict(response.json())
 
         return response_400
+    if response.status_code == HTTPStatus.UNAUTHORIZED:
+        response_401 = Error.from_dict(response.json())
+
+        return response_401
     if response.status_code == HTTPStatus.NOT_FOUND:
         response_404 = Error.from_dict(response.json())
 
@@ -66,7 +71,7 @@ def sync_detailed(
     client: Union[AuthenticatedClient, Client],
     json_body: DialConfig,
 ) -> Response[Union[Any, Error]]:
-    """Making a call from the SIP component to the provided phone number
+    """Make a call from the SIP component to the provided phone number
 
     Args:
         room_id (str):
@@ -101,7 +106,7 @@ def sync(
     client: Union[AuthenticatedClient, Client],
     json_body: DialConfig,
 ) -> Optional[Union[Any, Error]]:
-    """Making a call from the SIP component to the provided phone number
+    """Make a call from the SIP component to the provided phone number
 
     Args:
         room_id (str):
@@ -131,7 +136,7 @@ async def asyncio_detailed(
     client: Union[AuthenticatedClient, Client],
     json_body: DialConfig,
 ) -> Response[Union[Any, Error]]:
-    """Making a call from the SIP component to the provided phone number
+    """Make a call from the SIP component to the provided phone number
 
     Args:
         room_id (str):
@@ -164,7 +169,7 @@ async def asyncio(
     client: Union[AuthenticatedClient, Client],
     json_body: DialConfig,
 ) -> Optional[Union[Any, Error]]:
-    """Making a call from the SIP component to the provided phone number
+    """Make a call from the SIP component to the provided phone number
 
     Args:
         room_id (str):

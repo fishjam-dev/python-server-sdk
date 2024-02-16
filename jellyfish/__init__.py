@@ -21,6 +21,7 @@ from jellyfish._openapi_client.models import (
     ComponentPropertiesHLSSubscribeMode,
     ComponentPropertiesRTSP,
     ComponentPropertiesSIP,
+    ComponentPropertiesSIPSIPCredentials,
     ComponentRTSP,
     ComponentSIP,
     Peer,
@@ -29,6 +30,7 @@ from jellyfish._openapi_client.models import (
     Room,
     RoomConfig,
     RoomConfigVideoCodec,
+    SIPCredentials,
 )
 
 # API
@@ -56,6 +58,7 @@ __all__ = [
     "ComponentSIP",
     "ComponentOptionsSIP",
     "ComponentPropertiesSIP",
+    "ComponentPropertiesSIPSIPCredentials",
     "ComponentFile",
     "ComponentRTSP",
     "ComponentOptionsRTSP",
@@ -65,5 +68,6 @@ __all__ = [
     "ComponentPropertiesFile",
     "events",
     "errors",
+    "SIPCredentials",
 ]
 __docformat__ = "restructuredtext"

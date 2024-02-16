@@ -5,6 +5,7 @@ import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...models.error import Error
 from ...models.healthcheck_response import HealthcheckResponse
 from ...types import Response
 
@@ -18,15 +19,15 @@ def _get_kwargs() -> Dict[str, Any]:
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[HealthcheckResponse]:
+) -> Optional[Union[Error, HealthcheckResponse]]:
     if response.status_code == HTTPStatus.OK:
         response_200 = HealthcheckResponse.from_dict(response.json())
 
         return response_200
-    if response.status_code == HTTPStatus.INTERNAL_SERVER_ERROR:
-        response_500 = HealthcheckResponse.from_dict(response.json())
+    if response.status_code == HTTPStatus.UNAUTHORIZED:
+        response_401 = Error.from_dict(response.json())
 
-        return response_500
+        return response_401
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -35,7 +36,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[HealthcheckResponse]:
+) -> Response[Union[Error, HealthcheckResponse]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -47,7 +48,7 @@ def _build_response(
 def sync_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Response[HealthcheckResponse]:
+) -> Response[Union[Error, HealthcheckResponse]]:
     """Describes the health of Jellyfish
 
     Raises:
@@ -55,7 +56,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[HealthcheckResponse]
+        Response[Union[Error, HealthcheckResponse]]
     """
 
     kwargs = _get_kwargs()
@@ -70,7 +71,7 @@ def sync_detailed(
 def sync(
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Optional[HealthcheckResponse]:
+) -> Optional[Union[Error, HealthcheckResponse]]:
     """Describes the health of Jellyfish
 
     Raises:
@@ -78,7 +79,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        HealthcheckResponse
+        Union[Error, HealthcheckResponse]
     """
 
     return sync_detailed(
@@ -89,7 +90,7 @@ def sync(
 async def asyncio_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Response[HealthcheckResponse]:
+) -> Response[Union[Error, HealthcheckResponse]]:
     """Describes the health of Jellyfish
 
     Raises:
@@ -97,7 +98,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[HealthcheckResponse]
+        Response[Union[Error, HealthcheckResponse]]
     """
 
     kwargs = _get_kwargs()
@@ -110,7 +111,7 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Optional[HealthcheckResponse]:
+) -> Optional[Union[Error, HealthcheckResponse]]:
     """Describes the health of Jellyfish
 
     Raises:
@@ -118,7 +119,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        HealthcheckResponse
+        Union[Error, HealthcheckResponse]
     """
 
     return (

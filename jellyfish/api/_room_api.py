@@ -32,6 +32,7 @@ from jellyfish._openapi_client.models import (
     RoomConfig,
     RoomConfigVideoCodec,
     SubscriptionConfig,
+    DialConfig
 )
 from jellyfish.api._base_api import BaseApi
 
@@ -191,7 +192,7 @@ class RoomApi(BaseApi):
             sip_dial,
             room_id=room_id,
             component_id=component_id,
-            json_body={"phoneNumber": phone_number},
+            json_body=DialConfig(phone_number=phone_number),
         )
 
     def sip_end_call(self, room_id: str, component_id: str):

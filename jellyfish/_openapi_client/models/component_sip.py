@@ -1,12 +1,11 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import UNSET, Unset
-
 if TYPE_CHECKING:
     from ..models.component_properties_sip import ComponentPropertiesSIP
+    from ..models.track import Track
 
 
 T = TypeVar("T", bound="ComponentSIP")
@@ -18,31 +17,38 @@ class ComponentSIP:
 
     id: str
     """Assigned component ID"""
+    properties: "ComponentPropertiesSIP"
+    """Properties specific to the SIP component"""
+    tracks: List["Track"]
+    """List of all component's tracks"""
     type: str
     """Component type"""
-    properties: Union[Unset, "ComponentPropertiesSIP"] = UNSET
-    """Properties specific to the SIP component"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
     """@private"""
 
     def to_dict(self) -> Dict[str, Any]:
         """@private"""
         id = self.id
+        properties = self.properties.to_dict()
+
+        tracks = []
+        for tracks_item_data in self.tracks:
+            tracks_item = tracks_item_data.to_dict()
+
+            tracks.append(tracks_item)
+
         type = self.type
-        properties: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.properties, Unset):
-            properties = self.properties.to_dict()
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
                 "id": id,
+                "properties": properties,
+                "tracks": tracks,
                 "type": type,
             }
         )
-        if properties is not UNSET:
-            field_dict["properties"] = properties
 
         return field_dict
 
@@ -50,23 +56,27 @@ class ComponentSIP:
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         """@private"""
         from ..models.component_properties_sip import ComponentPropertiesSIP
+        from ..models.track import Track
 
         d = src_dict.copy()
         id = d.pop("id")
 
-        type = d.pop("type")
+        properties = ComponentPropertiesSIP.from_dict(d.pop("properties"))
 
-        _properties = d.pop("properties", UNSET)
-        properties: Union[Unset, ComponentPropertiesSIP]
-        if isinstance(_properties, Unset):
-            properties = UNSET
-        else:
-            properties = ComponentPropertiesSIP.from_dict(_properties)
+        tracks = []
+        _tracks = d.pop("tracks")
+        for tracks_item_data in _tracks:
+            tracks_item = Track.from_dict(tracks_item_data)
+
+            tracks.append(tracks_item)
+
+        type = d.pop("type")
 
         component_sip = cls(
             id=id,
-            type=type,
             properties=properties,
+            tracks=tracks,
+            type=type,
         )
 
         component_sip.additional_properties = d
