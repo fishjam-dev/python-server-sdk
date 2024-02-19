@@ -26,13 +26,13 @@ from jellyfish._openapi_client.models import (
     ComponentOptionsSIP,
     ComponentRTSP,
     ComponentSIP,
+    DialConfig,
     Peer,
     PeerOptionsWebRTC,
     Room,
     RoomConfig,
     RoomConfigVideoCodec,
     SubscriptionConfig,
-    DialConfig
 )
 from jellyfish.api._base_api import BaseApi
 

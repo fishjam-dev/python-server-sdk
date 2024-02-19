@@ -20,10 +20,9 @@ from jellyfish import (
     ComponentPropertiesHLSSubscribeMode,
     ComponentPropertiesRTSP,
     ComponentPropertiesSIP,
+    ComponentPropertiesSIPSIPCredentials,
     ComponentRTSP,
     ComponentSIP,
-    SIPCredentials,
-    ComponentPropertiesSIPSIPCredentials,
     Peer,
     PeerOptionsWebRTC,
     PeerStatus,
@@ -31,6 +30,7 @@ from jellyfish import (
     RoomApi,
     RoomConfig,
     RoomConfigVideoCodec,
+    SIPCredentials,
 )
 from jellyfish.errors import (
     BadRequestError,
@@ -75,7 +75,11 @@ SIP_CREDENTIALS = SIPCredentials(
 
 SIP_OPTIONS = ComponentOptionsSIP(registrar_credentials=SIP_CREDENTIALS)
 
-SIP_PROPERTIES = ComponentPropertiesSIP(registrar_credentials=ComponentPropertiesSIPSIPCredentials(address="my-sip-registrar.net", username="user-name", password="pass-word"))
+SIP_PROPERTIES = ComponentPropertiesSIP(
+    registrar_credentials=ComponentPropertiesSIPSIPCredentials(
+        address="my-sip-registrar.net", username="user-name", password="pass-word"
+    )
+)
 
 FILE_OPTIONS = ComponentOptionsFile(file_path="video.h264")
 FILE_PROPERTIES = ComponentPropertiesFile(
@@ -123,7 +127,11 @@ class TestCreateRoom:
         assert room == Room(
             components=[],
             config=RoomConfig(
-                room_id=room.id, max_peers=None, video_codec=None, webhook_url=None, peerless_purge_timeout=None
+                room_id=room.id,
+                max_peers=None,
+                video_codec=None,
+                webhook_url=None,
+                peerless_purge_timeout=None,
             ),
             id=room.id,
             peers=[],
@@ -143,7 +151,7 @@ class TestCreateRoom:
                 max_peers=MAX_PEERS,
                 video_codec=RoomConfigVideoCodec(CODEC_H264),
                 webhook_url=None,
-                peerless_purge_timeout=None
+                peerless_purge_timeout=None,
             ),
             id=room.id,
             peers=[],
@@ -171,7 +179,7 @@ class TestCreateRoom:
                 max_peers=None,
                 video_codec=None,
                 webhook_url=None,
-                peerless_purge_timeout=None
+                peerless_purge_timeout=None,
             ),
             id=room_id,
             peers=[],
@@ -221,7 +229,11 @@ class TestGetRoom:
             peers=[],
             id=room.id,
             config=RoomConfig(
-                room_id=room.id, max_peers=None, video_codec=None, webhook_url=None, peerless_purge_timeout=None
+                room_id=room.id,
+                max_peers=None,
+                video_codec=None,
+                webhook_url=None,
+                peerless_purge_timeout=None,
             ),
         ) == room_api.get_room(room.id)
 
