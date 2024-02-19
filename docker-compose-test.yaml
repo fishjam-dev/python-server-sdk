@@ -21,6 +21,8 @@ services:
       JF_SERVER_API_TOKEN: "development"
       JF_PORT: 5002
       JF_SECRET_KEY_BASE: "super-secret-key"
+      JF_SIP_USED: "true"
+      JF_SIP_IP: "127.0.0.1"
     ports:
       - "5002:5002"
       - "49999:49999"
