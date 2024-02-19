@@ -8,8 +8,9 @@ notifier = Notifier(server_address="localhost:5002", server_api_token="developme
 
 notifier_task = None
 
-LIMIT = os.getenv('CI_LIMIT', None)
+LIMIT = os.getenv("CI_LIMIT", None)
 counter = 0
+
 
 @notifier.on_server_notification
 def handle_notification(server_notification):
@@ -25,6 +26,7 @@ def handle_notification(server_notification):
 @notifier.on_metrics
 def handle_metrics(metrics_report):
     print(f"Received WebRTC metrics: {metrics_report}")
+    global counter
     if LIMIT and counter > LIMIT:
         notifier_task.cancel()
     counter += 1
