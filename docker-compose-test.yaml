@@ -43,3 +43,17 @@ services:
     depends_on:
       jellyfish:
         condition: service_healthy
+
+  examples:
+    container_name: test
+    image: "cimg/python:${PYTHON_VERSION:-3.8}"
+    command: sh -c "cd /app && \ poetry config virtualenvs.in-project false && \ poetry install --no-ansi && \ poetry run python ./examples/mini_tutorial.py && \ poetry run python ./examples/room_api.py && \ poetry run python ./examples/server_notification.py"
+    environment:
+      DOCKER_TEST: "TRUE"
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    depends_on:
+      jellyfish:
+        condition: service_healthy

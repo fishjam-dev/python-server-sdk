@@ -1,10 +1,15 @@
 import asyncio
+import os
 
 from jellyfish import Notifier, RoomApi
 from jellyfish.events import ServerMessageTrackAdded, ServerMessageTrackType
 
 notifier = Notifier(server_address="localhost:5002", server_api_token="development")
 
+notifier_task = None
+
+LIMIT = os.getenv('CI_LIMIT', None)
+counter = 0
 
 @notifier.on_server_notification
 def handle_notification(server_notification):
@@ -20,9 +25,13 @@ def handle_notification(server_notification):
 @notifier.on_metrics
 def handle_metrics(metrics_report):
     print(f"Received WebRTC metrics: {metrics_report}")
+    if LIMIT and counter > LIMIT:
+        notifier_task.cancel()
+    counter += 1
 
 
 async def test_notifier():
+    global notifier_task
     notifier_task = asyncio.create_task(notifier.connect())
 
     # Wait for notifier to be ready to receive messages
@@ -32,7 +41,10 @@ async def test_notifier():
     room_api = RoomApi()
     room_api.create_room()
 
-    await notifier_task
+    try:
+        await notifier_task
+    except asyncio.CancelledError:
+        print("Notifier task canceled, exiting")
 
 
 asyncio.run(test_notifier())
