@@ -46,6 +46,7 @@ lint = "poetry_scripts:run_linter"
 fix_lint = "poetry_scripts:run_linter_fix"
 generate_docs = "poetry_scripts:generate_docs"
 update_client = "poetry_scripts:update_client"
+examples = "poetry_scripts:run_examples"
 
 [tool.ruff]
 select = ["F", "I"]

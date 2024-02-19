@@ -2,7 +2,7 @@
 RoomApi used to manage rooms
 """
 
-from typing import List, Literal, Union
+from typing import List, Literal, Tuple, Union
 
 from jellyfish._openapi_client.api.hls import subscribe_hls_to as hls_subscribe_hls_to
 from jellyfish._openapi_client.api.room import add_component as room_add_component
@@ -62,7 +62,7 @@ class RoomApi(BaseApi):
         max_peers: int = None,
         video_codec: Literal["h264", "vp8"] = None,
         webhook_url: str = None,
-    ) -> tuple[str, Room]:
+    ) -> Tuple[str, Room]:
         """
         Creates a new room
 
@@ -104,7 +104,7 @@ class RoomApi(BaseApi):
 
         return self._request(room_get_room, room_id=room_id).data
 
-    def add_peer(self, room_id: str, options: PeerOptionsWebRTC) -> tuple[str, Peer]:
+    def add_peer(self, room_id: str, options: PeerOptionsWebRTC) -> Tuple[str, Peer]:
         """
         Creates peer in the room
 
@@ -130,7 +130,12 @@ class RoomApi(BaseApi):
     def add_component(
         self,
         room_id: str,
-        options: Union[ComponentOptionsFile, ComponentOptionsHLS, ComponentOptionsRTSP, ComponentOptionsSIP],
+        options: Union[
+            ComponentOptionsFile,
+            ComponentOptionsHLS,
+            ComponentOptionsRTSP,
+            ComponentOptionsSIP,
+        ],
     ) -> Union[ComponentFile, ComponentHLS, ComponentRTSP, ComponentSIP]:
         """
         Creates component in the room.

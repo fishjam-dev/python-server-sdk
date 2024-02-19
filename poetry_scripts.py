@@ -40,6 +40,12 @@ def run_linter_fix():
     check_exit_code("ruff check . --fix")
 
 
+def run_examples():
+    check_exit_code("python ./examples/mini_tutorial.py")
+    check_exit_code("python ./examples/room_api.py")
+    check_exit_code("python ./examples/server_notifications.py")
+
+
 def generate_docs():
     check_exit_code(
         "pdoc \

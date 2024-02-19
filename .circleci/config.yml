@@ -38,7 +38,9 @@ jobs:
     steps:
       - checkout
       - run: docker compose -f docker-compose-test.yaml up test --exit-code-from test
+      - run: docker compose -f docker-compose-test.yaml down
       - run: docker compose -f docker-compose-test.yaml up examples --exit-code-from examples
+
 
 
 workflows:

@@ -45,13 +45,14 @@ services:
         condition: service_healthy
 
   examples:
-    container_name: test
+    container_name: examples
     image: "cimg/python:${PYTHON_VERSION:-3.8}"
-    command: sh -c "cd /app && \ poetry config virtualenvs.in-project false && \ poetry install --no-ansi && \ poetry run python ./examples/mini_tutorial.py && \ poetry run python ./examples/room_api.py && \ poetry run python ./examples/server_notification.py"
+    command: sh -c "cd /app && \ poetry config virtualenvs.in-project false && \ poetry install --no-ansi && \ poetry run examples"
     environment:
       DOCKER_TEST: "TRUE"
+      CI_LIMIT: "10"
     ports:
-      - "5000:5000"
+      - "5001:5001"
     volumes:
       - .:/app
     depends_on:

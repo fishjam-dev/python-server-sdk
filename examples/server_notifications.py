@@ -9,6 +9,12 @@ notifier = Notifier(server_address="localhost:5002", server_api_token="developme
 notifier_task = None
 
 LIMIT = os.getenv("CI_LIMIT", None)
+print(f"LIMIT: {LIMIT}")
+
+if LIMIT is not None:
+    LIMIT = int(LIMIT)
+
+
 counter = 0
 
 
