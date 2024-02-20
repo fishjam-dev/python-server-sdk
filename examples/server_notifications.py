@@ -4,12 +4,14 @@ import os
 from jellyfish import Notifier, RoomApi
 from jellyfish.events import ServerMessageTrackAdded, ServerMessageTrackType
 
-notifier = Notifier(server_address="localhost:5002", server_api_token="development")
+HOST = "jellyfish" if os.getenv("DOCKER_TEST") == "TRUE" else "localhost"
+SERVER_ADDRESS = f"{HOST}:5002"
+
+notifier = Notifier(server_address=SERVER_ADDRESS, server_api_token="development")
 
 notifier_task = None
 
 LIMIT = os.getenv("CI_LIMIT", None)
-print(f"LIMIT: {LIMIT}")
 
 if LIMIT is not None:
     LIMIT = int(LIMIT)
@@ -46,7 +48,7 @@ async def test_notifier():
     await notifier.wait_ready()
 
     # Create a room to trigger a server notification
-    room_api = RoomApi()
+    room_api = RoomApi(server_address=SERVER_ADDRESS)
     room_api.create_room()
 
     try:

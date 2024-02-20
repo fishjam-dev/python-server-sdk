@@ -13,7 +13,7 @@ services:
       timeout: 2s
       start_period: 30s
     environment:
-      JF_HOST: "jellyfish"
+      JF_HOST: "jellyfish:5002"
       JF_INTEGRATED_TURN_IP: "${INTEGRATED_TURN_IP:-127.0.0.1}"
       JF_INTEGRATED_TURN_LISTEN_IP: "0.0.0.0"
       JF_INTEGRATED_TURN_PORT_RANGE: "50000-50050"
@@ -47,12 +47,10 @@ services:
   examples:
     container_name: examples
     image: "cimg/python:${PYTHON_VERSION:-3.8}"
-    command: sh -c "cd /app && \ poetry config virtualenvs.in-project false && \ poetry install --no-ansi && \ poetry run examples"
+    command: sh -c "cd /app && \ poetry config virtualenvs.in-project false && \ poetry cache clear pypi --all && \ poetry install --no-ansi && \ poetry run examples"
     environment:
       DOCKER_TEST: "TRUE"
       CI_LIMIT: "10"
-    ports:
-      - "5001:5001"
     volumes:
       - .:/app
     depends_on:

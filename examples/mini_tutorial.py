@@ -1,4 +1,5 @@
 import asyncio
+import os
 
 from jellyfish import (
     ComponentOptionsFile,
@@ -13,7 +14,11 @@ from jellyfish.events import (
     ServerMessageTrackType,
 )
 
-notifier = Notifier(server_address="localhost:5002", server_api_token="development")
+HOST = "jellyfish" if os.getenv("DOCKER_TEST") == "TRUE" else "localhost"
+SERVER_ADDRESS = f"{HOST}:5002"
+
+
+notifier = Notifier(server_address=SERVER_ADDRESS, server_api_token="development")
 
 notifier_task = None
 
@@ -34,7 +39,6 @@ def handle_notification(server_notification):
 
 @notifier.on_metrics
 def handle_metrics(metrics_report):
-    # print(f"Received WebRTC metrics: {metrics_report}")
     pass
 
 
@@ -45,7 +49,7 @@ async def test_notifier():
     # Wait for notifier to be ready to receive messages
     await notifier.wait_ready()
 
-    room_api = RoomApi()
+    room_api = RoomApi(server_address=SERVER_ADDRESS)
 
     # Create a room to trigger a server notification with h264 as a codec,
     # that allow to use HLS.

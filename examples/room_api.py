@@ -1,7 +1,12 @@
+import os
+
 from jellyfish import ComponentOptionsHLS, PeerOptionsWebRTC, RoomApi
 
+HOST = "jellyfish" if os.getenv("DOCKER_TEST") == "TRUE" else "localhost"
+SERVER_ADDRESS = f"{HOST}:5002"
+
 # Create a room
-room_api = RoomApi(server_address="localhost:5002", server_api_token="development")
+room_api = RoomApi(server_address=SERVER_ADDRESS, server_api_token="development")
 
 jellyfish_address, room = room_api.create_room(
     video_codec="h264", webhook_url="http://localhost:5000/webhook"
