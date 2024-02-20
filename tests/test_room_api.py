@@ -14,11 +14,15 @@ from jellyfish import (
     ComponentOptionsHLS,
     ComponentOptionsHLSSubscribeMode,
     ComponentOptionsRTSP,
+    ComponentOptionsSIP,
     ComponentPropertiesFile,
     ComponentPropertiesHLS,
     ComponentPropertiesHLSSubscribeMode,
     ComponentPropertiesRTSP,
+    ComponentPropertiesSIP,
+    ComponentPropertiesSIPSIPCredentials,
     ComponentRTSP,
+    ComponentSIP,
     Peer,
     PeerOptionsWebRTC,
     PeerStatus,
@@ -26,6 +30,7 @@ from jellyfish import (
     RoomApi,
     RoomConfig,
     RoomConfigVideoCodec,
+    SIPCredentials,
 )
 from jellyfish.errors import (
     BadRequestError,
@@ -60,6 +65,20 @@ RTSP_PROPERTIES = ComponentPropertiesRTSP(
     reconnect_delay=15000,
     rtp_port=20000,
     pierce_nat=True,
+)
+
+SIP_PHONE_NUMBER = "1234"
+
+SIP_CREDENTIALS = SIPCredentials(
+    address="my-sip-registrar.net", username="user-name", password="pass-word"
+)
+
+SIP_OPTIONS = ComponentOptionsSIP(registrar_credentials=SIP_CREDENTIALS)
+
+SIP_PROPERTIES = ComponentPropertiesSIP(
+    registrar_credentials=ComponentPropertiesSIPSIPCredentials(
+        address="my-sip-registrar.net", username="user-name", password="pass-word"
+    )
 )
 
 FILE_OPTIONS = ComponentOptionsFile(file_path="video.h264")
@@ -108,7 +127,11 @@ class TestCreateRoom:
         assert room == Room(
             components=[],
             config=RoomConfig(
-                room_id=room.id, max_peers=None, video_codec=None, webhook_url=None
+                room_id=room.id,
+                max_peers=None,
+                video_codec=None,
+                webhook_url=None,
+                peerless_purge_timeout=None,
             ),
             id=room.id,
             peers=[],
@@ -128,6 +151,7 @@ class TestCreateRoom:
                 max_peers=MAX_PEERS,
                 video_codec=RoomConfigVideoCodec(CODEC_H264),
                 webhook_url=None,
+                peerless_purge_timeout=None,
             ),
             id=room.id,
             peers=[],
@@ -155,6 +179,7 @@ class TestCreateRoom:
                 max_peers=None,
                 video_codec=None,
                 webhook_url=None,
+                peerless_purge_timeout=None,
             ),
             id=room_id,
             peers=[],
@@ -204,7 +229,11 @@ class TestGetRoom:
             peers=[],
             id=room.id,
             config=RoomConfig(
-                room_id=room.id, max_peers=None, video_codec=None, webhook_url=None
+                room_id=room.id,
+                max_peers=None,
+                video_codec=None,
+                webhook_url=None,
+                peerless_purge_timeout=None,
             ),
         ) == room_api.get_room(room.id)
 
@@ -228,6 +257,10 @@ class TestAddComponent:
 
     def test_with_options_rtsp(self, room_api):
         data = ComponentTestData(ComponentRTSP, "rtsp", RTSP_OPTIONS, RTSP_PROPERTIES)
+        self._test_component(room_api, data)
+
+    def test_with_options_sip(self, room_api):
+        data = ComponentTestData(ComponentSIP, "sip", SIP_OPTIONS, SIP_PROPERTIES)
         self._test_component(room_api, data)
 
     @pytest.mark.file_component_sources
@@ -294,6 +327,18 @@ class TestHLSSubscribe:
             str(exception_info.value)
             == "HLS component option `subscribe_mode` is set to :auto"
         )
+
+
+class TestSIPCall:
+    def test_happy_path(self, room_api: RoomApi):
+        _, room = room_api.create_room(video_codec=CODEC_H264)
+        component = room_api.add_component(
+            room.id,
+            options=ComponentOptionsSIP(registrar_credentials=SIP_CREDENTIALS),
+        )
+        assert room_api.sip_dial(room.id, component.id, SIP_PHONE_NUMBER) is None
+
+        assert room_api.sip_end_call(room.id, component.id) is None
 
 
 class TestAddPeer:

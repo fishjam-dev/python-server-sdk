@@ -15,17 +15,22 @@ from jellyfish._openapi_client.models import (
     ComponentOptionsHLS,
     ComponentOptionsHLSSubscribeMode,
     ComponentOptionsRTSP,
+    ComponentOptionsSIP,
     ComponentPropertiesFile,
     ComponentPropertiesHLS,
     ComponentPropertiesHLSSubscribeMode,
     ComponentPropertiesRTSP,
+    ComponentPropertiesSIP,
+    ComponentPropertiesSIPSIPCredentials,
     ComponentRTSP,
+    ComponentSIP,
     Peer,
     PeerOptionsWebRTC,
     PeerStatus,
     Room,
     RoomConfig,
     RoomConfigVideoCodec,
+    SIPCredentials,
 )
 
 # API
@@ -50,6 +55,11 @@ __all__ = [
     "ComponentOptionsHLSSubscribeMode",
     "ComponentPropertiesHLS",
     "ComponentPropertiesHLSSubscribeMode",
+    "ComponentSIP",
+    "ComponentOptionsSIP",
+    "ComponentPropertiesSIP",
+    "ComponentPropertiesSIPSIPCredentials",
+    "ComponentFile",
     "ComponentRTSP",
     "ComponentOptionsRTSP",
     "ComponentPropertiesRTSP",
@@ -58,5 +68,6 @@ __all__ = [
     "ComponentPropertiesFile",
     "events",
     "errors",
+    "SIPCredentials",
 ]
 __docformat__ = "restructuredtext"

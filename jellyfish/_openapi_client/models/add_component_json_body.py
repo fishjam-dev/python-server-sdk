@@ -9,6 +9,7 @@ if TYPE_CHECKING:
     from ..models.component_options_file import ComponentOptionsFile
     from ..models.component_options_hls import ComponentOptionsHLS
     from ..models.component_options_rtsp import ComponentOptionsRTSP
+    from ..models.component_options_sip import ComponentOptionsSIP
 
 
 T = TypeVar("T", bound="AddComponentJsonBody")
@@ -21,7 +22,11 @@ class AddComponentJsonBody:
     type: str
     """Component type"""
     options: Union[
-        "ComponentOptionsFile", "ComponentOptionsHLS", "ComponentOptionsRTSP", Unset
+        "ComponentOptionsFile",
+        "ComponentOptionsHLS",
+        "ComponentOptionsRTSP",
+        "ComponentOptionsSIP",
+        Unset,
     ] = UNSET
     """Component-specific options"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -29,6 +34,7 @@ class AddComponentJsonBody:
 
     def to_dict(self) -> Dict[str, Any]:
         """@private"""
+        from ..models.component_options_file import ComponentOptionsFile
         from ..models.component_options_hls import ComponentOptionsHLS
         from ..models.component_options_rtsp import ComponentOptionsRTSP
 
@@ -41,6 +47,9 @@ class AddComponentJsonBody:
             options = self.options.to_dict()
 
         elif isinstance(self.options, ComponentOptionsRTSP):
+            options = self.options.to_dict()
+
+        elif isinstance(self.options, ComponentOptionsFile):
             options = self.options.to_dict()
 
         else:
@@ -64,6 +73,7 @@ class AddComponentJsonBody:
         from ..models.component_options_file import ComponentOptionsFile
         from ..models.component_options_hls import ComponentOptionsHLS
         from ..models.component_options_rtsp import ComponentOptionsRTSP
+        from ..models.component_options_sip import ComponentOptionsSIP
 
         d = src_dict.copy()
         type = d.pop("type")
@@ -71,7 +81,11 @@ class AddComponentJsonBody:
         def _parse_options(
             data: object,
         ) -> Union[
-            "ComponentOptionsFile", "ComponentOptionsHLS", "ComponentOptionsRTSP", Unset
+            "ComponentOptionsFile",
+            "ComponentOptionsHLS",
+            "ComponentOptionsRTSP",
+            "ComponentOptionsSIP",
+            Unset,
         ]:
             if isinstance(data, Unset):
                 return data
@@ -95,13 +109,23 @@ class AddComponentJsonBody:
                 return componentsschemas_component_options_type_1
             except:  # noqa: E722
                 pass
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                componentsschemas_component_options_type_2 = (
+                    ComponentOptionsFile.from_dict(data)
+                )
+
+                return componentsschemas_component_options_type_2
+            except:  # noqa: E722
+                pass
             if not isinstance(data, dict):
                 raise TypeError()
-            componentsschemas_component_options_type_2 = ComponentOptionsFile.from_dict(
+            componentsschemas_component_options_type_3 = ComponentOptionsSIP.from_dict(
                 data
             )
 
-            return componentsschemas_component_options_type_2
+            return componentsschemas_component_options_type_3
 
         options = _parse_options(d.pop("options", UNSET))
 

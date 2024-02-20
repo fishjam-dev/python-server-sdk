@@ -6,32 +6,28 @@ import httpx
 from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...models.error import Error
-from ...models.recording_list_response import RecordingListResponse
+from ...models.healthcheck_response import HealthcheckResponse
 from ...types import Response
 
 
 def _get_kwargs() -> Dict[str, Any]:
     return {
         "method": "get",
-        "url": "/recording",
+        "url": "/health",
     }
 
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Error, RecordingListResponse]]:
+) -> Optional[Union[Error, HealthcheckResponse]]:
     if response.status_code == HTTPStatus.OK:
-        response_200 = RecordingListResponse.from_dict(response.json())
+        response_200 = HealthcheckResponse.from_dict(response.json())
 
         return response_200
     if response.status_code == HTTPStatus.UNAUTHORIZED:
         response_401 = Error.from_dict(response.json())
 
         return response_401
-    if response.status_code == HTTPStatus.NOT_FOUND:
-        response_404 = Error.from_dict(response.json())
-
-        return response_404
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -40,7 +36,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Error, RecordingListResponse]]:
+) -> Response[Union[Error, HealthcheckResponse]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -52,15 +48,15 @@ def _build_response(
 def sync_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Response[Union[Error, RecordingListResponse]]:
-    """Lists all available recordings
+) -> Response[Union[Error, HealthcheckResponse]]:
+    """Describes the health of Jellyfish
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Error, RecordingListResponse]]
+        Response[Union[Error, HealthcheckResponse]]
     """
 
     kwargs = _get_kwargs()
@@ -75,15 +71,15 @@ def sync_detailed(
 def sync(
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Optional[Union[Error, RecordingListResponse]]:
-    """Lists all available recordings
+) -> Optional[Union[Error, HealthcheckResponse]]:
+    """Describes the health of Jellyfish
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Error, RecordingListResponse]
+        Union[Error, HealthcheckResponse]
     """
 
     return sync_detailed(
@@ -94,15 +90,15 @@ def sync(
 async def asyncio_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Response[Union[Error, RecordingListResponse]]:
-    """Lists all available recordings
+) -> Response[Union[Error, HealthcheckResponse]]:
+    """Describes the health of Jellyfish
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Error, RecordingListResponse]]
+        Response[Union[Error, HealthcheckResponse]]
     """
 
     kwargs = _get_kwargs()
@@ -115,15 +111,15 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Optional[Union[Error, RecordingListResponse]]:
-    """Lists all available recordings
+) -> Optional[Union[Error, HealthcheckResponse]]:
+    """Describes the health of Jellyfish
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Error, RecordingListResponse]
+        Union[Error, HealthcheckResponse]
     """
 
     return (
