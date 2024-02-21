@@ -140,7 +140,7 @@ class RoomApi(BaseApi):
         """
         Creates component in the room.
         Currently there are 4 different components:
-        * File Component which options are `ComponentOptionsFile`
+        * File Component for which the options are `ComponentOptionsFile`
         * HLS Component which options are `ComponentOptionsHLS`
         * RTSP Component which options are `ComponentOptionsRTSP`
         * SIP Component which options are `ComponentOptionsSIP`
