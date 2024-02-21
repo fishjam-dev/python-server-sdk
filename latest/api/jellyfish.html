@@ -744,6 +744,30 @@
 </code></pre>
 </div>
 
+<h4 id="cluster-of-jellyfishes">Cluster of Jellyfishes</h4>
+
+<p>The cluster of jellyfishes has got embedded load balancer, which means that a new room will be created on jellyfish with the least usage. At the moment to modify this specific room you must communicate with the jellyfish on which this room was created.</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="n">room_api</span> <span class="o">=</span> <span class="n">RoomApi</span><span class="p">(</span><span class="n">server_address</span><span class="o">=</span><span class="s1">&#39;localhost:5002&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create a room to trigger a server notification with h264 as a codec,</span>
+<span class="c1"># that allow to use HLS.</span>
+<span class="n">address</span><span class="p">,</span> <span class="n">room</span> <span class="o">=</span> <span class="n">room_api</span><span class="o">.</span><span class="n">create_room</span><span class="p">(</span><span class="n">video_codec</span><span class="o">=</span><span class="s2">&quot;h264&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create new room api with returned jellyfish address as a room could be</span>
+<span class="c1"># created on a different jellyfish instance</span>
+<span class="c1"># (if you communicate with a cluster of jellyfishes)</span>
+<span class="n">new_room_api</span> <span class="o">=</span> <span class="n">RoomApi</span><span class="p">(</span><span class="n">server_address</span><span class="o">=</span><span class="n">address</span><span class="p">)</span>
+
+<span class="c1"># Add HLS component with manual subscribe mode, we use here `new_room_api` as we are sure that this API refers to the jellyfish on which this room was created.</span>
+<span class="n">_hls_component</span> <span class="o">=</span> <span class="n">new_room_api</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span>
+    <span class="n">room</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="n">ComponentOptionsHLS</span><span class="p">(</span><span class="n">subscribe_mode</span><span class="o">=</span><span class="n"><a href="#ComponentOptionsHLSSubscribeMode.MANUAL">ComponentOptionsHLSSubscribeMode.MANUAL</a></span><span class="p">),</span>
+<span class="p">)</span>
+</code></pre>
+</div>
+
 <h2 id="testing">Testing</h2>
 
 <p>You can test the SDK by running</p>
@@ -902,7 +926,7 @@
 </span><span id="RoomApi-63"><a href="#RoomApi-63"><span class="linenos"> 63</span></a>        <span class="n">max_peers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 </span><span id="RoomApi-64"><a href="#RoomApi-64"><span class="linenos"> 64</span></a>        <span class="n">video_codec</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;h264&quot;</span><span class="p">,</span> <span class="s2">&quot;vp8&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 </span><span id="RoomApi-65"><a href="#RoomApi-65"><span class="linenos"> 65</span></a>        <span class="n">webhook_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="RoomApi-66"><a href="#RoomApi-66"><span class="linenos"> 66</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Room</span><span class="p">):</span>
+</span><span id="RoomApi-66"><a href="#RoomApi-66"><span class="linenos"> 66</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Room</span><span class="p">]:</span>
 </span><span id="RoomApi-67"><a href="#RoomApi-67"><span class="linenos"> 67</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="RoomApi-68"><a href="#RoomApi-68"><span class="linenos"> 68</span></a><span class="sd">        Creates a new room</span>
 </span><span id="RoomApi-69"><a href="#RoomApi-69"><span class="linenos"> 69</span></a>
@@ -944,109 +968,118 @@
 </span><span id="RoomApi-105"><a href="#RoomApi-105"><span class="linenos">105</span></a>
 </span><span id="RoomApi-106"><a href="#RoomApi-106"><span class="linenos">106</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="n">room_get_room</span><span class="p">,</span> <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
 </span><span id="RoomApi-107"><a href="#RoomApi-107"><span class="linenos">107</span></a>
-</span><span id="RoomApi-108"><a href="#RoomApi-108"><span class="linenos">108</span></a>    <span class="k">def</span> <span class="nf">add_peer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">PeerOptionsWebRTC</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Peer</span><span class="p">):</span>
+</span><span id="RoomApi-108"><a href="#RoomApi-108"><span class="linenos">108</span></a>    <span class="k">def</span> <span class="nf">add_peer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">PeerOptionsWebRTC</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Peer</span><span class="p">]:</span>
 </span><span id="RoomApi-109"><a href="#RoomApi-109"><span class="linenos">109</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="RoomApi-110"><a href="#RoomApi-110"><span class="linenos">110</span></a><span class="sd">        Creates peer in the room</span>
 </span><span id="RoomApi-111"><a href="#RoomApi-111"><span class="linenos">111</span></a>
 </span><span id="RoomApi-112"><a href="#RoomApi-112"><span class="linenos">112</span></a><span class="sd">        Currently only `webrtc` peer is supported</span>
 </span><span id="RoomApi-113"><a href="#RoomApi-113"><span class="linenos">113</span></a>
 </span><span id="RoomApi-114"><a href="#RoomApi-114"><span class="linenos">114</span></a><span class="sd">        Returns a tuple (`peer_token`, `Peer`) - the token needed by Peer</span>
-</span><span id="RoomApi-115"><a href="#RoomApi-115"><span class="linenos">115</span></a><span class="sd">        to authenticate to Jellyfish and the new `Peer`</span>
-</span><span id="RoomApi-116"><a href="#RoomApi-116"><span class="linenos">116</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="RoomApi-117"><a href="#RoomApi-117"><span class="linenos">117</span></a>
-</span><span id="RoomApi-118"><a href="#RoomApi-118"><span class="linenos">118</span></a>        <span class="n">peer_type</span> <span class="o">=</span> <span class="s2">&quot;webrtc&quot;</span>
-</span><span id="RoomApi-119"><a href="#RoomApi-119"><span class="linenos">119</span></a>        <span class="n">json_body</span> <span class="o">=</span> <span class="n">AddPeerJsonBody</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">peer_type</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
-</span><span id="RoomApi-120"><a href="#RoomApi-120"><span class="linenos">120</span></a>
-</span><span id="RoomApi-121"><a href="#RoomApi-121"><span class="linenos">121</span></a>        <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="n">room_add_peer</span><span class="p">,</span> <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span> <span class="n">json_body</span><span class="o">=</span><span class="n">json_body</span><span class="p">)</span>
-</span><span id="RoomApi-122"><a href="#RoomApi-122"><span class="linenos">122</span></a>        <span class="k">return</span> <span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="n">resp</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">peer</span><span class="p">)</span>
-</span><span id="RoomApi-123"><a href="#RoomApi-123"><span class="linenos">123</span></a>
-</span><span id="RoomApi-124"><a href="#RoomApi-124"><span class="linenos">124</span></a>    <span class="k">def</span> <span class="nf">delete_peer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">peer_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="RoomApi-125"><a href="#RoomApi-125"><span class="linenos">125</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Deletes peer&quot;&quot;&quot;</span>
-</span><span id="RoomApi-126"><a href="#RoomApi-126"><span class="linenos">126</span></a>
-</span><span id="RoomApi-127"><a href="#RoomApi-127"><span class="linenos">127</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="n">room_delete_peer</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">peer_id</span><span class="p">,</span> <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">)</span>
+</span><span id="RoomApi-115"><a href="#RoomApi-115"><span class="linenos">115</span></a><span class="sd">        to authenticate to Jellyfish and the new `Peer`.</span>
+</span><span id="RoomApi-116"><a href="#RoomApi-116"><span class="linenos">116</span></a>
+</span><span id="RoomApi-117"><a href="#RoomApi-117"><span class="linenos">117</span></a><span class="sd">        The possible options to pass for peer are `PeerOptionsWebRTC`.</span>
+</span><span id="RoomApi-118"><a href="#RoomApi-118"><span class="linenos">118</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="RoomApi-119"><a href="#RoomApi-119"><span class="linenos">119</span></a>
+</span><span id="RoomApi-120"><a href="#RoomApi-120"><span class="linenos">120</span></a>        <span class="n">peer_type</span> <span class="o">=</span> <span class="s2">&quot;webrtc&quot;</span>
+</span><span id="RoomApi-121"><a href="#RoomApi-121"><span class="linenos">121</span></a>        <span class="n">json_body</span> <span class="o">=</span> <span class="n">AddPeerJsonBody</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">peer_type</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+</span><span id="RoomApi-122"><a href="#RoomApi-122"><span class="linenos">122</span></a>
+</span><span id="RoomApi-123"><a href="#RoomApi-123"><span class="linenos">123</span></a>        <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="n">room_add_peer</span><span class="p">,</span> <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span> <span class="n">json_body</span><span class="o">=</span><span class="n">json_body</span><span class="p">)</span>
+</span><span id="RoomApi-124"><a href="#RoomApi-124"><span class="linenos">124</span></a>        <span class="k">return</span> <span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="n">resp</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">peer</span><span class="p">)</span>
+</span><span id="RoomApi-125"><a href="#RoomApi-125"><span class="linenos">125</span></a>
+</span><span id="RoomApi-126"><a href="#RoomApi-126"><span class="linenos">126</span></a>    <span class="k">def</span> <span class="nf">delete_peer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">peer_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="RoomApi-127"><a href="#RoomApi-127"><span class="linenos">127</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Deletes peer&quot;&quot;&quot;</span>
 </span><span id="RoomApi-128"><a href="#RoomApi-128"><span class="linenos">128</span></a>
-</span><span id="RoomApi-129"><a href="#RoomApi-129"><span class="linenos">129</span></a>    <span class="k">def</span> <span class="nf">add_component</span><span class="p">(</span>
-</span><span id="RoomApi-130"><a href="#RoomApi-130"><span class="linenos">130</span></a>        <span class="bp">self</span><span class="p">,</span>
-</span><span id="RoomApi-131"><a href="#RoomApi-131"><span class="linenos">131</span></a>        <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span id="RoomApi-132"><a href="#RoomApi-132"><span class="linenos">132</span></a>        <span class="n">options</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
-</span><span id="RoomApi-133"><a href="#RoomApi-133"><span class="linenos">133</span></a>            <span class="n">ComponentOptionsFile</span><span class="p">,</span>
-</span><span id="RoomApi-134"><a href="#RoomApi-134"><span class="linenos">134</span></a>            <span class="n">ComponentOptionsHLS</span><span class="p">,</span>
-</span><span id="RoomApi-135"><a href="#RoomApi-135"><span class="linenos">135</span></a>            <span class="n">ComponentOptionsRTSP</span><span class="p">,</span>
-</span><span id="RoomApi-136"><a href="#RoomApi-136"><span class="linenos">136</span></a>            <span class="n">ComponentOptionsSIP</span><span class="p">,</span>
-</span><span id="RoomApi-137"><a href="#RoomApi-137"><span class="linenos">137</span></a>        <span class="p">],</span>
-</span><span id="RoomApi-138"><a href="#RoomApi-138"><span class="linenos">138</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">ComponentFile</span><span class="p">,</span> <span class="n">ComponentHLS</span><span class="p">,</span> <span class="n">ComponentRTSP</span><span class="p">,</span> <span class="n">ComponentSIP</span><span class="p">]:</span>
-</span><span id="RoomApi-139"><a href="#RoomApi-139"><span class="linenos">139</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates component in the room&quot;&quot;&quot;</span>
-</span><span id="RoomApi-140"><a href="#RoomApi-140"><span class="linenos">140</span></a>
-</span><span id="RoomApi-141"><a href="#RoomApi-141"><span class="linenos">141</span></a>        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">ComponentOptionsFile</span><span class="p">):</span>
-</span><span id="RoomApi-142"><a href="#RoomApi-142"><span class="linenos">142</span></a>            <span class="n">component_type</span> <span class="o">=</span> <span class="s2">&quot;file&quot;</span>
-</span><span id="RoomApi-143"><a href="#RoomApi-143"><span class="linenos">143</span></a>        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">ComponentOptionsHLS</span><span class="p">):</span>
-</span><span id="RoomApi-144"><a href="#RoomApi-144"><span class="linenos">144</span></a>            <span class="n">component_type</span> <span class="o">=</span> <span class="s2">&quot;hls&quot;</span>
-</span><span id="RoomApi-145"><a href="#RoomApi-145"><span class="linenos">145</span></a>        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">ComponentOptionsRTSP</span><span class="p">):</span>
-</span><span id="RoomApi-146"><a href="#RoomApi-146"><span class="linenos">146</span></a>            <span class="n">component_type</span> <span class="o">=</span> <span class="s2">&quot;rtsp&quot;</span>
-</span><span id="RoomApi-147"><a href="#RoomApi-147"><span class="linenos">147</span></a>        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">ComponentOptionsSIP</span><span class="p">):</span>
-</span><span id="RoomApi-148"><a href="#RoomApi-148"><span class="linenos">148</span></a>            <span class="n">component_type</span> <span class="o">=</span> <span class="s2">&quot;sip&quot;</span>
-</span><span id="RoomApi-149"><a href="#RoomApi-149"><span class="linenos">149</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="RoomApi-150"><a href="#RoomApi-150"><span class="linenos">150</span></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-</span><span id="RoomApi-151"><a href="#RoomApi-151"><span class="linenos">151</span></a>                <span class="s2">&quot;options must be ComponentFile, ComponentOptionsHLS,&quot;</span>
-</span><span id="RoomApi-152"><a href="#RoomApi-152"><span class="linenos">152</span></a>                <span class="s2">&quot;ComponentOptionsRTSP or ComponentOptionsSIP&quot;</span>
-</span><span id="RoomApi-153"><a href="#RoomApi-153"><span class="linenos">153</span></a>            <span class="p">)</span>
-</span><span id="RoomApi-154"><a href="#RoomApi-154"><span class="linenos">154</span></a>
-</span><span id="RoomApi-155"><a href="#RoomApi-155"><span class="linenos">155</span></a>        <span class="n">json_body</span> <span class="o">=</span> <span class="n">AddComponentJsonBody</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">component_type</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
-</span><span id="RoomApi-156"><a href="#RoomApi-156"><span class="linenos">156</span></a>
-</span><span id="RoomApi-157"><a href="#RoomApi-157"><span class="linenos">157</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
-</span><span id="RoomApi-158"><a href="#RoomApi-158"><span class="linenos">158</span></a>            <span class="n">room_add_component</span><span class="p">,</span> <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span> <span class="n">json_body</span><span class="o">=</span><span class="n">json_body</span>
-</span><span id="RoomApi-159"><a href="#RoomApi-159"><span class="linenos">159</span></a>        <span class="p">)</span><span class="o">.</span><span class="n">data</span>
-</span><span id="RoomApi-160"><a href="#RoomApi-160"><span class="linenos">160</span></a>
-</span><span id="RoomApi-161"><a href="#RoomApi-161"><span class="linenos">161</span></a>    <span class="k">def</span> <span class="nf">delete_component</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="RoomApi-162"><a href="#RoomApi-162"><span class="linenos">162</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Deletes component&quot;&quot;&quot;</span>
+</span><span id="RoomApi-129"><a href="#RoomApi-129"><span class="linenos">129</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="n">room_delete_peer</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">peer_id</span><span class="p">,</span> <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">)</span>
+</span><span id="RoomApi-130"><a href="#RoomApi-130"><span class="linenos">130</span></a>
+</span><span id="RoomApi-131"><a href="#RoomApi-131"><span class="linenos">131</span></a>    <span class="k">def</span> <span class="nf">add_component</span><span class="p">(</span>
+</span><span id="RoomApi-132"><a href="#RoomApi-132"><span class="linenos">132</span></a>        <span class="bp">self</span><span class="p">,</span>
+</span><span id="RoomApi-133"><a href="#RoomApi-133"><span class="linenos">133</span></a>        <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="RoomApi-134"><a href="#RoomApi-134"><span class="linenos">134</span></a>        <span class="n">options</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
+</span><span id="RoomApi-135"><a href="#RoomApi-135"><span class="linenos">135</span></a>            <span class="n">ComponentOptionsFile</span><span class="p">,</span>
+</span><span id="RoomApi-136"><a href="#RoomApi-136"><span class="linenos">136</span></a>            <span class="n">ComponentOptionsHLS</span><span class="p">,</span>
+</span><span id="RoomApi-137"><a href="#RoomApi-137"><span class="linenos">137</span></a>            <span class="n">ComponentOptionsRTSP</span><span class="p">,</span>
+</span><span id="RoomApi-138"><a href="#RoomApi-138"><span class="linenos">138</span></a>            <span class="n">ComponentOptionsSIP</span><span class="p">,</span>
+</span><span id="RoomApi-139"><a href="#RoomApi-139"><span class="linenos">139</span></a>        <span class="p">],</span>
+</span><span id="RoomApi-140"><a href="#RoomApi-140"><span class="linenos">140</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">ComponentFile</span><span class="p">,</span> <span class="n">ComponentHLS</span><span class="p">,</span> <span class="n">ComponentRTSP</span><span class="p">,</span> <span class="n">ComponentSIP</span><span class="p">]:</span>
+</span><span id="RoomApi-141"><a href="#RoomApi-141"><span class="linenos">141</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="RoomApi-142"><a href="#RoomApi-142"><span class="linenos">142</span></a><span class="sd">        Creates component in the room.</span>
+</span><span id="RoomApi-143"><a href="#RoomApi-143"><span class="linenos">143</span></a><span class="sd">        Currently there are 4 different components:</span>
+</span><span id="RoomApi-144"><a href="#RoomApi-144"><span class="linenos">144</span></a><span class="sd">        * File Component for which the options are `ComponentOptionsFile`</span>
+</span><span id="RoomApi-145"><a href="#RoomApi-145"><span class="linenos">145</span></a><span class="sd">        * HLS Component which options are `ComponentOptionsHLS`</span>
+</span><span id="RoomApi-146"><a href="#RoomApi-146"><span class="linenos">146</span></a><span class="sd">        * RTSP Component which options are `ComponentOptionsRTSP`</span>
+</span><span id="RoomApi-147"><a href="#RoomApi-147"><span class="linenos">147</span></a><span class="sd">        * SIP Component which options are `ComponentOptionsSIP`</span>
+</span><span id="RoomApi-148"><a href="#RoomApi-148"><span class="linenos">148</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="RoomApi-149"><a href="#RoomApi-149"><span class="linenos">149</span></a>
+</span><span id="RoomApi-150"><a href="#RoomApi-150"><span class="linenos">150</span></a>        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">ComponentOptionsFile</span><span class="p">):</span>
+</span><span id="RoomApi-151"><a href="#RoomApi-151"><span class="linenos">151</span></a>            <span class="n">component_type</span> <span class="o">=</span> <span class="s2">&quot;file&quot;</span>
+</span><span id="RoomApi-152"><a href="#RoomApi-152"><span class="linenos">152</span></a>        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">ComponentOptionsHLS</span><span class="p">):</span>
+</span><span id="RoomApi-153"><a href="#RoomApi-153"><span class="linenos">153</span></a>            <span class="n">component_type</span> <span class="o">=</span> <span class="s2">&quot;hls&quot;</span>
+</span><span id="RoomApi-154"><a href="#RoomApi-154"><span class="linenos">154</span></a>        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">ComponentOptionsRTSP</span><span class="p">):</span>
+</span><span id="RoomApi-155"><a href="#RoomApi-155"><span class="linenos">155</span></a>            <span class="n">component_type</span> <span class="o">=</span> <span class="s2">&quot;rtsp&quot;</span>
+</span><span id="RoomApi-156"><a href="#RoomApi-156"><span class="linenos">156</span></a>        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">ComponentOptionsSIP</span><span class="p">):</span>
+</span><span id="RoomApi-157"><a href="#RoomApi-157"><span class="linenos">157</span></a>            <span class="n">component_type</span> <span class="o">=</span> <span class="s2">&quot;sip&quot;</span>
+</span><span id="RoomApi-158"><a href="#RoomApi-158"><span class="linenos">158</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="RoomApi-159"><a href="#RoomApi-159"><span class="linenos">159</span></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+</span><span id="RoomApi-160"><a href="#RoomApi-160"><span class="linenos">160</span></a>                <span class="s2">&quot;options must be ComponentOptionsFile, ComponentOptionsHLS,&quot;</span>
+</span><span id="RoomApi-161"><a href="#RoomApi-161"><span class="linenos">161</span></a>                <span class="s2">&quot;ComponentOptionsRTSP or ComponentOptionsSIP&quot;</span>
+</span><span id="RoomApi-162"><a href="#RoomApi-162"><span class="linenos">162</span></a>            <span class="p">)</span>
 </span><span id="RoomApi-163"><a href="#RoomApi-163"><span class="linenos">163</span></a>
-</span><span id="RoomApi-164"><a href="#RoomApi-164"><span class="linenos">164</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="n">room_delete_component</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">component_id</span><span class="p">,</span> <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">)</span>
+</span><span id="RoomApi-164"><a href="#RoomApi-164"><span class="linenos">164</span></a>        <span class="n">json_body</span> <span class="o">=</span> <span class="n">AddComponentJsonBody</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">component_type</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
 </span><span id="RoomApi-165"><a href="#RoomApi-165"><span class="linenos">165</span></a>
-</span><span id="RoomApi-166"><a href="#RoomApi-166"><span class="linenos">166</span></a>    <span class="k">def</span> <span class="nf">hls_subscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">origins</span><span class="p">:</span> <span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
-</span><span id="RoomApi-167"><a href="#RoomApi-167"><span class="linenos">167</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="RoomApi-168"><a href="#RoomApi-168"><span class="linenos">168</span></a><span class="sd">        In order to subscribe to HLS peers/components,</span>
-</span><span id="RoomApi-169"><a href="#RoomApi-169"><span class="linenos">169</span></a><span class="sd">        the HLS component should be initialized with the subscribe_mode set to manual.</span>
-</span><span id="RoomApi-170"><a href="#RoomApi-170"><span class="linenos">170</span></a><span class="sd">        This mode proves beneficial when you do not wish to record or stream</span>
-</span><span id="RoomApi-171"><a href="#RoomApi-171"><span class="linenos">171</span></a><span class="sd">        all the available streams within a room via HLS.</span>
-</span><span id="RoomApi-172"><a href="#RoomApi-172"><span class="linenos">172</span></a><span class="sd">        It allows for selective addition instead –</span>
-</span><span id="RoomApi-173"><a href="#RoomApi-173"><span class="linenos">173</span></a><span class="sd">        you can manually select specific streams.</span>
-</span><span id="RoomApi-174"><a href="#RoomApi-174"><span class="linenos">174</span></a><span class="sd">        For instance, you could opt to record only the stream of an event&#39;s host.</span>
-</span><span id="RoomApi-175"><a href="#RoomApi-175"><span class="linenos">175</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="RoomApi-176"><a href="#RoomApi-176"><span class="linenos">176</span></a>
-</span><span id="RoomApi-177"><a href="#RoomApi-177"><span class="linenos">177</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
-</span><span id="RoomApi-178"><a href="#RoomApi-178"><span class="linenos">178</span></a>            <span class="n">hls_subscribe_hls_to</span><span class="p">,</span>
-</span><span id="RoomApi-179"><a href="#RoomApi-179"><span class="linenos">179</span></a>            <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span>
-</span><span id="RoomApi-180"><a href="#RoomApi-180"><span class="linenos">180</span></a>            <span class="n">json_body</span><span class="o">=</span><span class="n">SubscriptionConfig</span><span class="p">(</span><span class="n">origins</span><span class="o">=</span><span class="n">origins</span><span class="p">),</span>
-</span><span id="RoomApi-181"><a href="#RoomApi-181"><span class="linenos">181</span></a>        <span class="p">)</span>
-</span><span id="RoomApi-182"><a href="#RoomApi-182"><span class="linenos">182</span></a>
-</span><span id="RoomApi-183"><a href="#RoomApi-183"><span class="linenos">183</span></a>    <span class="k">def</span> <span class="nf">sip_dial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">phone_number</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="RoomApi-184"><a href="#RoomApi-184"><span class="linenos">184</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="RoomApi-185"><a href="#RoomApi-185"><span class="linenos">185</span></a><span class="sd">        Starts a phone call from a specified component to a provided phone number.</span>
-</span><span id="RoomApi-186"><a href="#RoomApi-186"><span class="linenos">186</span></a>
-</span><span id="RoomApi-187"><a href="#RoomApi-187"><span class="linenos">187</span></a><span class="sd">        This is asynchronous operation.</span>
-</span><span id="RoomApi-188"><a href="#RoomApi-188"><span class="linenos">188</span></a><span class="sd">        In case of providing incorrect phone number you will receive</span>
-</span><span id="RoomApi-189"><a href="#RoomApi-189"><span class="linenos">189</span></a><span class="sd">        notification `ComponentCrashed`.</span>
-</span><span id="RoomApi-190"><a href="#RoomApi-190"><span class="linenos">190</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="RoomApi-166"><a href="#RoomApi-166"><span class="linenos">166</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
+</span><span id="RoomApi-167"><a href="#RoomApi-167"><span class="linenos">167</span></a>            <span class="n">room_add_component</span><span class="p">,</span> <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span> <span class="n">json_body</span><span class="o">=</span><span class="n">json_body</span>
+</span><span id="RoomApi-168"><a href="#RoomApi-168"><span class="linenos">168</span></a>        <span class="p">)</span><span class="o">.</span><span class="n">data</span>
+</span><span id="RoomApi-169"><a href="#RoomApi-169"><span class="linenos">169</span></a>
+</span><span id="RoomApi-170"><a href="#RoomApi-170"><span class="linenos">170</span></a>    <span class="k">def</span> <span class="nf">delete_component</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="RoomApi-171"><a href="#RoomApi-171"><span class="linenos">171</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Deletes component&quot;&quot;&quot;</span>
+</span><span id="RoomApi-172"><a href="#RoomApi-172"><span class="linenos">172</span></a>
+</span><span id="RoomApi-173"><a href="#RoomApi-173"><span class="linenos">173</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="n">room_delete_component</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">component_id</span><span class="p">,</span> <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">)</span>
+</span><span id="RoomApi-174"><a href="#RoomApi-174"><span class="linenos">174</span></a>
+</span><span id="RoomApi-175"><a href="#RoomApi-175"><span class="linenos">175</span></a>    <span class="k">def</span> <span class="nf">hls_subscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">origins</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+</span><span id="RoomApi-176"><a href="#RoomApi-176"><span class="linenos">176</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="RoomApi-177"><a href="#RoomApi-177"><span class="linenos">177</span></a><span class="sd">        In order to subscribe to HLS peers/components,</span>
+</span><span id="RoomApi-178"><a href="#RoomApi-178"><span class="linenos">178</span></a><span class="sd">        the HLS component should be initialized with the subscribe_mode set to manual.</span>
+</span><span id="RoomApi-179"><a href="#RoomApi-179"><span class="linenos">179</span></a><span class="sd">        This mode proves beneficial when you do not wish to record or stream</span>
+</span><span id="RoomApi-180"><a href="#RoomApi-180"><span class="linenos">180</span></a><span class="sd">        all the available streams within a room via HLS.</span>
+</span><span id="RoomApi-181"><a href="#RoomApi-181"><span class="linenos">181</span></a><span class="sd">        It allows for selective addition instead –</span>
+</span><span id="RoomApi-182"><a href="#RoomApi-182"><span class="linenos">182</span></a><span class="sd">        you can manually select specific streams.</span>
+</span><span id="RoomApi-183"><a href="#RoomApi-183"><span class="linenos">183</span></a><span class="sd">        For instance, you could opt to record only the stream of an event&#39;s host.</span>
+</span><span id="RoomApi-184"><a href="#RoomApi-184"><span class="linenos">184</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="RoomApi-185"><a href="#RoomApi-185"><span class="linenos">185</span></a>
+</span><span id="RoomApi-186"><a href="#RoomApi-186"><span class="linenos">186</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
+</span><span id="RoomApi-187"><a href="#RoomApi-187"><span class="linenos">187</span></a>            <span class="n">hls_subscribe_hls_to</span><span class="p">,</span>
+</span><span id="RoomApi-188"><a href="#RoomApi-188"><span class="linenos">188</span></a>            <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span>
+</span><span id="RoomApi-189"><a href="#RoomApi-189"><span class="linenos">189</span></a>            <span class="n">json_body</span><span class="o">=</span><span class="n">SubscriptionConfig</span><span class="p">(</span><span class="n">origins</span><span class="o">=</span><span class="n">origins</span><span class="p">),</span>
+</span><span id="RoomApi-190"><a href="#RoomApi-190"><span class="linenos">190</span></a>        <span class="p">)</span>
 </span><span id="RoomApi-191"><a href="#RoomApi-191"><span class="linenos">191</span></a>
-</span><span id="RoomApi-192"><a href="#RoomApi-192"><span class="linenos">192</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
-</span><span id="RoomApi-193"><a href="#RoomApi-193"><span class="linenos">193</span></a>            <span class="n">sip_dial</span><span class="p">,</span>
-</span><span id="RoomApi-194"><a href="#RoomApi-194"><span class="linenos">194</span></a>            <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span>
-</span><span id="RoomApi-195"><a href="#RoomApi-195"><span class="linenos">195</span></a>            <span class="n">component_id</span><span class="o">=</span><span class="n">component_id</span><span class="p">,</span>
-</span><span id="RoomApi-196"><a href="#RoomApi-196"><span class="linenos">196</span></a>            <span class="n">json_body</span><span class="o">=</span><span class="n">DialConfig</span><span class="p">(</span><span class="n">phone_number</span><span class="o">=</span><span class="n">phone_number</span><span class="p">),</span>
-</span><span id="RoomApi-197"><a href="#RoomApi-197"><span class="linenos">197</span></a>        <span class="p">)</span>
-</span><span id="RoomApi-198"><a href="#RoomApi-198"><span class="linenos">198</span></a>
-</span><span id="RoomApi-199"><a href="#RoomApi-199"><span class="linenos">199</span></a>    <span class="k">def</span> <span class="nf">sip_end_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="RoomApi-200"><a href="#RoomApi-200"><span class="linenos">200</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="RoomApi-201"><a href="#RoomApi-201"><span class="linenos">201</span></a><span class="sd">        End a phone call on a specified SIP component.</span>
-</span><span id="RoomApi-202"><a href="#RoomApi-202"><span class="linenos">202</span></a>
-</span><span id="RoomApi-203"><a href="#RoomApi-203"><span class="linenos">203</span></a><span class="sd">        This is asynchronous operation.</span>
-</span><span id="RoomApi-204"><a href="#RoomApi-204"><span class="linenos">204</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="RoomApi-205"><a href="#RoomApi-205"><span class="linenos">205</span></a>
-</span><span id="RoomApi-206"><a href="#RoomApi-206"><span class="linenos">206</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
-</span><span id="RoomApi-207"><a href="#RoomApi-207"><span class="linenos">207</span></a>            <span class="n">sip_end_call</span><span class="p">,</span>
-</span><span id="RoomApi-208"><a href="#RoomApi-208"><span class="linenos">208</span></a>            <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span>
-</span><span id="RoomApi-209"><a href="#RoomApi-209"><span class="linenos">209</span></a>            <span class="n">component_id</span><span class="o">=</span><span class="n">component_id</span><span class="p">,</span>
-</span><span id="RoomApi-210"><a href="#RoomApi-210"><span class="linenos">210</span></a>        <span class="p">)</span>
+</span><span id="RoomApi-192"><a href="#RoomApi-192"><span class="linenos">192</span></a>    <span class="k">def</span> <span class="nf">sip_dial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">phone_number</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="RoomApi-193"><a href="#RoomApi-193"><span class="linenos">193</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="RoomApi-194"><a href="#RoomApi-194"><span class="linenos">194</span></a><span class="sd">        Starts a phone call from a specified component to a provided phone number.</span>
+</span><span id="RoomApi-195"><a href="#RoomApi-195"><span class="linenos">195</span></a>
+</span><span id="RoomApi-196"><a href="#RoomApi-196"><span class="linenos">196</span></a><span class="sd">        This is asynchronous operation.</span>
+</span><span id="RoomApi-197"><a href="#RoomApi-197"><span class="linenos">197</span></a><span class="sd">        In case of providing incorrect phone number you will receive</span>
+</span><span id="RoomApi-198"><a href="#RoomApi-198"><span class="linenos">198</span></a><span class="sd">        notification `ComponentCrashed`.</span>
+</span><span id="RoomApi-199"><a href="#RoomApi-199"><span class="linenos">199</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="RoomApi-200"><a href="#RoomApi-200"><span class="linenos">200</span></a>
+</span><span id="RoomApi-201"><a href="#RoomApi-201"><span class="linenos">201</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
+</span><span id="RoomApi-202"><a href="#RoomApi-202"><span class="linenos">202</span></a>            <span class="n">sip_dial</span><span class="p">,</span>
+</span><span id="RoomApi-203"><a href="#RoomApi-203"><span class="linenos">203</span></a>            <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span>
+</span><span id="RoomApi-204"><a href="#RoomApi-204"><span class="linenos">204</span></a>            <span class="n">component_id</span><span class="o">=</span><span class="n">component_id</span><span class="p">,</span>
+</span><span id="RoomApi-205"><a href="#RoomApi-205"><span class="linenos">205</span></a>            <span class="n">json_body</span><span class="o">=</span><span class="n">DialConfig</span><span class="p">(</span><span class="n">phone_number</span><span class="o">=</span><span class="n">phone_number</span><span class="p">),</span>
+</span><span id="RoomApi-206"><a href="#RoomApi-206"><span class="linenos">206</span></a>        <span class="p">)</span>
+</span><span id="RoomApi-207"><a href="#RoomApi-207"><span class="linenos">207</span></a>
+</span><span id="RoomApi-208"><a href="#RoomApi-208"><span class="linenos">208</span></a>    <span class="k">def</span> <span class="nf">sip_end_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="RoomApi-209"><a href="#RoomApi-209"><span class="linenos">209</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="RoomApi-210"><a href="#RoomApi-210"><span class="linenos">210</span></a><span class="sd">        End a phone call on a specified SIP component.</span>
+</span><span id="RoomApi-211"><a href="#RoomApi-211"><span class="linenos">211</span></a>
+</span><span id="RoomApi-212"><a href="#RoomApi-212"><span class="linenos">212</span></a><span class="sd">        This is asynchronous operation.</span>
+</span><span id="RoomApi-213"><a href="#RoomApi-213"><span class="linenos">213</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="RoomApi-214"><a href="#RoomApi-214"><span class="linenos">214</span></a>
+</span><span id="RoomApi-215"><a href="#RoomApi-215"><span class="linenos">215</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
+</span><span id="RoomApi-216"><a href="#RoomApi-216"><span class="linenos">216</span></a>            <span class="n">sip_end_call</span><span class="p">,</span>
+</span><span id="RoomApi-217"><a href="#RoomApi-217"><span class="linenos">217</span></a>            <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span>
+</span><span id="RoomApi-218"><a href="#RoomApi-218"><span class="linenos">218</span></a>            <span class="n">component_id</span><span class="o">=</span><span class="n">component_id</span><span class="p">,</span>
+</span><span id="RoomApi-219"><a href="#RoomApi-219"><span class="linenos">219</span></a>        <span class="p">)</span>
 </span></pre></div>
 
 
@@ -1093,7 +1126,7 @@ Set secure to <code>True</code> for <code>https</code> and <code>False</code> fo
 <div class="attr function">
 
         <span class="def">def</span>
-        <span class="name">create_room</span><span class="signature pdoc-code multiline">(<span class="param">  <span class="bp">self</span>,</span><span class="param">    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">    <span class="n">max_peers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">  <span class="n">video_codec</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;h264&#39;</span><span class="p">,</span> <span class="s1">&#39;vp8&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param"> <span class="n">webhook_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> (&lt;class &#x27;str&#x27;&gt;, &lt;class &#x27;<a href="#Room">Room</a>&#x27;&gt;):</span></span>
+        <span class="name">create_room</span><span class="signature pdoc-code multiline">(<span class="param">  <span class="bp">self</span>,</span><span class="param">    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">    <span class="n">max_peers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">  <span class="n">video_codec</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;h264&#39;</span><span class="p">,</span> <span class="s1">&#39;vp8&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param"> <span class="n">webhook_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n"><a href="#Room">Room</a></span><span class="p">]</span>:</span></span>
 
                 <label class="view-source-button" for="RoomApi.create_room-view-source"><span>View Source</span></label>
 
@@ -1105,7 +1138,7 @@ Set secure to <code>True</code> for <code>https</code> and <code>False</code> fo
 </span><span id="RoomApi.create_room-63"><a href="#RoomApi.create_room-63"><span class="linenos">63</span></a>        <span class="n">max_peers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 </span><span id="RoomApi.create_room-64"><a href="#RoomApi.create_room-64"><span class="linenos">64</span></a>        <span class="n">video_codec</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;h264&quot;</span><span class="p">,</span> <span class="s2">&quot;vp8&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 </span><span id="RoomApi.create_room-65"><a href="#RoomApi.create_room-65"><span class="linenos">65</span></a>        <span class="n">webhook_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="RoomApi.create_room-66"><a href="#RoomApi.create_room-66"><span class="linenos">66</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Room</span><span class="p">):</span>
+</span><span id="RoomApi.create_room-66"><a href="#RoomApi.create_room-66"><span class="linenos">66</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Room</span><span class="p">]:</span>
 </span><span id="RoomApi.create_room-67"><a href="#RoomApi.create_room-67"><span class="linenos">67</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="RoomApi.create_room-68"><a href="#RoomApi.create_room-68"><span class="linenos">68</span></a><span class="sd">        Creates a new room</span>
 </span><span id="RoomApi.create_room-69"><a href="#RoomApi.create_room-69"><span class="linenos">69</span></a>
@@ -1220,27 +1253,29 @@ the returned address in order to interact with the room.</p>
 <div class="attr function">
 
         <span class="def">def</span>
-        <span class="name">add_peer</span><span class="signature pdoc-code multiline">(<span class="param"> <span class="bp">self</span>,</span><span class="param">    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">  <span class="n">options</span><span class="p">:</span> <span class="n"><a href="#PeerOptionsWebRTC">PeerOptionsWebRTC</a></span></span><span class="return-annotation">) -> (&lt;class &#x27;str&#x27;&gt;, &lt;class &#x27;<a href="#Peer">Peer</a>&#x27;&gt;):</span></span>
+        <span class="name">add_peer</span><span class="signature pdoc-code multiline">(<span class="param"> <span class="bp">self</span>,</span><span class="param">    <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">  <span class="n">options</span><span class="p">:</span> <span class="n"><a href="#PeerOptionsWebRTC">PeerOptionsWebRTC</a></span></span><span class="return-annotation">) -> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n"><a href="#Peer">Peer</a></span><span class="p">]</span>:</span></span>
 
                 <label class="view-source-button" for="RoomApi.add_peer-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#RoomApi.add_peer"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="RoomApi.add_peer-108"><a href="#RoomApi.add_peer-108"><span class="linenos">108</span></a>    <span class="k">def</span> <span class="nf">add_peer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">PeerOptionsWebRTC</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Peer</span><span class="p">):</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="RoomApi.add_peer-108"><a href="#RoomApi.add_peer-108"><span class="linenos">108</span></a>    <span class="k">def</span> <span class="nf">add_peer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">PeerOptionsWebRTC</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Peer</span><span class="p">]:</span>
 </span><span id="RoomApi.add_peer-109"><a href="#RoomApi.add_peer-109"><span class="linenos">109</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="RoomApi.add_peer-110"><a href="#RoomApi.add_peer-110"><span class="linenos">110</span></a><span class="sd">        Creates peer in the room</span>
 </span><span id="RoomApi.add_peer-111"><a href="#RoomApi.add_peer-111"><span class="linenos">111</span></a>
 </span><span id="RoomApi.add_peer-112"><a href="#RoomApi.add_peer-112"><span class="linenos">112</span></a><span class="sd">        Currently only `webrtc` peer is supported</span>
 </span><span id="RoomApi.add_peer-113"><a href="#RoomApi.add_peer-113"><span class="linenos">113</span></a>
 </span><span id="RoomApi.add_peer-114"><a href="#RoomApi.add_peer-114"><span class="linenos">114</span></a><span class="sd">        Returns a tuple (`peer_token`, `Peer`) - the token needed by Peer</span>
-</span><span id="RoomApi.add_peer-115"><a href="#RoomApi.add_peer-115"><span class="linenos">115</span></a><span class="sd">        to authenticate to Jellyfish and the new `Peer`</span>
-</span><span id="RoomApi.add_peer-116"><a href="#RoomApi.add_peer-116"><span class="linenos">116</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="RoomApi.add_peer-117"><a href="#RoomApi.add_peer-117"><span class="linenos">117</span></a>
-</span><span id="RoomApi.add_peer-118"><a href="#RoomApi.add_peer-118"><span class="linenos">118</span></a>        <span class="n">peer_type</span> <span class="o">=</span> <span class="s2">&quot;webrtc&quot;</span>
-</span><span id="RoomApi.add_peer-119"><a href="#RoomApi.add_peer-119"><span class="linenos">119</span></a>        <span class="n">json_body</span> <span class="o">=</span> <span class="n">AddPeerJsonBody</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">peer_type</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
-</span><span id="RoomApi.add_peer-120"><a href="#RoomApi.add_peer-120"><span class="linenos">120</span></a>
-</span><span id="RoomApi.add_peer-121"><a href="#RoomApi.add_peer-121"><span class="linenos">121</span></a>        <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="n">room_add_peer</span><span class="p">,</span> <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span> <span class="n">json_body</span><span class="o">=</span><span class="n">json_body</span><span class="p">)</span>
-</span><span id="RoomApi.add_peer-122"><a href="#RoomApi.add_peer-122"><span class="linenos">122</span></a>        <span class="k">return</span> <span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="n">resp</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">peer</span><span class="p">)</span>
+</span><span id="RoomApi.add_peer-115"><a href="#RoomApi.add_peer-115"><span class="linenos">115</span></a><span class="sd">        to authenticate to Jellyfish and the new `Peer`.</span>
+</span><span id="RoomApi.add_peer-116"><a href="#RoomApi.add_peer-116"><span class="linenos">116</span></a>
+</span><span id="RoomApi.add_peer-117"><a href="#RoomApi.add_peer-117"><span class="linenos">117</span></a><span class="sd">        The possible options to pass for peer are `PeerOptionsWebRTC`.</span>
+</span><span id="RoomApi.add_peer-118"><a href="#RoomApi.add_peer-118"><span class="linenos">118</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="RoomApi.add_peer-119"><a href="#RoomApi.add_peer-119"><span class="linenos">119</span></a>
+</span><span id="RoomApi.add_peer-120"><a href="#RoomApi.add_peer-120"><span class="linenos">120</span></a>        <span class="n">peer_type</span> <span class="o">=</span> <span class="s2">&quot;webrtc&quot;</span>
+</span><span id="RoomApi.add_peer-121"><a href="#RoomApi.add_peer-121"><span class="linenos">121</span></a>        <span class="n">json_body</span> <span class="o">=</span> <span class="n">AddPeerJsonBody</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">peer_type</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+</span><span id="RoomApi.add_peer-122"><a href="#RoomApi.add_peer-122"><span class="linenos">122</span></a>
+</span><span id="RoomApi.add_peer-123"><a href="#RoomApi.add_peer-123"><span class="linenos">123</span></a>        <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="n">room_add_peer</span><span class="p">,</span> <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span> <span class="n">json_body</span><span class="o">=</span><span class="n">json_body</span><span class="p">)</span>
+</span><span id="RoomApi.add_peer-124"><a href="#RoomApi.add_peer-124"><span class="linenos">124</span></a>        <span class="k">return</span> <span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="n">resp</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">peer</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -1249,7 +1284,9 @@ the returned address in order to interact with the room.</p>
 <p>Currently only <code>webrtc</code> peer is supported</p>
 
 <p>Returns a tuple (<code>peer_token</code>, <code><a href="#Peer">Peer</a></code>) - the token needed by Peer
-to authenticate to Jellyfish and the new <code><a href="#Peer">Peer</a></code></p>
+to authenticate to Jellyfish and the new <code><a href="#Peer">Peer</a></code>.</p>
+
+<p>The possible options to pass for peer are <code><a href="#PeerOptionsWebRTC">PeerOptionsWebRTC</a></code>.</p>
 </div>
 
 
@@ -1265,10 +1302,10 @@ to authenticate to Jellyfish and the new <code><a href="#Peer">Peer</a></code></
 
     </div>
     <a class="headerlink" href="#RoomApi.delete_peer"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="RoomApi.delete_peer-124"><a href="#RoomApi.delete_peer-124"><span class="linenos">124</span></a>    <span class="k">def</span> <span class="nf">delete_peer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">peer_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="RoomApi.delete_peer-125"><a href="#RoomApi.delete_peer-125"><span class="linenos">125</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Deletes peer&quot;&quot;&quot;</span>
-</span><span id="RoomApi.delete_peer-126"><a href="#RoomApi.delete_peer-126"><span class="linenos">126</span></a>
-</span><span id="RoomApi.delete_peer-127"><a href="#RoomApi.delete_peer-127"><span class="linenos">127</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="n">room_delete_peer</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">peer_id</span><span class="p">,</span> <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="RoomApi.delete_peer-126"><a href="#RoomApi.delete_peer-126"><span class="linenos">126</span></a>    <span class="k">def</span> <span class="nf">delete_peer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">peer_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="RoomApi.delete_peer-127"><a href="#RoomApi.delete_peer-127"><span class="linenos">127</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Deletes peer&quot;&quot;&quot;</span>
+</span><span id="RoomApi.delete_peer-128"><a href="#RoomApi.delete_peer-128"><span class="linenos">128</span></a>
+</span><span id="RoomApi.delete_peer-129"><a href="#RoomApi.delete_peer-129"><span class="linenos">129</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="n">room_delete_peer</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">peer_id</span><span class="p">,</span> <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -1288,41 +1325,56 @@ to authenticate to Jellyfish and the new <code><a href="#Peer">Peer</a></code></
 
     </div>
     <a class="headerlink" href="#RoomApi.add_component"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="RoomApi.add_component-129"><a href="#RoomApi.add_component-129"><span class="linenos">129</span></a>    <span class="k">def</span> <span class="nf">add_component</span><span class="p">(</span>
-</span><span id="RoomApi.add_component-130"><a href="#RoomApi.add_component-130"><span class="linenos">130</span></a>        <span class="bp">self</span><span class="p">,</span>
-</span><span id="RoomApi.add_component-131"><a href="#RoomApi.add_component-131"><span class="linenos">131</span></a>        <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span id="RoomApi.add_component-132"><a href="#RoomApi.add_component-132"><span class="linenos">132</span></a>        <span class="n">options</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
-</span><span id="RoomApi.add_component-133"><a href="#RoomApi.add_component-133"><span class="linenos">133</span></a>            <span class="n">ComponentOptionsFile</span><span class="p">,</span>
-</span><span id="RoomApi.add_component-134"><a href="#RoomApi.add_component-134"><span class="linenos">134</span></a>            <span class="n">ComponentOptionsHLS</span><span class="p">,</span>
-</span><span id="RoomApi.add_component-135"><a href="#RoomApi.add_component-135"><span class="linenos">135</span></a>            <span class="n">ComponentOptionsRTSP</span><span class="p">,</span>
-</span><span id="RoomApi.add_component-136"><a href="#RoomApi.add_component-136"><span class="linenos">136</span></a>            <span class="n">ComponentOptionsSIP</span><span class="p">,</span>
-</span><span id="RoomApi.add_component-137"><a href="#RoomApi.add_component-137"><span class="linenos">137</span></a>        <span class="p">],</span>
-</span><span id="RoomApi.add_component-138"><a href="#RoomApi.add_component-138"><span class="linenos">138</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">ComponentFile</span><span class="p">,</span> <span class="n">ComponentHLS</span><span class="p">,</span> <span class="n">ComponentRTSP</span><span class="p">,</span> <span class="n">ComponentSIP</span><span class="p">]:</span>
-</span><span id="RoomApi.add_component-139"><a href="#RoomApi.add_component-139"><span class="linenos">139</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates component in the room&quot;&quot;&quot;</span>
-</span><span id="RoomApi.add_component-140"><a href="#RoomApi.add_component-140"><span class="linenos">140</span></a>
-</span><span id="RoomApi.add_component-141"><a href="#RoomApi.add_component-141"><span class="linenos">141</span></a>        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">ComponentOptionsFile</span><span class="p">):</span>
-</span><span id="RoomApi.add_component-142"><a href="#RoomApi.add_component-142"><span class="linenos">142</span></a>            <span class="n">component_type</span> <span class="o">=</span> <span class="s2">&quot;file&quot;</span>
-</span><span id="RoomApi.add_component-143"><a href="#RoomApi.add_component-143"><span class="linenos">143</span></a>        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">ComponentOptionsHLS</span><span class="p">):</span>
-</span><span id="RoomApi.add_component-144"><a href="#RoomApi.add_component-144"><span class="linenos">144</span></a>            <span class="n">component_type</span> <span class="o">=</span> <span class="s2">&quot;hls&quot;</span>
-</span><span id="RoomApi.add_component-145"><a href="#RoomApi.add_component-145"><span class="linenos">145</span></a>        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">ComponentOptionsRTSP</span><span class="p">):</span>
-</span><span id="RoomApi.add_component-146"><a href="#RoomApi.add_component-146"><span class="linenos">146</span></a>            <span class="n">component_type</span> <span class="o">=</span> <span class="s2">&quot;rtsp&quot;</span>
-</span><span id="RoomApi.add_component-147"><a href="#RoomApi.add_component-147"><span class="linenos">147</span></a>        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">ComponentOptionsSIP</span><span class="p">):</span>
-</span><span id="RoomApi.add_component-148"><a href="#RoomApi.add_component-148"><span class="linenos">148</span></a>            <span class="n">component_type</span> <span class="o">=</span> <span class="s2">&quot;sip&quot;</span>
-</span><span id="RoomApi.add_component-149"><a href="#RoomApi.add_component-149"><span class="linenos">149</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="RoomApi.add_component-150"><a href="#RoomApi.add_component-150"><span class="linenos">150</span></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-</span><span id="RoomApi.add_component-151"><a href="#RoomApi.add_component-151"><span class="linenos">151</span></a>                <span class="s2">&quot;options must be ComponentFile, ComponentOptionsHLS,&quot;</span>
-</span><span id="RoomApi.add_component-152"><a href="#RoomApi.add_component-152"><span class="linenos">152</span></a>                <span class="s2">&quot;ComponentOptionsRTSP or ComponentOptionsSIP&quot;</span>
-</span><span id="RoomApi.add_component-153"><a href="#RoomApi.add_component-153"><span class="linenos">153</span></a>            <span class="p">)</span>
-</span><span id="RoomApi.add_component-154"><a href="#RoomApi.add_component-154"><span class="linenos">154</span></a>
-</span><span id="RoomApi.add_component-155"><a href="#RoomApi.add_component-155"><span class="linenos">155</span></a>        <span class="n">json_body</span> <span class="o">=</span> <span class="n">AddComponentJsonBody</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">component_type</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
-</span><span id="RoomApi.add_component-156"><a href="#RoomApi.add_component-156"><span class="linenos">156</span></a>
-</span><span id="RoomApi.add_component-157"><a href="#RoomApi.add_component-157"><span class="linenos">157</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
-</span><span id="RoomApi.add_component-158"><a href="#RoomApi.add_component-158"><span class="linenos">158</span></a>            <span class="n">room_add_component</span><span class="p">,</span> <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span> <span class="n">json_body</span><span class="o">=</span><span class="n">json_body</span>
-</span><span id="RoomApi.add_component-159"><a href="#RoomApi.add_component-159"><span class="linenos">159</span></a>        <span class="p">)</span><span class="o">.</span><span class="n">data</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="RoomApi.add_component-131"><a href="#RoomApi.add_component-131"><span class="linenos">131</span></a>    <span class="k">def</span> <span class="nf">add_component</span><span class="p">(</span>
+</span><span id="RoomApi.add_component-132"><a href="#RoomApi.add_component-132"><span class="linenos">132</span></a>        <span class="bp">self</span><span class="p">,</span>
+</span><span id="RoomApi.add_component-133"><a href="#RoomApi.add_component-133"><span class="linenos">133</span></a>        <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="RoomApi.add_component-134"><a href="#RoomApi.add_component-134"><span class="linenos">134</span></a>        <span class="n">options</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
+</span><span id="RoomApi.add_component-135"><a href="#RoomApi.add_component-135"><span class="linenos">135</span></a>            <span class="n">ComponentOptionsFile</span><span class="p">,</span>
+</span><span id="RoomApi.add_component-136"><a href="#RoomApi.add_component-136"><span class="linenos">136</span></a>            <span class="n">ComponentOptionsHLS</span><span class="p">,</span>
+</span><span id="RoomApi.add_component-137"><a href="#RoomApi.add_component-137"><span class="linenos">137</span></a>            <span class="n">ComponentOptionsRTSP</span><span class="p">,</span>
+</span><span id="RoomApi.add_component-138"><a href="#RoomApi.add_component-138"><span class="linenos">138</span></a>            <span class="n">ComponentOptionsSIP</span><span class="p">,</span>
+</span><span id="RoomApi.add_component-139"><a href="#RoomApi.add_component-139"><span class="linenos">139</span></a>        <span class="p">],</span>
+</span><span id="RoomApi.add_component-140"><a href="#RoomApi.add_component-140"><span class="linenos">140</span></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">ComponentFile</span><span class="p">,</span> <span class="n">ComponentHLS</span><span class="p">,</span> <span class="n">ComponentRTSP</span><span class="p">,</span> <span class="n">ComponentSIP</span><span class="p">]:</span>
+</span><span id="RoomApi.add_component-141"><a href="#RoomApi.add_component-141"><span class="linenos">141</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="RoomApi.add_component-142"><a href="#RoomApi.add_component-142"><span class="linenos">142</span></a><span class="sd">        Creates component in the room.</span>
+</span><span id="RoomApi.add_component-143"><a href="#RoomApi.add_component-143"><span class="linenos">143</span></a><span class="sd">        Currently there are 4 different components:</span>
+</span><span id="RoomApi.add_component-144"><a href="#RoomApi.add_component-144"><span class="linenos">144</span></a><span class="sd">        * File Component for which the options are `ComponentOptionsFile`</span>
+</span><span id="RoomApi.add_component-145"><a href="#RoomApi.add_component-145"><span class="linenos">145</span></a><span class="sd">        * HLS Component which options are `ComponentOptionsHLS`</span>
+</span><span id="RoomApi.add_component-146"><a href="#RoomApi.add_component-146"><span class="linenos">146</span></a><span class="sd">        * RTSP Component which options are `ComponentOptionsRTSP`</span>
+</span><span id="RoomApi.add_component-147"><a href="#RoomApi.add_component-147"><span class="linenos">147</span></a><span class="sd">        * SIP Component which options are `ComponentOptionsSIP`</span>
+</span><span id="RoomApi.add_component-148"><a href="#RoomApi.add_component-148"><span class="linenos">148</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="RoomApi.add_component-149"><a href="#RoomApi.add_component-149"><span class="linenos">149</span></a>
+</span><span id="RoomApi.add_component-150"><a href="#RoomApi.add_component-150"><span class="linenos">150</span></a>        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">ComponentOptionsFile</span><span class="p">):</span>
+</span><span id="RoomApi.add_component-151"><a href="#RoomApi.add_component-151"><span class="linenos">151</span></a>            <span class="n">component_type</span> <span class="o">=</span> <span class="s2">&quot;file&quot;</span>
+</span><span id="RoomApi.add_component-152"><a href="#RoomApi.add_component-152"><span class="linenos">152</span></a>        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">ComponentOptionsHLS</span><span class="p">):</span>
+</span><span id="RoomApi.add_component-153"><a href="#RoomApi.add_component-153"><span class="linenos">153</span></a>            <span class="n">component_type</span> <span class="o">=</span> <span class="s2">&quot;hls&quot;</span>
+</span><span id="RoomApi.add_component-154"><a href="#RoomApi.add_component-154"><span class="linenos">154</span></a>        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">ComponentOptionsRTSP</span><span class="p">):</span>
+</span><span id="RoomApi.add_component-155"><a href="#RoomApi.add_component-155"><span class="linenos">155</span></a>            <span class="n">component_type</span> <span class="o">=</span> <span class="s2">&quot;rtsp&quot;</span>
+</span><span id="RoomApi.add_component-156"><a href="#RoomApi.add_component-156"><span class="linenos">156</span></a>        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">ComponentOptionsSIP</span><span class="p">):</span>
+</span><span id="RoomApi.add_component-157"><a href="#RoomApi.add_component-157"><span class="linenos">157</span></a>            <span class="n">component_type</span> <span class="o">=</span> <span class="s2">&quot;sip&quot;</span>
+</span><span id="RoomApi.add_component-158"><a href="#RoomApi.add_component-158"><span class="linenos">158</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="RoomApi.add_component-159"><a href="#RoomApi.add_component-159"><span class="linenos">159</span></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+</span><span id="RoomApi.add_component-160"><a href="#RoomApi.add_component-160"><span class="linenos">160</span></a>                <span class="s2">&quot;options must be ComponentOptionsFile, ComponentOptionsHLS,&quot;</span>
+</span><span id="RoomApi.add_component-161"><a href="#RoomApi.add_component-161"><span class="linenos">161</span></a>                <span class="s2">&quot;ComponentOptionsRTSP or ComponentOptionsSIP&quot;</span>
+</span><span id="RoomApi.add_component-162"><a href="#RoomApi.add_component-162"><span class="linenos">162</span></a>            <span class="p">)</span>
+</span><span id="RoomApi.add_component-163"><a href="#RoomApi.add_component-163"><span class="linenos">163</span></a>
+</span><span id="RoomApi.add_component-164"><a href="#RoomApi.add_component-164"><span class="linenos">164</span></a>        <span class="n">json_body</span> <span class="o">=</span> <span class="n">AddComponentJsonBody</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">component_type</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+</span><span id="RoomApi.add_component-165"><a href="#RoomApi.add_component-165"><span class="linenos">165</span></a>
+</span><span id="RoomApi.add_component-166"><a href="#RoomApi.add_component-166"><span class="linenos">166</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
+</span><span id="RoomApi.add_component-167"><a href="#RoomApi.add_component-167"><span class="linenos">167</span></a>            <span class="n">room_add_component</span><span class="p">,</span> <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span> <span class="n">json_body</span><span class="o">=</span><span class="n">json_body</span>
+</span><span id="RoomApi.add_component-168"><a href="#RoomApi.add_component-168"><span class="linenos">168</span></a>        <span class="p">)</span><span class="o">.</span><span class="n">data</span>
 </span></pre></div>
 
 
-            <div class="docstring"><p>Creates component in the room</p>
+            <div class="docstring"><p>Creates component in the room.
+Currently there are 4 different components:</p>
+
+<ul>
+<li>File Component for which the options are <code><a href="#ComponentOptionsFile">ComponentOptionsFile</a></code></li>
+<li>HLS Component which options are <code><a href="#ComponentOptionsHLS">ComponentOptionsHLS</a></code></li>
+<li>RTSP Component which options are <code><a href="#ComponentOptionsRTSP">ComponentOptionsRTSP</a></code></li>
+<li>SIP Component which options are <code><a href="#ComponentOptionsSIP">ComponentOptionsSIP</a></code></li>
+</ul>
 </div>
 
 
@@ -1338,10 +1390,10 @@ to authenticate to Jellyfish and the new <code><a href="#Peer">Peer</a></code></
 
     </div>
     <a class="headerlink" href="#RoomApi.delete_component"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="RoomApi.delete_component-161"><a href="#RoomApi.delete_component-161"><span class="linenos">161</span></a>    <span class="k">def</span> <span class="nf">delete_component</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="RoomApi.delete_component-162"><a href="#RoomApi.delete_component-162"><span class="linenos">162</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Deletes component&quot;&quot;&quot;</span>
-</span><span id="RoomApi.delete_component-163"><a href="#RoomApi.delete_component-163"><span class="linenos">163</span></a>
-</span><span id="RoomApi.delete_component-164"><a href="#RoomApi.delete_component-164"><span class="linenos">164</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="n">room_delete_component</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">component_id</span><span class="p">,</span> <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="RoomApi.delete_component-170"><a href="#RoomApi.delete_component-170"><span class="linenos">170</span></a>    <span class="k">def</span> <span class="nf">delete_component</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="RoomApi.delete_component-171"><a href="#RoomApi.delete_component-171"><span class="linenos">171</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Deletes component&quot;&quot;&quot;</span>
+</span><span id="RoomApi.delete_component-172"><a href="#RoomApi.delete_component-172"><span class="linenos">172</span></a>
+</span><span id="RoomApi.delete_component-173"><a href="#RoomApi.delete_component-173"><span class="linenos">173</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="n">room_delete_component</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">component_id</span><span class="p">,</span> <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -1355,28 +1407,28 @@ to authenticate to Jellyfish and the new <code><a href="#Peer">Peer</a></code></
 <div class="attr function">
 
         <span class="def">def</span>
-        <span class="name">hls_subscribe</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param">origins: [&lt;class &#x27;str&#x27;&gt;]</span><span class="return-annotation">):</span></span>
+        <span class="name">hls_subscribe</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param"><span class="n">origins</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></span><span class="return-annotation">):</span></span>
 
                 <label class="view-source-button" for="RoomApi.hls_subscribe-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#RoomApi.hls_subscribe"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="RoomApi.hls_subscribe-166"><a href="#RoomApi.hls_subscribe-166"><span class="linenos">166</span></a>    <span class="k">def</span> <span class="nf">hls_subscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">origins</span><span class="p">:</span> <span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
-</span><span id="RoomApi.hls_subscribe-167"><a href="#RoomApi.hls_subscribe-167"><span class="linenos">167</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="RoomApi.hls_subscribe-168"><a href="#RoomApi.hls_subscribe-168"><span class="linenos">168</span></a><span class="sd">        In order to subscribe to HLS peers/components,</span>
-</span><span id="RoomApi.hls_subscribe-169"><a href="#RoomApi.hls_subscribe-169"><span class="linenos">169</span></a><span class="sd">        the HLS component should be initialized with the subscribe_mode set to manual.</span>
-</span><span id="RoomApi.hls_subscribe-170"><a href="#RoomApi.hls_subscribe-170"><span class="linenos">170</span></a><span class="sd">        This mode proves beneficial when you do not wish to record or stream</span>
-</span><span id="RoomApi.hls_subscribe-171"><a href="#RoomApi.hls_subscribe-171"><span class="linenos">171</span></a><span class="sd">        all the available streams within a room via HLS.</span>
-</span><span id="RoomApi.hls_subscribe-172"><a href="#RoomApi.hls_subscribe-172"><span class="linenos">172</span></a><span class="sd">        It allows for selective addition instead –</span>
-</span><span id="RoomApi.hls_subscribe-173"><a href="#RoomApi.hls_subscribe-173"><span class="linenos">173</span></a><span class="sd">        you can manually select specific streams.</span>
-</span><span id="RoomApi.hls_subscribe-174"><a href="#RoomApi.hls_subscribe-174"><span class="linenos">174</span></a><span class="sd">        For instance, you could opt to record only the stream of an event&#39;s host.</span>
-</span><span id="RoomApi.hls_subscribe-175"><a href="#RoomApi.hls_subscribe-175"><span class="linenos">175</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="RoomApi.hls_subscribe-176"><a href="#RoomApi.hls_subscribe-176"><span class="linenos">176</span></a>
-</span><span id="RoomApi.hls_subscribe-177"><a href="#RoomApi.hls_subscribe-177"><span class="linenos">177</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
-</span><span id="RoomApi.hls_subscribe-178"><a href="#RoomApi.hls_subscribe-178"><span class="linenos">178</span></a>            <span class="n">hls_subscribe_hls_to</span><span class="p">,</span>
-</span><span id="RoomApi.hls_subscribe-179"><a href="#RoomApi.hls_subscribe-179"><span class="linenos">179</span></a>            <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span>
-</span><span id="RoomApi.hls_subscribe-180"><a href="#RoomApi.hls_subscribe-180"><span class="linenos">180</span></a>            <span class="n">json_body</span><span class="o">=</span><span class="n">SubscriptionConfig</span><span class="p">(</span><span class="n">origins</span><span class="o">=</span><span class="n">origins</span><span class="p">),</span>
-</span><span id="RoomApi.hls_subscribe-181"><a href="#RoomApi.hls_subscribe-181"><span class="linenos">181</span></a>        <span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="RoomApi.hls_subscribe-175"><a href="#RoomApi.hls_subscribe-175"><span class="linenos">175</span></a>    <span class="k">def</span> <span class="nf">hls_subscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">origins</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+</span><span id="RoomApi.hls_subscribe-176"><a href="#RoomApi.hls_subscribe-176"><span class="linenos">176</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="RoomApi.hls_subscribe-177"><a href="#RoomApi.hls_subscribe-177"><span class="linenos">177</span></a><span class="sd">        In order to subscribe to HLS peers/components,</span>
+</span><span id="RoomApi.hls_subscribe-178"><a href="#RoomApi.hls_subscribe-178"><span class="linenos">178</span></a><span class="sd">        the HLS component should be initialized with the subscribe_mode set to manual.</span>
+</span><span id="RoomApi.hls_subscribe-179"><a href="#RoomApi.hls_subscribe-179"><span class="linenos">179</span></a><span class="sd">        This mode proves beneficial when you do not wish to record or stream</span>
+</span><span id="RoomApi.hls_subscribe-180"><a href="#RoomApi.hls_subscribe-180"><span class="linenos">180</span></a><span class="sd">        all the available streams within a room via HLS.</span>
+</span><span id="RoomApi.hls_subscribe-181"><a href="#RoomApi.hls_subscribe-181"><span class="linenos">181</span></a><span class="sd">        It allows for selective addition instead –</span>
+</span><span id="RoomApi.hls_subscribe-182"><a href="#RoomApi.hls_subscribe-182"><span class="linenos">182</span></a><span class="sd">        you can manually select specific streams.</span>
+</span><span id="RoomApi.hls_subscribe-183"><a href="#RoomApi.hls_subscribe-183"><span class="linenos">183</span></a><span class="sd">        For instance, you could opt to record only the stream of an event&#39;s host.</span>
+</span><span id="RoomApi.hls_subscribe-184"><a href="#RoomApi.hls_subscribe-184"><span class="linenos">184</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="RoomApi.hls_subscribe-185"><a href="#RoomApi.hls_subscribe-185"><span class="linenos">185</span></a>
+</span><span id="RoomApi.hls_subscribe-186"><a href="#RoomApi.hls_subscribe-186"><span class="linenos">186</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
+</span><span id="RoomApi.hls_subscribe-187"><a href="#RoomApi.hls_subscribe-187"><span class="linenos">187</span></a>            <span class="n">hls_subscribe_hls_to</span><span class="p">,</span>
+</span><span id="RoomApi.hls_subscribe-188"><a href="#RoomApi.hls_subscribe-188"><span class="linenos">188</span></a>            <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span>
+</span><span id="RoomApi.hls_subscribe-189"><a href="#RoomApi.hls_subscribe-189"><span class="linenos">189</span></a>            <span class="n">json_body</span><span class="o">=</span><span class="n">SubscriptionConfig</span><span class="p">(</span><span class="n">origins</span><span class="o">=</span><span class="n">origins</span><span class="p">),</span>
+</span><span id="RoomApi.hls_subscribe-190"><a href="#RoomApi.hls_subscribe-190"><span class="linenos">190</span></a>        <span class="p">)</span>
 </span></pre></div>
 
 
@@ -1402,21 +1454,21 @@ For instance, you could opt to record only the stream of an event's host.</p>
 
     </div>
     <a class="headerlink" href="#RoomApi.sip_dial"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="RoomApi.sip_dial-183"><a href="#RoomApi.sip_dial-183"><span class="linenos">183</span></a>    <span class="k">def</span> <span class="nf">sip_dial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">phone_number</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="RoomApi.sip_dial-184"><a href="#RoomApi.sip_dial-184"><span class="linenos">184</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="RoomApi.sip_dial-185"><a href="#RoomApi.sip_dial-185"><span class="linenos">185</span></a><span class="sd">        Starts a phone call from a specified component to a provided phone number.</span>
-</span><span id="RoomApi.sip_dial-186"><a href="#RoomApi.sip_dial-186"><span class="linenos">186</span></a>
-</span><span id="RoomApi.sip_dial-187"><a href="#RoomApi.sip_dial-187"><span class="linenos">187</span></a><span class="sd">        This is asynchronous operation.</span>
-</span><span id="RoomApi.sip_dial-188"><a href="#RoomApi.sip_dial-188"><span class="linenos">188</span></a><span class="sd">        In case of providing incorrect phone number you will receive</span>
-</span><span id="RoomApi.sip_dial-189"><a href="#RoomApi.sip_dial-189"><span class="linenos">189</span></a><span class="sd">        notification `ComponentCrashed`.</span>
-</span><span id="RoomApi.sip_dial-190"><a href="#RoomApi.sip_dial-190"><span class="linenos">190</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="RoomApi.sip_dial-191"><a href="#RoomApi.sip_dial-191"><span class="linenos">191</span></a>
-</span><span id="RoomApi.sip_dial-192"><a href="#RoomApi.sip_dial-192"><span class="linenos">192</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
-</span><span id="RoomApi.sip_dial-193"><a href="#RoomApi.sip_dial-193"><span class="linenos">193</span></a>            <span class="n">sip_dial</span><span class="p">,</span>
-</span><span id="RoomApi.sip_dial-194"><a href="#RoomApi.sip_dial-194"><span class="linenos">194</span></a>            <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span>
-</span><span id="RoomApi.sip_dial-195"><a href="#RoomApi.sip_dial-195"><span class="linenos">195</span></a>            <span class="n">component_id</span><span class="o">=</span><span class="n">component_id</span><span class="p">,</span>
-</span><span id="RoomApi.sip_dial-196"><a href="#RoomApi.sip_dial-196"><span class="linenos">196</span></a>            <span class="n">json_body</span><span class="o">=</span><span class="n">DialConfig</span><span class="p">(</span><span class="n">phone_number</span><span class="o">=</span><span class="n">phone_number</span><span class="p">),</span>
-</span><span id="RoomApi.sip_dial-197"><a href="#RoomApi.sip_dial-197"><span class="linenos">197</span></a>        <span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="RoomApi.sip_dial-192"><a href="#RoomApi.sip_dial-192"><span class="linenos">192</span></a>    <span class="k">def</span> <span class="nf">sip_dial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">phone_number</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="RoomApi.sip_dial-193"><a href="#RoomApi.sip_dial-193"><span class="linenos">193</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="RoomApi.sip_dial-194"><a href="#RoomApi.sip_dial-194"><span class="linenos">194</span></a><span class="sd">        Starts a phone call from a specified component to a provided phone number.</span>
+</span><span id="RoomApi.sip_dial-195"><a href="#RoomApi.sip_dial-195"><span class="linenos">195</span></a>
+</span><span id="RoomApi.sip_dial-196"><a href="#RoomApi.sip_dial-196"><span class="linenos">196</span></a><span class="sd">        This is asynchronous operation.</span>
+</span><span id="RoomApi.sip_dial-197"><a href="#RoomApi.sip_dial-197"><span class="linenos">197</span></a><span class="sd">        In case of providing incorrect phone number you will receive</span>
+</span><span id="RoomApi.sip_dial-198"><a href="#RoomApi.sip_dial-198"><span class="linenos">198</span></a><span class="sd">        notification `ComponentCrashed`.</span>
+</span><span id="RoomApi.sip_dial-199"><a href="#RoomApi.sip_dial-199"><span class="linenos">199</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="RoomApi.sip_dial-200"><a href="#RoomApi.sip_dial-200"><span class="linenos">200</span></a>
+</span><span id="RoomApi.sip_dial-201"><a href="#RoomApi.sip_dial-201"><span class="linenos">201</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
+</span><span id="RoomApi.sip_dial-202"><a href="#RoomApi.sip_dial-202"><span class="linenos">202</span></a>            <span class="n">sip_dial</span><span class="p">,</span>
+</span><span id="RoomApi.sip_dial-203"><a href="#RoomApi.sip_dial-203"><span class="linenos">203</span></a>            <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span>
+</span><span id="RoomApi.sip_dial-204"><a href="#RoomApi.sip_dial-204"><span class="linenos">204</span></a>            <span class="n">component_id</span><span class="o">=</span><span class="n">component_id</span><span class="p">,</span>
+</span><span id="RoomApi.sip_dial-205"><a href="#RoomApi.sip_dial-205"><span class="linenos">205</span></a>            <span class="n">json_body</span><span class="o">=</span><span class="n">DialConfig</span><span class="p">(</span><span class="n">phone_number</span><span class="o">=</span><span class="n">phone_number</span><span class="p">),</span>
+</span><span id="RoomApi.sip_dial-206"><a href="#RoomApi.sip_dial-206"><span class="linenos">206</span></a>        <span class="p">)</span>
 </span></pre></div>
 
 
@@ -1440,18 +1492,18 @@ notification <code>ComponentCrashed</code>.</p>
 
     </div>
     <a class="headerlink" href="#RoomApi.sip_end_call"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="RoomApi.sip_end_call-199"><a href="#RoomApi.sip_end_call-199"><span class="linenos">199</span></a>    <span class="k">def</span> <span class="nf">sip_end_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="RoomApi.sip_end_call-200"><a href="#RoomApi.sip_end_call-200"><span class="linenos">200</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="RoomApi.sip_end_call-201"><a href="#RoomApi.sip_end_call-201"><span class="linenos">201</span></a><span class="sd">        End a phone call on a specified SIP component.</span>
-</span><span id="RoomApi.sip_end_call-202"><a href="#RoomApi.sip_end_call-202"><span class="linenos">202</span></a>
-</span><span id="RoomApi.sip_end_call-203"><a href="#RoomApi.sip_end_call-203"><span class="linenos">203</span></a><span class="sd">        This is asynchronous operation.</span>
-</span><span id="RoomApi.sip_end_call-204"><a href="#RoomApi.sip_end_call-204"><span class="linenos">204</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="RoomApi.sip_end_call-205"><a href="#RoomApi.sip_end_call-205"><span class="linenos">205</span></a>
-</span><span id="RoomApi.sip_end_call-206"><a href="#RoomApi.sip_end_call-206"><span class="linenos">206</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
-</span><span id="RoomApi.sip_end_call-207"><a href="#RoomApi.sip_end_call-207"><span class="linenos">207</span></a>            <span class="n">sip_end_call</span><span class="p">,</span>
-</span><span id="RoomApi.sip_end_call-208"><a href="#RoomApi.sip_end_call-208"><span class="linenos">208</span></a>            <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span>
-</span><span id="RoomApi.sip_end_call-209"><a href="#RoomApi.sip_end_call-209"><span class="linenos">209</span></a>            <span class="n">component_id</span><span class="o">=</span><span class="n">component_id</span><span class="p">,</span>
-</span><span id="RoomApi.sip_end_call-210"><a href="#RoomApi.sip_end_call-210"><span class="linenos">210</span></a>        <span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="RoomApi.sip_end_call-208"><a href="#RoomApi.sip_end_call-208"><span class="linenos">208</span></a>    <span class="k">def</span> <span class="nf">sip_end_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="RoomApi.sip_end_call-209"><a href="#RoomApi.sip_end_call-209"><span class="linenos">209</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="RoomApi.sip_end_call-210"><a href="#RoomApi.sip_end_call-210"><span class="linenos">210</span></a><span class="sd">        End a phone call on a specified SIP component.</span>
+</span><span id="RoomApi.sip_end_call-211"><a href="#RoomApi.sip_end_call-211"><span class="linenos">211</span></a>
+</span><span id="RoomApi.sip_end_call-212"><a href="#RoomApi.sip_end_call-212"><span class="linenos">212</span></a><span class="sd">        This is asynchronous operation.</span>
+</span><span id="RoomApi.sip_end_call-213"><a href="#RoomApi.sip_end_call-213"><span class="linenos">213</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="RoomApi.sip_end_call-214"><a href="#RoomApi.sip_end_call-214"><span class="linenos">214</span></a>
+</span><span id="RoomApi.sip_end_call-215"><a href="#RoomApi.sip_end_call-215"><span class="linenos">215</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
+</span><span id="RoomApi.sip_end_call-216"><a href="#RoomApi.sip_end_call-216"><span class="linenos">216</span></a>            <span class="n">sip_end_call</span><span class="p">,</span>
+</span><span id="RoomApi.sip_end_call-217"><a href="#RoomApi.sip_end_call-217"><span class="linenos">217</span></a>            <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span>
+</span><span id="RoomApi.sip_end_call-218"><a href="#RoomApi.sip_end_call-218"><span class="linenos">218</span></a>            <span class="n">component_id</span><span class="o">=</span><span class="n">component_id</span><span class="p">,</span>
+</span><span id="RoomApi.sip_end_call-219"><a href="#RoomApi.sip_end_call-219"><span class="linenos">219</span></a>        <span class="p">)</span>
 </span></pre></div>
 
 
