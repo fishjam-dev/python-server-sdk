@@ -2,7 +2,7 @@
 RoomApi used to manage rooms
 """
 
-from typing import Literal, Union
+from typing import List, Literal, Tuple, Union
 
 from jellyfish._openapi_client.api.hls import subscribe_hls_to as hls_subscribe_hls_to
 from jellyfish._openapi_client.api.room import add_component as room_add_component
@@ -62,7 +62,7 @@ class RoomApi(BaseApi):
         max_peers: int = None,
         video_codec: Literal["h264", "vp8"] = None,
         webhook_url: str = None,
-    ) -> (str, Room):
+    ) -> Tuple[str, Room]:
         """
         Creates a new room
 
@@ -104,14 +104,16 @@ class RoomApi(BaseApi):
 
         return self._request(room_get_room, room_id=room_id).data
 
-    def add_peer(self, room_id: str, options: PeerOptionsWebRTC) -> (str, Peer):
+    def add_peer(self, room_id: str, options: PeerOptionsWebRTC) -> Tuple[str, Peer]:
         """
         Creates peer in the room
 
         Currently only `webrtc` peer is supported
 
         Returns a tuple (`peer_token`, `Peer`) - the token needed by Peer
-        to authenticate to Jellyfish and the new `Peer`
+        to authenticate to Jellyfish and the new `Peer`.
+
+        The possible options to pass for peer are `PeerOptionsWebRTC`.
         """
 
         peer_type = "webrtc"
@@ -135,7 +137,14 @@ class RoomApi(BaseApi):
             ComponentOptionsSIP,
         ],
     ) -> Union[ComponentFile, ComponentHLS, ComponentRTSP, ComponentSIP]:
-        """Creates component in the room"""
+        """
+        Creates component in the room.
+        Currently there are 4 different components:
+        * File Component for which the options are `ComponentOptionsFile`
+        * HLS Component which options are `ComponentOptionsHLS`
+        * RTSP Component which options are `ComponentOptionsRTSP`
+        * SIP Component which options are `ComponentOptionsSIP`
+        """
 
         if isinstance(options, ComponentOptionsFile):
             component_type = "file"
@@ -147,7 +156,7 @@ class RoomApi(BaseApi):
             component_type = "sip"
         else:
             raise ValueError(
-                "options must be ComponentFile, ComponentOptionsHLS,"
+                "options must be ComponentOptionsFile, ComponentOptionsHLS,"
                 "ComponentOptionsRTSP or ComponentOptionsSIP"
             )
 
@@ -162,7 +171,7 @@ class RoomApi(BaseApi):
 
         return self._request(room_delete_component, id=component_id, room_id=room_id)
 
-    def hls_subscribe(self, room_id: str, origins: [str]):
+    def hls_subscribe(self, room_id: str, origins: List[str]):
         """
         In order to subscribe to HLS peers/components,
         the HLS component should be initialized with the subscribe_mode set to manual.

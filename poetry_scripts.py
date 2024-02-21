@@ -1,13 +1,24 @@
 import os
 import shutil
+import subprocess
 import sys
 from pathlib import Path
 
 
 def check_exit_code(command):
-    command_exit_code = os.system(command)
-    if command_exit_code != 0:
-        sys.exit(command_exit_code >> 8)
+    process = subprocess.Popen(
+        command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
+    )
+
+    while True:
+        output = process.stdout.readline()
+        if output == b"" and process.poll() is not None:
+            break
+        if output:
+            print(str(output.strip(), "utf-8"))
+    exit_code = process.poll()
+    if exit_code != 0:
+        sys.exit(exit_code)
 
 
 def run_tests():
@@ -18,6 +29,17 @@ def run_tests():
         --exit-code-from test"
     )
     check_exit_code("docker compose -f docker-compose-test.yaml down")
+
+
+def run_examples():
+    print("Start examples")
+
+    examples = os.listdir("./examples")
+
+    for example in examples:
+        check_exit_code(f"python ./examples/{example}")
+        print(f"After example from file: {example}")
+    print("All examples run without errors")
 
 
 def run_local_test():
