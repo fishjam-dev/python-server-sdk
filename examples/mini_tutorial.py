@@ -60,7 +60,7 @@ async def test_notifier():
     # (if you communicate with a cluster of jellyfishes)
     room_api = RoomApi(server_address=address)
 
-    # Add HLS componen manual
+    # Add HLS component with manual subscribe mode
     _hls_component = room_api.add_component(
         room.id,
         ComponentOptionsHLS(subscribe_mode=ComponentOptionsHLSSubscribeMode.MANUAL),
