@@ -139,7 +139,7 @@ class RoomApi(BaseApi):
     ) -> Union[ComponentFile, ComponentHLS, ComponentRTSP, ComponentSIP]:
         """
         Creates component in the room.
-        Currently there are 3 different components:
+        Currently there are 4 different components:
         * File Component which options are `ComponentOptionsFile`
         * HLS Component which options are `ComponentOptionsHLS`
         * RTSP Component which options are `ComponentOptionsRTSP`
