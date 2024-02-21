@@ -95,6 +95,29 @@ asyncio.run(test_notifier())
 # Received WebRTC metrics: ServerMessageMetricsReport(metrics='{}')
 ```
 
+#### Cluster of Jellyfishes
+
+The cluster of jellyfishes has got embedded load balancer, which means that a new room will be created on jellyfish with the least usage. At the moment to modify this specific room you must communicate with the jellyfish on which this room was created.
+
+```python
+room_api = RoomApi(server_address='localhost:5002')
+
+# Create a room to trigger a server notification with h264 as a codec,
+# that allow to use HLS.
+address, room = room_api.create_room(video_codec="h264")
+
+# Create new room api with returned jellyfish address as a room could be
+# created on a different jellyfish instance
+# (if you communicate with a cluster of jellyfishes)
+new_room_api = RoomApi(server_address=address)
+
+# Add HLS component with manual subscribe mode, we use here `new_room_api` as we are sure that this API refers to the jellyfish on which this room was created.
+_hls_component = new_room_api.add_component(
+    room.id,
+    ComponentOptionsHLS(subscribe_mode=ComponentOptionsHLSSubscribeMode.MANUAL),
+)
+```
+
 ## Testing
 
 You can test the SDK by running

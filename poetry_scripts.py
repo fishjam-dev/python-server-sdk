@@ -1,3 +1,4 @@
+import os
 import shutil
 import subprocess
 import sys
@@ -32,11 +33,12 @@ def run_tests():
 
 def run_examples():
     print("Start examples")
-    check_exit_code("python ./examples/mini_tutorial.py")
-    print("After minitutorial")
-    check_exit_code("python ./examples/room_api.py")
-    print("After room_api")
-    check_exit_code("python ./examples/server_notifications.py")
+
+    examples = os.listdir("./examples")
+
+    for example in examples:
+        check_exit_code(f"python ./examples/{example}")
+        print(f"After example from file: {example}")
     print("All examples run without errors")
 
 
