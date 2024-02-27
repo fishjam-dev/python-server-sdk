@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "jellyfish-server-sdk"
-version = "0.2.0"
+version = "0.3.0"
 description = "Python server SDK for the Jellyfish media server"
 authors = ["Jellyfish Team"]
 homepage = "https://github.com/jellyfish-dev/python-server-sdk"
