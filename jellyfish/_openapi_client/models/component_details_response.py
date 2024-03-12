@@ -1,4 +1,12 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    Dict,
+    List,
+    Type,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -6,6 +14,7 @@ from attrs import field as _attrs_field
 if TYPE_CHECKING:
     from ..models.component_file import ComponentFile
     from ..models.component_hls import ComponentHLS
+    from ..models.component_recording import ComponentRecording
     from ..models.component_rtsp import ComponentRTSP
     from ..models.component_sip import ComponentSIP
 
@@ -17,7 +26,13 @@ T = TypeVar("T", bound="ComponentDetailsResponse")
 class ComponentDetailsResponse:
     """Response containing component details"""
 
-    data: Union["ComponentFile", "ComponentHLS", "ComponentRTSP", "ComponentSIP"]
+    data: Union[
+        "ComponentFile",
+        "ComponentHLS",
+        "ComponentRTSP",
+        "ComponentRecording",
+        "ComponentSIP",
+    ]
     """Describes component"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
     """@private"""
@@ -27,6 +42,7 @@ class ComponentDetailsResponse:
         from ..models.component_file import ComponentFile
         from ..models.component_hls import ComponentHLS
         from ..models.component_rtsp import ComponentRTSP
+        from ..models.component_sip import ComponentSIP
 
         data: Dict[str, Any]
 
@@ -37,6 +53,9 @@ class ComponentDetailsResponse:
             data = self.data.to_dict()
 
         elif isinstance(self.data, ComponentFile):
+            data = self.data.to_dict()
+
+        elif isinstance(self.data, ComponentSIP):
             data = self.data.to_dict()
 
         else:
@@ -57,6 +76,7 @@ class ComponentDetailsResponse:
         """@private"""
         from ..models.component_file import ComponentFile
         from ..models.component_hls import ComponentHLS
+        from ..models.component_recording import ComponentRecording
         from ..models.component_rtsp import ComponentRTSP
         from ..models.component_sip import ComponentSIP
 
@@ -64,7 +84,13 @@ class ComponentDetailsResponse:
 
         def _parse_data(
             data: object,
-        ) -> Union["ComponentFile", "ComponentHLS", "ComponentRTSP", "ComponentSIP"]:
+        ) -> Union[
+            "ComponentFile",
+            "ComponentHLS",
+            "ComponentRTSP",
+            "ComponentRecording",
+            "ComponentSIP",
+        ]:
             try:
                 if not isinstance(data, dict):
                     raise TypeError()
@@ -89,11 +115,19 @@ class ComponentDetailsResponse:
                 return componentsschemas_component_type_2
             except:  # noqa: E722
                 pass
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                componentsschemas_component_type_3 = ComponentSIP.from_dict(data)
+
+                return componentsschemas_component_type_3
+            except:  # noqa: E722
+                pass
             if not isinstance(data, dict):
                 raise TypeError()
-            componentsschemas_component_type_3 = ComponentSIP.from_dict(data)
+            componentsschemas_component_type_4 = ComponentRecording.from_dict(data)
 
-            return componentsschemas_component_type_3
+            return componentsschemas_component_type_4
 
         data = _parse_data(d.pop("data"))
 

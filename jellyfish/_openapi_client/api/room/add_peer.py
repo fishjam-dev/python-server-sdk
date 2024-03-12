@@ -70,7 +70,7 @@ def _build_response(
 def sync_detailed(
     room_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
     json_body: AddPeerJsonBody,
 ) -> Response[Union[Error, PeerDetailsResponse]]:
     """Create peer
@@ -102,7 +102,7 @@ def sync_detailed(
 def sync(
     room_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
     json_body: AddPeerJsonBody,
 ) -> Optional[Union[Error, PeerDetailsResponse]]:
     """Create peer
@@ -129,7 +129,7 @@ def sync(
 async def asyncio_detailed(
     room_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
     json_body: AddPeerJsonBody,
 ) -> Response[Union[Error, PeerDetailsResponse]]:
     """Create peer
@@ -159,7 +159,7 @@ async def asyncio_detailed(
 async def asyncio(
     room_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
     json_body: AddPeerJsonBody,
 ) -> Optional[Union[Error, PeerDetailsResponse]]:
     """Create peer

@@ -47,7 +47,7 @@ def _build_response(
 
 def sync_detailed(
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Response[Union[Error, HealthcheckResponse]]:
     """Describes the health of Jellyfish
 
@@ -70,7 +70,7 @@ def sync_detailed(
 
 def sync(
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Optional[Union[Error, HealthcheckResponse]]:
     """Describes the health of Jellyfish
 
@@ -89,7 +89,7 @@ def sync(
 
 async def asyncio_detailed(
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Response[Union[Error, HealthcheckResponse]]:
     """Describes the health of Jellyfish
 
@@ -110,7 +110,7 @@ async def asyncio_detailed(
 
 async def asyncio(
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Optional[Union[Error, HealthcheckResponse]]:
     """Describes the health of Jellyfish
 

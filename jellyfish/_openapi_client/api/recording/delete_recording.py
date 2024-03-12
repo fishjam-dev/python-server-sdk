@@ -58,7 +58,7 @@ def _build_response(
 def sync_detailed(
     recording_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Response[Union[Any, Error]]:
     """Deletes the recording
 
@@ -87,7 +87,7 @@ def sync_detailed(
 def sync(
     recording_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Optional[Union[Any, Error]]:
     """Deletes the recording
 
@@ -111,7 +111,7 @@ def sync(
 async def asyncio_detailed(
     recording_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Response[Union[Any, Error]]:
     """Deletes the recording
 
@@ -138,7 +138,7 @@ async def asyncio_detailed(
 async def asyncio(
     recording_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Optional[Union[Any, Error]]:
     """Deletes the recording
 

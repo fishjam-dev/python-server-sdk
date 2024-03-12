@@ -1,4 +1,12 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    Dict,
+    List,
+    Type,
+    TypeVar,
+    Union,
+)
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -6,6 +14,7 @@ from attrs import field as _attrs_field
 if TYPE_CHECKING:
     from ..models.component_file import ComponentFile
     from ..models.component_hls import ComponentHLS
+    from ..models.component_recording import ComponentRecording
     from ..models.component_rtsp import ComponentRTSP
     from ..models.component_sip import ComponentSIP
     from ..models.peer import Peer
@@ -20,7 +29,13 @@ class Room:
     """Description of the room state"""
 
     components: List[
-        Union["ComponentFile", "ComponentHLS", "ComponentRTSP", "ComponentSIP"]
+        Union[
+            "ComponentFile",
+            "ComponentHLS",
+            "ComponentRTSP",
+            "ComponentRecording",
+            "ComponentSIP",
+        ]
     ]
     """List of all components"""
     config: "RoomConfig"
@@ -37,6 +52,7 @@ class Room:
         from ..models.component_file import ComponentFile
         from ..models.component_hls import ComponentHLS
         from ..models.component_rtsp import ComponentRTSP
+        from ..models.component_sip import ComponentSIP
 
         components = []
         for components_item_data in self.components:
@@ -49,6 +65,9 @@ class Room:
                 components_item = components_item_data.to_dict()
 
             elif isinstance(components_item_data, ComponentFile):
+                components_item = components_item_data.to_dict()
+
+            elif isinstance(components_item_data, ComponentSIP):
                 components_item = components_item_data.to_dict()
 
             else:
@@ -83,6 +102,7 @@ class Room:
         """@private"""
         from ..models.component_file import ComponentFile
         from ..models.component_hls import ComponentHLS
+        from ..models.component_recording import ComponentRecording
         from ..models.component_rtsp import ComponentRTSP
         from ..models.component_sip import ComponentSIP
         from ..models.peer import Peer
@@ -96,7 +116,11 @@ class Room:
             def _parse_components_item(
                 data: object,
             ) -> Union[
-                "ComponentFile", "ComponentHLS", "ComponentRTSP", "ComponentSIP"
+                "ComponentFile",
+                "ComponentHLS",
+                "ComponentRTSP",
+                "ComponentRecording",
+                "ComponentSIP",
             ]:
                 try:
                     if not isinstance(data, dict):
@@ -122,11 +146,19 @@ class Room:
                     return componentsschemas_component_type_2
                 except:  # noqa: E722
                     pass
+                try:
+                    if not isinstance(data, dict):
+                        raise TypeError()
+                    componentsschemas_component_type_3 = ComponentSIP.from_dict(data)
+
+                    return componentsschemas_component_type_3
+                except:  # noqa: E722
+                    pass
                 if not isinstance(data, dict):
                     raise TypeError()
-                componentsschemas_component_type_3 = ComponentSIP.from_dict(data)
+                componentsschemas_component_type_4 = ComponentRecording.from_dict(data)
 
-                return componentsschemas_component_type_3
+                return componentsschemas_component_type_4
 
             components_item = _parse_components_item(components_item_data)
 

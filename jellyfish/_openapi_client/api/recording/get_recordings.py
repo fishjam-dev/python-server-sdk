@@ -51,7 +51,7 @@ def _build_response(
 
 def sync_detailed(
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Response[Union[Error, RecordingListResponse]]:
     """Lists all available recordings
 
@@ -74,7 +74,7 @@ def sync_detailed(
 
 def sync(
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Optional[Union[Error, RecordingListResponse]]:
     """Lists all available recordings
 
@@ -93,7 +93,7 @@ def sync(
 
 async def asyncio_detailed(
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Response[Union[Error, RecordingListResponse]]:
     """Lists all available recordings
 
@@ -114,7 +114,7 @@ async def asyncio_detailed(
 
 async def asyncio(
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Optional[Union[Error, RecordingListResponse]]:
     """Lists all available recordings
 
