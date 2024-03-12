@@ -1,5 +1,5 @@
 {% extends "frame.html.jinja2" %}
-{% block title %}{{ module.modulename }} API documentation{% endblock %}
+{% block title %}Jellyfish Python Server SDK{% endblock %}
 {% block nav %}
     {% block module_list_link %}
         {% set parentmodule = ".".join(module.modulename.split(".")[:-1]) %}
@@ -177,7 +177,6 @@ See https://pdoc.dev/docs/pdoc/render_helpers.html#DefaultMacroExtension for an 
     {% endif %}
 {% enddefaultmacro %}
 {% defaultmacro variable(var) -%}
-    {%- if var.is_type_alias_type %}<span class="def">type</span> {% endif -%}
     <span class="name">{{ var.name }}</span>{{ annotation(var) }}{{ default_value(var) }}
 {% enddefaultmacro %}
 {% defaultmacro submodule(mod) -%}
@@ -209,7 +208,7 @@ See https://pdoc.dev/docs/pdoc/render_helpers.html#DefaultMacroExtension for an 
 {% enddefaultmacro %}
 {% defaultmacro docstring(var) %}
     {% if var.docstring %}
-        <div class="docstring">{{ var.docstring | replace("@public", "") | to_markdown | to_html | linkify(namespace=var.qualname) }}</div>
+        <div class="docstring">{{ var.docstring | to_markdown | to_html | linkify(namespace=var.qualname) }}</div>
     {% endif %}
 {% enddefaultmacro %}
 {% defaultmacro nav_members(members) %}
@@ -239,13 +238,10 @@ See https://pdoc.dev/docs/pdoc/render_helpers.html#DefaultMacroExtension for an 
     Implementing this as a macro makes it very easy to override with a custom template, see
     https://github.com/mitmproxy/pdoc/tree/main/examples/custom-template.
     #}
-    {% if "@private" in doc.docstring %}
-        {# hide members explicitly marked as @private #}
-    {% elif "@public" in doc.docstring %}
-        {# show members explicitly marked as @public #}
-        true
-    {% elif not include_undocumented and not doc.docstring %}
+    {% if not include_undocumented and not doc.docstring %}
         {# hide members that are undocumented if include_undocumented has been toggled off. #}
+    {% elif doc.docstring and "@private" in doc.docstring %}
+        {# hide members explicitly marked as @private #}
     {% elif doc.name == "__init__" and (doc.docstring or (doc.kind == "function" and doc.signature_without_self.parameters)) %}
         {# show constructors that have a docstring or at least one extra argument #}
         true
@@ -299,18 +295,4 @@ See https://pdoc.dev/docs/pdoc/render_helpers.html#DefaultMacroExtension for an 
     {% endif %}
 {% enddefaultmacro %}
 {% defaultmacro module_name() %}
-    <h1 class="modulename">
-        {% set parts = module.modulename.split(".") %}
-        {% for part in parts %}
-            {%- set fullname = ".".join(parts[:loop.index]) -%}
-            {%- if fullname in all_modules and fullname != module.modulename -%}
-                <a href="./{{ "../" * loop.revindex0 }}{{ part }}.html">{{ part }}</a>
-            {%- else -%}
-                {{ part }}
-            {%- endif -%}
-            {%- if loop.nextitem -%}
-                <wbr>.
-            {%- endif -%}
-        {% endfor %}
-    </h1>
 {% enddefaultmacro %}
