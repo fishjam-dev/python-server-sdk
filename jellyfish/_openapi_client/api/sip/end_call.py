@@ -61,7 +61,7 @@ def sync_detailed(
     room_id: str,
     component_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Response[Union[Any, Error]]:
     """Finish call made by SIP component
 
@@ -93,7 +93,7 @@ def sync(
     room_id: str,
     component_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Optional[Union[Any, Error]]:
     """Finish call made by SIP component
 
@@ -120,7 +120,7 @@ async def asyncio_detailed(
     room_id: str,
     component_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Response[Union[Any, Error]]:
     """Finish call made by SIP component
 
@@ -150,7 +150,7 @@ async def asyncio(
     room_id: str,
     component_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Optional[Union[Any, Error]]:
     """Finish call made by SIP component
 

@@ -66,7 +66,7 @@ def _build_response(
 def sync_detailed(
     room_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
     json_body: AddComponentJsonBody,
 ) -> Response[Union[ComponentDetailsResponse, Error]]:
     """Creates the component and adds it to the room
@@ -98,7 +98,7 @@ def sync_detailed(
 def sync(
     room_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
     json_body: AddComponentJsonBody,
 ) -> Optional[Union[ComponentDetailsResponse, Error]]:
     """Creates the component and adds it to the room
@@ -125,7 +125,7 @@ def sync(
 async def asyncio_detailed(
     room_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
     json_body: AddComponentJsonBody,
 ) -> Response[Union[ComponentDetailsResponse, Error]]:
     """Creates the component and adds it to the room
@@ -155,7 +155,7 @@ async def asyncio_detailed(
 async def asyncio(
     room_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
     json_body: AddComponentJsonBody,
 ) -> Optional[Union[ComponentDetailsResponse, Error]]:
     """Creates the component and adds it to the room

@@ -67,7 +67,7 @@ def sync_detailed(
     room_id: str,
     component_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
     json_body: DialConfig,
 ) -> Response[Union[Any, Error]]:
     """Make a call from the SIP component to the provided phone number
@@ -102,7 +102,7 @@ def sync(
     room_id: str,
     component_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
     json_body: DialConfig,
 ) -> Optional[Union[Any, Error]]:
     """Make a call from the SIP component to the provided phone number
@@ -132,7 +132,7 @@ async def asyncio_detailed(
     room_id: str,
     component_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
     json_body: DialConfig,
 ) -> Response[Union[Any, Error]]:
     """Make a call from the SIP component to the provided phone number
@@ -165,7 +165,7 @@ async def asyncio(
     room_id: str,
     component_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
     json_body: DialConfig,
 ) -> Optional[Union[Any, Error]]:
     """Make a call from the SIP component to the provided phone number

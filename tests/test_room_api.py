@@ -13,14 +13,17 @@ from jellyfish import (
     ComponentOptionsFile,
     ComponentOptionsHLS,
     ComponentOptionsHLSSubscribeMode,
+    ComponentOptionsRecording,
     ComponentOptionsRTSP,
     ComponentOptionsSIP,
     ComponentPropertiesFile,
     ComponentPropertiesHLS,
     ComponentPropertiesHLSSubscribeMode,
+    ComponentPropertiesRecording,
     ComponentPropertiesRTSP,
     ComponentPropertiesSIP,
     ComponentPropertiesSIPSIPCredentials,
+    ComponentRecording,
     ComponentRTSP,
     ComponentSIP,
     Peer,
@@ -30,6 +33,7 @@ from jellyfish import (
     RoomApi,
     RoomConfig,
     RoomConfigVideoCodec,
+    S3Credentials,
     SIPCredentials,
 )
 from jellyfish.errors import (
@@ -85,6 +89,17 @@ FILE_OPTIONS = ComponentOptionsFile(file_path="video.h264")
 FILE_PROPERTIES = ComponentPropertiesFile(
     file_path=FILE_OPTIONS.file_path, framerate=30
 )
+
+RECORDING_OPTIONS = ComponentOptionsRecording(
+    path_prefix="prefix",
+    credentials=S3Credentials(
+        bucket="bucket",
+        region="region",
+        secret_access_key="secret",
+        access_key_id="access",
+    ),
+)
+RECORDING_PROPERTIES = ComponentPropertiesRecording(path_prefix="prefix")
 
 
 class TestAuthentication:
@@ -261,6 +276,12 @@ class TestAddComponent:
 
     def test_with_options_sip(self, room_api):
         data = ComponentTestData(ComponentSIP, "sip", SIP_OPTIONS, SIP_PROPERTIES)
+        self._test_component(room_api, data)
+
+    def test_with_options_recording(self, room_api):
+        data = ComponentTestData(
+            ComponentRecording, "recording", RECORDING_OPTIONS, RECORDING_PROPERTIES
+        )
         self._test_component(room_api, data)
 
     @pytest.mark.file_component_sources

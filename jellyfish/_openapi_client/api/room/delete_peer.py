@@ -57,7 +57,7 @@ def sync_detailed(
     room_id: str,
     id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Response[Union[Any, Error]]:
     """Delete peer
 
@@ -89,7 +89,7 @@ def sync(
     room_id: str,
     id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Optional[Union[Any, Error]]:
     """Delete peer
 
@@ -116,7 +116,7 @@ async def asyncio_detailed(
     room_id: str,
     id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Response[Union[Any, Error]]:
     """Delete peer
 
@@ -146,7 +146,7 @@ async def asyncio(
     room_id: str,
     id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Optional[Union[Any, Error]]:
     """Delete peer
 

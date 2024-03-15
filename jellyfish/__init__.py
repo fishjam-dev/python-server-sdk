@@ -14,14 +14,17 @@ from jellyfish._openapi_client.models import (
     ComponentOptionsFile,
     ComponentOptionsHLS,
     ComponentOptionsHLSSubscribeMode,
+    ComponentOptionsRecording,
     ComponentOptionsRTSP,
     ComponentOptionsSIP,
     ComponentPropertiesFile,
     ComponentPropertiesHLS,
     ComponentPropertiesHLSSubscribeMode,
+    ComponentPropertiesRecording,
     ComponentPropertiesRTSP,
     ComponentPropertiesSIP,
     ComponentPropertiesSIPSIPCredentials,
+    ComponentRecording,
     ComponentRTSP,
     ComponentSIP,
     Peer,
@@ -30,6 +33,7 @@ from jellyfish._openapi_client.models import (
     Room,
     RoomConfig,
     RoomConfigVideoCodec,
+    S3Credentials,
     SIPCredentials,
 )
 
@@ -69,5 +73,9 @@ __all__ = [
     "events",
     "errors",
     "SIPCredentials",
+    "ComponentRecording",
+    "ComponentOptionsRecording",
+    "ComponentPropertiesRecording",
+    "S3Credentials",
 ]
 __docformat__ = "restructuredtext"

@@ -22,8 +22,10 @@ from jellyfish._openapi_client.models import (
     ComponentHLS,
     ComponentOptionsFile,
     ComponentOptionsHLS,
+    ComponentOptionsRecording,
     ComponentOptionsRTSP,
     ComponentOptionsSIP,
+    ComponentRecording,
     ComponentRTSP,
     ComponentSIP,
     DialConfig,
@@ -133,15 +135,19 @@ class RoomApi(BaseApi):
         options: Union[
             ComponentOptionsFile,
             ComponentOptionsHLS,
+            ComponentOptionsRecording,
             ComponentOptionsRTSP,
             ComponentOptionsSIP,
         ],
-    ) -> Union[ComponentFile, ComponentHLS, ComponentRTSP, ComponentSIP]:
+    ) -> Union[
+        ComponentFile, ComponentHLS, ComponentRecording, ComponentRTSP, ComponentSIP
+    ]:
         """
         Creates component in the room.
         Currently there are 4 different components:
         * File Component for which the options are `ComponentOptionsFile`
         * HLS Component which options are `ComponentOptionsHLS`
+        * Recording Component which options are `ComponentOptionsRecording`
         * RTSP Component which options are `ComponentOptionsRTSP`
         * SIP Component which options are `ComponentOptionsSIP`
         """
@@ -150,6 +156,8 @@ class RoomApi(BaseApi):
             component_type = "file"
         elif isinstance(options, ComponentOptionsHLS):
             component_type = "hls"
+        elif isinstance(options, ComponentOptionsRecording):
+            component_type = "recording"
         elif isinstance(options, ComponentOptionsRTSP):
             component_type = "rtsp"
         elif isinstance(options, ComponentOptionsSIP):
@@ -157,7 +165,7 @@ class RoomApi(BaseApi):
         else:
             raise ValueError(
                 "options must be ComponentOptionsFile, ComponentOptionsHLS,"
-                "ComponentOptionsRTSP or ComponentOptionsSIP"
+                "ComponentOptionsRTSP, ComponentOptionsRecording or ComponentOptionsSIP"
             )
 
         json_body = AddComponentJsonBody(type=component_type, options=options)

@@ -58,7 +58,7 @@ def _build_response(
 
 def sync_detailed(
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
     json_body: RoomConfig,
 ) -> Response[Union[Error, RoomCreateDetailsResponse]]:
     """Creates a room
@@ -87,7 +87,7 @@ def sync_detailed(
 
 def sync(
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
     json_body: RoomConfig,
 ) -> Optional[Union[Error, RoomCreateDetailsResponse]]:
     """Creates a room
@@ -111,7 +111,7 @@ def sync(
 
 async def asyncio_detailed(
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
     json_body: RoomConfig,
 ) -> Response[Union[Error, RoomCreateDetailsResponse]]:
     """Creates a room
@@ -138,7 +138,7 @@ async def asyncio_detailed(
 
 async def asyncio(
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
     json_body: RoomConfig,
 ) -> Optional[Union[Error, RoomCreateDetailsResponse]]:
     """Creates a room

@@ -56,7 +56,7 @@ def _build_response(
 def sync_detailed(
     room_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Response[Union[Error, RoomDetailsResponse]]:
     """Shows information about the room
 
@@ -85,7 +85,7 @@ def sync_detailed(
 def sync(
     room_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Optional[Union[Error, RoomDetailsResponse]]:
     """Shows information about the room
 
@@ -109,7 +109,7 @@ def sync(
 async def asyncio_detailed(
     room_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Response[Union[Error, RoomDetailsResponse]]:
     """Shows information about the room
 
@@ -136,7 +136,7 @@ async def asyncio_detailed(
 async def asyncio(
     room_id: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient,
 ) -> Optional[Union[Error, RoomDetailsResponse]]:
     """Shows information about the room
 
