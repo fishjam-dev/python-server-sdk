@@ -181,7 +181,7 @@ class RoomApi(BaseApi):
 
     def subscribe(self, room_id: str, component_id: str, origins: List[str]):
         """
-        In order to subscribe component to peers/components,
+        In order to subscribe the component to peers/components,
         the component should be initialized with the subscribe_mode set to manual.
         This mode proves beneficial when you do not wish to record or stream
         all the available streams within a room.
