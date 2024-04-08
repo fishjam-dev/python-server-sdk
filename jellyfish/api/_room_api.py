@@ -4,7 +4,6 @@ RoomApi used to manage rooms
 
 from typing import List, Literal, Tuple, Union
 
-from jellyfish._openapi_client.api.hls import subscribe_hls_to as hls_subscribe_hls_to
 from jellyfish._openapi_client.api.room import add_component as room_add_component
 from jellyfish._openapi_client.api.room import add_peer as room_add_peer
 from jellyfish._openapi_client.api.room import create_room as room_create_room
@@ -13,6 +12,7 @@ from jellyfish._openapi_client.api.room import delete_peer as room_delete_peer
 from jellyfish._openapi_client.api.room import delete_room as room_delete_room
 from jellyfish._openapi_client.api.room import get_all_rooms as room_get_all_rooms
 from jellyfish._openapi_client.api.room import get_room as room_get_room
+from jellyfish._openapi_client.api.room import subscribe_to
 from jellyfish._openapi_client.api.sip import dial as sip_dial
 from jellyfish._openapi_client.api.sip import end_call as sip_end_call
 from jellyfish._openapi_client.models import (
@@ -179,20 +179,21 @@ class RoomApi(BaseApi):
 
         return self._request(room_delete_component, id=component_id, room_id=room_id)
 
-    def hls_subscribe(self, room_id: str, origins: List[str]):
+    def subscribe(self, room_id: str, component_id: str, origins: List[str]):
         """
-        In order to subscribe to HLS peers/components,
-        the HLS component should be initialized with the subscribe_mode set to manual.
+        In order to subscribe component to peers/components,
+        the component should be initialized with the subscribe_mode set to manual.
         This mode proves beneficial when you do not wish to record or stream
-        all the available streams within a room via HLS.
+        all the available streams within a room.
         It allows for selective addition instead –
         you can manually select specific streams.
         For instance, you could opt to record only the stream of an event's host.
         """
 
         return self._request(
-            hls_subscribe_hls_to,
+            subscribe_to,
             room_id=room_id,
+            component_id=component_id,
             json_body=SubscriptionConfig(origins=origins),
         )
 

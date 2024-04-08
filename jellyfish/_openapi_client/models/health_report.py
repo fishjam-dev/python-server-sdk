@@ -18,10 +18,14 @@ class HealthReport:
 
     distribution: "HealthReportDistribution"
     """Informs about the status of Jellyfish distribution"""
+    git_commit: str
+    """Commit hash of the build"""
     status: HealthReportStatus
     """Informs about the status of Jellyfish or a specific service"""
     uptime: int
     """Uptime of Jellyfish (in seconds)"""
+    version: str
+    """Version of Jellyfish"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
     """@private"""
 
@@ -29,17 +33,21 @@ class HealthReport:
         """@private"""
         distribution = self.distribution.to_dict()
 
+        git_commit = self.git_commit
         status = self.status.value
 
         uptime = self.uptime
+        version = self.version
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
                 "distribution": distribution,
+                "gitCommit": git_commit,
                 "status": status,
                 "uptime": uptime,
+                "version": version,
             }
         )
 
@@ -53,14 +61,20 @@ class HealthReport:
         d = src_dict.copy()
         distribution = HealthReportDistribution.from_dict(d.pop("distribution"))
 
+        git_commit = d.pop("gitCommit")
+
         status = HealthReportStatus(d.pop("status"))
 
         uptime = d.pop("uptime")
 
+        version = d.pop("version")
+
         health_report = cls(
             distribution=distribution,
+            git_commit=git_commit,
             status=status,
             uptime=uptime,
+            version=version,
         )
 
         health_report.additional_properties = d

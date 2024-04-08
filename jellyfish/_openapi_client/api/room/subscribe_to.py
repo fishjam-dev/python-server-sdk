@@ -12,6 +12,7 @@ from ...types import Response
 
 def _get_kwargs(
     room_id: str,
+    component_id: str,
     *,
     json_body: SubscriptionConfig,
 ) -> Dict[str, Any]:
@@ -19,8 +20,9 @@ def _get_kwargs(
 
     return {
         "method": "post",
-        "url": "/hls/{room_id}/subscribe".format(
+        "url": "/room/{room_id}/component/{component_id}/subscribe".format(
             room_id=room_id,
+            component_id=component_id,
         ),
         "json": json_json_body,
     }
@@ -63,14 +65,16 @@ def _build_response(
 
 def sync_detailed(
     room_id: str,
+    component_id: str,
     *,
     client: AuthenticatedClient,
     json_body: SubscriptionConfig,
 ) -> Response[Union[Any, Error]]:
-    """Subscribe the HLS component to the tracks of peers or components
+    """Subscribe component to the tracks of peers or components
 
     Args:
         room_id (str):
+        component_id (str):
         json_body (SubscriptionConfig): Subscription config
 
     Raises:
@@ -83,6 +87,7 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         room_id=room_id,
+        component_id=component_id,
         json_body=json_body,
     )
 
@@ -95,14 +100,16 @@ def sync_detailed(
 
 def sync(
     room_id: str,
+    component_id: str,
     *,
     client: AuthenticatedClient,
     json_body: SubscriptionConfig,
 ) -> Optional[Union[Any, Error]]:
-    """Subscribe the HLS component to the tracks of peers or components
+    """Subscribe component to the tracks of peers or components
 
     Args:
         room_id (str):
+        component_id (str):
         json_body (SubscriptionConfig): Subscription config
 
     Raises:
@@ -115,6 +122,7 @@ def sync(
 
     return sync_detailed(
         room_id=room_id,
+        component_id=component_id,
         client=client,
         json_body=json_body,
     ).parsed
@@ -122,14 +130,16 @@ def sync(
 
 async def asyncio_detailed(
     room_id: str,
+    component_id: str,
     *,
     client: AuthenticatedClient,
     json_body: SubscriptionConfig,
 ) -> Response[Union[Any, Error]]:
-    """Subscribe the HLS component to the tracks of peers or components
+    """Subscribe component to the tracks of peers or components
 
     Args:
         room_id (str):
+        component_id (str):
         json_body (SubscriptionConfig): Subscription config
 
     Raises:
@@ -142,6 +152,7 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         room_id=room_id,
+        component_id=component_id,
         json_body=json_body,
     )
 
@@ -152,14 +163,16 @@ async def asyncio_detailed(
 
 async def asyncio(
     room_id: str,
+    component_id: str,
     *,
     client: AuthenticatedClient,
     json_body: SubscriptionConfig,
 ) -> Optional[Union[Any, Error]]:
-    """Subscribe the HLS component to the tracks of peers or components
+    """Subscribe component to the tracks of peers or components
 
     Args:
         room_id (str):
+        component_id (str):
         json_body (SubscriptionConfig): Subscription config
 
     Raises:
@@ -173,6 +186,7 @@ async def asyncio(
     return (
         await asyncio_detailed(
             room_id=room_id,
+            component_id=component_id,
             client=client,
             json_body=json_body,
         )
