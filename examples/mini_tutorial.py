@@ -61,7 +61,7 @@ async def test_notifier():
     room_api = RoomApi(server_address=address)
 
     # Add HLS component with manual subscribe mode
-    _hls_component = room_api.add_component(
+    hls_component = room_api.add_component(
         room.id,
         ComponentOptionsHLS(subscribe_mode=ComponentOptionsHLSSubscribeMode.MANUAL),
     )
@@ -70,7 +70,7 @@ async def test_notifier():
     file_component = room_api.add_component(room.id, ComponentOptionsFile("video.h264"))
 
     # Subscribe on specific component
-    room_api.hls_subscribe(room.id, [file_component.id])
+    room_api.subscribe(room.id, hls_component.id, [file_component.id])
 
     try:
         await notifier_task
