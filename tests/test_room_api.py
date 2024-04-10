@@ -103,7 +103,6 @@ RECORDING_OPTIONS = ComponentOptionsRecording(
     subscribe_mode=ComponentOptionsRecordingSubscribeMode.AUTO,
 )
 RECORDING_PROPERTIES = ComponentPropertiesRecording(
-    path_prefix="prefix",
     subscribe_mode=ComponentPropertiesRecordingSubscribeMode("auto"),
 )
 

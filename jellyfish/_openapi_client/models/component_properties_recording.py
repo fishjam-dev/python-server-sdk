@@ -14,8 +14,6 @@ T = TypeVar("T", bound="ComponentPropertiesRecording")
 class ComponentPropertiesRecording:
     """Properties specific to the Recording component"""
 
-    path_prefix: str
-    """Path prefix under which all recording are stored"""
     subscribe_mode: ComponentPropertiesRecordingSubscribeMode
     """Whether the Recording component should subscribe to tracks automatically or manually"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -23,14 +21,12 @@ class ComponentPropertiesRecording:
 
     def to_dict(self) -> Dict[str, Any]:
         """@private"""
-        path_prefix = self.path_prefix
         subscribe_mode = self.subscribe_mode.value
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "pathPrefix": path_prefix,
                 "subscribeMode": subscribe_mode,
             }
         )
@@ -41,14 +37,11 @@ class ComponentPropertiesRecording:
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         """@private"""
         d = src_dict.copy()
-        path_prefix = d.pop("pathPrefix")
-
         subscribe_mode = ComponentPropertiesRecordingSubscribeMode(
             d.pop("subscribeMode")
         )
 
         component_properties_recording = cls(
-            path_prefix=path_prefix,
             subscribe_mode=subscribe_mode,
         )
 
