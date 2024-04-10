@@ -9,6 +9,9 @@ from .component_options_file import ComponentOptionsFile
 from .component_options_hls import ComponentOptionsHLS
 from .component_options_hls_subscribe_mode import ComponentOptionsHLSSubscribeMode
 from .component_options_recording import ComponentOptionsRecording
+from .component_options_recording_subscribe_mode import (
+    ComponentOptionsRecordingSubscribeMode,
+)
 from .component_options_rtsp import ComponentOptionsRTSP
 from .component_options_sip import ComponentOptionsSIP
 from .component_options_sipsip_credentials import ComponentOptionsSIPSIPCredentials
@@ -16,6 +19,9 @@ from .component_properties_file import ComponentPropertiesFile
 from .component_properties_hls import ComponentPropertiesHLS
 from .component_properties_hls_subscribe_mode import ComponentPropertiesHLSSubscribeMode
 from .component_properties_recording import ComponentPropertiesRecording
+from .component_properties_recording_subscribe_mode import (
+    ComponentPropertiesRecordingSubscribeMode,
+)
 from .component_properties_rtsp import ComponentPropertiesRTSP
 from .component_properties_sip import ComponentPropertiesSIP
 from .component_properties_sipsip_credentials import (
@@ -59,6 +65,7 @@ __all__ = (
     "ComponentOptionsHLS",
     "ComponentOptionsHLSSubscribeMode",
     "ComponentOptionsRecording",
+    "ComponentOptionsRecordingSubscribeMode",
     "ComponentOptionsRTSP",
     "ComponentOptionsSIP",
     "ComponentOptionsSIPSIPCredentials",
@@ -66,6 +73,7 @@ __all__ = (
     "ComponentPropertiesHLS",
     "ComponentPropertiesHLSSubscribeMode",
     "ComponentPropertiesRecording",
+    "ComponentPropertiesRecordingSubscribeMode",
     "ComponentPropertiesRTSP",
     "ComponentPropertiesSIP",
     "ComponentPropertiesSIPSIPCredentials",

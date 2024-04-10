@@ -14,12 +14,14 @@ from jellyfish import (
     ComponentOptionsHLS,
     ComponentOptionsHLSSubscribeMode,
     ComponentOptionsRecording,
+    ComponentOptionsRecordingSubscribeMode,
     ComponentOptionsRTSP,
     ComponentOptionsSIP,
     ComponentPropertiesFile,
     ComponentPropertiesHLS,
     ComponentPropertiesHLSSubscribeMode,
     ComponentPropertiesRecording,
+    ComponentPropertiesRecordingSubscribeMode,
     ComponentPropertiesRTSP,
     ComponentPropertiesSIP,
     ComponentPropertiesSIPSIPCredentials,
@@ -98,8 +100,11 @@ RECORDING_OPTIONS = ComponentOptionsRecording(
         secret_access_key="secret",
         access_key_id="access",
     ),
+    subscribe_mode=ComponentOptionsRecordingSubscribeMode.AUTO,
 )
-RECORDING_PROPERTIES = ComponentPropertiesRecording(path_prefix="prefix")
+RECORDING_PROPERTIES = ComponentPropertiesRecording(
+    subscribe_mode=ComponentPropertiesRecordingSubscribeMode("auto"),
+)
 
 
 class TestAuthentication:
@@ -330,24 +335,42 @@ class TestDeleteComponent:
 class TestHLSSubscribe:
     def test_valid_subscription(self, room_api: RoomApi):
         _, room = room_api.create_room(video_codec=CODEC_H264)
-        _ = room_api.add_component(
+        hls_component = room_api.add_component(
             room.id,
             options=ComponentOptionsHLS(
                 subscribe_mode=ComponentOptionsHLSSubscribeMode("manual")
             ),
         )
-        assert room_api.hls_subscribe(room.id, ["peer-id"]) is None
+        recording_component = room_api.add_component(
+            room.id,
+            options=ComponentOptionsRecording(
+                path_prefix="prefix",
+                credentials=S3Credentials(
+                    bucket="bucket",
+                    region="region",
+                    secret_access_key="secret",
+                    access_key_id="access",
+                ),
+                subscribe_mode=ComponentOptionsRecordingSubscribeMode("manual"),
+            ),
+        )
+
+        for component in [hls_component, recording_component]:
+            assert room_api.subscribe(room.id, component.id, ["peer-id"]) is None
 
     def test_invalid_subscription_in_auto_mode(self, room_api: RoomApi):
         _, room = room_api.create_room(video_codec=CODEC_H264)
-        _ = room_api.add_component(room.id, options=HLS_OPTIONS)
-        with pytest.raises(BadRequestError) as exception_info:
-            room_api.hls_subscribe(room.id, ["component-id"])
+        hls_component = room_api.add_component(room.id, options=HLS_OPTIONS)
+        recording_component = room_api.add_component(room.id, options=RECORDING_OPTIONS)
 
-        assert (
-            str(exception_info.value)
-            == "HLS component option `subscribe_mode` is set to :auto"
-        )
+        for component in [hls_component, recording_component]:
+            with pytest.raises(BadRequestError) as exception_info:
+                room_api.subscribe(room.id, component.id, ["component-id"])
+
+            assert (
+                str(exception_info.value)
+                == f"Component {component.id} option `subscribe_mode` is set to :auto"
+            )
 
 
 class TestSIPCall:

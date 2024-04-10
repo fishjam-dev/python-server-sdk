@@ -3,6 +3,9 @@ from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..models.component_options_recording_subscribe_mode import (
+    ComponentOptionsRecordingSubscribeMode,
+)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -18,8 +21,12 @@ class ComponentOptionsRecording:
 
     credentials: Union[Unset, None, "S3Credentials"] = UNSET
     """An AWS S3 credential that will be used to send HLS stream. The stream will only be uploaded if credentials are provided"""
-    path_prefix: Union[Unset, str] = ""
+    path_prefix: Union[Unset, None, str] = UNSET
     """Path prefix under which all recording are stored"""
+    subscribe_mode: Union[
+        Unset, ComponentOptionsRecordingSubscribeMode
+    ] = ComponentOptionsRecordingSubscribeMode.AUTO
+    """Whether the Recording component should subscribe to tracks automatically or manually."""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
     """@private"""
 
@@ -30,6 +37,9 @@ class ComponentOptionsRecording:
             credentials = self.credentials.to_dict() if self.credentials else None
 
         path_prefix = self.path_prefix
+        subscribe_mode: Union[Unset, str] = UNSET
+        if not isinstance(self.subscribe_mode, Unset):
+            subscribe_mode = self.subscribe_mode.value
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -38,6 +48,8 @@ class ComponentOptionsRecording:
             field_dict["credentials"] = credentials
         if path_prefix is not UNSET:
             field_dict["pathPrefix"] = path_prefix
+        if subscribe_mode is not UNSET:
+            field_dict["subscribeMode"] = subscribe_mode
 
         return field_dict
 
@@ -58,9 +70,17 @@ class ComponentOptionsRecording:
 
         path_prefix = d.pop("pathPrefix", UNSET)
 
+        _subscribe_mode = d.pop("subscribeMode", UNSET)
+        subscribe_mode: Union[Unset, ComponentOptionsRecordingSubscribeMode]
+        if isinstance(_subscribe_mode, Unset):
+            subscribe_mode = UNSET
+        else:
+            subscribe_mode = ComponentOptionsRecordingSubscribeMode(_subscribe_mode)
+
         component_options_recording = cls(
             credentials=credentials,
             path_prefix=path_prefix,
+            subscribe_mode=subscribe_mode,
         )
 
         component_options_recording.additional_properties = d
