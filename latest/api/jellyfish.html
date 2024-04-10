@@ -186,7 +186,7 @@
                                 <a class="function" href="#RoomApi.delete_component">delete_component</a>
                         </li>
                         <li>
-                                <a class="function" href="#RoomApi.hls_subscribe">hls_subscribe</a>
+                                <a class="function" href="#RoomApi.subscribe">subscribe</a>
                         </li>
                         <li>
                                 <a class="function" href="#RoomApi.sip_dial">sip_dial</a>
@@ -668,6 +668,21 @@
                         <li>
                                 <a class="variable" href="#ComponentOptionsRecording.path_prefix">path_prefix</a>
                         </li>
+                        <li>
+                                <a class="variable" href="#ComponentOptionsRecording.subscribe_mode">subscribe_mode</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
+                    <a class="class" href="#ComponentOptionsRecordingSubscribeMode">ComponentOptionsRecordingSubscribeMode</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="variable" href="#ComponentOptionsRecordingSubscribeMode.AUTO">AUTO</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#ComponentOptionsRecordingSubscribeMode.MANUAL">MANUAL</a>
+                        </li>
                 </ul>
 
             </li>
@@ -678,7 +693,19 @@
                                 <a class="function" href="#ComponentPropertiesRecording.__init__">ComponentPropertiesRecording</a>
                         </li>
                         <li>
-                                <a class="variable" href="#ComponentPropertiesRecording.path_prefix">path_prefix</a>
+                                <a class="variable" href="#ComponentPropertiesRecording.subscribe_mode">subscribe_mode</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
+                    <a class="class" href="#ComponentPropertiesRecordingSubscribeMode">ComponentPropertiesRecordingSubscribeMode</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="variable" href="#ComponentPropertiesRecordingSubscribeMode.AUTO">AUTO</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#ComponentPropertiesRecordingSubscribeMode.MANUAL">MANUAL</a>
                         </li>
                 </ul>
 
@@ -908,70 +935,74 @@
 </span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>    <span class="n">ComponentOptionsHLS</span><span class="p">,</span>
 </span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>    <span class="n">ComponentOptionsHLSSubscribeMode</span><span class="p">,</span>
 </span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>    <span class="n">ComponentOptionsRecording</span><span class="p">,</span>
-</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>    <span class="n">ComponentOptionsRTSP</span><span class="p">,</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>    <span class="n">ComponentOptionsSIP</span><span class="p">,</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>    <span class="n">ComponentPropertiesFile</span><span class="p">,</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>    <span class="n">ComponentPropertiesHLS</span><span class="p">,</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>    <span class="n">ComponentPropertiesHLSSubscribeMode</span><span class="p">,</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>    <span class="n">ComponentPropertiesRecording</span><span class="p">,</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>    <span class="n">ComponentPropertiesRTSP</span><span class="p">,</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>    <span class="n">ComponentPropertiesSIP</span><span class="p">,</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>    <span class="n">ComponentPropertiesSIPSIPCredentials</span><span class="p">,</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>    <span class="n">ComponentRecording</span><span class="p">,</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>    <span class="n">ComponentRTSP</span><span class="p">,</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>    <span class="n">ComponentSIP</span><span class="p">,</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>    <span class="n">Peer</span><span class="p">,</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>    <span class="n">PeerOptionsWebRTC</span><span class="p">,</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>    <span class="n">PeerStatus</span><span class="p">,</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>    <span class="n">Room</span><span class="p">,</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>    <span class="n">RoomConfig</span><span class="p">,</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>    <span class="n">RoomConfigVideoCodec</span><span class="p">,</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>    <span class="n">S3Credentials</span><span class="p">,</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>    <span class="n">SIPCredentials</span><span class="p">,</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a><span class="p">)</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>
-</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a><span class="c1"># API</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a><span class="kn">from</span> <span class="nn">jellyfish._webhook_notifier</span> <span class="kn">import</span> <span class="n">receive_binary</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a><span class="kn">from</span> <span class="nn">jellyfish._ws_notifier</span> <span class="kn">import</span> <span class="n">Notifier</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a><span class="kn">from</span> <span class="nn">jellyfish.api._recording_api</span> <span class="kn">import</span> <span class="n">RecordingApi</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a><span class="kn">from</span> <span class="nn">jellyfish.api._room_api</span> <span class="kn">import</span> <span class="n">RoomApi</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>
-</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>    <span class="s2">&quot;RoomApi&quot;</span><span class="p">,</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>    <span class="s2">&quot;RecordingApi&quot;</span><span class="p">,</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>    <span class="s2">&quot;Notifier&quot;</span><span class="p">,</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>    <span class="s2">&quot;receive_binary&quot;</span><span class="p">,</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>    <span class="s2">&quot;Room&quot;</span><span class="p">,</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>    <span class="s2">&quot;RoomConfig&quot;</span><span class="p">,</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>    <span class="s2">&quot;RoomConfigVideoCodec&quot;</span><span class="p">,</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>    <span class="s2">&quot;Peer&quot;</span><span class="p">,</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>    <span class="s2">&quot;PeerOptionsWebRTC&quot;</span><span class="p">,</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a>    <span class="s2">&quot;PeerStatus&quot;</span><span class="p">,</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>    <span class="s2">&quot;ComponentHLS&quot;</span><span class="p">,</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>    <span class="s2">&quot;ComponentOptionsHLS&quot;</span><span class="p">,</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a>    <span class="s2">&quot;ComponentOptionsHLSSubscribeMode&quot;</span><span class="p">,</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a>    <span class="s2">&quot;ComponentPropertiesHLS&quot;</span><span class="p">,</span>
-</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>    <span class="s2">&quot;ComponentPropertiesHLSSubscribeMode&quot;</span><span class="p">,</span>
-</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a>    <span class="s2">&quot;ComponentSIP&quot;</span><span class="p">,</span>
-</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a>    <span class="s2">&quot;ComponentOptionsSIP&quot;</span><span class="p">,</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a>    <span class="s2">&quot;ComponentPropertiesSIP&quot;</span><span class="p">,</span>
-</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a>    <span class="s2">&quot;ComponentPropertiesSIPSIPCredentials&quot;</span><span class="p">,</span>
-</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a>    <span class="s2">&quot;ComponentFile&quot;</span><span class="p">,</span>
-</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a>    <span class="s2">&quot;ComponentRTSP&quot;</span><span class="p">,</span>
-</span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a>    <span class="s2">&quot;ComponentOptionsRTSP&quot;</span><span class="p">,</span>
-</span><span id="L-69"><a href="#L-69"><span class="linenos">69</span></a>    <span class="s2">&quot;ComponentPropertiesRTSP&quot;</span><span class="p">,</span>
-</span><span id="L-70"><a href="#L-70"><span class="linenos">70</span></a>    <span class="s2">&quot;ComponentFile&quot;</span><span class="p">,</span>
-</span><span id="L-71"><a href="#L-71"><span class="linenos">71</span></a>    <span class="s2">&quot;ComponentOptionsFile&quot;</span><span class="p">,</span>
-</span><span id="L-72"><a href="#L-72"><span class="linenos">72</span></a>    <span class="s2">&quot;ComponentPropertiesFile&quot;</span><span class="p">,</span>
-</span><span id="L-73"><a href="#L-73"><span class="linenos">73</span></a>    <span class="s2">&quot;events&quot;</span><span class="p">,</span>
-</span><span id="L-74"><a href="#L-74"><span class="linenos">74</span></a>    <span class="s2">&quot;errors&quot;</span><span class="p">,</span>
-</span><span id="L-75"><a href="#L-75"><span class="linenos">75</span></a>    <span class="s2">&quot;SIPCredentials&quot;</span><span class="p">,</span>
-</span><span id="L-76"><a href="#L-76"><span class="linenos">76</span></a>    <span class="s2">&quot;ComponentRecording&quot;</span><span class="p">,</span>
-</span><span id="L-77"><a href="#L-77"><span class="linenos">77</span></a>    <span class="s2">&quot;ComponentOptionsRecording&quot;</span><span class="p">,</span>
-</span><span id="L-78"><a href="#L-78"><span class="linenos">78</span></a>    <span class="s2">&quot;ComponentPropertiesRecording&quot;</span><span class="p">,</span>
-</span><span id="L-79"><a href="#L-79"><span class="linenos">79</span></a>    <span class="s2">&quot;S3Credentials&quot;</span><span class="p">,</span>
-</span><span id="L-80"><a href="#L-80"><span class="linenos">80</span></a><span class="p">]</span>
-</span><span id="L-81"><a href="#L-81"><span class="linenos">81</span></a><span class="n">__docformat__</span> <span class="o">=</span> <span class="s2">&quot;restructuredtext&quot;</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>    <span class="n">ComponentOptionsRecordingSubscribeMode</span><span class="p">,</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>    <span class="n">ComponentOptionsRTSP</span><span class="p">,</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>    <span class="n">ComponentOptionsSIP</span><span class="p">,</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>    <span class="n">ComponentPropertiesFile</span><span class="p">,</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>    <span class="n">ComponentPropertiesHLS</span><span class="p">,</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>    <span class="n">ComponentPropertiesHLSSubscribeMode</span><span class="p">,</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>    <span class="n">ComponentPropertiesRecording</span><span class="p">,</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>    <span class="n">ComponentPropertiesRecordingSubscribeMode</span><span class="p">,</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>    <span class="n">ComponentPropertiesRTSP</span><span class="p">,</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>    <span class="n">ComponentPropertiesSIP</span><span class="p">,</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>    <span class="n">ComponentPropertiesSIPSIPCredentials</span><span class="p">,</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>    <span class="n">ComponentRecording</span><span class="p">,</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>    <span class="n">ComponentRTSP</span><span class="p">,</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>    <span class="n">ComponentSIP</span><span class="p">,</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>    <span class="n">Peer</span><span class="p">,</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>    <span class="n">PeerOptionsWebRTC</span><span class="p">,</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>    <span class="n">PeerStatus</span><span class="p">,</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>    <span class="n">Room</span><span class="p">,</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>    <span class="n">RoomConfig</span><span class="p">,</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>    <span class="n">RoomConfigVideoCodec</span><span class="p">,</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>    <span class="n">S3Credentials</span><span class="p">,</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>    <span class="n">SIPCredentials</span><span class="p">,</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a><span class="p">)</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>
+</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a><span class="c1"># API</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a><span class="kn">from</span> <span class="nn">jellyfish._webhook_notifier</span> <span class="kn">import</span> <span class="n">receive_binary</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a><span class="kn">from</span> <span class="nn">jellyfish._ws_notifier</span> <span class="kn">import</span> <span class="n">Notifier</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a><span class="kn">from</span> <span class="nn">jellyfish.api._recording_api</span> <span class="kn">import</span> <span class="n">RecordingApi</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a><span class="kn">from</span> <span class="nn">jellyfish.api._room_api</span> <span class="kn">import</span> <span class="n">RoomApi</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>
+</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>    <span class="s2">&quot;RoomApi&quot;</span><span class="p">,</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>    <span class="s2">&quot;RecordingApi&quot;</span><span class="p">,</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>    <span class="s2">&quot;Notifier&quot;</span><span class="p">,</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>    <span class="s2">&quot;receive_binary&quot;</span><span class="p">,</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>    <span class="s2">&quot;Room&quot;</span><span class="p">,</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>    <span class="s2">&quot;RoomConfig&quot;</span><span class="p">,</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>    <span class="s2">&quot;RoomConfigVideoCodec&quot;</span><span class="p">,</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a>    <span class="s2">&quot;Peer&quot;</span><span class="p">,</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>    <span class="s2">&quot;PeerOptionsWebRTC&quot;</span><span class="p">,</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>    <span class="s2">&quot;PeerStatus&quot;</span><span class="p">,</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a>    <span class="s2">&quot;ComponentHLS&quot;</span><span class="p">,</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a>    <span class="s2">&quot;ComponentOptionsHLS&quot;</span><span class="p">,</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>    <span class="s2">&quot;ComponentOptionsHLSSubscribeMode&quot;</span><span class="p">,</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a>    <span class="s2">&quot;ComponentPropertiesHLS&quot;</span><span class="p">,</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a>    <span class="s2">&quot;ComponentPropertiesHLSSubscribeMode&quot;</span><span class="p">,</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a>    <span class="s2">&quot;ComponentSIP&quot;</span><span class="p">,</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a>    <span class="s2">&quot;ComponentOptionsSIP&quot;</span><span class="p">,</span>
+</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a>    <span class="s2">&quot;ComponentPropertiesSIP&quot;</span><span class="p">,</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a>    <span class="s2">&quot;ComponentPropertiesSIPSIPCredentials&quot;</span><span class="p">,</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a>    <span class="s2">&quot;ComponentFile&quot;</span><span class="p">,</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos">69</span></a>    <span class="s2">&quot;ComponentRTSP&quot;</span><span class="p">,</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos">70</span></a>    <span class="s2">&quot;ComponentOptionsRTSP&quot;</span><span class="p">,</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos">71</span></a>    <span class="s2">&quot;ComponentPropertiesRTSP&quot;</span><span class="p">,</span>
+</span><span id="L-72"><a href="#L-72"><span class="linenos">72</span></a>    <span class="s2">&quot;ComponentFile&quot;</span><span class="p">,</span>
+</span><span id="L-73"><a href="#L-73"><span class="linenos">73</span></a>    <span class="s2">&quot;ComponentOptionsFile&quot;</span><span class="p">,</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos">74</span></a>    <span class="s2">&quot;ComponentPropertiesFile&quot;</span><span class="p">,</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos">75</span></a>    <span class="s2">&quot;events&quot;</span><span class="p">,</span>
+</span><span id="L-76"><a href="#L-76"><span class="linenos">76</span></a>    <span class="s2">&quot;errors&quot;</span><span class="p">,</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos">77</span></a>    <span class="s2">&quot;SIPCredentials&quot;</span><span class="p">,</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos">78</span></a>    <span class="s2">&quot;ComponentRecording&quot;</span><span class="p">,</span>
+</span><span id="L-79"><a href="#L-79"><span class="linenos">79</span></a>    <span class="s2">&quot;ComponentOptionsRecording&quot;</span><span class="p">,</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos">80</span></a>    <span class="s2">&quot;ComponentOptionsRecordingSubscribeMode&quot;</span><span class="p">,</span>
+</span><span id="L-81"><a href="#L-81"><span class="linenos">81</span></a>    <span class="s2">&quot;ComponentPropertiesRecording&quot;</span><span class="p">,</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos">82</span></a>    <span class="s2">&quot;ComponentPropertiesRecordingSubscribeMode&quot;</span><span class="p">,</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos">83</span></a>    <span class="s2">&quot;S3Credentials&quot;</span><span class="p">,</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos">84</span></a><span class="p">]</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos">85</span></a><span class="n">__docformat__</span> <span class="o">=</span> <span class="s2">&quot;restructuredtext&quot;</span>
 </span></pre></div>
 
 
@@ -1127,51 +1158,52 @@
 </span><span id="RoomApi-180"><a href="#RoomApi-180"><span class="linenos">180</span></a>
 </span><span id="RoomApi-181"><a href="#RoomApi-181"><span class="linenos">181</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="n">room_delete_component</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">component_id</span><span class="p">,</span> <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">)</span>
 </span><span id="RoomApi-182"><a href="#RoomApi-182"><span class="linenos">182</span></a>
-</span><span id="RoomApi-183"><a href="#RoomApi-183"><span class="linenos">183</span></a>    <span class="k">def</span> <span class="nf">hls_subscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">origins</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+</span><span id="RoomApi-183"><a href="#RoomApi-183"><span class="linenos">183</span></a>    <span class="k">def</span> <span class="nf">subscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">origins</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
 </span><span id="RoomApi-184"><a href="#RoomApi-184"><span class="linenos">184</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="RoomApi-185"><a href="#RoomApi-185"><span class="linenos">185</span></a><span class="sd">        In order to subscribe to HLS peers/components,</span>
-</span><span id="RoomApi-186"><a href="#RoomApi-186"><span class="linenos">186</span></a><span class="sd">        the HLS component should be initialized with the subscribe_mode set to manual.</span>
+</span><span id="RoomApi-185"><a href="#RoomApi-185"><span class="linenos">185</span></a><span class="sd">        In order to subscribe the component to peers/components,</span>
+</span><span id="RoomApi-186"><a href="#RoomApi-186"><span class="linenos">186</span></a><span class="sd">        the component should be initialized with the subscribe_mode set to manual.</span>
 </span><span id="RoomApi-187"><a href="#RoomApi-187"><span class="linenos">187</span></a><span class="sd">        This mode proves beneficial when you do not wish to record or stream</span>
-</span><span id="RoomApi-188"><a href="#RoomApi-188"><span class="linenos">188</span></a><span class="sd">        all the available streams within a room via HLS.</span>
+</span><span id="RoomApi-188"><a href="#RoomApi-188"><span class="linenos">188</span></a><span class="sd">        all the available streams within a room.</span>
 </span><span id="RoomApi-189"><a href="#RoomApi-189"><span class="linenos">189</span></a><span class="sd">        It allows for selective addition instead –</span>
 </span><span id="RoomApi-190"><a href="#RoomApi-190"><span class="linenos">190</span></a><span class="sd">        you can manually select specific streams.</span>
 </span><span id="RoomApi-191"><a href="#RoomApi-191"><span class="linenos">191</span></a><span class="sd">        For instance, you could opt to record only the stream of an event&#39;s host.</span>
 </span><span id="RoomApi-192"><a href="#RoomApi-192"><span class="linenos">192</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="RoomApi-193"><a href="#RoomApi-193"><span class="linenos">193</span></a>
 </span><span id="RoomApi-194"><a href="#RoomApi-194"><span class="linenos">194</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
-</span><span id="RoomApi-195"><a href="#RoomApi-195"><span class="linenos">195</span></a>            <span class="n">hls_subscribe_hls_to</span><span class="p">,</span>
+</span><span id="RoomApi-195"><a href="#RoomApi-195"><span class="linenos">195</span></a>            <span class="n">subscribe_to</span><span class="p">,</span>
 </span><span id="RoomApi-196"><a href="#RoomApi-196"><span class="linenos">196</span></a>            <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span>
-</span><span id="RoomApi-197"><a href="#RoomApi-197"><span class="linenos">197</span></a>            <span class="n">json_body</span><span class="o">=</span><span class="n">SubscriptionConfig</span><span class="p">(</span><span class="n">origins</span><span class="o">=</span><span class="n">origins</span><span class="p">),</span>
-</span><span id="RoomApi-198"><a href="#RoomApi-198"><span class="linenos">198</span></a>        <span class="p">)</span>
-</span><span id="RoomApi-199"><a href="#RoomApi-199"><span class="linenos">199</span></a>
-</span><span id="RoomApi-200"><a href="#RoomApi-200"><span class="linenos">200</span></a>    <span class="k">def</span> <span class="nf">sip_dial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">phone_number</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="RoomApi-201"><a href="#RoomApi-201"><span class="linenos">201</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="RoomApi-202"><a href="#RoomApi-202"><span class="linenos">202</span></a><span class="sd">        Starts a phone call from a specified component to a provided phone number.</span>
-</span><span id="RoomApi-203"><a href="#RoomApi-203"><span class="linenos">203</span></a>
-</span><span id="RoomApi-204"><a href="#RoomApi-204"><span class="linenos">204</span></a><span class="sd">        This is asynchronous operation.</span>
-</span><span id="RoomApi-205"><a href="#RoomApi-205"><span class="linenos">205</span></a><span class="sd">        In case of providing incorrect phone number you will receive</span>
-</span><span id="RoomApi-206"><a href="#RoomApi-206"><span class="linenos">206</span></a><span class="sd">        notification `ComponentCrashed`.</span>
-</span><span id="RoomApi-207"><a href="#RoomApi-207"><span class="linenos">207</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="RoomApi-208"><a href="#RoomApi-208"><span class="linenos">208</span></a>
-</span><span id="RoomApi-209"><a href="#RoomApi-209"><span class="linenos">209</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
-</span><span id="RoomApi-210"><a href="#RoomApi-210"><span class="linenos">210</span></a>            <span class="n">sip_dial</span><span class="p">,</span>
-</span><span id="RoomApi-211"><a href="#RoomApi-211"><span class="linenos">211</span></a>            <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span>
-</span><span id="RoomApi-212"><a href="#RoomApi-212"><span class="linenos">212</span></a>            <span class="n">component_id</span><span class="o">=</span><span class="n">component_id</span><span class="p">,</span>
-</span><span id="RoomApi-213"><a href="#RoomApi-213"><span class="linenos">213</span></a>            <span class="n">json_body</span><span class="o">=</span><span class="n">DialConfig</span><span class="p">(</span><span class="n">phone_number</span><span class="o">=</span><span class="n">phone_number</span><span class="p">),</span>
-</span><span id="RoomApi-214"><a href="#RoomApi-214"><span class="linenos">214</span></a>        <span class="p">)</span>
-</span><span id="RoomApi-215"><a href="#RoomApi-215"><span class="linenos">215</span></a>
-</span><span id="RoomApi-216"><a href="#RoomApi-216"><span class="linenos">216</span></a>    <span class="k">def</span> <span class="nf">sip_end_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="RoomApi-217"><a href="#RoomApi-217"><span class="linenos">217</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="RoomApi-218"><a href="#RoomApi-218"><span class="linenos">218</span></a><span class="sd">        End a phone call on a specified SIP component.</span>
-</span><span id="RoomApi-219"><a href="#RoomApi-219"><span class="linenos">219</span></a>
-</span><span id="RoomApi-220"><a href="#RoomApi-220"><span class="linenos">220</span></a><span class="sd">        This is asynchronous operation.</span>
-</span><span id="RoomApi-221"><a href="#RoomApi-221"><span class="linenos">221</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="RoomApi-222"><a href="#RoomApi-222"><span class="linenos">222</span></a>
-</span><span id="RoomApi-223"><a href="#RoomApi-223"><span class="linenos">223</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
-</span><span id="RoomApi-224"><a href="#RoomApi-224"><span class="linenos">224</span></a>            <span class="n">sip_end_call</span><span class="p">,</span>
-</span><span id="RoomApi-225"><a href="#RoomApi-225"><span class="linenos">225</span></a>            <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span>
-</span><span id="RoomApi-226"><a href="#RoomApi-226"><span class="linenos">226</span></a>            <span class="n">component_id</span><span class="o">=</span><span class="n">component_id</span><span class="p">,</span>
-</span><span id="RoomApi-227"><a href="#RoomApi-227"><span class="linenos">227</span></a>        <span class="p">)</span>
+</span><span id="RoomApi-197"><a href="#RoomApi-197"><span class="linenos">197</span></a>            <span class="n">component_id</span><span class="o">=</span><span class="n">component_id</span><span class="p">,</span>
+</span><span id="RoomApi-198"><a href="#RoomApi-198"><span class="linenos">198</span></a>            <span class="n">json_body</span><span class="o">=</span><span class="n">SubscriptionConfig</span><span class="p">(</span><span class="n">origins</span><span class="o">=</span><span class="n">origins</span><span class="p">),</span>
+</span><span id="RoomApi-199"><a href="#RoomApi-199"><span class="linenos">199</span></a>        <span class="p">)</span>
+</span><span id="RoomApi-200"><a href="#RoomApi-200"><span class="linenos">200</span></a>
+</span><span id="RoomApi-201"><a href="#RoomApi-201"><span class="linenos">201</span></a>    <span class="k">def</span> <span class="nf">sip_dial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">phone_number</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="RoomApi-202"><a href="#RoomApi-202"><span class="linenos">202</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="RoomApi-203"><a href="#RoomApi-203"><span class="linenos">203</span></a><span class="sd">        Starts a phone call from a specified component to a provided phone number.</span>
+</span><span id="RoomApi-204"><a href="#RoomApi-204"><span class="linenos">204</span></a>
+</span><span id="RoomApi-205"><a href="#RoomApi-205"><span class="linenos">205</span></a><span class="sd">        This is asynchronous operation.</span>
+</span><span id="RoomApi-206"><a href="#RoomApi-206"><span class="linenos">206</span></a><span class="sd">        In case of providing incorrect phone number you will receive</span>
+</span><span id="RoomApi-207"><a href="#RoomApi-207"><span class="linenos">207</span></a><span class="sd">        notification `ComponentCrashed`.</span>
+</span><span id="RoomApi-208"><a href="#RoomApi-208"><span class="linenos">208</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="RoomApi-209"><a href="#RoomApi-209"><span class="linenos">209</span></a>
+</span><span id="RoomApi-210"><a href="#RoomApi-210"><span class="linenos">210</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
+</span><span id="RoomApi-211"><a href="#RoomApi-211"><span class="linenos">211</span></a>            <span class="n">sip_dial</span><span class="p">,</span>
+</span><span id="RoomApi-212"><a href="#RoomApi-212"><span class="linenos">212</span></a>            <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span>
+</span><span id="RoomApi-213"><a href="#RoomApi-213"><span class="linenos">213</span></a>            <span class="n">component_id</span><span class="o">=</span><span class="n">component_id</span><span class="p">,</span>
+</span><span id="RoomApi-214"><a href="#RoomApi-214"><span class="linenos">214</span></a>            <span class="n">json_body</span><span class="o">=</span><span class="n">DialConfig</span><span class="p">(</span><span class="n">phone_number</span><span class="o">=</span><span class="n">phone_number</span><span class="p">),</span>
+</span><span id="RoomApi-215"><a href="#RoomApi-215"><span class="linenos">215</span></a>        <span class="p">)</span>
+</span><span id="RoomApi-216"><a href="#RoomApi-216"><span class="linenos">216</span></a>
+</span><span id="RoomApi-217"><a href="#RoomApi-217"><span class="linenos">217</span></a>    <span class="k">def</span> <span class="nf">sip_end_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="RoomApi-218"><a href="#RoomApi-218"><span class="linenos">218</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="RoomApi-219"><a href="#RoomApi-219"><span class="linenos">219</span></a><span class="sd">        End a phone call on a specified SIP component.</span>
+</span><span id="RoomApi-220"><a href="#RoomApi-220"><span class="linenos">220</span></a>
+</span><span id="RoomApi-221"><a href="#RoomApi-221"><span class="linenos">221</span></a><span class="sd">        This is asynchronous operation.</span>
+</span><span id="RoomApi-222"><a href="#RoomApi-222"><span class="linenos">222</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="RoomApi-223"><a href="#RoomApi-223"><span class="linenos">223</span></a>
+</span><span id="RoomApi-224"><a href="#RoomApi-224"><span class="linenos">224</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
+</span><span id="RoomApi-225"><a href="#RoomApi-225"><span class="linenos">225</span></a>            <span class="n">sip_end_call</span><span class="p">,</span>
+</span><span id="RoomApi-226"><a href="#RoomApi-226"><span class="linenos">226</span></a>            <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span>
+</span><span id="RoomApi-227"><a href="#RoomApi-227"><span class="linenos">227</span></a>            <span class="n">component_id</span><span class="o">=</span><span class="n">component_id</span><span class="p">,</span>
+</span><span id="RoomApi-228"><a href="#RoomApi-228"><span class="linenos">228</span></a>        <span class="p">)</span>
 </span></pre></div>
 
 
@@ -1501,40 +1533,41 @@ Currently there are 4 different components:</p>
 
 
                             </div>
-                            <div id="RoomApi.hls_subscribe" class="classattr">
-                                        <input id="RoomApi.hls_subscribe-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                            <div id="RoomApi.subscribe" class="classattr">
+                                        <input id="RoomApi.subscribe-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
 
         <span class="def">def</span>
-        <span class="name">hls_subscribe</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param"><span class="n">origins</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></span><span class="return-annotation">):</span></span>
+        <span class="name">subscribe</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param"><span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param"><span class="n">origins</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></span><span class="return-annotation">):</span></span>
 
-                <label class="view-source-button" for="RoomApi.hls_subscribe-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="RoomApi.subscribe-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#RoomApi.hls_subscribe"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="RoomApi.hls_subscribe-183"><a href="#RoomApi.hls_subscribe-183"><span class="linenos">183</span></a>    <span class="k">def</span> <span class="nf">hls_subscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">origins</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
-</span><span id="RoomApi.hls_subscribe-184"><a href="#RoomApi.hls_subscribe-184"><span class="linenos">184</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="RoomApi.hls_subscribe-185"><a href="#RoomApi.hls_subscribe-185"><span class="linenos">185</span></a><span class="sd">        In order to subscribe to HLS peers/components,</span>
-</span><span id="RoomApi.hls_subscribe-186"><a href="#RoomApi.hls_subscribe-186"><span class="linenos">186</span></a><span class="sd">        the HLS component should be initialized with the subscribe_mode set to manual.</span>
-</span><span id="RoomApi.hls_subscribe-187"><a href="#RoomApi.hls_subscribe-187"><span class="linenos">187</span></a><span class="sd">        This mode proves beneficial when you do not wish to record or stream</span>
-</span><span id="RoomApi.hls_subscribe-188"><a href="#RoomApi.hls_subscribe-188"><span class="linenos">188</span></a><span class="sd">        all the available streams within a room via HLS.</span>
-</span><span id="RoomApi.hls_subscribe-189"><a href="#RoomApi.hls_subscribe-189"><span class="linenos">189</span></a><span class="sd">        It allows for selective addition instead –</span>
-</span><span id="RoomApi.hls_subscribe-190"><a href="#RoomApi.hls_subscribe-190"><span class="linenos">190</span></a><span class="sd">        you can manually select specific streams.</span>
-</span><span id="RoomApi.hls_subscribe-191"><a href="#RoomApi.hls_subscribe-191"><span class="linenos">191</span></a><span class="sd">        For instance, you could opt to record only the stream of an event&#39;s host.</span>
-</span><span id="RoomApi.hls_subscribe-192"><a href="#RoomApi.hls_subscribe-192"><span class="linenos">192</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="RoomApi.hls_subscribe-193"><a href="#RoomApi.hls_subscribe-193"><span class="linenos">193</span></a>
-</span><span id="RoomApi.hls_subscribe-194"><a href="#RoomApi.hls_subscribe-194"><span class="linenos">194</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
-</span><span id="RoomApi.hls_subscribe-195"><a href="#RoomApi.hls_subscribe-195"><span class="linenos">195</span></a>            <span class="n">hls_subscribe_hls_to</span><span class="p">,</span>
-</span><span id="RoomApi.hls_subscribe-196"><a href="#RoomApi.hls_subscribe-196"><span class="linenos">196</span></a>            <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span>
-</span><span id="RoomApi.hls_subscribe-197"><a href="#RoomApi.hls_subscribe-197"><span class="linenos">197</span></a>            <span class="n">json_body</span><span class="o">=</span><span class="n">SubscriptionConfig</span><span class="p">(</span><span class="n">origins</span><span class="o">=</span><span class="n">origins</span><span class="p">),</span>
-</span><span id="RoomApi.hls_subscribe-198"><a href="#RoomApi.hls_subscribe-198"><span class="linenos">198</span></a>        <span class="p">)</span>
+    <a class="headerlink" href="#RoomApi.subscribe"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="RoomApi.subscribe-183"><a href="#RoomApi.subscribe-183"><span class="linenos">183</span></a>    <span class="k">def</span> <span class="nf">subscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">origins</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+</span><span id="RoomApi.subscribe-184"><a href="#RoomApi.subscribe-184"><span class="linenos">184</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="RoomApi.subscribe-185"><a href="#RoomApi.subscribe-185"><span class="linenos">185</span></a><span class="sd">        In order to subscribe the component to peers/components,</span>
+</span><span id="RoomApi.subscribe-186"><a href="#RoomApi.subscribe-186"><span class="linenos">186</span></a><span class="sd">        the component should be initialized with the subscribe_mode set to manual.</span>
+</span><span id="RoomApi.subscribe-187"><a href="#RoomApi.subscribe-187"><span class="linenos">187</span></a><span class="sd">        This mode proves beneficial when you do not wish to record or stream</span>
+</span><span id="RoomApi.subscribe-188"><a href="#RoomApi.subscribe-188"><span class="linenos">188</span></a><span class="sd">        all the available streams within a room.</span>
+</span><span id="RoomApi.subscribe-189"><a href="#RoomApi.subscribe-189"><span class="linenos">189</span></a><span class="sd">        It allows for selective addition instead –</span>
+</span><span id="RoomApi.subscribe-190"><a href="#RoomApi.subscribe-190"><span class="linenos">190</span></a><span class="sd">        you can manually select specific streams.</span>
+</span><span id="RoomApi.subscribe-191"><a href="#RoomApi.subscribe-191"><span class="linenos">191</span></a><span class="sd">        For instance, you could opt to record only the stream of an event&#39;s host.</span>
+</span><span id="RoomApi.subscribe-192"><a href="#RoomApi.subscribe-192"><span class="linenos">192</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="RoomApi.subscribe-193"><a href="#RoomApi.subscribe-193"><span class="linenos">193</span></a>
+</span><span id="RoomApi.subscribe-194"><a href="#RoomApi.subscribe-194"><span class="linenos">194</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
+</span><span id="RoomApi.subscribe-195"><a href="#RoomApi.subscribe-195"><span class="linenos">195</span></a>            <span class="n">subscribe_to</span><span class="p">,</span>
+</span><span id="RoomApi.subscribe-196"><a href="#RoomApi.subscribe-196"><span class="linenos">196</span></a>            <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span>
+</span><span id="RoomApi.subscribe-197"><a href="#RoomApi.subscribe-197"><span class="linenos">197</span></a>            <span class="n">component_id</span><span class="o">=</span><span class="n">component_id</span><span class="p">,</span>
+</span><span id="RoomApi.subscribe-198"><a href="#RoomApi.subscribe-198"><span class="linenos">198</span></a>            <span class="n">json_body</span><span class="o">=</span><span class="n">SubscriptionConfig</span><span class="p">(</span><span class="n">origins</span><span class="o">=</span><span class="n">origins</span><span class="p">),</span>
+</span><span id="RoomApi.subscribe-199"><a href="#RoomApi.subscribe-199"><span class="linenos">199</span></a>        <span class="p">)</span>
 </span></pre></div>
 
 
-            <div class="docstring"><p>In order to subscribe to HLS peers/components,
-the HLS component should be initialized with the subscribe_mode set to manual.
+            <div class="docstring"><p>In order to subscribe the component to peers/components,
+the component should be initialized with the subscribe_mode set to manual.
 This mode proves beneficial when you do not wish to record or stream
-all the available streams within a room via HLS.
+all the available streams within a room.
 It allows for selective addition instead –
 you can manually select specific streams.
 For instance, you could opt to record only the stream of an event's host.</p>
@@ -1553,21 +1586,21 @@ For instance, you could opt to record only the stream of an event's host.</p>
 
     </div>
     <a class="headerlink" href="#RoomApi.sip_dial"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="RoomApi.sip_dial-200"><a href="#RoomApi.sip_dial-200"><span class="linenos">200</span></a>    <span class="k">def</span> <span class="nf">sip_dial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">phone_number</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="RoomApi.sip_dial-201"><a href="#RoomApi.sip_dial-201"><span class="linenos">201</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="RoomApi.sip_dial-202"><a href="#RoomApi.sip_dial-202"><span class="linenos">202</span></a><span class="sd">        Starts a phone call from a specified component to a provided phone number.</span>
-</span><span id="RoomApi.sip_dial-203"><a href="#RoomApi.sip_dial-203"><span class="linenos">203</span></a>
-</span><span id="RoomApi.sip_dial-204"><a href="#RoomApi.sip_dial-204"><span class="linenos">204</span></a><span class="sd">        This is asynchronous operation.</span>
-</span><span id="RoomApi.sip_dial-205"><a href="#RoomApi.sip_dial-205"><span class="linenos">205</span></a><span class="sd">        In case of providing incorrect phone number you will receive</span>
-</span><span id="RoomApi.sip_dial-206"><a href="#RoomApi.sip_dial-206"><span class="linenos">206</span></a><span class="sd">        notification `ComponentCrashed`.</span>
-</span><span id="RoomApi.sip_dial-207"><a href="#RoomApi.sip_dial-207"><span class="linenos">207</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="RoomApi.sip_dial-208"><a href="#RoomApi.sip_dial-208"><span class="linenos">208</span></a>
-</span><span id="RoomApi.sip_dial-209"><a href="#RoomApi.sip_dial-209"><span class="linenos">209</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
-</span><span id="RoomApi.sip_dial-210"><a href="#RoomApi.sip_dial-210"><span class="linenos">210</span></a>            <span class="n">sip_dial</span><span class="p">,</span>
-</span><span id="RoomApi.sip_dial-211"><a href="#RoomApi.sip_dial-211"><span class="linenos">211</span></a>            <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span>
-</span><span id="RoomApi.sip_dial-212"><a href="#RoomApi.sip_dial-212"><span class="linenos">212</span></a>            <span class="n">component_id</span><span class="o">=</span><span class="n">component_id</span><span class="p">,</span>
-</span><span id="RoomApi.sip_dial-213"><a href="#RoomApi.sip_dial-213"><span class="linenos">213</span></a>            <span class="n">json_body</span><span class="o">=</span><span class="n">DialConfig</span><span class="p">(</span><span class="n">phone_number</span><span class="o">=</span><span class="n">phone_number</span><span class="p">),</span>
-</span><span id="RoomApi.sip_dial-214"><a href="#RoomApi.sip_dial-214"><span class="linenos">214</span></a>        <span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="RoomApi.sip_dial-201"><a href="#RoomApi.sip_dial-201"><span class="linenos">201</span></a>    <span class="k">def</span> <span class="nf">sip_dial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">phone_number</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="RoomApi.sip_dial-202"><a href="#RoomApi.sip_dial-202"><span class="linenos">202</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="RoomApi.sip_dial-203"><a href="#RoomApi.sip_dial-203"><span class="linenos">203</span></a><span class="sd">        Starts a phone call from a specified component to a provided phone number.</span>
+</span><span id="RoomApi.sip_dial-204"><a href="#RoomApi.sip_dial-204"><span class="linenos">204</span></a>
+</span><span id="RoomApi.sip_dial-205"><a href="#RoomApi.sip_dial-205"><span class="linenos">205</span></a><span class="sd">        This is asynchronous operation.</span>
+</span><span id="RoomApi.sip_dial-206"><a href="#RoomApi.sip_dial-206"><span class="linenos">206</span></a><span class="sd">        In case of providing incorrect phone number you will receive</span>
+</span><span id="RoomApi.sip_dial-207"><a href="#RoomApi.sip_dial-207"><span class="linenos">207</span></a><span class="sd">        notification `ComponentCrashed`.</span>
+</span><span id="RoomApi.sip_dial-208"><a href="#RoomApi.sip_dial-208"><span class="linenos">208</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="RoomApi.sip_dial-209"><a href="#RoomApi.sip_dial-209"><span class="linenos">209</span></a>
+</span><span id="RoomApi.sip_dial-210"><a href="#RoomApi.sip_dial-210"><span class="linenos">210</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
+</span><span id="RoomApi.sip_dial-211"><a href="#RoomApi.sip_dial-211"><span class="linenos">211</span></a>            <span class="n">sip_dial</span><span class="p">,</span>
+</span><span id="RoomApi.sip_dial-212"><a href="#RoomApi.sip_dial-212"><span class="linenos">212</span></a>            <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span>
+</span><span id="RoomApi.sip_dial-213"><a href="#RoomApi.sip_dial-213"><span class="linenos">213</span></a>            <span class="n">component_id</span><span class="o">=</span><span class="n">component_id</span><span class="p">,</span>
+</span><span id="RoomApi.sip_dial-214"><a href="#RoomApi.sip_dial-214"><span class="linenos">214</span></a>            <span class="n">json_body</span><span class="o">=</span><span class="n">DialConfig</span><span class="p">(</span><span class="n">phone_number</span><span class="o">=</span><span class="n">phone_number</span><span class="p">),</span>
+</span><span id="RoomApi.sip_dial-215"><a href="#RoomApi.sip_dial-215"><span class="linenos">215</span></a>        <span class="p">)</span>
 </span></pre></div>
 
 
@@ -1591,18 +1624,18 @@ notification <code>ComponentCrashed</code>.</p>
 
     </div>
     <a class="headerlink" href="#RoomApi.sip_end_call"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="RoomApi.sip_end_call-216"><a href="#RoomApi.sip_end_call-216"><span class="linenos">216</span></a>    <span class="k">def</span> <span class="nf">sip_end_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="RoomApi.sip_end_call-217"><a href="#RoomApi.sip_end_call-217"><span class="linenos">217</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="RoomApi.sip_end_call-218"><a href="#RoomApi.sip_end_call-218"><span class="linenos">218</span></a><span class="sd">        End a phone call on a specified SIP component.</span>
-</span><span id="RoomApi.sip_end_call-219"><a href="#RoomApi.sip_end_call-219"><span class="linenos">219</span></a>
-</span><span id="RoomApi.sip_end_call-220"><a href="#RoomApi.sip_end_call-220"><span class="linenos">220</span></a><span class="sd">        This is asynchronous operation.</span>
-</span><span id="RoomApi.sip_end_call-221"><a href="#RoomApi.sip_end_call-221"><span class="linenos">221</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="RoomApi.sip_end_call-222"><a href="#RoomApi.sip_end_call-222"><span class="linenos">222</span></a>
-</span><span id="RoomApi.sip_end_call-223"><a href="#RoomApi.sip_end_call-223"><span class="linenos">223</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
-</span><span id="RoomApi.sip_end_call-224"><a href="#RoomApi.sip_end_call-224"><span class="linenos">224</span></a>            <span class="n">sip_end_call</span><span class="p">,</span>
-</span><span id="RoomApi.sip_end_call-225"><a href="#RoomApi.sip_end_call-225"><span class="linenos">225</span></a>            <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span>
-</span><span id="RoomApi.sip_end_call-226"><a href="#RoomApi.sip_end_call-226"><span class="linenos">226</span></a>            <span class="n">component_id</span><span class="o">=</span><span class="n">component_id</span><span class="p">,</span>
-</span><span id="RoomApi.sip_end_call-227"><a href="#RoomApi.sip_end_call-227"><span class="linenos">227</span></a>        <span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="RoomApi.sip_end_call-217"><a href="#RoomApi.sip_end_call-217"><span class="linenos">217</span></a>    <span class="k">def</span> <span class="nf">sip_end_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">component_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="RoomApi.sip_end_call-218"><a href="#RoomApi.sip_end_call-218"><span class="linenos">218</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="RoomApi.sip_end_call-219"><a href="#RoomApi.sip_end_call-219"><span class="linenos">219</span></a><span class="sd">        End a phone call on a specified SIP component.</span>
+</span><span id="RoomApi.sip_end_call-220"><a href="#RoomApi.sip_end_call-220"><span class="linenos">220</span></a>
+</span><span id="RoomApi.sip_end_call-221"><a href="#RoomApi.sip_end_call-221"><span class="linenos">221</span></a><span class="sd">        This is asynchronous operation.</span>
+</span><span id="RoomApi.sip_end_call-222"><a href="#RoomApi.sip_end_call-222"><span class="linenos">222</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="RoomApi.sip_end_call-223"><a href="#RoomApi.sip_end_call-223"><span class="linenos">223</span></a>
+</span><span id="RoomApi.sip_end_call-224"><a href="#RoomApi.sip_end_call-224"><span class="linenos">224</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
+</span><span id="RoomApi.sip_end_call-225"><a href="#RoomApi.sip_end_call-225"><span class="linenos">225</span></a>            <span class="n">sip_end_call</span><span class="p">,</span>
+</span><span id="RoomApi.sip_end_call-226"><a href="#RoomApi.sip_end_call-226"><span class="linenos">226</span></a>            <span class="n">room_id</span><span class="o">=</span><span class="n">room_id</span><span class="p">,</span>
+</span><span id="RoomApi.sip_end_call-227"><a href="#RoomApi.sip_end_call-227"><span class="linenos">227</span></a>            <span class="n">component_id</span><span class="o">=</span><span class="n">component_id</span><span class="p">,</span>
+</span><span id="RoomApi.sip_end_call-228"><a href="#RoomApi.sip_end_call-228"><span class="linenos">228</span></a>        <span class="p">)</span>
 </span></pre></div>
 
 
@@ -5832,76 +5865,93 @@ otherwise the messages won't be received.</p>
 
     </div>
     <a class="headerlink" href="#ComponentOptionsRecording"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ComponentOptionsRecording-16"><a href="#ComponentOptionsRecording-16"><span class="linenos">16</span></a><span class="nd">@_attrs_define</span>
-</span><span id="ComponentOptionsRecording-17"><a href="#ComponentOptionsRecording-17"><span class="linenos">17</span></a><span class="k">class</span> <span class="nc">ComponentOptionsRecording</span><span class="p">:</span>
-</span><span id="ComponentOptionsRecording-18"><a href="#ComponentOptionsRecording-18"><span class="linenos">18</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Options specific to the Recording component&quot;&quot;&quot;</span>
-</span><span id="ComponentOptionsRecording-19"><a href="#ComponentOptionsRecording-19"><span class="linenos">19</span></a>
-</span><span id="ComponentOptionsRecording-20"><a href="#ComponentOptionsRecording-20"><span class="linenos">20</span></a>    <span class="n">credentials</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Unset</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;S3Credentials&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNSET</span>
-</span><span id="ComponentOptionsRecording-21"><a href="#ComponentOptionsRecording-21"><span class="linenos">21</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;An AWS S3 credential that will be used to send HLS stream. The stream will only be uploaded if credentials are provided&quot;&quot;&quot;</span>
-</span><span id="ComponentOptionsRecording-22"><a href="#ComponentOptionsRecording-22"><span class="linenos">22</span></a>    <span class="n">path_prefix</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Unset</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-</span><span id="ComponentOptionsRecording-23"><a href="#ComponentOptionsRecording-23"><span class="linenos">23</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Path prefix under which all recording are stored&quot;&quot;&quot;</span>
-</span><span id="ComponentOptionsRecording-24"><a href="#ComponentOptionsRecording-24"><span class="linenos">24</span></a>    <span class="n">additional_properties</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">_attrs_field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-</span><span id="ComponentOptionsRecording-25"><a href="#ComponentOptionsRecording-25"><span class="linenos">25</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;@private&quot;&quot;&quot;</span>
-</span><span id="ComponentOptionsRecording-26"><a href="#ComponentOptionsRecording-26"><span class="linenos">26</span></a>
-</span><span id="ComponentOptionsRecording-27"><a href="#ComponentOptionsRecording-27"><span class="linenos">27</span></a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-</span><span id="ComponentOptionsRecording-28"><a href="#ComponentOptionsRecording-28"><span class="linenos">28</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;@private&quot;&quot;&quot;</span>
-</span><span id="ComponentOptionsRecording-29"><a href="#ComponentOptionsRecording-29"><span class="linenos">29</span></a>        <span class="n">credentials</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Unset</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="n">UNSET</span>
-</span><span id="ComponentOptionsRecording-30"><a href="#ComponentOptionsRecording-30"><span class="linenos">30</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">credentials</span><span class="p">,</span> <span class="n">Unset</span><span class="p">):</span>
-</span><span id="ComponentOptionsRecording-31"><a href="#ComponentOptionsRecording-31"><span class="linenos">31</span></a>            <span class="n">credentials</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">credentials</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">credentials</span> <span class="k">else</span> <span class="kc">None</span>
-</span><span id="ComponentOptionsRecording-32"><a href="#ComponentOptionsRecording-32"><span class="linenos">32</span></a>
-</span><span id="ComponentOptionsRecording-33"><a href="#ComponentOptionsRecording-33"><span class="linenos">33</span></a>        <span class="n">path_prefix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">path_prefix</span>
-</span><span id="ComponentOptionsRecording-34"><a href="#ComponentOptionsRecording-34"><span class="linenos">34</span></a>
-</span><span id="ComponentOptionsRecording-35"><a href="#ComponentOptionsRecording-35"><span class="linenos">35</span></a>        <span class="n">field_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span id="ComponentOptionsRecording-36"><a href="#ComponentOptionsRecording-36"><span class="linenos">36</span></a>        <span class="n">field_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span><span class="p">)</span>
-</span><span id="ComponentOptionsRecording-37"><a href="#ComponentOptionsRecording-37"><span class="linenos">37</span></a>        <span class="n">field_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({})</span>
-</span><span id="ComponentOptionsRecording-38"><a href="#ComponentOptionsRecording-38"><span class="linenos">38</span></a>        <span class="k">if</span> <span class="n">credentials</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">UNSET</span><span class="p">:</span>
-</span><span id="ComponentOptionsRecording-39"><a href="#ComponentOptionsRecording-39"><span class="linenos">39</span></a>            <span class="n">field_dict</span><span class="p">[</span><span class="s2">&quot;credentials&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">credentials</span>
-</span><span id="ComponentOptionsRecording-40"><a href="#ComponentOptionsRecording-40"><span class="linenos">40</span></a>        <span class="k">if</span> <span class="n">path_prefix</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">UNSET</span><span class="p">:</span>
-</span><span id="ComponentOptionsRecording-41"><a href="#ComponentOptionsRecording-41"><span class="linenos">41</span></a>            <span class="n">field_dict</span><span class="p">[</span><span class="s2">&quot;pathPrefix&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">path_prefix</span>
-</span><span id="ComponentOptionsRecording-42"><a href="#ComponentOptionsRecording-42"><span class="linenos">42</span></a>
-</span><span id="ComponentOptionsRecording-43"><a href="#ComponentOptionsRecording-43"><span class="linenos">43</span></a>        <span class="k">return</span> <span class="n">field_dict</span>
-</span><span id="ComponentOptionsRecording-44"><a href="#ComponentOptionsRecording-44"><span class="linenos">44</span></a>
-</span><span id="ComponentOptionsRecording-45"><a href="#ComponentOptionsRecording-45"><span class="linenos">45</span></a>    <span class="nd">@classmethod</span>
-</span><span id="ComponentOptionsRecording-46"><a href="#ComponentOptionsRecording-46"><span class="linenos">46</span></a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">src_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-</span><span id="ComponentOptionsRecording-47"><a href="#ComponentOptionsRecording-47"><span class="linenos">47</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;@private&quot;&quot;&quot;</span>
-</span><span id="ComponentOptionsRecording-48"><a href="#ComponentOptionsRecording-48"><span class="linenos">48</span></a>        <span class="kn">from</span> <span class="nn">..models.s3_credentials</span> <span class="kn">import</span> <span class="n">S3Credentials</span>
-</span><span id="ComponentOptionsRecording-49"><a href="#ComponentOptionsRecording-49"><span class="linenos">49</span></a>
-</span><span id="ComponentOptionsRecording-50"><a href="#ComponentOptionsRecording-50"><span class="linenos">50</span></a>        <span class="n">d</span> <span class="o">=</span> <span class="n">src_dict</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-</span><span id="ComponentOptionsRecording-51"><a href="#ComponentOptionsRecording-51"><span class="linenos">51</span></a>        <span class="n">_credentials</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;credentials&quot;</span><span class="p">,</span> <span class="n">UNSET</span><span class="p">)</span>
-</span><span id="ComponentOptionsRecording-52"><a href="#ComponentOptionsRecording-52"><span class="linenos">52</span></a>        <span class="n">credentials</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Unset</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">S3Credentials</span><span class="p">]</span>
-</span><span id="ComponentOptionsRecording-53"><a href="#ComponentOptionsRecording-53"><span class="linenos">53</span></a>        <span class="k">if</span> <span class="n">_credentials</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="ComponentOptionsRecording-54"><a href="#ComponentOptionsRecording-54"><span class="linenos">54</span></a>            <span class="n">credentials</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="ComponentOptionsRecording-55"><a href="#ComponentOptionsRecording-55"><span class="linenos">55</span></a>        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_credentials</span><span class="p">,</span> <span class="n">Unset</span><span class="p">):</span>
-</span><span id="ComponentOptionsRecording-56"><a href="#ComponentOptionsRecording-56"><span class="linenos">56</span></a>            <span class="n">credentials</span> <span class="o">=</span> <span class="n">UNSET</span>
-</span><span id="ComponentOptionsRecording-57"><a href="#ComponentOptionsRecording-57"><span class="linenos">57</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="ComponentOptionsRecording-58"><a href="#ComponentOptionsRecording-58"><span class="linenos">58</span></a>            <span class="n">credentials</span> <span class="o">=</span> <span class="n">S3Credentials</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">_credentials</span><span class="p">)</span>
-</span><span id="ComponentOptionsRecording-59"><a href="#ComponentOptionsRecording-59"><span class="linenos">59</span></a>
-</span><span id="ComponentOptionsRecording-60"><a href="#ComponentOptionsRecording-60"><span class="linenos">60</span></a>        <span class="n">path_prefix</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;pathPrefix&quot;</span><span class="p">,</span> <span class="n">UNSET</span><span class="p">)</span>
-</span><span id="ComponentOptionsRecording-61"><a href="#ComponentOptionsRecording-61"><span class="linenos">61</span></a>
-</span><span id="ComponentOptionsRecording-62"><a href="#ComponentOptionsRecording-62"><span class="linenos">62</span></a>        <span class="n">component_options_recording</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span>
-</span><span id="ComponentOptionsRecording-63"><a href="#ComponentOptionsRecording-63"><span class="linenos">63</span></a>            <span class="n">credentials</span><span class="o">=</span><span class="n">credentials</span><span class="p">,</span>
-</span><span id="ComponentOptionsRecording-64"><a href="#ComponentOptionsRecording-64"><span class="linenos">64</span></a>            <span class="n">path_prefix</span><span class="o">=</span><span class="n">path_prefix</span><span class="p">,</span>
-</span><span id="ComponentOptionsRecording-65"><a href="#ComponentOptionsRecording-65"><span class="linenos">65</span></a>        <span class="p">)</span>
-</span><span id="ComponentOptionsRecording-66"><a href="#ComponentOptionsRecording-66"><span class="linenos">66</span></a>
-</span><span id="ComponentOptionsRecording-67"><a href="#ComponentOptionsRecording-67"><span class="linenos">67</span></a>        <span class="n">component_options_recording</span><span class="o">.</span><span class="n">additional_properties</span> <span class="o">=</span> <span class="n">d</span>
-</span><span id="ComponentOptionsRecording-68"><a href="#ComponentOptionsRecording-68"><span class="linenos">68</span></a>        <span class="k">return</span> <span class="n">component_options_recording</span>
-</span><span id="ComponentOptionsRecording-69"><a href="#ComponentOptionsRecording-69"><span class="linenos">69</span></a>
-</span><span id="ComponentOptionsRecording-70"><a href="#ComponentOptionsRecording-70"><span class="linenos">70</span></a>    <span class="nd">@property</span>
-</span><span id="ComponentOptionsRecording-71"><a href="#ComponentOptionsRecording-71"><span class="linenos">71</span></a>    <span class="k">def</span> <span class="nf">additional_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-</span><span id="ComponentOptionsRecording-72"><a href="#ComponentOptionsRecording-72"><span class="linenos">72</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;@private&quot;&quot;&quot;</span>
-</span><span id="ComponentOptionsRecording-73"><a href="#ComponentOptionsRecording-73"><span class="linenos">73</span></a>        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-</span><span id="ComponentOptionsRecording-74"><a href="#ComponentOptionsRecording-74"><span class="linenos">74</span></a>
-</span><span id="ComponentOptionsRecording-75"><a href="#ComponentOptionsRecording-75"><span class="linenos">75</span></a>    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-</span><span id="ComponentOptionsRecording-76"><a href="#ComponentOptionsRecording-76"><span class="linenos">76</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-</span><span id="ComponentOptionsRecording-77"><a href="#ComponentOptionsRecording-77"><span class="linenos">77</span></a>
-</span><span id="ComponentOptionsRecording-78"><a href="#ComponentOptionsRecording-78"><span class="linenos">78</span></a>    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="ComponentOptionsRecording-79"><a href="#ComponentOptionsRecording-79"><span class="linenos">79</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-</span><span id="ComponentOptionsRecording-80"><a href="#ComponentOptionsRecording-80"><span class="linenos">80</span></a>
-</span><span id="ComponentOptionsRecording-81"><a href="#ComponentOptionsRecording-81"><span class="linenos">81</span></a>    <span class="k">def</span> <span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="ComponentOptionsRecording-82"><a href="#ComponentOptionsRecording-82"><span class="linenos">82</span></a>        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-</span><span id="ComponentOptionsRecording-83"><a href="#ComponentOptionsRecording-83"><span class="linenos">83</span></a>
-</span><span id="ComponentOptionsRecording-84"><a href="#ComponentOptionsRecording-84"><span class="linenos">84</span></a>    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span id="ComponentOptionsRecording-85"><a href="#ComponentOptionsRecording-85"><span class="linenos">85</span></a>        <span class="k">return</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ComponentOptionsRecording-19"><a href="#ComponentOptionsRecording-19"><span class="linenos"> 19</span></a><span class="nd">@_attrs_define</span>
+</span><span id="ComponentOptionsRecording-20"><a href="#ComponentOptionsRecording-20"><span class="linenos"> 20</span></a><span class="k">class</span> <span class="nc">ComponentOptionsRecording</span><span class="p">:</span>
+</span><span id="ComponentOptionsRecording-21"><a href="#ComponentOptionsRecording-21"><span class="linenos"> 21</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Options specific to the Recording component&quot;&quot;&quot;</span>
+</span><span id="ComponentOptionsRecording-22"><a href="#ComponentOptionsRecording-22"><span class="linenos"> 22</span></a>
+</span><span id="ComponentOptionsRecording-23"><a href="#ComponentOptionsRecording-23"><span class="linenos"> 23</span></a>    <span class="n">credentials</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Unset</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;S3Credentials&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNSET</span>
+</span><span id="ComponentOptionsRecording-24"><a href="#ComponentOptionsRecording-24"><span class="linenos"> 24</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;An AWS S3 credential that will be used to send HLS stream. The stream will only be uploaded if credentials are provided&quot;&quot;&quot;</span>
+</span><span id="ComponentOptionsRecording-25"><a href="#ComponentOptionsRecording-25"><span class="linenos"> 25</span></a>    <span class="n">path_prefix</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Unset</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNSET</span>
+</span><span id="ComponentOptionsRecording-26"><a href="#ComponentOptionsRecording-26"><span class="linenos"> 26</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Path prefix under which all recording are stored&quot;&quot;&quot;</span>
+</span><span id="ComponentOptionsRecording-27"><a href="#ComponentOptionsRecording-27"><span class="linenos"> 27</span></a>    <span class="n">subscribe_mode</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
+</span><span id="ComponentOptionsRecording-28"><a href="#ComponentOptionsRecording-28"><span class="linenos"> 28</span></a>        <span class="n">Unset</span><span class="p">,</span> <span class="n">ComponentOptionsRecordingSubscribeMode</span>
+</span><span id="ComponentOptionsRecording-29"><a href="#ComponentOptionsRecording-29"><span class="linenos"> 29</span></a>    <span class="p">]</span> <span class="o">=</span> <span class="n">ComponentOptionsRecordingSubscribeMode</span><span class="o">.</span><span class="n">AUTO</span>
+</span><span id="ComponentOptionsRecording-30"><a href="#ComponentOptionsRecording-30"><span class="linenos"> 30</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Whether the Recording component should subscribe to tracks automatically or manually.&quot;&quot;&quot;</span>
+</span><span id="ComponentOptionsRecording-31"><a href="#ComponentOptionsRecording-31"><span class="linenos"> 31</span></a>    <span class="n">additional_properties</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">_attrs_field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+</span><span id="ComponentOptionsRecording-32"><a href="#ComponentOptionsRecording-32"><span class="linenos"> 32</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;@private&quot;&quot;&quot;</span>
+</span><span id="ComponentOptionsRecording-33"><a href="#ComponentOptionsRecording-33"><span class="linenos"> 33</span></a>
+</span><span id="ComponentOptionsRecording-34"><a href="#ComponentOptionsRecording-34"><span class="linenos"> 34</span></a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</span><span id="ComponentOptionsRecording-35"><a href="#ComponentOptionsRecording-35"><span class="linenos"> 35</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;@private&quot;&quot;&quot;</span>
+</span><span id="ComponentOptionsRecording-36"><a href="#ComponentOptionsRecording-36"><span class="linenos"> 36</span></a>        <span class="n">credentials</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Unset</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="n">UNSET</span>
+</span><span id="ComponentOptionsRecording-37"><a href="#ComponentOptionsRecording-37"><span class="linenos"> 37</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">credentials</span><span class="p">,</span> <span class="n">Unset</span><span class="p">):</span>
+</span><span id="ComponentOptionsRecording-38"><a href="#ComponentOptionsRecording-38"><span class="linenos"> 38</span></a>            <span class="n">credentials</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">credentials</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">credentials</span> <span class="k">else</span> <span class="kc">None</span>
+</span><span id="ComponentOptionsRecording-39"><a href="#ComponentOptionsRecording-39"><span class="linenos"> 39</span></a>
+</span><span id="ComponentOptionsRecording-40"><a href="#ComponentOptionsRecording-40"><span class="linenos"> 40</span></a>        <span class="n">path_prefix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">path_prefix</span>
+</span><span id="ComponentOptionsRecording-41"><a href="#ComponentOptionsRecording-41"><span class="linenos"> 41</span></a>        <span class="n">subscribe_mode</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Unset</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNSET</span>
+</span><span id="ComponentOptionsRecording-42"><a href="#ComponentOptionsRecording-42"><span class="linenos"> 42</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">subscribe_mode</span><span class="p">,</span> <span class="n">Unset</span><span class="p">):</span>
+</span><span id="ComponentOptionsRecording-43"><a href="#ComponentOptionsRecording-43"><span class="linenos"> 43</span></a>            <span class="n">subscribe_mode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subscribe_mode</span><span class="o">.</span><span class="n">value</span>
+</span><span id="ComponentOptionsRecording-44"><a href="#ComponentOptionsRecording-44"><span class="linenos"> 44</span></a>
+</span><span id="ComponentOptionsRecording-45"><a href="#ComponentOptionsRecording-45"><span class="linenos"> 45</span></a>        <span class="n">field_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span id="ComponentOptionsRecording-46"><a href="#ComponentOptionsRecording-46"><span class="linenos"> 46</span></a>        <span class="n">field_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span><span class="p">)</span>
+</span><span id="ComponentOptionsRecording-47"><a href="#ComponentOptionsRecording-47"><span class="linenos"> 47</span></a>        <span class="n">field_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({})</span>
+</span><span id="ComponentOptionsRecording-48"><a href="#ComponentOptionsRecording-48"><span class="linenos"> 48</span></a>        <span class="k">if</span> <span class="n">credentials</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">UNSET</span><span class="p">:</span>
+</span><span id="ComponentOptionsRecording-49"><a href="#ComponentOptionsRecording-49"><span class="linenos"> 49</span></a>            <span class="n">field_dict</span><span class="p">[</span><span class="s2">&quot;credentials&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">credentials</span>
+</span><span id="ComponentOptionsRecording-50"><a href="#ComponentOptionsRecording-50"><span class="linenos"> 50</span></a>        <span class="k">if</span> <span class="n">path_prefix</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">UNSET</span><span class="p">:</span>
+</span><span id="ComponentOptionsRecording-51"><a href="#ComponentOptionsRecording-51"><span class="linenos"> 51</span></a>            <span class="n">field_dict</span><span class="p">[</span><span class="s2">&quot;pathPrefix&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">path_prefix</span>
+</span><span id="ComponentOptionsRecording-52"><a href="#ComponentOptionsRecording-52"><span class="linenos"> 52</span></a>        <span class="k">if</span> <span class="n">subscribe_mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">UNSET</span><span class="p">:</span>
+</span><span id="ComponentOptionsRecording-53"><a href="#ComponentOptionsRecording-53"><span class="linenos"> 53</span></a>            <span class="n">field_dict</span><span class="p">[</span><span class="s2">&quot;subscribeMode&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">subscribe_mode</span>
+</span><span id="ComponentOptionsRecording-54"><a href="#ComponentOptionsRecording-54"><span class="linenos"> 54</span></a>
+</span><span id="ComponentOptionsRecording-55"><a href="#ComponentOptionsRecording-55"><span class="linenos"> 55</span></a>        <span class="k">return</span> <span class="n">field_dict</span>
+</span><span id="ComponentOptionsRecording-56"><a href="#ComponentOptionsRecording-56"><span class="linenos"> 56</span></a>
+</span><span id="ComponentOptionsRecording-57"><a href="#ComponentOptionsRecording-57"><span class="linenos"> 57</span></a>    <span class="nd">@classmethod</span>
+</span><span id="ComponentOptionsRecording-58"><a href="#ComponentOptionsRecording-58"><span class="linenos"> 58</span></a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">src_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+</span><span id="ComponentOptionsRecording-59"><a href="#ComponentOptionsRecording-59"><span class="linenos"> 59</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;@private&quot;&quot;&quot;</span>
+</span><span id="ComponentOptionsRecording-60"><a href="#ComponentOptionsRecording-60"><span class="linenos"> 60</span></a>        <span class="kn">from</span> <span class="nn">..models.s3_credentials</span> <span class="kn">import</span> <span class="n">S3Credentials</span>
+</span><span id="ComponentOptionsRecording-61"><a href="#ComponentOptionsRecording-61"><span class="linenos"> 61</span></a>
+</span><span id="ComponentOptionsRecording-62"><a href="#ComponentOptionsRecording-62"><span class="linenos"> 62</span></a>        <span class="n">d</span> <span class="o">=</span> <span class="n">src_dict</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span><span id="ComponentOptionsRecording-63"><a href="#ComponentOptionsRecording-63"><span class="linenos"> 63</span></a>        <span class="n">_credentials</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;credentials&quot;</span><span class="p">,</span> <span class="n">UNSET</span><span class="p">)</span>
+</span><span id="ComponentOptionsRecording-64"><a href="#ComponentOptionsRecording-64"><span class="linenos"> 64</span></a>        <span class="n">credentials</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Unset</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">S3Credentials</span><span class="p">]</span>
+</span><span id="ComponentOptionsRecording-65"><a href="#ComponentOptionsRecording-65"><span class="linenos"> 65</span></a>        <span class="k">if</span> <span class="n">_credentials</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="ComponentOptionsRecording-66"><a href="#ComponentOptionsRecording-66"><span class="linenos"> 66</span></a>            <span class="n">credentials</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="ComponentOptionsRecording-67"><a href="#ComponentOptionsRecording-67"><span class="linenos"> 67</span></a>        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_credentials</span><span class="p">,</span> <span class="n">Unset</span><span class="p">):</span>
+</span><span id="ComponentOptionsRecording-68"><a href="#ComponentOptionsRecording-68"><span class="linenos"> 68</span></a>            <span class="n">credentials</span> <span class="o">=</span> <span class="n">UNSET</span>
+</span><span id="ComponentOptionsRecording-69"><a href="#ComponentOptionsRecording-69"><span class="linenos"> 69</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="ComponentOptionsRecording-70"><a href="#ComponentOptionsRecording-70"><span class="linenos"> 70</span></a>            <span class="n">credentials</span> <span class="o">=</span> <span class="n">S3Credentials</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">_credentials</span><span class="p">)</span>
+</span><span id="ComponentOptionsRecording-71"><a href="#ComponentOptionsRecording-71"><span class="linenos"> 71</span></a>
+</span><span id="ComponentOptionsRecording-72"><a href="#ComponentOptionsRecording-72"><span class="linenos"> 72</span></a>        <span class="n">path_prefix</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;pathPrefix&quot;</span><span class="p">,</span> <span class="n">UNSET</span><span class="p">)</span>
+</span><span id="ComponentOptionsRecording-73"><a href="#ComponentOptionsRecording-73"><span class="linenos"> 73</span></a>
+</span><span id="ComponentOptionsRecording-74"><a href="#ComponentOptionsRecording-74"><span class="linenos"> 74</span></a>        <span class="n">_subscribe_mode</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;subscribeMode&quot;</span><span class="p">,</span> <span class="n">UNSET</span><span class="p">)</span>
+</span><span id="ComponentOptionsRecording-75"><a href="#ComponentOptionsRecording-75"><span class="linenos"> 75</span></a>        <span class="n">subscribe_mode</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Unset</span><span class="p">,</span> <span class="n">ComponentOptionsRecordingSubscribeMode</span><span class="p">]</span>
+</span><span id="ComponentOptionsRecording-76"><a href="#ComponentOptionsRecording-76"><span class="linenos"> 76</span></a>        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_subscribe_mode</span><span class="p">,</span> <span class="n">Unset</span><span class="p">):</span>
+</span><span id="ComponentOptionsRecording-77"><a href="#ComponentOptionsRecording-77"><span class="linenos"> 77</span></a>            <span class="n">subscribe_mode</span> <span class="o">=</span> <span class="n">UNSET</span>
+</span><span id="ComponentOptionsRecording-78"><a href="#ComponentOptionsRecording-78"><span class="linenos"> 78</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="ComponentOptionsRecording-79"><a href="#ComponentOptionsRecording-79"><span class="linenos"> 79</span></a>            <span class="n">subscribe_mode</span> <span class="o">=</span> <span class="n">ComponentOptionsRecordingSubscribeMode</span><span class="p">(</span><span class="n">_subscribe_mode</span><span class="p">)</span>
+</span><span id="ComponentOptionsRecording-80"><a href="#ComponentOptionsRecording-80"><span class="linenos"> 80</span></a>
+</span><span id="ComponentOptionsRecording-81"><a href="#ComponentOptionsRecording-81"><span class="linenos"> 81</span></a>        <span class="n">component_options_recording</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span>
+</span><span id="ComponentOptionsRecording-82"><a href="#ComponentOptionsRecording-82"><span class="linenos"> 82</span></a>            <span class="n">credentials</span><span class="o">=</span><span class="n">credentials</span><span class="p">,</span>
+</span><span id="ComponentOptionsRecording-83"><a href="#ComponentOptionsRecording-83"><span class="linenos"> 83</span></a>            <span class="n">path_prefix</span><span class="o">=</span><span class="n">path_prefix</span><span class="p">,</span>
+</span><span id="ComponentOptionsRecording-84"><a href="#ComponentOptionsRecording-84"><span class="linenos"> 84</span></a>            <span class="n">subscribe_mode</span><span class="o">=</span><span class="n">subscribe_mode</span><span class="p">,</span>
+</span><span id="ComponentOptionsRecording-85"><a href="#ComponentOptionsRecording-85"><span class="linenos"> 85</span></a>        <span class="p">)</span>
+</span><span id="ComponentOptionsRecording-86"><a href="#ComponentOptionsRecording-86"><span class="linenos"> 86</span></a>
+</span><span id="ComponentOptionsRecording-87"><a href="#ComponentOptionsRecording-87"><span class="linenos"> 87</span></a>        <span class="n">component_options_recording</span><span class="o">.</span><span class="n">additional_properties</span> <span class="o">=</span> <span class="n">d</span>
+</span><span id="ComponentOptionsRecording-88"><a href="#ComponentOptionsRecording-88"><span class="linenos"> 88</span></a>        <span class="k">return</span> <span class="n">component_options_recording</span>
+</span><span id="ComponentOptionsRecording-89"><a href="#ComponentOptionsRecording-89"><span class="linenos"> 89</span></a>
+</span><span id="ComponentOptionsRecording-90"><a href="#ComponentOptionsRecording-90"><span class="linenos"> 90</span></a>    <span class="nd">@property</span>
+</span><span id="ComponentOptionsRecording-91"><a href="#ComponentOptionsRecording-91"><span class="linenos"> 91</span></a>    <span class="k">def</span> <span class="nf">additional_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span id="ComponentOptionsRecording-92"><a href="#ComponentOptionsRecording-92"><span class="linenos"> 92</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;@private&quot;&quot;&quot;</span>
+</span><span id="ComponentOptionsRecording-93"><a href="#ComponentOptionsRecording-93"><span class="linenos"> 93</span></a>        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</span><span id="ComponentOptionsRecording-94"><a href="#ComponentOptionsRecording-94"><span class="linenos"> 94</span></a>
+</span><span id="ComponentOptionsRecording-95"><a href="#ComponentOptionsRecording-95"><span class="linenos"> 95</span></a>    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+</span><span id="ComponentOptionsRecording-96"><a href="#ComponentOptionsRecording-96"><span class="linenos"> 96</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+</span><span id="ComponentOptionsRecording-97"><a href="#ComponentOptionsRecording-97"><span class="linenos"> 97</span></a>
+</span><span id="ComponentOptionsRecording-98"><a href="#ComponentOptionsRecording-98"><span class="linenos"> 98</span></a>    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="ComponentOptionsRecording-99"><a href="#ComponentOptionsRecording-99"><span class="linenos"> 99</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+</span><span id="ComponentOptionsRecording-100"><a href="#ComponentOptionsRecording-100"><span class="linenos">100</span></a>
+</span><span id="ComponentOptionsRecording-101"><a href="#ComponentOptionsRecording-101"><span class="linenos">101</span></a>    <span class="k">def</span> <span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="ComponentOptionsRecording-102"><a href="#ComponentOptionsRecording-102"><span class="linenos">102</span></a>        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+</span><span id="ComponentOptionsRecording-103"><a href="#ComponentOptionsRecording-103"><span class="linenos">103</span></a>
+</span><span id="ComponentOptionsRecording-104"><a href="#ComponentOptionsRecording-104"><span class="linenos">104</span></a>    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="ComponentOptionsRecording-105"><a href="#ComponentOptionsRecording-105"><span class="linenos">105</span></a>        <span class="k">return</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span>
 </span></pre></div>
 
 
@@ -5913,16 +5963,17 @@ otherwise the messages won't be received.</p>
                                         <input id="ComponentOptionsRecording.__init__-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
 
-        <span class="name">ComponentOptionsRecording</span><span class="signature pdoc-code multiline">(<span class="param">    <span class="n">credentials</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">jellyfish</span><span class="o">.</span><span class="n">_openapi_client</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">Unset</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">,</span> <span class="n"><a href="#S3Credentials">S3Credentials</a></span><span class="p">]</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">jellyfish</span><span class="o">.</span><span class="n">_openapi_client</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">Unset</span> <span class="nb">object</span><span class="o">&gt;</span>,</span><span class="param">    <span class="n">path_prefix</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">jellyfish</span><span class="o">.</span><span class="n">_openapi_client</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">Unset</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span></span>)</span>
+        <span class="name">ComponentOptionsRecording</span><span class="signature pdoc-code multiline">(<span class="param">    <span class="n">credentials</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">jellyfish</span><span class="o">.</span><span class="n">_openapi_client</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">Unset</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">,</span> <span class="n"><a href="#S3Credentials">S3Credentials</a></span><span class="p">]</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">jellyfish</span><span class="o">.</span><span class="n">_openapi_client</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">Unset</span> <span class="nb">object</span><span class="o">&gt;</span>,</span><span class="param">    <span class="n">path_prefix</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">jellyfish</span><span class="o">.</span><span class="n">_openapi_client</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">Unset</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">jellyfish</span><span class="o">.</span><span class="n">_openapi_client</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">Unset</span> <span class="nb">object</span><span class="o">&gt;</span>,</span><span class="param">  <span class="n">subscribe_mode</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">jellyfish</span><span class="o">.</span><span class="n">_openapi_client</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">Unset</span><span class="p">,</span> <span class="n"><a href="#ComponentOptionsRecordingSubscribeMode">ComponentOptionsRecordingSubscribeMode</a></span><span class="p">]</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n"><a href="#ComponentOptionsRecordingSubscribeMode.AUTO">ComponentOptionsRecordingSubscribeMode.AUTO</a></span><span class="p">:</span> <span class="s1">&#39;auto&#39;</span><span class="o">&gt;</span></span>)</span>
 
                 <label class="view-source-button" for="ComponentOptionsRecording.__init__-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#ComponentOptionsRecording.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ComponentOptionsRecording.__init__-2"><a href="#ComponentOptionsRecording.__init__-2"><span class="linenos">2</span></a><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">credentials</span><span class="o">=</span><span class="n">attr_dict</span><span class="p">[</span><span class="s1">&#39;credentials&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span><span class="p">,</span> <span class="n">path_prefix</span><span class="o">=</span><span class="n">attr_dict</span><span class="p">[</span><span class="s1">&#39;path_prefix&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span><span class="p">):</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ComponentOptionsRecording.__init__-2"><a href="#ComponentOptionsRecording.__init__-2"><span class="linenos">2</span></a><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">credentials</span><span class="o">=</span><span class="n">attr_dict</span><span class="p">[</span><span class="s1">&#39;credentials&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span><span class="p">,</span> <span class="n">path_prefix</span><span class="o">=</span><span class="n">attr_dict</span><span class="p">[</span><span class="s1">&#39;path_prefix&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span><span class="p">,</span> <span class="n">subscribe_mode</span><span class="o">=</span><span class="n">attr_dict</span><span class="p">[</span><span class="s1">&#39;subscribe_mode&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span><span class="p">):</span>
 </span><span id="ComponentOptionsRecording.__init__-3"><a href="#ComponentOptionsRecording.__init__-3"><span class="linenos">3</span></a>    <span class="bp">self</span><span class="o">.</span><span class="n">credentials</span> <span class="o">=</span> <span class="n">credentials</span>
 </span><span id="ComponentOptionsRecording.__init__-4"><a href="#ComponentOptionsRecording.__init__-4"><span class="linenos">4</span></a>    <span class="bp">self</span><span class="o">.</span><span class="n">path_prefix</span> <span class="o">=</span> <span class="n">path_prefix</span>
-</span><span id="ComponentOptionsRecording.__init__-5"><a href="#ComponentOptionsRecording.__init__-5"><span class="linenos">5</span></a>    <span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span> <span class="o">=</span> <span class="n">__attr_factory_additional_properties</span><span class="p">()</span>
+</span><span id="ComponentOptionsRecording.__init__-5"><a href="#ComponentOptionsRecording.__init__-5"><span class="linenos">5</span></a>    <span class="bp">self</span><span class="o">.</span><span class="n">subscribe_mode</span> <span class="o">=</span> <span class="n">subscribe_mode</span>
+</span><span id="ComponentOptionsRecording.__init__-6"><a href="#ComponentOptionsRecording.__init__-6"><span class="linenos">6</span></a>    <span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span> <span class="o">=</span> <span class="n">__attr_factory_additional_properties</span><span class="p">()</span>
 </span></pre></div>
 
 
@@ -5946,7 +5997,7 @@ otherwise the messages won't be received.</p>
                             </div>
                             <div id="ComponentOptionsRecording.path_prefix" class="classattr">
                                 <div class="attr variable">
-            <span class="name">path_prefix</span><span class="annotation">: Union[jellyfish._openapi_client.types.Unset, str]</span>
+            <span class="name">path_prefix</span><span class="annotation">: Union[jellyfish._openapi_client.types.Unset, NoneType, str]</span>
 
 
     </div>
@@ -5956,6 +6007,130 @@ otherwise the messages won't be received.</p>
 </div>
 
 
+                            </div>
+                            <div id="ComponentOptionsRecording.subscribe_mode" class="classattr">
+                                <div class="attr variable">
+            <span class="name">subscribe_mode</span><span class="annotation">: Union[jellyfish._openapi_client.types.Unset, <a href="#ComponentOptionsRecordingSubscribeMode">ComponentOptionsRecordingSubscribeMode</a>]</span>
+
+
+    </div>
+    <a class="headerlink" href="#ComponentOptionsRecording.subscribe_mode"></a>
+
+            <div class="docstring"><p>Whether the Recording component should subscribe to tracks automatically or manually.</p>
+</div>
+
+
+                            </div>
+                </section>
+                <section id="ComponentOptionsRecordingSubscribeMode">
+                            <input id="ComponentOptionsRecordingSubscribeMode-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr class">
+
+    <span class="def">class</span>
+    <span class="name">ComponentOptionsRecordingSubscribeMode</span><wbr>(<span class="base">builtins.str</span>, <span class="base">enum.Enum</span>):
+
+                <label class="view-source-button" for="ComponentOptionsRecordingSubscribeMode-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#ComponentOptionsRecordingSubscribeMode"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ComponentOptionsRecordingSubscribeMode-5"><a href="#ComponentOptionsRecordingSubscribeMode-5"><span class="linenos"> 5</span></a><span class="k">class</span> <span class="nc">ComponentOptionsRecordingSubscribeMode</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+</span><span id="ComponentOptionsRecordingSubscribeMode-6"><a href="#ComponentOptionsRecordingSubscribeMode-6"><span class="linenos"> 6</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Whether the Recording component should subscribe to tracks automatically or manually.&quot;&quot;&quot;</span>
+</span><span id="ComponentOptionsRecordingSubscribeMode-7"><a href="#ComponentOptionsRecordingSubscribeMode-7"><span class="linenos"> 7</span></a>
+</span><span id="ComponentOptionsRecordingSubscribeMode-8"><a href="#ComponentOptionsRecordingSubscribeMode-8"><span class="linenos"> 8</span></a>    <span class="n">AUTO</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span>
+</span><span id="ComponentOptionsRecordingSubscribeMode-9"><a href="#ComponentOptionsRecordingSubscribeMode-9"><span class="linenos"> 9</span></a>    <span class="n">MANUAL</span> <span class="o">=</span> <span class="s2">&quot;manual&quot;</span>
+</span><span id="ComponentOptionsRecordingSubscribeMode-10"><a href="#ComponentOptionsRecordingSubscribeMode-10"><span class="linenos">10</span></a>
+</span><span id="ComponentOptionsRecordingSubscribeMode-11"><a href="#ComponentOptionsRecordingSubscribeMode-11"><span class="linenos">11</span></a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="ComponentOptionsRecordingSubscribeMode-12"><a href="#ComponentOptionsRecordingSubscribeMode-12"><span class="linenos">12</span></a>        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Whether the Recording component should subscribe to tracks automatically or manually.</p>
+</div>
+
+
+                            <div id="ComponentOptionsRecordingSubscribeMode.AUTO" class="classattr">
+                                <div class="attr variable">
+            <span class="name">AUTO</span>        =
+<span class="default_value">&lt;<a href="#ComponentOptionsRecordingSubscribeMode.AUTO">ComponentOptionsRecordingSubscribeMode.AUTO</a>: &#39;auto&#39;&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ComponentOptionsRecordingSubscribeMode.AUTO"></a>
+
+
+
+                            </div>
+                            <div id="ComponentOptionsRecordingSubscribeMode.MANUAL" class="classattr">
+                                <div class="attr variable">
+            <span class="name">MANUAL</span>        =
+<span class="default_value">&lt;<a href="#ComponentOptionsRecordingSubscribeMode.MANUAL">ComponentOptionsRecordingSubscribeMode.MANUAL</a>: &#39;manual&#39;&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ComponentOptionsRecordingSubscribeMode.MANUAL"></a>
+
+
+
+                            </div>
+                            <div class="inherited">
+                                <h5>Inherited Members</h5>
+                                <dl>
+                                    <div><dt>enum.Enum</dt>
+                                <dd id="ComponentOptionsRecordingSubscribeMode.name" class="variable">name</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.value" class="variable">value</dd>
+
+            </div>
+            <div><dt>builtins.str</dt>
+                                <dd id="ComponentOptionsRecordingSubscribeMode.encode" class="function">encode</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.replace" class="function">replace</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.split" class="function">split</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.rsplit" class="function">rsplit</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.join" class="function">join</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.capitalize" class="function">capitalize</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.casefold" class="function">casefold</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.title" class="function">title</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.center" class="function">center</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.count" class="function">count</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.expandtabs" class="function">expandtabs</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.find" class="function">find</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.partition" class="function">partition</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.index" class="function">index</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.ljust" class="function">ljust</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.lower" class="function">lower</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.lstrip" class="function">lstrip</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.rfind" class="function">rfind</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.rindex" class="function">rindex</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.rjust" class="function">rjust</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.rstrip" class="function">rstrip</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.rpartition" class="function">rpartition</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.splitlines" class="function">splitlines</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.strip" class="function">strip</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.swapcase" class="function">swapcase</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.translate" class="function">translate</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.upper" class="function">upper</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.startswith" class="function">startswith</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.endswith" class="function">endswith</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.removeprefix" class="function">removeprefix</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.removesuffix" class="function">removesuffix</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.isascii" class="function">isascii</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.islower" class="function">islower</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.isupper" class="function">isupper</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.istitle" class="function">istitle</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.isspace" class="function">isspace</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.isdecimal" class="function">isdecimal</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.isdigit" class="function">isdigit</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.isnumeric" class="function">isnumeric</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.isalpha" class="function">isalpha</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.isalnum" class="function">isalnum</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.isidentifier" class="function">isidentifier</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.isprintable" class="function">isprintable</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.zfill" class="function">zfill</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.format" class="function">format</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.format_map" class="function">format_map</dd>
+                <dd id="ComponentOptionsRecordingSubscribeMode.maketrans" class="function">maketrans</dd>
+
+            </div>
+                                </dl>
                             </div>
                 </section>
                 <section id="ComponentPropertiesRecording">
@@ -5969,58 +6144,60 @@ otherwise the messages won't be received.</p>
 
     </div>
     <a class="headerlink" href="#ComponentPropertiesRecording"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ComponentPropertiesRecording-10"><a href="#ComponentPropertiesRecording-10"><span class="linenos">10</span></a><span class="nd">@_attrs_define</span>
-</span><span id="ComponentPropertiesRecording-11"><a href="#ComponentPropertiesRecording-11"><span class="linenos">11</span></a><span class="k">class</span> <span class="nc">ComponentPropertiesRecording</span><span class="p">:</span>
-</span><span id="ComponentPropertiesRecording-12"><a href="#ComponentPropertiesRecording-12"><span class="linenos">12</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Properties specific to the Recording component&quot;&quot;&quot;</span>
-</span><span id="ComponentPropertiesRecording-13"><a href="#ComponentPropertiesRecording-13"><span class="linenos">13</span></a>
-</span><span id="ComponentPropertiesRecording-14"><a href="#ComponentPropertiesRecording-14"><span class="linenos">14</span></a>    <span class="n">path_prefix</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="ComponentPropertiesRecording-15"><a href="#ComponentPropertiesRecording-15"><span class="linenos">15</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Path prefix under which all recording are stored&quot;&quot;&quot;</span>
-</span><span id="ComponentPropertiesRecording-16"><a href="#ComponentPropertiesRecording-16"><span class="linenos">16</span></a>    <span class="n">additional_properties</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">_attrs_field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-</span><span id="ComponentPropertiesRecording-17"><a href="#ComponentPropertiesRecording-17"><span class="linenos">17</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;@private&quot;&quot;&quot;</span>
-</span><span id="ComponentPropertiesRecording-18"><a href="#ComponentPropertiesRecording-18"><span class="linenos">18</span></a>
-</span><span id="ComponentPropertiesRecording-19"><a href="#ComponentPropertiesRecording-19"><span class="linenos">19</span></a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-</span><span id="ComponentPropertiesRecording-20"><a href="#ComponentPropertiesRecording-20"><span class="linenos">20</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;@private&quot;&quot;&quot;</span>
-</span><span id="ComponentPropertiesRecording-21"><a href="#ComponentPropertiesRecording-21"><span class="linenos">21</span></a>        <span class="n">path_prefix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">path_prefix</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ComponentPropertiesRecording-14"><a href="#ComponentPropertiesRecording-14"><span class="linenos">14</span></a><span class="nd">@_attrs_define</span>
+</span><span id="ComponentPropertiesRecording-15"><a href="#ComponentPropertiesRecording-15"><span class="linenos">15</span></a><span class="k">class</span> <span class="nc">ComponentPropertiesRecording</span><span class="p">:</span>
+</span><span id="ComponentPropertiesRecording-16"><a href="#ComponentPropertiesRecording-16"><span class="linenos">16</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Properties specific to the Recording component&quot;&quot;&quot;</span>
+</span><span id="ComponentPropertiesRecording-17"><a href="#ComponentPropertiesRecording-17"><span class="linenos">17</span></a>
+</span><span id="ComponentPropertiesRecording-18"><a href="#ComponentPropertiesRecording-18"><span class="linenos">18</span></a>    <span class="n">subscribe_mode</span><span class="p">:</span> <span class="n">ComponentPropertiesRecordingSubscribeMode</span>
+</span><span id="ComponentPropertiesRecording-19"><a href="#ComponentPropertiesRecording-19"><span class="linenos">19</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Whether the Recording component should subscribe to tracks automatically or manually&quot;&quot;&quot;</span>
+</span><span id="ComponentPropertiesRecording-20"><a href="#ComponentPropertiesRecording-20"><span class="linenos">20</span></a>    <span class="n">additional_properties</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">_attrs_field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+</span><span id="ComponentPropertiesRecording-21"><a href="#ComponentPropertiesRecording-21"><span class="linenos">21</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;@private&quot;&quot;&quot;</span>
 </span><span id="ComponentPropertiesRecording-22"><a href="#ComponentPropertiesRecording-22"><span class="linenos">22</span></a>
-</span><span id="ComponentPropertiesRecording-23"><a href="#ComponentPropertiesRecording-23"><span class="linenos">23</span></a>        <span class="n">field_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span id="ComponentPropertiesRecording-24"><a href="#ComponentPropertiesRecording-24"><span class="linenos">24</span></a>        <span class="n">field_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span><span class="p">)</span>
-</span><span id="ComponentPropertiesRecording-25"><a href="#ComponentPropertiesRecording-25"><span class="linenos">25</span></a>        <span class="n">field_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
-</span><span id="ComponentPropertiesRecording-26"><a href="#ComponentPropertiesRecording-26"><span class="linenos">26</span></a>            <span class="p">{</span>
-</span><span id="ComponentPropertiesRecording-27"><a href="#ComponentPropertiesRecording-27"><span class="linenos">27</span></a>                <span class="s2">&quot;pathPrefix&quot;</span><span class="p">:</span> <span class="n">path_prefix</span><span class="p">,</span>
-</span><span id="ComponentPropertiesRecording-28"><a href="#ComponentPropertiesRecording-28"><span class="linenos">28</span></a>            <span class="p">}</span>
-</span><span id="ComponentPropertiesRecording-29"><a href="#ComponentPropertiesRecording-29"><span class="linenos">29</span></a>        <span class="p">)</span>
-</span><span id="ComponentPropertiesRecording-30"><a href="#ComponentPropertiesRecording-30"><span class="linenos">30</span></a>
-</span><span id="ComponentPropertiesRecording-31"><a href="#ComponentPropertiesRecording-31"><span class="linenos">31</span></a>        <span class="k">return</span> <span class="n">field_dict</span>
-</span><span id="ComponentPropertiesRecording-32"><a href="#ComponentPropertiesRecording-32"><span class="linenos">32</span></a>
-</span><span id="ComponentPropertiesRecording-33"><a href="#ComponentPropertiesRecording-33"><span class="linenos">33</span></a>    <span class="nd">@classmethod</span>
-</span><span id="ComponentPropertiesRecording-34"><a href="#ComponentPropertiesRecording-34"><span class="linenos">34</span></a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">src_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-</span><span id="ComponentPropertiesRecording-35"><a href="#ComponentPropertiesRecording-35"><span class="linenos">35</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;@private&quot;&quot;&quot;</span>
-</span><span id="ComponentPropertiesRecording-36"><a href="#ComponentPropertiesRecording-36"><span class="linenos">36</span></a>        <span class="n">d</span> <span class="o">=</span> <span class="n">src_dict</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-</span><span id="ComponentPropertiesRecording-37"><a href="#ComponentPropertiesRecording-37"><span class="linenos">37</span></a>        <span class="n">path_prefix</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;pathPrefix&quot;</span><span class="p">)</span>
-</span><span id="ComponentPropertiesRecording-38"><a href="#ComponentPropertiesRecording-38"><span class="linenos">38</span></a>
-</span><span id="ComponentPropertiesRecording-39"><a href="#ComponentPropertiesRecording-39"><span class="linenos">39</span></a>        <span class="n">component_properties_recording</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span>
-</span><span id="ComponentPropertiesRecording-40"><a href="#ComponentPropertiesRecording-40"><span class="linenos">40</span></a>            <span class="n">path_prefix</span><span class="o">=</span><span class="n">path_prefix</span><span class="p">,</span>
-</span><span id="ComponentPropertiesRecording-41"><a href="#ComponentPropertiesRecording-41"><span class="linenos">41</span></a>        <span class="p">)</span>
-</span><span id="ComponentPropertiesRecording-42"><a href="#ComponentPropertiesRecording-42"><span class="linenos">42</span></a>
-</span><span id="ComponentPropertiesRecording-43"><a href="#ComponentPropertiesRecording-43"><span class="linenos">43</span></a>        <span class="n">component_properties_recording</span><span class="o">.</span><span class="n">additional_properties</span> <span class="o">=</span> <span class="n">d</span>
-</span><span id="ComponentPropertiesRecording-44"><a href="#ComponentPropertiesRecording-44"><span class="linenos">44</span></a>        <span class="k">return</span> <span class="n">component_properties_recording</span>
-</span><span id="ComponentPropertiesRecording-45"><a href="#ComponentPropertiesRecording-45"><span class="linenos">45</span></a>
-</span><span id="ComponentPropertiesRecording-46"><a href="#ComponentPropertiesRecording-46"><span class="linenos">46</span></a>    <span class="nd">@property</span>
-</span><span id="ComponentPropertiesRecording-47"><a href="#ComponentPropertiesRecording-47"><span class="linenos">47</span></a>    <span class="k">def</span> <span class="nf">additional_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-</span><span id="ComponentPropertiesRecording-48"><a href="#ComponentPropertiesRecording-48"><span class="linenos">48</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;@private&quot;&quot;&quot;</span>
-</span><span id="ComponentPropertiesRecording-49"><a href="#ComponentPropertiesRecording-49"><span class="linenos">49</span></a>        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-</span><span id="ComponentPropertiesRecording-50"><a href="#ComponentPropertiesRecording-50"><span class="linenos">50</span></a>
-</span><span id="ComponentPropertiesRecording-51"><a href="#ComponentPropertiesRecording-51"><span class="linenos">51</span></a>    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-</span><span id="ComponentPropertiesRecording-52"><a href="#ComponentPropertiesRecording-52"><span class="linenos">52</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-</span><span id="ComponentPropertiesRecording-53"><a href="#ComponentPropertiesRecording-53"><span class="linenos">53</span></a>
-</span><span id="ComponentPropertiesRecording-54"><a href="#ComponentPropertiesRecording-54"><span class="linenos">54</span></a>    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="ComponentPropertiesRecording-55"><a href="#ComponentPropertiesRecording-55"><span class="linenos">55</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+</span><span id="ComponentPropertiesRecording-23"><a href="#ComponentPropertiesRecording-23"><span class="linenos">23</span></a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</span><span id="ComponentPropertiesRecording-24"><a href="#ComponentPropertiesRecording-24"><span class="linenos">24</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;@private&quot;&quot;&quot;</span>
+</span><span id="ComponentPropertiesRecording-25"><a href="#ComponentPropertiesRecording-25"><span class="linenos">25</span></a>        <span class="n">subscribe_mode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subscribe_mode</span><span class="o">.</span><span class="n">value</span>
+</span><span id="ComponentPropertiesRecording-26"><a href="#ComponentPropertiesRecording-26"><span class="linenos">26</span></a>
+</span><span id="ComponentPropertiesRecording-27"><a href="#ComponentPropertiesRecording-27"><span class="linenos">27</span></a>        <span class="n">field_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span id="ComponentPropertiesRecording-28"><a href="#ComponentPropertiesRecording-28"><span class="linenos">28</span></a>        <span class="n">field_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span><span class="p">)</span>
+</span><span id="ComponentPropertiesRecording-29"><a href="#ComponentPropertiesRecording-29"><span class="linenos">29</span></a>        <span class="n">field_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+</span><span id="ComponentPropertiesRecording-30"><a href="#ComponentPropertiesRecording-30"><span class="linenos">30</span></a>            <span class="p">{</span>
+</span><span id="ComponentPropertiesRecording-31"><a href="#ComponentPropertiesRecording-31"><span class="linenos">31</span></a>                <span class="s2">&quot;subscribeMode&quot;</span><span class="p">:</span> <span class="n">subscribe_mode</span><span class="p">,</span>
+</span><span id="ComponentPropertiesRecording-32"><a href="#ComponentPropertiesRecording-32"><span class="linenos">32</span></a>            <span class="p">}</span>
+</span><span id="ComponentPropertiesRecording-33"><a href="#ComponentPropertiesRecording-33"><span class="linenos">33</span></a>        <span class="p">)</span>
+</span><span id="ComponentPropertiesRecording-34"><a href="#ComponentPropertiesRecording-34"><span class="linenos">34</span></a>
+</span><span id="ComponentPropertiesRecording-35"><a href="#ComponentPropertiesRecording-35"><span class="linenos">35</span></a>        <span class="k">return</span> <span class="n">field_dict</span>
+</span><span id="ComponentPropertiesRecording-36"><a href="#ComponentPropertiesRecording-36"><span class="linenos">36</span></a>
+</span><span id="ComponentPropertiesRecording-37"><a href="#ComponentPropertiesRecording-37"><span class="linenos">37</span></a>    <span class="nd">@classmethod</span>
+</span><span id="ComponentPropertiesRecording-38"><a href="#ComponentPropertiesRecording-38"><span class="linenos">38</span></a>    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">src_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+</span><span id="ComponentPropertiesRecording-39"><a href="#ComponentPropertiesRecording-39"><span class="linenos">39</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;@private&quot;&quot;&quot;</span>
+</span><span id="ComponentPropertiesRecording-40"><a href="#ComponentPropertiesRecording-40"><span class="linenos">40</span></a>        <span class="n">d</span> <span class="o">=</span> <span class="n">src_dict</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span><span id="ComponentPropertiesRecording-41"><a href="#ComponentPropertiesRecording-41"><span class="linenos">41</span></a>        <span class="n">subscribe_mode</span> <span class="o">=</span> <span class="n">ComponentPropertiesRecordingSubscribeMode</span><span class="p">(</span>
+</span><span id="ComponentPropertiesRecording-42"><a href="#ComponentPropertiesRecording-42"><span class="linenos">42</span></a>            <span class="n">d</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;subscribeMode&quot;</span><span class="p">)</span>
+</span><span id="ComponentPropertiesRecording-43"><a href="#ComponentPropertiesRecording-43"><span class="linenos">43</span></a>        <span class="p">)</span>
+</span><span id="ComponentPropertiesRecording-44"><a href="#ComponentPropertiesRecording-44"><span class="linenos">44</span></a>
+</span><span id="ComponentPropertiesRecording-45"><a href="#ComponentPropertiesRecording-45"><span class="linenos">45</span></a>        <span class="n">component_properties_recording</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span>
+</span><span id="ComponentPropertiesRecording-46"><a href="#ComponentPropertiesRecording-46"><span class="linenos">46</span></a>            <span class="n">subscribe_mode</span><span class="o">=</span><span class="n">subscribe_mode</span><span class="p">,</span>
+</span><span id="ComponentPropertiesRecording-47"><a href="#ComponentPropertiesRecording-47"><span class="linenos">47</span></a>        <span class="p">)</span>
+</span><span id="ComponentPropertiesRecording-48"><a href="#ComponentPropertiesRecording-48"><span class="linenos">48</span></a>
+</span><span id="ComponentPropertiesRecording-49"><a href="#ComponentPropertiesRecording-49"><span class="linenos">49</span></a>        <span class="n">component_properties_recording</span><span class="o">.</span><span class="n">additional_properties</span> <span class="o">=</span> <span class="n">d</span>
+</span><span id="ComponentPropertiesRecording-50"><a href="#ComponentPropertiesRecording-50"><span class="linenos">50</span></a>        <span class="k">return</span> <span class="n">component_properties_recording</span>
+</span><span id="ComponentPropertiesRecording-51"><a href="#ComponentPropertiesRecording-51"><span class="linenos">51</span></a>
+</span><span id="ComponentPropertiesRecording-52"><a href="#ComponentPropertiesRecording-52"><span class="linenos">52</span></a>    <span class="nd">@property</span>
+</span><span id="ComponentPropertiesRecording-53"><a href="#ComponentPropertiesRecording-53"><span class="linenos">53</span></a>    <span class="k">def</span> <span class="nf">additional_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span id="ComponentPropertiesRecording-54"><a href="#ComponentPropertiesRecording-54"><span class="linenos">54</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;@private&quot;&quot;&quot;</span>
+</span><span id="ComponentPropertiesRecording-55"><a href="#ComponentPropertiesRecording-55"><span class="linenos">55</span></a>        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 </span><span id="ComponentPropertiesRecording-56"><a href="#ComponentPropertiesRecording-56"><span class="linenos">56</span></a>
-</span><span id="ComponentPropertiesRecording-57"><a href="#ComponentPropertiesRecording-57"><span class="linenos">57</span></a>    <span class="k">def</span> <span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="ComponentPropertiesRecording-58"><a href="#ComponentPropertiesRecording-58"><span class="linenos">58</span></a>        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+</span><span id="ComponentPropertiesRecording-57"><a href="#ComponentPropertiesRecording-57"><span class="linenos">57</span></a>    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+</span><span id="ComponentPropertiesRecording-58"><a href="#ComponentPropertiesRecording-58"><span class="linenos">58</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 </span><span id="ComponentPropertiesRecording-59"><a href="#ComponentPropertiesRecording-59"><span class="linenos">59</span></a>
-</span><span id="ComponentPropertiesRecording-60"><a href="#ComponentPropertiesRecording-60"><span class="linenos">60</span></a>    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span id="ComponentPropertiesRecording-61"><a href="#ComponentPropertiesRecording-61"><span class="linenos">61</span></a>        <span class="k">return</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span>
+</span><span id="ComponentPropertiesRecording-60"><a href="#ComponentPropertiesRecording-60"><span class="linenos">60</span></a>    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="ComponentPropertiesRecording-61"><a href="#ComponentPropertiesRecording-61"><span class="linenos">61</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+</span><span id="ComponentPropertiesRecording-62"><a href="#ComponentPropertiesRecording-62"><span class="linenos">62</span></a>
+</span><span id="ComponentPropertiesRecording-63"><a href="#ComponentPropertiesRecording-63"><span class="linenos">63</span></a>    <span class="k">def</span> <span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="ComponentPropertiesRecording-64"><a href="#ComponentPropertiesRecording-64"><span class="linenos">64</span></a>        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+</span><span id="ComponentPropertiesRecording-65"><a href="#ComponentPropertiesRecording-65"><span class="linenos">65</span></a>
+</span><span id="ComponentPropertiesRecording-66"><a href="#ComponentPropertiesRecording-66"><span class="linenos">66</span></a>    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="ComponentPropertiesRecording-67"><a href="#ComponentPropertiesRecording-67"><span class="linenos">67</span></a>        <span class="k">return</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span>
 </span></pre></div>
 
 
@@ -6032,14 +6209,14 @@ otherwise the messages won't be received.</p>
                                         <input id="ComponentPropertiesRecording.__init__-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
 
-        <span class="name">ComponentPropertiesRecording</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">path_prefix</span><span class="p">:</span> <span class="nb">str</span></span>)</span>
+        <span class="name">ComponentPropertiesRecording</span><span class="signature pdoc-code multiline">(<span class="param"> <span class="n">subscribe_mode</span><span class="p">:</span> <span class="n"><a href="#ComponentPropertiesRecordingSubscribeMode">ComponentPropertiesRecordingSubscribeMode</a></span></span>)</span>
 
                 <label class="view-source-button" for="ComponentPropertiesRecording.__init__-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#ComponentPropertiesRecording.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ComponentPropertiesRecording.__init__-2"><a href="#ComponentPropertiesRecording.__init__-2"><span class="linenos">2</span></a><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path_prefix</span><span class="p">):</span>
-</span><span id="ComponentPropertiesRecording.__init__-3"><a href="#ComponentPropertiesRecording.__init__-3"><span class="linenos">3</span></a>    <span class="bp">self</span><span class="o">.</span><span class="n">path_prefix</span> <span class="o">=</span> <span class="n">path_prefix</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ComponentPropertiesRecording.__init__-2"><a href="#ComponentPropertiesRecording.__init__-2"><span class="linenos">2</span></a><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subscribe_mode</span><span class="p">):</span>
+</span><span id="ComponentPropertiesRecording.__init__-3"><a href="#ComponentPropertiesRecording.__init__-3"><span class="linenos">3</span></a>    <span class="bp">self</span><span class="o">.</span><span class="n">subscribe_mode</span> <span class="o">=</span> <span class="n">subscribe_mode</span>
 </span><span id="ComponentPropertiesRecording.__init__-4"><a href="#ComponentPropertiesRecording.__init__-4"><span class="linenos">4</span></a>    <span class="bp">self</span><span class="o">.</span><span class="n">additional_properties</span> <span class="o">=</span> <span class="n">__attr_factory_additional_properties</span><span class="p">()</span>
 </span></pre></div>
 
@@ -6049,18 +6226,129 @@ otherwise the messages won't be received.</p>
 
 
                             </div>
-                            <div id="ComponentPropertiesRecording.path_prefix" class="classattr">
+                            <div id="ComponentPropertiesRecording.subscribe_mode" class="classattr">
                                 <div class="attr variable">
-            <span class="name">path_prefix</span><span class="annotation">: str</span>
+            <span class="name">subscribe_mode</span><span class="annotation">: <a href="#ComponentPropertiesRecordingSubscribeMode">ComponentPropertiesRecordingSubscribeMode</a></span>
 
 
     </div>
-    <a class="headerlink" href="#ComponentPropertiesRecording.path_prefix"></a>
+    <a class="headerlink" href="#ComponentPropertiesRecording.subscribe_mode"></a>
 
-            <div class="docstring"><p>Path prefix under which all recording are stored</p>
+            <div class="docstring"><p>Whether the Recording component should subscribe to tracks automatically or manually</p>
 </div>
 
 
+                            </div>
+                </section>
+                <section id="ComponentPropertiesRecordingSubscribeMode">
+                            <input id="ComponentPropertiesRecordingSubscribeMode-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr class">
+
+    <span class="def">class</span>
+    <span class="name">ComponentPropertiesRecordingSubscribeMode</span><wbr>(<span class="base">builtins.str</span>, <span class="base">enum.Enum</span>):
+
+                <label class="view-source-button" for="ComponentPropertiesRecordingSubscribeMode-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#ComponentPropertiesRecordingSubscribeMode"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ComponentPropertiesRecordingSubscribeMode-5"><a href="#ComponentPropertiesRecordingSubscribeMode-5"><span class="linenos"> 5</span></a><span class="k">class</span> <span class="nc">ComponentPropertiesRecordingSubscribeMode</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+</span><span id="ComponentPropertiesRecordingSubscribeMode-6"><a href="#ComponentPropertiesRecordingSubscribeMode-6"><span class="linenos"> 6</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Whether the Recording component should subscribe to tracks automatically or manually&quot;&quot;&quot;</span>
+</span><span id="ComponentPropertiesRecordingSubscribeMode-7"><a href="#ComponentPropertiesRecordingSubscribeMode-7"><span class="linenos"> 7</span></a>
+</span><span id="ComponentPropertiesRecordingSubscribeMode-8"><a href="#ComponentPropertiesRecordingSubscribeMode-8"><span class="linenos"> 8</span></a>    <span class="n">AUTO</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span>
+</span><span id="ComponentPropertiesRecordingSubscribeMode-9"><a href="#ComponentPropertiesRecordingSubscribeMode-9"><span class="linenos"> 9</span></a>    <span class="n">MANUAL</span> <span class="o">=</span> <span class="s2">&quot;manual&quot;</span>
+</span><span id="ComponentPropertiesRecordingSubscribeMode-10"><a href="#ComponentPropertiesRecordingSubscribeMode-10"><span class="linenos">10</span></a>
+</span><span id="ComponentPropertiesRecordingSubscribeMode-11"><a href="#ComponentPropertiesRecordingSubscribeMode-11"><span class="linenos">11</span></a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="ComponentPropertiesRecordingSubscribeMode-12"><a href="#ComponentPropertiesRecordingSubscribeMode-12"><span class="linenos">12</span></a>        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Whether the Recording component should subscribe to tracks automatically or manually</p>
+</div>
+
+
+                            <div id="ComponentPropertiesRecordingSubscribeMode.AUTO" class="classattr">
+                                <div class="attr variable">
+            <span class="name">AUTO</span>        =
+<span class="default_value">&lt;<a href="#ComponentPropertiesRecordingSubscribeMode.AUTO">ComponentPropertiesRecordingSubscribeMode.AUTO</a>: &#39;auto&#39;&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ComponentPropertiesRecordingSubscribeMode.AUTO"></a>
+
+
+
+                            </div>
+                            <div id="ComponentPropertiesRecordingSubscribeMode.MANUAL" class="classattr">
+                                <div class="attr variable">
+            <span class="name">MANUAL</span>        =
+<span class="default_value">&lt;<a href="#ComponentPropertiesRecordingSubscribeMode.MANUAL">ComponentPropertiesRecordingSubscribeMode.MANUAL</a>: &#39;manual&#39;&gt;</span>
+
+
+    </div>
+    <a class="headerlink" href="#ComponentPropertiesRecordingSubscribeMode.MANUAL"></a>
+
+
+
+                            </div>
+                            <div class="inherited">
+                                <h5>Inherited Members</h5>
+                                <dl>
+                                    <div><dt>enum.Enum</dt>
+                                <dd id="ComponentPropertiesRecordingSubscribeMode.name" class="variable">name</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.value" class="variable">value</dd>
+
+            </div>
+            <div><dt>builtins.str</dt>
+                                <dd id="ComponentPropertiesRecordingSubscribeMode.encode" class="function">encode</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.replace" class="function">replace</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.split" class="function">split</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.rsplit" class="function">rsplit</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.join" class="function">join</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.capitalize" class="function">capitalize</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.casefold" class="function">casefold</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.title" class="function">title</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.center" class="function">center</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.count" class="function">count</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.expandtabs" class="function">expandtabs</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.find" class="function">find</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.partition" class="function">partition</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.index" class="function">index</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.ljust" class="function">ljust</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.lower" class="function">lower</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.lstrip" class="function">lstrip</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.rfind" class="function">rfind</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.rindex" class="function">rindex</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.rjust" class="function">rjust</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.rstrip" class="function">rstrip</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.rpartition" class="function">rpartition</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.splitlines" class="function">splitlines</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.strip" class="function">strip</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.swapcase" class="function">swapcase</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.translate" class="function">translate</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.upper" class="function">upper</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.startswith" class="function">startswith</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.endswith" class="function">endswith</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.removeprefix" class="function">removeprefix</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.removesuffix" class="function">removesuffix</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.isascii" class="function">isascii</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.islower" class="function">islower</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.isupper" class="function">isupper</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.istitle" class="function">istitle</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.isspace" class="function">isspace</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.isdecimal" class="function">isdecimal</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.isdigit" class="function">isdigit</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.isnumeric" class="function">isnumeric</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.isalpha" class="function">isalpha</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.isalnum" class="function">isalnum</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.isidentifier" class="function">isidentifier</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.isprintable" class="function">isprintable</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.zfill" class="function">zfill</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.format" class="function">format</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.format_map" class="function">format_map</dd>
+                <dd id="ComponentPropertiesRecordingSubscribeMode.maketrans" class="function">maketrans</dd>
+
+            </div>
+                                </dl>
                             </div>
                 </section>
                 <section id="S3Credentials">
