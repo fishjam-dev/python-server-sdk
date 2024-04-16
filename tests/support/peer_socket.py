@@ -14,7 +14,7 @@ from tests.support.protos.jellyfish import (
 
 
 class PeerSocket:
-    def __init__(self, server_address, auto_close = False):
+    def __init__(self, server_address, auto_close=False):
         self._server_address = server_address
 
         self._ready = False

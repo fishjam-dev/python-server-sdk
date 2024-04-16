@@ -166,7 +166,11 @@ class TestReceivingNotifications:
         notifier_task = asyncio.create_task(notifier.connect())
         await notifier.wait_ready()
 
-        _, room = room_api.create_room(webhook_url=WEBHOOK_URL, peerless_purge_timeout=1, peer_disconnected_timeout=1)
+        _, room = room_api.create_room(
+            webhook_url=WEBHOOK_URL,
+            peerless_purge_timeout=1,
+            peer_disconnected_timeout=1,
+        )
 
         peer_token, peer = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
 

@@ -89,7 +89,7 @@ class RoomApi(BaseApi):
             video_codec=video_codec,
             webhook_url=webhook_url,
             peerless_purge_timeout=peerless_purge_timeout,
-            peer_disconnected_timeout=peer_disconnected_timeout
+            peer_disconnected_timeout=peer_disconnected_timeout,
         )
 
         resp = self._request(room_create_room, json_body=room_config)
