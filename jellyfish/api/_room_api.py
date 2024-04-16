@@ -53,7 +53,7 @@ class PeerCreationResponse:
         self.peer = peer
         self.token = token
         self.ws_url = ws_url
-        
+
 
 class RoomApi(BaseApi):
     """Allows for managing rooms"""
@@ -126,7 +126,9 @@ class RoomApi(BaseApi):
 
         return self._request(room_get_room, room_id=room_id).data
 
-    def add_peer(self, room_id: str, options: PeerOptionsWebRTC) -> PeerCreationResponse:
+    def add_peer(
+        self, room_id: str, options: PeerOptionsWebRTC
+    ) -> PeerCreationResponse:
         """
         Creates peer in the room
 
@@ -142,7 +144,9 @@ class RoomApi(BaseApi):
         json_body = AddPeerJsonBody(type=peer_type, options=options)
 
         resp = self._request(room_add_peer, room_id=room_id, json_body=json_body)
-        return PeerCreationResponse(resp.data.peer, resp.data.token, resp.data.peer_websocket_url)
+        return PeerCreationResponse(
+            resp.data.peer, resp.data.token, resp.data.peer_websocket_url
+        )
 
     def delete_peer(self, room_id: str, peer_id: str) -> None:
         """Deletes peer"""

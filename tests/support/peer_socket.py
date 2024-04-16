@@ -22,9 +22,7 @@ class PeerSocket:
         self._auto_close = auto_close
 
     async def connect(self, token):
-        async with client.connect(
-            f"ws://{self._socket_addres}"
-        ) as websocket:
+        async with client.connect(f"ws://{self._socket_addres}") as websocket:
             msg = PeerMessage(auth_request=PeerMessageAuthRequest(token=token))
             await websocket.send(bytes(msg))
 
