@@ -39,6 +39,22 @@ from jellyfish._openapi_client.models import (
 from jellyfish.api._base_api import BaseApi
 
 
+class PeerCreationResponse:
+    """Contains all information returned by jellyfish after adding Peer"""
+
+    peer: Peer
+    """Peer structure"""
+    token: str
+    """token used for authentication when connecting through websocket to jellyfish"""
+    ws_url: str
+    """websocket adress to which this specific peer have to connect"""
+
+    def __init__(self, peer: Peer, token: str, ws_url: str) -> None:
+        self.peer = peer
+        self.token = token
+        self.ws_url = ws_url
+        
+
 class RoomApi(BaseApi):
     """Allows for managing rooms"""
 
@@ -110,7 +126,7 @@ class RoomApi(BaseApi):
 
         return self._request(room_get_room, room_id=room_id).data
 
-    def add_peer(self, room_id: str, options: PeerOptionsWebRTC) -> Tuple[str, Peer]:
+    def add_peer(self, room_id: str, options: PeerOptionsWebRTC) -> PeerCreationResponse:
         """
         Creates peer in the room
 
@@ -126,7 +142,7 @@ class RoomApi(BaseApi):
         json_body = AddPeerJsonBody(type=peer_type, options=options)
 
         resp = self._request(room_add_peer, room_id=room_id, json_body=json_body)
-        return (resp.data.token, resp.data.peer)
+        return PeerCreationResponse(resp.data.peer, resp.data.token, resp.data.peer_websocket_url)
 
     def delete_peer(self, room_id: str, peer_id: str) -> None:
         """Deletes peer"""

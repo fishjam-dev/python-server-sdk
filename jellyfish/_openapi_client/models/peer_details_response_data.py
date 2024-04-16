@@ -1,7 +1,9 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.peer import Peer
@@ -18,6 +20,8 @@ class PeerDetailsResponseData:
     """Describes peer status"""
     token: str
     """Token for authorizing websocket connection"""
+    peer_websocket_url: Union[Unset, str] = UNSET
+    """Websocket URL to which peer has to connect"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
     """@private"""
 
@@ -26,6 +30,7 @@ class PeerDetailsResponseData:
         peer = self.peer.to_dict()
 
         token = self.token
+        peer_websocket_url = self.peer_websocket_url
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -35,6 +40,8 @@ class PeerDetailsResponseData:
                 "token": token,
             }
         )
+        if peer_websocket_url is not UNSET:
+            field_dict["peer_websocket_url"] = peer_websocket_url
 
         return field_dict
 
@@ -48,9 +55,12 @@ class PeerDetailsResponseData:
 
         token = d.pop("token")
 
+        peer_websocket_url = d.pop("peer_websocket_url", UNSET)
+
         peer_details_response_data = cls(
             peer=peer,
             token=token,
+            peer_websocket_url=peer_websocket_url,
         )
 
         peer_details_response_data.additional_properties = d

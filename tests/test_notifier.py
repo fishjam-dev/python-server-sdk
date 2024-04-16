@@ -132,14 +132,14 @@ class TestReceivingNotifications:
 
         _, room = room_api.create_room(webhook_url=WEBHOOK_URL)
 
-        peer_token, peer = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
+        result = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
 
-        peer_socket = PeerSocket(server_address=SERVER_ADDRESS)
-        peer_task = asyncio.create_task(peer_socket.connect(peer_token))
+        peer_socket = PeerSocket(socket_addres=result.ws_url)
+        peer_task = asyncio.create_task(peer_socket.connect(result.token))
 
         await peer_socket.wait_ready()
 
-        room_api.delete_peer(room.id, peer.id)
+        room_api.delete_peer(room.id, result.peer.id)
 
         room_api.delete_room(room.id)
 
@@ -201,10 +201,10 @@ class TestReceivingNotifications:
         await notifier.wait_ready()
 
         _, room = room_api.create_room(webhook_url=WEBHOOK_URL)
-        peer_token, _peer = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
+        result = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
 
-        peer_socket = PeerSocket(server_address=SERVER_ADDRESS)
-        peer_task = asyncio.create_task(peer_socket.connect(peer_token))
+        peer_socket = PeerSocket(socket_addres=result.ws_url)
+        peer_task = asyncio.create_task(peer_socket.connect(result.token))
 
         await peer_socket.wait_ready()
 
@@ -253,10 +253,10 @@ class TestReceivingMetrics:
     @pytest.mark.asyncio
     async def test_metrics_with_one_peer(self, room_api: RoomApi, notifier: Notifier):
         _, room = room_api.create_room()
-        peer_token, _peer = room_api.add_peer(room.id, PeerOptionsWebRTC())
+        result = room_api.add_peer(room.id, PeerOptionsWebRTC())
 
-        peer_socket = PeerSocket(server_address=SERVER_ADDRESS)
-        peer_task = asyncio.create_task(peer_socket.connect(peer_token))
+        peer_socket = PeerSocket(socket_addres=result.ws_url)
+        peer_task = asyncio.create_task(peer_socket.connect(result.token))
 
         await peer_socket.wait_ready()
 

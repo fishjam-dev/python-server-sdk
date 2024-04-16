@@ -14,8 +14,8 @@ from tests.support.protos.jellyfish import (
 
 
 class PeerSocket:
-    def __init__(self, server_address, auto_close=False):
-        self._server_address = server_address
+    def __init__(self, socket_addres, auto_close=False):
+        self._socket_addres = socket_addres
 
         self._ready = False
         self._ready_event = None
@@ -23,7 +23,7 @@ class PeerSocket:
 
     async def connect(self, token):
         async with client.connect(
-            f"ws://{self._server_address}/socket/peer/websocket"
+            f"ws://{self._socket_addres}"
         ) as websocket:
             msg = PeerMessage(auth_request=PeerMessageAuthRequest(token=token))
             await websocket.send(bytes(msg))
