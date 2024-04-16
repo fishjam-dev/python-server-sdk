@@ -151,6 +151,38 @@ class TestReceivingNotifications:
             self.assert_event(event)
 
     @pytest.mark.asyncio
+    async def test_peer_connected_disconnected_deleted(
+        self, room_api: RoomApi, notifier: Notifier
+    ):
+        event_checks = [
+            ServerMessageRoomCreated,
+            ServerMessagePeerConnected,
+            ServerMessagePeerDisconnected,
+            ServerMessageRoomDeleted,
+        ]
+
+        assert_task = asyncio.create_task(assert_events(notifier, event_checks.copy()))
+
+        notifier_task = asyncio.create_task(notifier.connect())
+        await notifier.wait_ready()
+
+        _, room = room_api.create_room(webhook_url=WEBHOOK_URL, peerless_purge_timeout=1, peer_disconnected_timeout=1)
+
+        peer_token, peer = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
+
+        peer_socket = PeerSocket(server_address=SERVER_ADDRESS, auto_close=True)
+        peer_task = asyncio.create_task(peer_socket.connect(peer_token))
+
+        await peer_socket.wait_ready()
+
+        await assert_task
+        await cancel(peer_task)
+        await cancel(notifier_task)
+
+        for event in event_checks:
+            self.assert_event(event)
+
+    @pytest.mark.asyncio
     async def test_peer_connected_room_deleted(
         self, room_api: RoomApi, notifier: Notifier
     ):

@@ -64,6 +64,8 @@ class RoomApi(BaseApi):
         max_peers: int = None,
         video_codec: Literal["h264", "vp8"] = None,
         webhook_url: str = None,
+        peerless_purge_timeout: int = None,
+        peer_disconnected_timeout: int = None,
     ) -> Tuple[str, Room]:
         """
         Creates a new room
@@ -86,6 +88,8 @@ class RoomApi(BaseApi):
             max_peers=max_peers,
             video_codec=video_codec,
             webhook_url=webhook_url,
+            peerless_purge_timeout=peerless_purge_timeout,
+            peer_disconnected_timeout=peer_disconnected_timeout
         )
 
         resp = self._request(room_create_room, json_body=room_config)
