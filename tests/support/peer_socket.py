@@ -14,15 +14,15 @@ from tests.support.protos.jellyfish import (
 
 
 class PeerSocket:
-    def __init__(self, socket_addres, auto_close=False):
-        self._socket_addres = socket_addres
+    def __init__(self, socket_address, auto_close=False):
+        self._socket_address = socket_address
 
         self._ready = False
         self._ready_event = None
         self._auto_close = auto_close
 
     async def connect(self, token):
-        async with client.connect(f"ws://{self._socket_addres}") as websocket:
+        async with client.connect(f"ws://{self._socket_address}") as websocket:
             msg = PeerMessage(auth_request=PeerMessageAuthRequest(token=token))
             await websocket.send(bytes(msg))
 
