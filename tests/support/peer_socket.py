@@ -42,9 +42,7 @@ class PeerSocket:
             if self._ready_event:
                 self._ready_event.set()
 
-            if self._auto_close:
-                websocket.close()
-            else:
+            if not self._auto_close:
                 await websocket.wait_closed()
 
     async def wait_ready(self):

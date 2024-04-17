@@ -168,7 +168,7 @@ class TestReceivingNotifications:
 
         _, room = room_api.create_room(
             webhook_url=WEBHOOK_URL,
-            peerless_purge_timeout=1,
+            peerless_purge_timeout=2,
             peer_disconnected_timeout=1,
         )
 

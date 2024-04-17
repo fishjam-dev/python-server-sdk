@@ -16,7 +16,7 @@ class RoomConfig:
     max_peers: Union[Unset, None, int] = UNSET
     """Maximum amount of peers allowed into the room"""
     peer_disconnected_timeout: Union[Unset, None, int] = UNSET
-    """Duration (in seconds) after which the peer will be removed if it disconnects. If not provided, this feature is disabled."""
+    """Duration (in seconds) after which the peer will be removed if it is disconnected. If not provided, this feature is disabled."""
     peerless_purge_timeout: Union[Unset, None, int] = UNSET
     """Duration (in seconds) after which the room will be removed if no peers are connected. If not provided, this feature is disabled."""
     room_id: Union[Unset, None, str] = UNSET
