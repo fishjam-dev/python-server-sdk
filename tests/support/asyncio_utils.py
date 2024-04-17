@@ -4,7 +4,7 @@ import asyncio
 
 from jellyfish import Notifier
 
-ASSERTION_TIMEOUT = 2.0
+ASSERTION_TIMEOUT = 5.0
 
 
 async def assert_events(notifier: Notifier, event_checks: list):

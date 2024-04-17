@@ -152,6 +152,7 @@ class TestCreateRoom:
                 video_codec=None,
                 webhook_url=None,
                 peerless_purge_timeout=None,
+                peer_disconnected_timeout=None,
             ),
             id=room.id,
             peers=[],
@@ -172,6 +173,7 @@ class TestCreateRoom:
                 video_codec=RoomConfigVideoCodec(CODEC_H264),
                 webhook_url=None,
                 peerless_purge_timeout=None,
+                peer_disconnected_timeout=None,
             ),
             id=room.id,
             peers=[],
@@ -200,6 +202,7 @@ class TestCreateRoom:
                 video_codec=None,
                 webhook_url=None,
                 peerless_purge_timeout=None,
+                peer_disconnected_timeout=None,
             ),
             id=room_id,
             peers=[],
@@ -254,6 +257,7 @@ class TestGetRoom:
                 video_codec=None,
                 webhook_url=None,
                 peerless_purge_timeout=None,
+                peer_disconnected_timeout=None,
             ),
         ) == room_api.get_room(room.id)
 

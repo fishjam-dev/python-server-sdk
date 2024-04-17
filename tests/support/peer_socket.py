@@ -14,11 +14,12 @@ from tests.support.protos.jellyfish import (
 
 
 class PeerSocket:
-    def __init__(self, server_address):
+    def __init__(self, server_address, auto_close=False):
         self._server_address = server_address
 
         self._ready = False
         self._ready_event = None
+        self._auto_close = auto_close
 
     async def connect(self, token):
         async with client.connect(
@@ -41,7 +42,8 @@ class PeerSocket:
             if self._ready_event:
                 self._ready_event.set()
 
-            await websocket.wait_closed()
+            if not self._auto_close:
+                await websocket.wait_closed()
 
     async def wait_ready(self):
         # pylint: disable=duplicate-code
