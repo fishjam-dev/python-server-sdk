@@ -174,7 +174,9 @@ class TestReceivingNotifications:
 
         result = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
 
-        peer_socket = PeerSocket(socket_addres=result.peer_websocket_url, auto_close=True)
+        peer_socket = PeerSocket(
+            socket_addres=result.peer_websocket_url, auto_close=True
+        )
         peer_task = asyncio.create_task(peer_socket.connect(result.token))
 
         await peer_socket.wait_ready()
