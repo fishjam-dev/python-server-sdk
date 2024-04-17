@@ -134,7 +134,7 @@ class TestReceivingNotifications:
 
         result = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
 
-        peer_socket = PeerSocket(socket_addres=result.ws_url)
+        peer_socket = PeerSocket(socket_addres=result.peer_websocket_url)
         peer_task = asyncio.create_task(peer_socket.connect(result.token))
 
         await peer_socket.wait_ready()
@@ -172,10 +172,10 @@ class TestReceivingNotifications:
             peer_disconnected_timeout=1,
         )
 
-        peer_token, peer = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
+        result = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
 
-        peer_socket = PeerSocket(server_address=SERVER_ADDRESS, auto_close=True)
-        peer_task = asyncio.create_task(peer_socket.connect(peer_token))
+        peer_socket = PeerSocket(socket_addres=SERVER_ADDRESS, auto_close=True)
+        peer_task = asyncio.create_task(peer_socket.connect(result.token))
 
         await peer_socket.wait_ready()
 
@@ -203,7 +203,7 @@ class TestReceivingNotifications:
         _, room = room_api.create_room(webhook_url=WEBHOOK_URL)
         result = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
 
-        peer_socket = PeerSocket(socket_addres=result.ws_url)
+        peer_socket = PeerSocket(socket_addres=result.peer_websocket_url)
         peer_task = asyncio.create_task(peer_socket.connect(result.token))
 
         await peer_socket.wait_ready()
@@ -255,7 +255,7 @@ class TestReceivingMetrics:
         _, room = room_api.create_room()
         result = room_api.add_peer(room.id, PeerOptionsWebRTC())
 
-        peer_socket = PeerSocket(socket_addres=result.ws_url)
+        peer_socket = PeerSocket(socket_addres=result.peer_websocket_url)
         peer_task = asyncio.create_task(peer_socket.connect(result.token))
 
         await peer_socket.wait_ready()
