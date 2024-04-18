@@ -29,7 +29,7 @@ from jellyfish._openapi_client.models import (
     ComponentRTSP,
     ComponentSIP,
     DialConfig,
-    Peer,
+    PeerDetailsResponseData,
     PeerOptionsWebRTC,
     Room,
     RoomConfig,
@@ -110,7 +110,9 @@ class RoomApi(BaseApi):
 
         return self._request(room_get_room, room_id=room_id).data
 
-    def add_peer(self, room_id: str, options: PeerOptionsWebRTC) -> Tuple[str, Peer]:
+    def add_peer(
+        self, room_id: str, options: PeerOptionsWebRTC
+    ) -> PeerDetailsResponseData:
         """
         Creates peer in the room
 
@@ -126,7 +128,11 @@ class RoomApi(BaseApi):
         json_body = AddPeerJsonBody(type=peer_type, options=options)
 
         resp = self._request(room_add_peer, room_id=room_id, json_body=json_body)
-        return (resp.data.token, resp.data.peer)
+        return PeerDetailsResponseData(
+            peer=resp.data.peer,
+            token=resp.data.token,
+            peer_websocket_url=resp.data.peer_websocket_url,
+        )
 
     def delete_peer(self, room_id: str, peer_id: str) -> None:
         """Deletes peer"""

@@ -405,23 +405,23 @@ class TestAddPeer:
     def test_with_specified_options(self, room_api: RoomApi):
         _, room = room_api.create_room()
 
-        _token, peer = room_api.add_peer(
+        peer = room_api.add_peer(
             room.id, options=PeerOptionsWebRTC(enable_simulcast=True)
-        )
+        ).peer
 
         self._assert_peer_created(room_api, peer, room.id)
 
     def test_default_options(self, room_api: RoomApi):
         _, room = room_api.create_room()
 
-        _token, peer = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
+        peer = room_api.add_peer(room.id, options=PeerOptionsWebRTC()).peer
 
         self._assert_peer_created(room_api, peer, room.id)
 
     def test_peer_limit_reached(self, room_api: RoomApi):
         _, room = room_api.create_room(max_peers=1)
 
-        _token, peer = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
+        peer = room_api.add_peer(room.id, options=PeerOptionsWebRTC()).peer
 
         self._assert_peer_created(room_api, peer, room.id)
 
@@ -432,9 +432,11 @@ class TestAddPeer:
 class TestDeletePeer:
     def test_valid(self, room_api: RoomApi):
         _, room = room_api.create_room()
-        _, peer = room_api.add_peer(
+        result = room_api.add_peer(
             room.id, options=PeerOptionsWebRTC(enable_simulcast=True)
         )
+
+        peer = result.peer
 
         room_api.delete_peer(room.id, peer.id)
 

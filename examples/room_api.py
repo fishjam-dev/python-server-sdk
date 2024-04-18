@@ -14,8 +14,8 @@ jellyfish_address, room = room_api.create_room(
 print((jellyfish_address, room))
 
 # Add peer to the room
-peer_token, peer_webrtc = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
-print((peer_token, peer_webrtc))
+result = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
+print((result.token, result.peer, result.peer_websocket_url))
 
 # Add component to the room
 component_hls = room_api.add_component(room.id, options=ComponentOptionsHLS())
