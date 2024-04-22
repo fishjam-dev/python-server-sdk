@@ -12,7 +12,9 @@ import requests
 from jellyfish import ComponentOptionsFile, Notifier, PeerOptionsWebRTC, RoomApi
 from jellyfish.events import (
     ServerMessageMetricsReport,
+    ServerMessagePeerAdded,
     ServerMessagePeerConnected,
+    ServerMessagePeerDeleted,
     ServerMessagePeerDisconnected,
     ServerMessageRoomCreated,
     ServerMessageRoomDeleted,
@@ -121,8 +123,10 @@ class TestReceivingNotifications:
     ):
         event_checks = [
             ServerMessageRoomCreated,
+            ServerMessagePeerAdded,
             ServerMessagePeerConnected,
             ServerMessagePeerDisconnected,
+            ServerMessagePeerDeleted,
             ServerMessageRoomDeleted,
         ]
         assert_task = asyncio.create_task(assert_events(notifier, event_checks.copy()))
@@ -156,8 +160,10 @@ class TestReceivingNotifications:
     ):
         event_checks = [
             ServerMessageRoomCreated,
+            ServerMessagePeerAdded,
             ServerMessagePeerConnected,
             ServerMessagePeerDisconnected,
+            ServerMessagePeerDeleted,
             ServerMessageRoomDeleted,
         ]
 
@@ -194,7 +200,9 @@ class TestReceivingNotifications:
     ):
         event_checks = [
             ServerMessageRoomCreated,
+            ServerMessagePeerAdded,
             ServerMessagePeerConnected,
+            ServerMessagePeerDeleted,
             ServerMessageRoomDeleted,
         ]
         assert_task = asyncio.create_task(assert_events(notifier, event_checks.copy()))
