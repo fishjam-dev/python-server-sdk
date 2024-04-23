@@ -85,6 +85,12 @@ class ServerMessage(betterproto.Message):
     track_metadata_updated: "ServerMessageTrackMetadataUpdated" = (
         betterproto.message_field(19, group="content")
     )
+    peer_added: "ServerMessagePeerAdded" = betterproto.message_field(
+        20, group="content"
+    )
+    peer_deleted: "ServerMessagePeerDeleted" = betterproto.message_field(
+        21, group="content"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -92,6 +98,22 @@ class ServerMessageRoomCrashed(betterproto.Message):
     """Notification sent when a room crashes"""
 
     room_id: str = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class ServerMessagePeerAdded(betterproto.Message):
+    """Notification sent when a peer is added"""
+
+    room_id: str = betterproto.string_field(1)
+    peer_id: str = betterproto.string_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class ServerMessagePeerDeleted(betterproto.Message):
+    """Notification sent when a peer is removed"""
+
+    room_id: str = betterproto.string_field(1)
+    peer_id: str = betterproto.string_field(2)
 
 
 @dataclass(eq=False, repr=False)
@@ -116,6 +138,7 @@ class ServerMessagePeerCrashed(betterproto.Message):
 
     room_id: str = betterproto.string_field(1)
     peer_id: str = betterproto.string_field(2)
+    reason: str = betterproto.string_field(3)
 
 
 @dataclass(eq=False, repr=False)
