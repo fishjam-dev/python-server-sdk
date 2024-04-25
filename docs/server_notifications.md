@@ -1,16 +1,9 @@
 # Server Notifications
 
-The Jellyfish can send one of the following notifications:
+Jellyfish sends server side notifications whenever some important event occurs, e.g.:
+* a room has been created
+* a peer has connected
+* component has crashed
+* etc.
 
-`ServerMessageRoomCreated`,
-`ServerMessageRoomDeleted`,
-`ServerMessageRoomCrashed`,
-`ServerMessagePeerConnected`,
-`ServerMessagePeerDisconnected`,
-`ServerMessagePeerCrashed`,
-`ServerMessageComponentCrashed`,
-`ServerMessageTrackAdded`,
-`ServerMessageTrackMetadataUpdated`,
-`ServerMessageTrackRemoved`,
-`ServerMessageHlsPlayable`,
-`ServerMessageMetricsReport`
+This is the list of all available notifications:
