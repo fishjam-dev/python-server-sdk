@@ -1,10 +1,10 @@
 # Fishjam Python Server SDK
 
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/jellyfish-dev/python-server-sdk/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/jellyfish-dev/python-server-sdk/tree/main)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/fishjam-dev/python-server-sdk/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/fishjam-dev/python-server-sdk/tree/main)
 
-Python server SDK for the [Fishjam Media Server](https://github.com/jellyfish-dev/jellyfish).
+Python server SDK for the [Fishjam Media Server](https://github.com/fishjam-dev/fishjam).
 
-Read the docs [here](https://jellyfish-dev.github.io/python-server-sdk)
+Read the docs [here](https://fishjam-dev.github.io/python-server-sdk)
 
 ## Installation
 
@@ -21,7 +21,7 @@ The SDK exports two main classes for interacting with Fishjam server:
 
 #### RoomApi
 
-Create a `RoomApi` instance, providing the jellyfish server address and api token
+Create a `RoomApi` instance, providing the fishjam server address and api token
 
 ```python
 from jellyfish import RoomApi
@@ -55,7 +55,7 @@ All methods in `RoomApi` may raise one of the exceptions deriving from `jellyfis
 
 Notifier allows for receiving real-time updates from the Fishjam Server.
 
-You can read more about notifications in the [Fishjam Docs](https://jellyfish-dev.github.io/jellyfish-docs/next/getting_started/notifications).
+You can read more about notifications in the [Fishjam Docs](https://fishjam-dev.github.io/fishjam-docs/next/getting_started/notifications).
 
 Create `Notifier` instance
 ```python
@@ -108,7 +108,7 @@ address, room = room_api.create_room(video_codec="h264")
 
 # Create new room api with returned fishjam address as a room could be
 # created on a different fishjam instance
-# (if you communicate with a cluster of fishjames)
+# (if you communicate with a cluster of fishjams)
 new_room_api = RoomApi(server_address=address)
 
 # Add HLS component with manual subscribe mode, we use here `new_room_api` as we are sure that this API refers to the fishjam on which this room was created.
@@ -143,8 +143,8 @@ poetry run lint
 
 ## Copyright and License
 
-Copyright 2023, [Software Mansion](https://swmansion.com/?utm_source=git&utm_medium=readme&utm_campaign=jellyfish)
+Copyright 2023, [Software Mansion](https://swmansion.com/?utm_source=git&utm_medium=readme&utm_campaign=fishjam)
 
-[![Software Mansion](https://logo.swmansion.com/logo?color=white&variant=desktop&width=200&tag=membrane-github)](https://swmansion.com/?utm_source=git&utm_medium=readme&utm_campaign=jellyfish)
+[![Software Mansion](https://logo.swmansion.com/logo?color=white&variant=desktop&width=200&tag=membrane-github)](https://swmansion.com/?utm_source=git&utm_medium=readme&utm_campaign=fishjam)
 
 Licensed under the [Apache License, Version 2.0](LICENSE)
