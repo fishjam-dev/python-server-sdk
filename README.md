@@ -1,10 +1,10 @@
-# Jellyfish Python Server SDK
+# Fishjam Python Server SDK
 
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/jellyfish-dev/python-server-sdk/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/jellyfish-dev/python-server-sdk/tree/main)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/fishjam-dev/python-server-sdk/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/fishjam-dev/python-server-sdk/tree/main)
 
-Python server SDK for the [Jellyfish Media Server](https://github.com/jellyfish-dev/jellyfish).
+Python server SDK for the [Fishjam Media Server](https://github.com/fishjam-dev/fishjam).
 
-Read the docs [here](https://jellyfish-dev.github.io/python-server-sdk)
+Read the docs [here](https://fishjam-dev.github.io/python-server-sdk)
 
 ## Installation
 
@@ -14,14 +14,14 @@ pip install jellyfish-server-sdk
 
 ## Usage
 
-The SDK exports two main classes for interacting with Jellyfish server:
+The SDK exports two main classes for interacting with Fishjam server:
 `RoomApi` and `Notifier`.
 
 `RoomApi` wraps http REST api calls, while `Notifier` is responsible for receiving real-time updates from the server.
 
 #### RoomApi
 
-Create a `RoomApi` instance, providing the jellyfish server address and api token
+Create a `RoomApi` instance, providing the fishjam server address and api token
 
 ```python
 from jellyfish import RoomApi
@@ -29,7 +29,7 @@ from jellyfish import RoomApi
 room_api = RoomApi(server_address="localhost:5002", server_api_token="development")
 ```
 
-You can use it to interact with Jellyfish, manage rooms, peers and components
+You can use it to interact with Fishjam, manage rooms, peers and components
 
 ```python
 # Create a room
@@ -53,9 +53,9 @@ All methods in `RoomApi` may raise one of the exceptions deriving from `jellyfis
 
 #### Notifier
 
-Notifier allows for receiving real-time updates from the Jellyfish Server.
+Notifier allows for receiving real-time updates from the Fishjam Server.
 
-You can read more about notifications in the [Jellyfish Docs](https://jellyfish-dev.github.io/jellyfish-docs/next/getting_started/notifications).
+You can read more about notifications in the [Fishjam Docs](https://fishjam-dev.github.io/fishjam-docs/next/getting_started/notifications).
 
 Create `Notifier` instance
 ```python
@@ -95,9 +95,9 @@ asyncio.run(test_notifier())
 # Received WebRTC metrics: ServerMessageMetricsReport(metrics='{}')
 ```
 
-#### Cluster of Jellyfishes
+#### Cluster of Fishjams
 
-The cluster of jellyfishes has got embedded load balancer, which means that a new room will be created on jellyfish with the least usage. At the moment to modify this specific room you must communicate with the jellyfish on which this room was created.
+The cluster of fishjams has got embedded load balancer, which means that a new room will be created on fishjam with the least usage. At the moment to modify this specific room you must communicate with the fishjam on which this room was created.
 
 ```python
 room_api = RoomApi(server_address='localhost:5002')
@@ -106,12 +106,12 @@ room_api = RoomApi(server_address='localhost:5002')
 # that allow to use HLS.
 address, room = room_api.create_room(video_codec="h264")
 
-# Create new room api with returned jellyfish address as a room could be
-# created on a different jellyfish instance
-# (if you communicate with a cluster of jellyfishes)
+# Create new room api with returned fishjam address as a room could be
+# created on a different fishjam instance
+# (if you communicate with a cluster of fishjams)
 new_room_api = RoomApi(server_address=address)
 
-# Add HLS component with manual subscribe mode, we use here `new_room_api` as we are sure that this API refers to the jellyfish on which this room was created.
+# Add HLS component with manual subscribe mode, we use here `new_room_api` as we are sure that this API refers to the fishjam on which this room was created.
 _hls_component = new_room_api.add_component(
     room.id,
     ComponentOptionsHLS(subscribe_mode=ComponentOptionsHLSSubscribeMode.MANUAL),
@@ -143,8 +143,8 @@ poetry run lint
 
 ## Copyright and License
 
-Copyright 2023, [Software Mansion](https://swmansion.com/?utm_source=git&utm_medium=readme&utm_campaign=jellyfish)
+Copyright 2023, [Software Mansion](https://swmansion.com/?utm_source=git&utm_medium=readme&utm_campaign=fishjam)
 
-[![Software Mansion](https://logo.swmansion.com/logo?color=white&variant=desktop&width=200&tag=membrane-github)](https://swmansion.com/?utm_source=git&utm_medium=readme&utm_campaign=jellyfish)
+[![Software Mansion](https://logo.swmansion.com/logo?color=white&variant=desktop&width=200&tag=membrane-github)](https://swmansion.com/?utm_source=git&utm_medium=readme&utm_campaign=fishjam)
 
 Licensed under the [Apache License, Version 2.0](LICENSE)
