@@ -2,7 +2,7 @@ version: "3"
 
 services:
   fishjam:
-    image: "jellyfish-0.6.0-dev:latest"
+    image: "ghcr.io/fishjam-dev/fishjam:${TAG:-edge}"
     container_name: fishjam
     restart: on-failure
     healthcheck:
