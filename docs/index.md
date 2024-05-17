@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="refresh" content="0; url=./api/jellyfish.html" />
+    <meta http-equiv="refresh" content="0; url=./api/fishjam.html" />
 </head>
 
-<link href="jellyfish.html" rel="import" />
+<link href="fishjam.html" rel="import" />
 
 </html>
