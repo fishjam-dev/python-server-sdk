@@ -4,10 +4,10 @@ import os
 
 import pytest
 
-from jellyfish import RecordingApi
-from jellyfish.errors import NotFoundError
+from fishjam import RecordingApi
+from fishjam.errors import NotFoundError
 
-HOST = "jellyfish" if os.getenv("DOCKER_TEST") == "TRUE" else "localhost"
+HOST = "fishjam" if os.getenv("DOCKER_TEST") == "TRUE" else "localhost"
 SERVER_ADDRESS = f"{HOST}:5002"
 SERVER_API_TOKEN = "development"
 

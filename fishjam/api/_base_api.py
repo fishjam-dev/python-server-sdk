@@ -1,7 +1,7 @@
-from jellyfish._openapi_client.client import AuthenticatedClient
-from jellyfish._openapi_client.models import Error
-from jellyfish._openapi_client.types import Response
-from jellyfish.errors import HTTPError
+from fishjam._openapi_client.client import AuthenticatedClient
+from fishjam._openapi_client.models import Error
+from fishjam._openapi_client.types import Response
+from fishjam.errors import HTTPError
 
 
 class BaseApi:

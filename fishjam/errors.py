@@ -1,6 +1,6 @@
 from http import HTTPStatus
 
-from jellyfish._openapi_client.types import Response
+from fishjam._openapi_client.types import Response
 
 
 class HTTPError(Exception):

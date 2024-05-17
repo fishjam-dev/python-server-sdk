@@ -1,13 +1,13 @@
 [tool.poetry]
-name = "jellyfish-server-sdk"
+name = "fishjam-server-sdk"
 version = "0.4.0"
-description = "Python server SDK for the Jellyfish media server"
-authors = ["Jellyfish Team"]
-homepage = "https://github.com/jellyfish-dev/python-server-sdk"
-documentation = "https://jellyfish-dev.github.io/python-server-sdk/jellyfish"
+description = "Python server SDK for the Fishjam media server"
+authors = ["Fishjam Team"]
+homepage = "https://github.com/fishjam-dev/python-server-sdk"
+documentation = "https://fishjam-dev.github.io/python-server-sdk/fishjam"
 license = "Apache-2.0"
 readme = "README.md"
-packages = [{ include = "jellyfish" }]
+packages = [{ include = "fishjam" }]
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -56,7 +56,7 @@ select = ["F", "I", "E"]
 ignore = []
 
 [tool.ruff.extend-per-file-ignores]
-"jellyfish/_openapi_client/**" = ["E501"]
+"fishjam/_openapi_client/**" = ["E501"]
 
 [tool.pytest.ini_options]
 markers = [

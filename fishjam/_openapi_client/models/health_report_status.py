@@ -2,7 +2,7 @@ from enum import Enum
 
 
 class HealthReportStatus(str, Enum):
-    """Informs about the status of Jellyfish or a specific service"""
+    """Informs about the status of Fishjam or a specific service"""
 
     DOWN = "DOWN"
     UP = "UP"

@@ -7,7 +7,7 @@ from dataclasses import dataclass
 
 import pytest
 
-from jellyfish import (
+from fishjam import (
     ComponentFile,
     ComponentHLS,
     ComponentOptionsFile,
@@ -38,14 +38,14 @@ from jellyfish import (
     S3Credentials,
     SIPCredentials,
 )
-from jellyfish.errors import (
+from fishjam.errors import (
     BadRequestError,
     NotFoundError,
     ServiceUnavailableError,
     UnauthorizedError,
 )
 
-HOST = "jellyfish" if os.getenv("DOCKER_TEST") == "TRUE" else "localhost"
+HOST = "fishjam" if os.getenv("DOCKER_TEST") == "TRUE" else "localhost"
 SERVER_ADDRESS = f"{HOST}:5002"
 SERVER_API_TOKEN = "development"
 

@@ -3,7 +3,7 @@
 """
 
 # Exported messages
-from jellyfish.events._protos.jellyfish import (
+from fishjam.events._protos.fishjam import (
     ServerMessageComponentCrashed,
     ServerMessageHlsPlayable,
     ServerMessageMetricsReport,

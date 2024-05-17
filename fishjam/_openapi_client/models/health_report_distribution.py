@@ -11,14 +11,14 @@ T = TypeVar("T", bound="HealthReportDistribution")
 
 @_attrs_define
 class HealthReportDistribution:
-    """Informs about the status of Jellyfish distribution"""
+    """Informs about the status of Fishjam distribution"""
 
     node_status: HealthReportStatus
-    """Informs about the status of Jellyfish or a specific service"""
+    """Informs about the status of Fishjam or a specific service"""
     nodes_in_cluster: int
-    """Amount of nodes (including this Jellyfish's node) in the distribution cluster"""
+    """Amount of nodes (including this Fishjam's node) in the distribution cluster"""
     enabled: Union[Unset, bool] = UNSET
-    """Whether distribution is enabled on this Jellyfish"""
+    """Whether distribution is enabled on this Fishjam"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
     """@private"""
 

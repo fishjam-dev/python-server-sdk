@@ -14,18 +14,18 @@ T = TypeVar("T", bound="HealthReport")
 
 @_attrs_define
 class HealthReport:
-    """Describes overall Jellyfish health"""
+    """Describes overall Fishjam health"""
 
     distribution: "HealthReportDistribution"
-    """Informs about the status of Jellyfish distribution"""
+    """Informs about the status of Fishjam distribution"""
     git_commit: str
     """Commit hash of the build"""
     status: HealthReportStatus
-    """Informs about the status of Jellyfish or a specific service"""
+    """Informs about the status of Fishjam or a specific service"""
     uptime: int
-    """Uptime of Jellyfish (in seconds)"""
+    """Uptime of Fishjam (in seconds)"""
     version: str
-    """Version of Jellyfish"""
+    """Version of Fishjam"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
     """@private"""
 

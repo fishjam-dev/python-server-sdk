@@ -20,11 +20,11 @@ class RoomConfig:
     peerless_purge_timeout: Union[Unset, None, int] = UNSET
     """Duration (in seconds) after which the room will be removed if no peers are connected. If not provided, this feature is disabled."""
     room_id: Union[Unset, None, str] = UNSET
-    """Custom id used for identifying room within Jellyfish. Must be unique across all rooms. If not provided, random UUID is generated."""
+    """Custom id used for identifying room within Fishjam. Must be unique across all rooms. If not provided, random UUID is generated."""
     video_codec: Union[Unset, None, RoomConfigVideoCodec] = UNSET
     """Enforces video codec for each peer in the room"""
     webhook_url: Union[Unset, None, str] = UNSET
-    """URL where Jellyfish notifications will be sent"""
+    """URL where Fishjam notifications will be sent"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
     """@private"""
 

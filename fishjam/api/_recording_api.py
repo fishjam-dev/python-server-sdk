@@ -2,8 +2,8 @@
 RecordingApi used to manage rooms
 """
 
-from jellyfish._openapi_client.api.recording import delete_recording, get_recordings
-from jellyfish.api._base_api import BaseApi
+from fishjam._openapi_client.api.recording import delete_recording, get_recordings
+from fishjam.api._base_api import BaseApi
 
 
 class RecordingApi(BaseApi):
@@ -16,7 +16,7 @@ class RecordingApi(BaseApi):
         secure: bool = False,
     ):
         """
-        Create RecordingApi instance, providing the jellyfish address and api token.
+        Create RecordingApi instance, providing the fishjam address and api token.
         Set secure to `True` for `https` and `False` for `http` connection (default).
         """
 
