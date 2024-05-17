@@ -4,18 +4,18 @@ RoomApi used to manage rooms
 
 from typing import List, Literal, Tuple, Union
 
-from jellyfish._openapi_client.api.room import add_component as room_add_component
-from jellyfish._openapi_client.api.room import add_peer as room_add_peer
-from jellyfish._openapi_client.api.room import create_room as room_create_room
-from jellyfish._openapi_client.api.room import delete_component as room_delete_component
-from jellyfish._openapi_client.api.room import delete_peer as room_delete_peer
-from jellyfish._openapi_client.api.room import delete_room as room_delete_room
-from jellyfish._openapi_client.api.room import get_all_rooms as room_get_all_rooms
-from jellyfish._openapi_client.api.room import get_room as room_get_room
-from jellyfish._openapi_client.api.room import subscribe_to
-from jellyfish._openapi_client.api.sip import dial as sip_dial
-from jellyfish._openapi_client.api.sip import end_call as sip_end_call
-from jellyfish._openapi_client.models import (
+from fishjam._openapi_client.api.room import add_component as room_add_component
+from fishjam._openapi_client.api.room import add_peer as room_add_peer
+from fishjam._openapi_client.api.room import create_room as room_create_room
+from fishjam._openapi_client.api.room import delete_component as room_delete_component
+from fishjam._openapi_client.api.room import delete_peer as room_delete_peer
+from fishjam._openapi_client.api.room import delete_room as room_delete_room
+from fishjam._openapi_client.api.room import get_all_rooms as room_get_all_rooms
+from fishjam._openapi_client.api.room import get_room as room_get_room
+from fishjam._openapi_client.api.room import subscribe_to
+from fishjam._openapi_client.api.sip import dial as sip_dial
+from fishjam._openapi_client.api.sip import end_call as sip_end_call
+from fishjam._openapi_client.models import (
     AddComponentJsonBody,
     AddPeerJsonBody,
     ComponentFile,
@@ -36,7 +36,7 @@ from jellyfish._openapi_client.models import (
     RoomConfigVideoCodec,
     SubscriptionConfig,
 )
-from jellyfish.api._base_api import BaseApi
+from fishjam.api._base_api import BaseApi
 
 
 class RoomApi(BaseApi):
@@ -49,7 +49,7 @@ class RoomApi(BaseApi):
         secure: bool = False,
     ):
         """
-        Create RoomApi instance, providing the jellyfish address and api token.
+        Create RoomApi instance, providing the fishjam address and api token.
         Set secure to `True` for `https` and `False` for `http` connection (default).
         """
         super().__init__(
@@ -70,7 +70,7 @@ class RoomApi(BaseApi):
         """
         Creates a new room
 
-        Returns a tuple (`jellyfish_address`, `Room`) - the address of the Jellyfish
+        Returns a tuple (`fishjam_address`, `Room`) - the address of the Fishjam
         in which the room has been created and the created `Room`
 
         The returned address may be different from the current `RoomApi` instance.
@@ -93,7 +93,7 @@ class RoomApi(BaseApi):
         )
 
         resp = self._request(room_create_room, json_body=room_config)
-        return (resp.data.jellyfish_address, resp.data.room)
+        return (resp.data.fishjam_address, resp.data.room)
 
     def delete_room(self, room_id: str) -> None:
         """Deletes a room"""
@@ -119,7 +119,7 @@ class RoomApi(BaseApi):
         Currently only `webrtc` peer is supported
 
         Returns a tuple (`peer_token`, `Peer`) - the token needed by Peer
-        to authenticate to Jellyfish and the new `Peer`.
+        to authenticate to Fishjam and the new `Peer`.
 
         The possible options to pass for peer are `PeerOptionsWebRTC`.
         """

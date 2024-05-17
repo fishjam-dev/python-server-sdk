@@ -22,7 +22,7 @@ def check_exit_code(command):
 
 
 def run_tests():
-    check_exit_code("docker rm -f jellyfish")
+    check_exit_code("docker rm -f fishjam")
     check_exit_code("docker compose -f docker-compose-test.yaml pull")
     check_exit_code(
         "docker compose -f docker-compose-test.yaml up --remove-orphans test \
@@ -70,7 +70,7 @@ def generate_docs():
     --logo https://logo.swmansion.com/membrane/\?width\=70\&variant\=signetDark\
     -t templates/doc \
     -o doc \
-    jellyfish"
+    fishjam"
     )
     here = Path(__file__).parent
     input = here / "doc"
@@ -89,8 +89,8 @@ def generate_docs():
 def update_client():
     check_exit_code(
         "openapi-python-client update\
-            --url https://raw.githubusercontent.com/jellyfish-dev/"
-        "jellyfish/main/openapi.yaml \
+            --url https://raw.githubusercontent.com/fishjam-dev/"
+        "fishjam/main/openapi.yaml \
             --config openapi-python-client-config.yaml \
             --custom-template-path=templates/openapi"
     )

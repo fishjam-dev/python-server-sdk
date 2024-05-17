@@ -2,7 +2,7 @@
 
 import asyncio
 
-from jellyfish import Notifier
+from fishjam import Notifier
 
 ASSERTION_TIMEOUT = 5.0
 

@@ -4,34 +4,30 @@ from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 if TYPE_CHECKING:
-    from ..models.room import Room
+    from ..models.health_report import HealthReport
 
 
-T = TypeVar("T", bound="RoomCreateDetailsResponseData")
+T = TypeVar("T", bound="HealthcheckResponse")
 
 
 @_attrs_define
-class RoomCreateDetailsResponseData:
-    """ """
+class HealthcheckResponse:
+    """Response containing health report of Fishjam"""
 
-    jellyfish_address: str
-    """Jellyfish instance address where the room was created. This might be different than the address of Jellyfish where the request was sent only when running a cluster of Jellyfishes."""
-    room: "Room"
-    """Description of the room state"""
+    data: "HealthReport"
+    """Describes overall Fishjam health"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
     """@private"""
 
     def to_dict(self) -> Dict[str, Any]:
         """@private"""
-        jellyfish_address = self.jellyfish_address
-        room = self.room.to_dict()
+        data = self.data.to_dict()
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "jellyfish_address": jellyfish_address,
-                "room": room,
+                "data": data,
             }
         )
 
@@ -40,20 +36,17 @@ class RoomCreateDetailsResponseData:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         """@private"""
-        from ..models.room import Room
+        from ..models.health_report import HealthReport
 
         d = src_dict.copy()
-        jellyfish_address = d.pop("jellyfish_address")
+        data = HealthReport.from_dict(d.pop("data"))
 
-        room = Room.from_dict(d.pop("room"))
-
-        room_create_details_response_data = cls(
-            jellyfish_address=jellyfish_address,
-            room=room,
+        healthcheck_response = cls(
+            data=data,
         )
 
-        room_create_details_response_data.additional_properties = d
-        return room_create_details_response_data
+        healthcheck_response.additional_properties = d
+        return healthcheck_response
 
     @property
     def additional_keys(self) -> List[str]:

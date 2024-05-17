@@ -1,6 +1,6 @@
 # Server Notifications
 
-Jellyfish sends server side notifications whenever some important event occurs, e.g.:
+Fishjam sends server side notifications whenever some important event occurs, e.g.:
 * a room has been created
 * a peer has connected
 * component has crashed

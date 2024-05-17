@@ -9,8 +9,8 @@ import betterproto
 from websockets import client
 from websockets.exceptions import ConnectionClosed
 
-from jellyfish.events import ServerMessageMetricsReport
-from jellyfish.events._protos.jellyfish import (
+from fishjam.events import ServerMessageMetricsReport
+from fishjam.events._protos.fishjam import (
     ServerMessage,
     ServerMessageAuthenticated,
     ServerMessageAuthRequest,
@@ -22,7 +22,7 @@ from jellyfish.events._protos.jellyfish import (
 
 class Notifier:
     """
-    Allows for receiving WebSocket messages from Jellyfish.
+    Allows for receiving WebSocket messages from Fishjam.
     """
 
     def __init__(
@@ -32,7 +32,7 @@ class Notifier:
         secure: bool = False,
     ):
         """
-        Create Notifier instance, providing the jellyfish address and api token.
+        Create Notifier instance, providing the fishjam address and api token.
         Set secure to `True` for `wss` and `False` for `ws` connection (default).
         """
 
@@ -64,8 +64,8 @@ class Notifier:
 
     async def connect(self):
         """
-        A coroutine which connects Notifier to Jellyfish and listens for all incoming
-        messages from the Jellyfish.
+        A coroutine which connects Notifier to Fishjam and listens for all incoming
+        messages from the Fishjam.
 
         It runs until the connection isn't closed.
 
@@ -100,7 +100,7 @@ class Notifier:
 
     async def wait_ready(self) -> True:
         """
-        Waits until the notifier is connected and authenticated to Jellyfish.
+        Waits until the notifier is connected and authenticated to Fishjam.
 
         If already connected, returns `True` immediately.
         """

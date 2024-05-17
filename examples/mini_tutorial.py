@@ -1,20 +1,20 @@
 import asyncio
 import os
 
-from jellyfish import (
+from fishjam import (
     ComponentOptionsFile,
     ComponentOptionsHLS,
     ComponentOptionsHLSSubscribeMode,
     Notifier,
     RoomApi,
 )
-from jellyfish.events import (
+from fishjam.events import (
     ServerMessageHlsPlayable,
     ServerMessageTrackAdded,
     ServerMessageTrackType,
 )
 
-HOST = "jellyfish" if os.getenv("DOCKER_TEST") == "TRUE" else "localhost"
+HOST = "fishjam" if os.getenv("DOCKER_TEST") == "TRUE" else "localhost"
 SERVER_ADDRESS = f"{HOST}:5002"
 
 
@@ -55,9 +55,9 @@ async def test_notifier():
     # that allow to use HLS.
     address, room = room_api.create_room(video_codec="h264")
 
-    # Create new room api with returned jellyfish address as a room could be
-    # created on a different jellyfish instance
-    # (if you communicate with a cluster of jellyfishes)
+    # Create new room api with returned fishjam address as a room could be
+    # created on a different fishjam instance
+    # (if you communicate with a cluster of fishjames)
     room_api = RoomApi(server_address=address)
 
     # Add HLS component with manual subscribe mode

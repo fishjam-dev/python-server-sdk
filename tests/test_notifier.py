@@ -9,8 +9,8 @@ from multiprocessing import Process, Queue
 import pytest
 import requests
 
-from jellyfish import ComponentOptionsFile, Notifier, PeerOptionsWebRTC, RoomApi
-from jellyfish.events import (
+from fishjam import ComponentOptionsFile, Notifier, PeerOptionsWebRTC, RoomApi
+from fishjam.events import (
     ServerMessageMetricsReport,
     ServerMessagePeerAdded,
     ServerMessagePeerConnected,
@@ -25,7 +25,7 @@ from tests.support.asyncio_utils import assert_events, assert_metrics, cancel
 from tests.support.peer_socket import PeerSocket
 from tests.support.webhook_notifier import run_server
 
-HOST = "jellyfish" if os.getenv("DOCKER_TEST") == "TRUE" else "localhost"
+HOST = "fishjam" if os.getenv("DOCKER_TEST") == "TRUE" else "localhost"
 SERVER_ADDRESS = f"{HOST}:5002"
 SERVER_API_TOKEN = "development"
 WEBHOOK_ADDRESS = "test" if os.getenv("DOCKER_TEST") == "TRUE" else "localhost"

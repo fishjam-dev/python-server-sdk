@@ -5,10 +5,10 @@
 # pylint: disable=locally-disabled, no-name-in-module, import-error
 
 # Exceptions and Server Messages
-from jellyfish import errors, events
+from fishjam import errors, events
 
 # Models
-from jellyfish._openapi_client.models import (
+from fishjam._openapi_client.models import (
     ComponentFile,
     ComponentHLS,
     ComponentOptionsFile,
@@ -40,10 +40,10 @@ from jellyfish._openapi_client.models import (
 )
 
 # API
-from jellyfish._webhook_notifier import receive_binary
-from jellyfish._ws_notifier import Notifier
-from jellyfish.api._recording_api import RecordingApi
-from jellyfish.api._room_api import RoomApi
+from fishjam._webhook_notifier import receive_binary
+from fishjam._ws_notifier import Notifier
+from fishjam.api._recording_api import RecordingApi
+from fishjam.api._room_api import RoomApi
 
 __all__ = [
     "RoomApi",

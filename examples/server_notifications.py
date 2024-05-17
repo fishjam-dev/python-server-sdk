@@ -1,10 +1,10 @@
 import asyncio
 import os
 
-from jellyfish import Notifier, RoomApi
-from jellyfish.events import ServerMessageTrackAdded, ServerMessageTrackType
+from fishjam import Notifier, RoomApi
+from fishjam.events import ServerMessageTrackAdded, ServerMessageTrackType
 
-HOST = "jellyfish" if os.getenv("DOCKER_TEST") == "TRUE" else "localhost"
+HOST = "fishjam" if os.getenv("DOCKER_TEST") == "TRUE" else "localhost"
 SERVER_ADDRESS = f"{HOST}:5002"
 
 notifier = Notifier(server_address=SERVER_ADDRESS, server_api_token="development")

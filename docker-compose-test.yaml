@@ -1,34 +1,34 @@
 version: "3"
 
 services:
-  jellyfish:
-    image: "ghcr.io/fishjam-dev/jellyfish:${TAG:-edge}"
-    container_name: jellyfish
+  fishjam:
+    image: "ghcr.io/fishjam-dev/fishjam:${TAG:-edge}"
+    container_name: fishjam
     restart: on-failure
     healthcheck:
       test: >
-        curl --fail -H "authorization: Bearer development" http://jellyfish:5002/room || exit 1
+        curl --fail -H "authorization: Bearer development" http://fishjam:5002/room || exit 1
       interval: 3s
       retries: 2
       timeout: 2s
       start_period: 30s
     environment:
-      JF_HOST: "jellyfish:5002"
-      JF_INTEGRATED_TURN_IP: "${INTEGRATED_TURN_IP:-127.0.0.1}"
-      JF_INTEGRATED_TURN_LISTEN_IP: "0.0.0.0"
-      JF_INTEGRATED_TURN_PORT_RANGE: "50000-50050"
-      JF_INTEGRATED_TCP_TURN_PORT: "49999"
-      JF_SERVER_API_TOKEN: "development"
-      JF_PORT: 5002
-      JF_SECRET_KEY_BASE: "super-secret-key"
-      JF_SIP_USED: "true"
-      JF_SIP_IP: "127.0.0.1"
+      FJ_HOST: "fishjam:5002"
+      FJ_INTEGRATED_TURN_IP: "${INTEGRATED_TURN_IP:-127.0.0.1}"
+      FJ_INTEGRATED_TURN_LISTEN_IP: "0.0.0.0"
+      FJ_INTEGRATED_TURN_PORT_RANGE: "50000-50050"
+      FJ_INTEGRATED_TCP_TURN_PORT: "49999"
+      FJ_SERVER_API_TOKEN: "development"
+      FJ_PORT: 5002
+      FJ_SECRET_KEY_BASE: "super-secret-key"
+      FJ_SIP_IP: "127.0.0.1"
+      FJ_COMPONENTS_USED: rtsp file hls recording sip
     ports:
       - "5002:5002"
       - "49999:49999"
       - "50000-50050:50000-50050/udp"
     volumes:
-      - ./tests/fixtures:/app/jellyfish_resources/file_component_sources
+      - ./tests/fixtures:/app/fishjam_resources/file_component_sources
 
   test:
     container_name: test
@@ -41,7 +41,7 @@ services:
     volumes:
       - .:/app
     depends_on:
-      jellyfish:
+      fishjam:
         condition: service_healthy
 
   examples:
@@ -54,5 +54,5 @@ services:
     volumes:
       - .:/app
     depends_on:
-      jellyfish:
+      fishjam:
         condition: service_healthy

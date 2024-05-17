@@ -2,7 +2,7 @@
 
 from flask import Flask, Response, request
 
-from jellyfish import receive_binary
+from fishjam import receive_binary
 
 app = Flask(__name__)
 DATA_QUEUE = None

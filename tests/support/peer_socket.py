@@ -6,7 +6,7 @@ import betterproto
 from websockets import client
 from websockets.exceptions import ConnectionClosedOK
 
-from tests.support.protos.jellyfish import (
+from tests.support.protos.fishjam import (
     PeerMessage,
     PeerMessageAuthenticated,
     PeerMessageAuthRequest,
