@@ -11,12 +11,15 @@ room_api = RoomApi(server_address=SERVER_ADDRESS, server_api_token="development"
 fishjam_address, room = room_api.create_room(
     video_codec="h264", webhook_url="http://localhost:5000/webhook"
 )
-print((fishjam_address, room))
+print(f"Fishjam address: {fishjam_address}\nRoom: \n\t{room}\n")
 
 # Add peer to the room
-result = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
-print((result.token, result.peer, result.peer_websocket_url))
+response = room_api.add_peer(room.id, options=PeerOptionsWebRTC())
+print(
+    f"Websocket URL: {response.peer_websocket_url}\nPeer token: \n\t{response.token}\n"
+    f"Peer: \n\t{response.peer}\n"
+)
 
 # Add component to the room
 component_hls = room_api.add_component(room.id, options=ComponentOptionsHLS())
-print(component_hls)
+print(f"Component HLS: \n\t{component_hls}")
