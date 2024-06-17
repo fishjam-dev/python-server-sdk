@@ -8,7 +8,11 @@ from .component_hls import ComponentHLS
 from .component_options_file import ComponentOptionsFile
 from .component_options_hls import ComponentOptionsHLS
 from .component_options_hls_subscribe_mode import ComponentOptionsHLSSubscribeMode
+from .component_options_hlss3_credentials import ComponentOptionsHLSS3Credentials
 from .component_options_recording import ComponentOptionsRecording
+from .component_options_recording_s3_credentials import (
+    ComponentOptionsRecordingS3Credentials,
+)
 from .component_options_recording_subscribe_mode import (
     ComponentOptionsRecordingSubscribeMode,
 )
@@ -33,9 +37,9 @@ from .component_sip import ComponentSIP
 from .dial_config import DialConfig
 from .error import Error
 from .health_report import HealthReport
-from .health_report_distribution import HealthReportDistribution
-from .health_report_status import HealthReportStatus
 from .healthcheck_response import HealthcheckResponse
+from .node_status import NodeStatus
+from .node_status_status import NodeStatusStatus
 from .peer import Peer
 from .peer_details_response import PeerDetailsResponse
 from .peer_details_response_data import PeerDetailsResponseData
@@ -63,8 +67,10 @@ __all__ = (
     "ComponentHLS",
     "ComponentOptionsFile",
     "ComponentOptionsHLS",
+    "ComponentOptionsHLSS3Credentials",
     "ComponentOptionsHLSSubscribeMode",
     "ComponentOptionsRecording",
+    "ComponentOptionsRecordingS3Credentials",
     "ComponentOptionsRecordingSubscribeMode",
     "ComponentOptionsRTSP",
     "ComponentOptionsSIP",
@@ -84,8 +90,8 @@ __all__ = (
     "Error",
     "HealthcheckResponse",
     "HealthReport",
-    "HealthReportDistribution",
-    "HealthReportStatus",
+    "NodeStatus",
+    "NodeStatusStatus",
     "Peer",
     "PeerDetailsResponse",
     "PeerDetailsResponseData",

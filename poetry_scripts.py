@@ -66,8 +66,8 @@ def generate_docs():
     check_exit_code(
         "pdoc \
     --include-undocumented \
-    --favicon https://logo.swmansion.com/membrane/\?width\=100\&variant\=signetDark\
-    --logo https://logo.swmansion.com/membrane/\?width\=70\&variant\=signetDark\
+    --favicon https://logo.swmansion.com/membrane/?width=100&variant=signetDark\
+    --logo https://logo.swmansion.com/membrane/?width=70&variant=signetDark\
     -t templates/doc \
     -o doc \
     fishjam"
@@ -90,7 +90,7 @@ def update_client():
     check_exit_code(
         "openapi-python-client update\
             --url https://raw.githubusercontent.com/fishjam-dev/"
-        "fishjam/main/openapi.yaml \
+        "fishjam/feat/cluster-health-report/openapi.yaml \
             --config openapi-python-client-config.yaml \
             --custom-template-path=templates/openapi"
     )

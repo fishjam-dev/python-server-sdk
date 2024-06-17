@@ -9,7 +9,9 @@ from ..models.component_options_hls_subscribe_mode import (
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.s3_credentials import S3Credentials
+    from ..models.component_options_hlss3_credentials import (
+        ComponentOptionsHLSS3Credentials,
+    )
 
 
 T = TypeVar("T", bound="ComponentOptionsHLS")
@@ -23,7 +25,7 @@ class ComponentOptionsHLS:
     """Whether the component should use LL-HLS"""
     persistent: Union[Unset, bool] = False
     """Whether the video is stored after end of stream"""
-    s3: Union[Unset, None, "S3Credentials"] = UNSET
+    s3: Union[Unset, None, "ComponentOptionsHLSS3Credentials"] = UNSET
     """An AWS S3 credential that will be used to send HLS stream. The stream will only be uploaded if credentials are provided"""
     subscribe_mode: Union[
         Unset, ComponentOptionsHLSSubscribeMode
@@ -67,7 +69,9 @@ class ComponentOptionsHLS:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         """@private"""
-        from ..models.s3_credentials import S3Credentials
+        from ..models.component_options_hlss3_credentials import (
+            ComponentOptionsHLSS3Credentials,
+        )
 
         d = src_dict.copy()
         low_latency = d.pop("lowLatency", UNSET)
@@ -75,13 +79,13 @@ class ComponentOptionsHLS:
         persistent = d.pop("persistent", UNSET)
 
         _s3 = d.pop("s3", UNSET)
-        s3: Union[Unset, None, S3Credentials]
+        s3: Union[Unset, None, ComponentOptionsHLSS3Credentials]
         if _s3 is None:
             s3 = None
         elif isinstance(_s3, Unset):
             s3 = UNSET
         else:
-            s3 = S3Credentials.from_dict(_s3)
+            s3 = ComponentOptionsHLSS3Credentials.from_dict(_s3)
 
         _subscribe_mode = d.pop("subscribeMode", UNSET)
         subscribe_mode: Union[Unset, ComponentOptionsHLSSubscribeMode]

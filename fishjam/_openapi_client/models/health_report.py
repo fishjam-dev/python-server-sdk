@@ -3,10 +3,8 @@ from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.health_report_status import HealthReportStatus
-
 if TYPE_CHECKING:
-    from ..models.health_report_distribution import HealthReportDistribution
+    from ..models.node_status import NodeStatus
 
 
 T = TypeVar("T", bound="HealthReport")
@@ -16,38 +14,37 @@ T = TypeVar("T", bound="HealthReport")
 class HealthReport:
     """Describes overall Fishjam health"""
 
-    distribution: "HealthReportDistribution"
-    """Informs about the status of Fishjam distribution"""
-    git_commit: str
-    """Commit hash of the build"""
-    status: HealthReportStatus
-    """Informs about the status of Fishjam or a specific service"""
-    uptime: int
-    """Uptime of Fishjam (in seconds)"""
-    version: str
-    """Version of Fishjam"""
+    distribution_enabled: bool
+    """Cluster distribution enabled/disabled"""
+    local_status: "NodeStatus"
+    """Informs about the status of node"""
+    nodes_in_cluster: int
+    """Number of nodes in cluster"""
+    nodes_status: List["NodeStatus"]
+    """Status of each node in cluster"""
     additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
     """@private"""
 
     def to_dict(self) -> Dict[str, Any]:
         """@private"""
-        distribution = self.distribution.to_dict()
+        distribution_enabled = self.distribution_enabled
+        local_status = self.local_status.to_dict()
 
-        git_commit = self.git_commit
-        status = self.status.value
+        nodes_in_cluster = self.nodes_in_cluster
+        nodes_status = []
+        for nodes_status_item_data in self.nodes_status:
+            nodes_status_item = nodes_status_item_data.to_dict()
 
-        uptime = self.uptime
-        version = self.version
+            nodes_status.append(nodes_status_item)
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "distribution": distribution,
-                "gitCommit": git_commit,
-                "status": status,
-                "uptime": uptime,
-                "version": version,
+                "distributionEnabled": distribution_enabled,
+                "localStatus": local_status,
+                "nodesInCluster": nodes_in_cluster,
+                "nodesStatus": nodes_status,
             }
         )
 
@@ -56,25 +53,27 @@ class HealthReport:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         """@private"""
-        from ..models.health_report_distribution import HealthReportDistribution
+        from ..models.node_status import NodeStatus
 
         d = src_dict.copy()
-        distribution = HealthReportDistribution.from_dict(d.pop("distribution"))
+        distribution_enabled = d.pop("distributionEnabled")
 
-        git_commit = d.pop("gitCommit")
+        local_status = NodeStatus.from_dict(d.pop("localStatus"))
 
-        status = HealthReportStatus(d.pop("status"))
+        nodes_in_cluster = d.pop("nodesInCluster")
 
-        uptime = d.pop("uptime")
+        nodes_status = []
+        _nodes_status = d.pop("nodesStatus")
+        for nodes_status_item_data in _nodes_status:
+            nodes_status_item = NodeStatus.from_dict(nodes_status_item_data)
 
-        version = d.pop("version")
+            nodes_status.append(nodes_status_item)
 
         health_report = cls(
-            distribution=distribution,
-            git_commit=git_commit,
-            status=status,
-            uptime=uptime,
-            version=version,
+            distribution_enabled=distribution_enabled,
+            local_status=local_status,
+            nodes_in_cluster=nodes_in_cluster,
+            nodes_status=nodes_status,
         )
 
         health_report.additional_properties = d

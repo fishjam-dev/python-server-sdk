@@ -141,6 +141,13 @@ You can check linter by running
 poetry run lint
 ```
 
+## Documentation
+Documentation is generated via openapi-python-client.
+
+To update documentation you need to:
+- in `poetry_scripts.py` change branch from which openapi.yaml should be downloaded
+- run `poetry run update-client`
+
 ## Copyright and License
 
 Copyright 2023, [Software Mansion](https://swmansion.com/?utm_source=git&utm_medium=readme&utm_campaign=fishjam)

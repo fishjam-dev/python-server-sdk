@@ -9,7 +9,9 @@ from ..models.component_options_recording_subscribe_mode import (
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.s3_credentials import S3Credentials
+    from ..models.component_options_recording_s3_credentials import (
+        ComponentOptionsRecordingS3Credentials,
+    )
 
 
 T = TypeVar("T", bound="ComponentOptionsRecording")
@@ -19,7 +21,7 @@ T = TypeVar("T", bound="ComponentOptionsRecording")
 class ComponentOptionsRecording:
     """Options specific to the Recording component"""
 
-    credentials: Union[Unset, None, "S3Credentials"] = UNSET
+    credentials: Union[Unset, None, "ComponentOptionsRecordingS3Credentials"] = UNSET
     """An AWS S3 credential that will be used to send HLS stream. The stream will only be uploaded if credentials are provided"""
     path_prefix: Union[Unset, None, str] = UNSET
     """Path prefix under which all recording are stored"""
@@ -56,17 +58,19 @@ class ComponentOptionsRecording:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         """@private"""
-        from ..models.s3_credentials import S3Credentials
+        from ..models.component_options_recording_s3_credentials import (
+            ComponentOptionsRecordingS3Credentials,
+        )
 
         d = src_dict.copy()
         _credentials = d.pop("credentials", UNSET)
-        credentials: Union[Unset, None, S3Credentials]
+        credentials: Union[Unset, None, ComponentOptionsRecordingS3Credentials]
         if _credentials is None:
             credentials = None
         elif isinstance(_credentials, Unset):
             credentials = UNSET
         else:
-            credentials = S3Credentials.from_dict(_credentials)
+            credentials = ComponentOptionsRecordingS3Credentials.from_dict(_credentials)
 
         path_prefix = d.pop("pathPrefix", UNSET)
 

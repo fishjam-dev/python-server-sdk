@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class HealthReportStatus(str, Enum):
+class NodeStatusStatus(str, Enum):
     """Informs about the status of Fishjam or a specific service"""
 
     DOWN = "DOWN"
